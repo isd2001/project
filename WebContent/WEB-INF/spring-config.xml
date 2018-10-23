@@ -31,8 +31,8 @@
 	</bean>
 	 <bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	 	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
-	 	<property name="url" value="jdbc:oracle:thin:@dal.mockingu.com:1521:xe"></property>
-	 	<property name="username" value="minwoo"></property>
+	 	<property name="url" value="jdbc:oracle:thin:@13.125.207.28:1521:xe"></property>
+	 	<property name="username" value="dev"></property>
 	 	<property name="password" value="oracle"></property>
 	 </bean>
 	 
@@ -68,7 +68,7 @@
 		
 	</websocket:handlers> -->
 	
-	<mongo:mongo-client host="dal.mockingu.com" port="36936"/>
+	<mongo:mongo-client host="turn.mockingu.com" port="36936"/>
 	 
 	 <bean id = "mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 	 	<constructor-arg name = "mongoClient" ref="mongoClient"/>
