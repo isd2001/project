@@ -11,7 +11,7 @@
 		          <a class="p-2 text-muted" href="#">같이가요</a>
 		          <a class="p-2 text-muted" href="#">개시판</a>
 		          <a class="p-2 text-muted" href="#">추가메뉴</a>
-		          <a class="p-2 text-muted" href="#">추가메뉴</a>
+		          <a class="p-2 text-muted" href="${pageContext.servletContext.contextPath }/test.do">타일 예제</a>
 		          <a class="p-2 text-muted" >      </a>         
 		        </nav>	        
 </div>
