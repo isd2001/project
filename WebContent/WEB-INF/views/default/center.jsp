@@ -4,11 +4,6 @@
 	href="${pageContext.servletContext.contextPath }/css/bootstrap.css"
 	rel="stylesheet">
 <body>
-<div class="alert alert-success" role="alert" style="text-align: center">
-
-  반려견과 함께하는 공간 개놀자
-
-</div>
 	<div class="row">
 	<div class="col-md-6">
 			<div id="carouselExampleIndicators" class="carousel slide"

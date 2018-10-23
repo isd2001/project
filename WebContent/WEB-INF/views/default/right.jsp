@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<div class="dropdown" >
-  <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"  >
+<div class="dropdown1" >
+  <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"  >
     <span>1 </span>실시간 순위 <span class="badge badge-pill badge-success">↑</span>
   </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
     <a class="dropdown-item">
 			<span>2 </span>실시간 순위 <span class="badge badge-pill badge-success">↑</span>
 	</a>
@@ -55,8 +55,8 @@
 </div>
 
 <script>	
-	$(".dropdown").on("mouseover", function(){	
-		$("#dropdownMenuButton").trigger("click");
+/* 	$("#dropdownMenuButton1").on("mouse", function(){	
+		$("#dropdownMenuButton1").trigger("click");
 	})
-	
+	  */
 </script>
