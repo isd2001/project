@@ -1,56 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 
-<form>
-	<label for="seoul">지역</label>
-	<div class="form-row">
-		<div class="form-group col-md-3">
-			<select id="area" class="form-control">
-				<option selected value="">서울 전체</option>
-				<option value="강남구">강남구</option>
-				<option value="강동구">강동구</option>
-				<option value="강북구">강북구</option>
-				<option value="강서구">강서구</option>
-				<option value="관악구">관악구</option>
-				<option value="광진구">광진구</option>
-				<option value="구로구">구로구</option>
-				<option value="금천구">금천구</option>
-				<option value="노원구">노원구</option>
-				<option value="도봉구">도봉구</option>
-				<option value="동대문구">동대문구</option>
-				<option value="동작구">동작구</option>
-				<option value="마포구">마포구</option>
-				<option value="서대문구">서대문구</option>
-				<option value="서초구">서초구</option>
-				<option value="성동구">성동구</option>
-				<option value="성북구">성북구</option>
-				<option value="송파구">송파구</option>
-				<option value="양천구">양천구</option>
-				<option value="영등포구">영등포구</option>
-				<option value="용산구">용산구</option>
-				<option value="은평구">은평구</option>
-				<option value="종로구">종로구</option>
-				<option value="중구">중구</option>
-				<option value="중량구">중량구</option>
-			</select>
+<form action="${pageContext.servletContext.contextPath }/together/selectboard.do" method="post">
+	<div class="accordion" id="accordionExample">
+		<div class="card">
+			<div class="card-header" id="headingOne">
+				<h5 class="mb-0">
+					<button class="btn btn-link collapsed" type="button"
+						data-toggle="collapse" data-target="#collapseOne"
+						aria-expanded="false" aria-controls="collapseOne"
+						style="align-content: center;">지역을 선택해주세요</button>
+				</h5>
+			</div>
+			<div id="collapseOne" class="collapse show"
+				aria-labelledby="headingOne" data-parent="#accordionExample">
+				<div class="card-body">
+					<a onclick="area(10);" href="${pageContext.servletContext.contextPath }/together/selectboard.do?area=10" class="badge badge-light"
+						style="opacity: 0.5;">강남구</a> <a onclick="area(20);" href="#"
+						class="badge badge-light" style="opacity: 0.5;">강동구</a> <a
+						onclick="area(30);" href="#" class="badge badge-light"
+						style="opacity: 0.5;">강북구</a> <a onclick="area(40);" href="#"
+						class="badge badge-light" style="opacity: 0.5;">강서구</a> <a
+						onclick="area(50);" href="#" class="badge badge-light"
+						style="opacity: 0.5;">관악구</a> <a onclick="area(60);" href="#"
+						class="badge badge-light" style="opacity: 0.5;">광진구</a> <a
+						onclick="area(70);" href="#" class="badge badge-light"
+						style="opacity: 0.5;">구로구</a> <a onclick="area(80);" href="#"
+						class="badge badge-light" style="opacity: 0.5;">금천구</a> <a
+						onclick="area(90);" href="#" class="badge badge-light"
+						style="opacity: 0.5;">노원구</a> <a onclick="area(100);" href="#"
+						class="badge badge-light" style="opacity: 0.5;">도봉구</a> <a
+						onclick="area(110);" href="#" class="badge badge-light"
+						style="opacity: 0.5;">동대문구</a> <a onclick="area(120);" href="#"
+						class="badge badge-light" style="opacity: 0.5;">동작구</a> <a
+						onclick="area(130);" href="#" class="badge badge-light"
+						style="opacity: 0.5;">마포구</a> <a onclick="area(140);" href="#"
+						class="badge badge-light" style="opacity: 0.5;">서대문구</a> <a
+						onclick="area(150);" href="#" class="badge badge-light"
+						style="opacity: 0.5;">서초구</a> <a onclick="area(160);" href="#"
+						class="badge badge-light" style="opacity: 0.5;">성동구</a> <a
+						onclick="area(170);" href="#" class="badge badge-light"
+						style="opacity: 0.5;">성북구</a> <a onclick="area(180);" href="#"
+						class="badge badge-light" style="opacity: 0.5;">송파구</a> <a
+						onclick="area(190);" href="#" class="badge badge-light"
+						style="opacity: 0.5;">양천구</a> <a onclick="area(200);" href="#"
+						class="badge badge-light" style="opacity: 0.5;">영등포구</a> <a
+						onclick="area(210);" href="#" class="badge badge-light"
+						style="opacity: 0.5;">용산구</a> <a onclick="area(220);" href="#"
+						class="badge badge-light" style="opacity: 0.5;">은평구</a> <a
+						onclick="area(230);" href="#" class="badge badge-light"
+						style="opacity: 0.5;">종로구</a> <a onclick="area(240);" href="#"
+						class="badge badge-light" style="opacity: 0.5;">중구</a> <a
+						onclick="area(250);" href="#" class="badge badge-light"
+						style="opacity: 0.5;">중량구</a>
+				</div>
+			</div>
 		</div>
 	</div>
-	
-	
-	
-	
-	
+	<hr />
+	<button type="submit" id="result"
+		class="btn btn-secondary btn-lg btn-block">검색</button>
+
+
 	<script>
-	$("#area").on("click",function(){
-		
-	console.log( $("#area").val() );
-	var area = 	$("#area").val();
-		
-		
-	});
-	
-	
-	
+		/* 		$("ul#area li").on("click", function() {
+		 $("#area").css("color","black");
+		 console.log($("#ar").val());
+
+		 }); */
+
+		var area = function(target) {
+			var area = target;
+			$("#result").on("click", function() {
+
+				console.log(area);
+
+				area = null;
+			});
+
+		}
 	</script>
 </form>
 
