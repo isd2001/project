@@ -13,10 +13,4 @@
 		<put-attribute name="center" value="/WEB-INF/views/test/test.jsp"/>
 		<put-attribute name="right" value="/WEB-INF/views/default/right.jsp"/>
 	</definition>	
-	<definition name="percel.index" template="/WEB-INF/tiles/admin-template.jsp">
-		<put-attribute name="head" value="/WEB-INF/views/default/head.jsp"/>
-		<put-attribute name="menu" value="/WEB-INF/views/default/menu.jsp"/>
-		<put-attribute name="center" value="/WEB-INF/views/percel/percel.jsp"/>
-		<put-attribute name="right" value="/WEB-INF/views/default/right.jsp"/>
-	</definition>	
 </tiles-definitions>
