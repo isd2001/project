@@ -16,32 +16,27 @@ import app.service.SocketService;
 
 public class FindSocketController extends TextWebSocketHandler{
 
-//	@Autowired
-//	Gson gson;
-//	
-//	@Autowired
-//	SocketService service;
-//	
-//	List<WebSocketSession> sockets;
-//	
-//	@Override
-//	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-//		sockets.remove(session);
-//	}
-//	@Override
-//	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-//		sockets.add(session);
-//	}
-//	@Override
-//	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-//		String got = message.getPayload();
-//		
-//		String a = gson.toJson(got);
-//		
-//		
-//		Map map = new HashMap<>();
-//		
-//		
-//		
-//	}
+	@Autowired
+	Gson gson;
+	
+	@Autowired
+	SocketService service;
+	
+	List<WebSocketSession> sockets;
+	
+	@Override
+	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+		sockets.remove(session);
+	}
+	@Override
+	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+		sockets.add(session);
+	}
+	@Override
+	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+		String got = message.getPayload();
+		Map jmap = gson.fromJson(got,Map.class);
+		
+		
+	}
 }

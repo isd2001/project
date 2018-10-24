@@ -1,37 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link rel="stylesheet"
-	href="${pageContext.servletContext.contextPath }/css/blog.css">
-<header class="blog-header py-3"<%-- style="background: url('${pageContext.servletContext.contextPath }/image/grass.jpg') "  --%> >
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-	<div class="row flex-nowrap justify-content-between align-items-center">
-		<div class="col-4 pt-1">
-			<a class="blog-header-logo text-dark"
-				href="${pageContext.servletContext.contextPath }/index.do">개놀자</a> <a
-				href="${pageContext.servletContext.contextPath }/index.do"> <img
-				class="mb-4"
-				src="${pageContext.servletContext.contextPath }/image/dal.jpg"
-				alt="" width="60" height="60">
-			</a>
-		</div>
-		<div class="col-4 text-center">
-			<form>
-				<input type="text" placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-success  type="submit">Search</button>
-			</form>
-		</div>
+<div class="alert alert-success" role="alert" style="text-align: center">
+	반려견과 함께하는 공간 개놀자</div>
 
-		<div class="col-4 d-flex justify-content-end align-items-center">
-			<a class="btn btn-sm btn-outline-secondary" href="#">회원가입</a>
+<form method="post" enctype="multipart/form-data"
+	action="${pageContext.servletContext.contextPath}/find/list.do">
+	<div style="text-align: center">
+		<br />
+		<h3>
+			<b>강아지를 찾아주세요</b>
+		</h3>
+		<div style="text-align: right">
+			<fmt:formatDate value="${sessionScope.date}"></fmt:formatDate>
+		</div>
+		<br />
+		
+		<div class="input-group mb-3">
+ 			<div class="input-group-prepend">
+    			<button class="btn btn-outline-secondary" type="button">제목 입력</button>
+  			</div>
+  			<input style="text-align:center" type="text" class="form-control" placeholder="제목을 입력해주세요" 
+  			aria-label="" aria-describedby="basic-addon1" id="findName" name="findName">
+		</div>
+		
+		<div class="input-group mb-1">
+			<div class="input-group-prepend">
+				<button class="btn btn-outline-secondary" type="button"	id="findFileBt" name="findFileBt">파일 첨부</button>
+			</div>
+			<div class="custom-file">
+				<input type="file" class="custom-file-input" aria-describedby="inputGroupFileAddon03"> 
+				<label class="custom-file-label" for="inputGroupFile03"> 파일이 필요하신가요?</label>
+			</div>
+		</div>
+		<br/>
+		<div class="form-group">
+			<textarea class="form-control" rows="15" cols="110" id="findComment"></textarea>
 		</div>
 	</div>
-</header>
-<body>
-	<div>
-		<textarea rows="10" cols="500"></textarea>
+
+	<div style="text-align: center">
+		<button class="btn btn-outline-secondary" type="button">작성 완료</button>
 	</div>
-</body>
+</form>
 <script>
-	var findws = new WebSocket("ws://"+location.host+"${pageContext.servletContext.contextPath}/find.do");
-	
+	var check = function(target) {
+		console.log(target.files.length);
+		for (var i = 0; i < target.files.length; i++) {
+			console.log(target.files[i].name);
+		}
+	}
+
+	var findws = new WebSocket("ws://" + location.host
+			+ "${pageContext.servletContext.contextPath}/find.do");
 </script>
