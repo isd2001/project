@@ -1,74 +1,158 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<div class="pet-info-layout">
-	<div class="arrow arrow_left text-none"
-		onclick="location.href='/main/sellView/971'">
-		<span><</span>
-	</div>
-	<div class="pet-profile-img-layout">
-		<li>
-			<div>
-				<img src="/preSaleUpFile/181016_강남비숑남_638.jpg"
-					title="/preSaleUpFile/181016_강남비숑남_638.jpg">
-			</div>
-		</li>
-	</div>
-	<div class="pet-profile-info-layout">
-		<div class="pet-info">
-			<ul>
-				<li class="title">Bichon frise : 비숑프리제_ 레니안</li>
-				<li><div>견종</div>
-					<div>
-						<span>비숑 프리제</span>
-					</div></li>
-				<li><div>성별</div>
-					<div>
-						<span>남 아 Male</span>
-					</div></li>
-				<li><div>나이</div>
-					<div>
-						<span>2개월령</span>
-					</div></li>
-				<li><div>성격</div>
-					<div>
-						<span>순하고 발랄함</span>
-					</div></li>
-				<li><div>분양가</div>
-					<div>
-						<span> <font color='#F0242d'>담당지점</font> 문의
-						</span>
-					</div></li>
-				<li>
-					<div>지점</div>
-					<div class="store">
-						강남점
-						<style>
-.pet-info .store {
-	line-height: 36px !important;
-}
-</style>
-					</div>
-				</li>
-				<li class="search-tag">
-					<div>검색태그</div>
-					<div>
-						<a href='/main/topSerch?keyword=비숑 프리제'><span>비숑 프리제</span><a>
-					</div>
-				</li>
-			</ul>
-		</div>
-		<div class="shop-info-layout">
-			<div class="add-wishlist "></div>
-			<!-- <div class="kakaotalk" onclick="window.open('http://plus.kakao.com/home/no8lmjrp');" style="cursor:pointer;"></div> -->
-			<div class="kakaotalk"
-				onclick="window.open('http://pf.kakao.com/_YXmyu?');"
-				style="cursor: pointer;"></div>
-			<div class="call" style="cursor: pointer"
-				onclick="location.href='tel:1800-4113'"></div>
+<hr class="mb-4">
+<div class="row mb-2">
+	<div class="col-md-6">
+		<div class="card flex-md-row mb-4 shadow-sm h-md-250">
+			<img class="card-img-right flex-auto d-none d-lg-block" src="${pageContext.servletContext.contextPath }/image/parcelimage/dog01.jpg" alt="Thumbnail [400x400]" style="width: 400px; height: 400px;" data-holder-rendered="true">
 		</div>
 	</div>
-	<div class="arrow arrow_right text-none"
-		onclick="location.href='/main/sellView/973'">
-		<span>></span>
+	<div class="bd-example">
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Pomeranian : 포메라니안_ 돌리</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">견종</th>
+					<td>포메라니안</td>
+				</tr>
+				<tr>
+					<th scope="row">성별</th>
+					<td>남아</td>
+				</tr>
+				<tr>
+					<th scope="row">나이</th>
+					<td>2개월</td>
+				</tr>
+				<tr>
+					<th scope="row">성격</th>
+					<td>얌전하고 애교많음</td>
+				</tr>
+				<tr>
+					<th scope="row">접종</th>
+					<td>접종함</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </div>
+
+<a>
+
+
+</a>
+
+
+<main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8 blog-main">
+          <h3 class="pb-3 mb-4 font-italic border-bottom">
+            From the Firehose
+          </h3>
+
+          <div class="blog-post">
+            <h2 class="blog-post-title">Sample blog post</h2>
+            <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
+
+            <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
+            <hr>
+            <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
+            <blockquote>
+              <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+            </blockquote>
+            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+            <h2>Heading</h2>
+            <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+            <h3>Sub-heading</h3>
+            <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+            <pre><code>Example code block</code></pre>
+            <p>Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+            <h3>Sub-heading</h3>
+            <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+            <ul>
+              <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
+              <li>Donec id elit non mi porta gravida at eget metus.</li>
+              <li>Nulla vitae elit libero, a pharetra augue.</li>
+            </ul>
+            <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
+            <ol>
+              <li>Vestibulum id ligula porta felis euismod semper.</li>
+              <li>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
+              <li>Maecenas sed diam eget risus varius blandit sit amet non magna.</li>
+            </ol>
+            <p>Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.</p>
+          </div><!-- /.blog-post -->
+
+          <div class="blog-post">
+            <h2 class="blog-post-title">Another blog post</h2>
+            <p class="blog-post-meta">December 23, 2013 by <a href="#">Jacob</a></p>
+
+            <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
+            <blockquote>
+              <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+            </blockquote>
+            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+            <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+          </div><!-- /.blog-post -->
+
+          <div class="blog-post">
+            <h2 class="blog-post-title">New feature</h2>
+            <p class="blog-post-meta">December 14, 2013 by <a href="#">Chris</a></p>
+
+            <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+            <ul>
+              <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
+              <li>Donec id elit non mi porta gravida at eget metus.</li>
+              <li>Nulla vitae elit libero, a pharetra augue.</li>
+            </ul>
+            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+            <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
+          </div><!-- /.blog-post -->
+
+          <nav class="blog-pagination">
+            <a class="btn btn-outline-primary" href="#">Older</a>
+            <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
+          </nav>
+
+        </div><!-- /.blog-main -->
+
+        <aside class="col-md-4 blog-sidebar">
+          <div class="p-3 mb-3 bg-light rounded">
+            <h4 class="font-italic">About</h4>
+            <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+          </div>
+
+          <div class="p-3">
+            <h4 class="font-italic">Archives</h4>
+            <ol class="list-unstyled mb-0">
+              <li><a href="#">March 2014</a></li>
+              <li><a href="#">February 2014</a></li>
+              <li><a href="#">January 2014</a></li>
+              <li><a href="#">December 2013</a></li>
+              <li><a href="#">November 2013</a></li>
+              <li><a href="#">October 2013</a></li>
+              <li><a href="#">September 2013</a></li>
+              <li><a href="#">August 2013</a></li>
+              <li><a href="#">July 2013</a></li>
+              <li><a href="#">June 2013</a></li>
+              <li><a href="#">May 2013</a></li>
+              <li><a href="#">April 2013</a></li>
+            </ol>
+          </div>
+
+          <div class="p-3">
+            <h4 class="font-italic">Elsewhere</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">GitHub</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">Facebook</a></li>
+            </ol>
+          </div>
+        </aside><!-- /.blog-sidebar -->
+
+      </div><!-- /.row -->
+
+    </main>

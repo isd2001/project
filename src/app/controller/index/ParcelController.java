@@ -76,6 +76,10 @@ public class ParcelController {
 			return "parcel.new";
 		}
 		
-		
+	}
+	
+	@RequestMapping("/detail.do")
+	public String getByOnePercel() {
+		return "parcel.detail";
 	}
 }
