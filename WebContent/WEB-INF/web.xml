@@ -29,4 +29,9 @@
 	<listener>
 		<listener-class>app.listener.AppInitializer</listener-class>
 	</listener>
+	
+	<servlet-mapping>
+	  <servelt-name>NboardController</servelt-name>
+	  <url-pattern>.do</url-pattern>
+    </servlet-mapping>
 </web-app>
