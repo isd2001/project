@@ -29,7 +29,7 @@ div.desc {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath }/css/gallery.css">
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath }/css/parcel.css">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
@@ -45,14 +45,14 @@ div.desc {
 		<div >
 			<tiles:insertAttribute name="menu"/>
 		</div>
-		<div class="row at-row">
-			<div class="col-md-8 at-col at-main" >
+		<div class= "row">
+			<div class = "col-md-9">
 				<tiles:insertAttribute name="center"/>
 			</div>
-			<div class="col-md-4 at-col at-side" style="padding-left:0px; padding-top:5px;">
+			<div class = "col-md-3">
 				<tiles:insertAttribute name="right"/>
 			</div>
-		</div>		
+		</div>
 	</div>
 </body>
 </html>
