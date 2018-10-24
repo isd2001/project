@@ -73,7 +73,7 @@
 	<div class="row">
 
 		<div class="col-md-1.5 mb-2">
-			<a>
+			<a id="map">
 				<button type="button" class="btn btn-outline-light" id="map">
 					<img class="btn-img"
 						src="${pageContext.servletContext.contextPath }/image/위치.PNG"
@@ -146,8 +146,8 @@
 		});
 		
 		$("#map").on("click",function() {
-			window.open("${pageContext.servletContext.contextPath }/board/map.do",
-			"map", "width=500,height=500");
+			window.open("${pageContext.servletContext.contextPath }/together/map2.do",
+			"map", "width=600,height=600");
 		});
 </script>
 
