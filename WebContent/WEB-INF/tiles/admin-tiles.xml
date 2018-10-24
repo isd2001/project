@@ -7,11 +7,12 @@
 		<put-attribute name="center" value="/WEB-INF/views/default/center.jsp"/>
 		<put-attribute name="right" value="/WEB-INF/views/default/right.jsp"/>
 	</definition>	
-	<definition name="main.test" template="/WEB-INF/tiles/admin-template.jsp">
+	<definition name="main.togetherboard" template="/WEB-INF/tiles/admin-template.jsp">
 		<put-attribute name="head" value="/WEB-INF/views/default/head.jsp"/>
 		<put-attribute name="menu" value="/WEB-INF/views/default/menu.jsp"/>
-		<put-attribute name="center" value="/WEB-INF/views/test/test.jsp"/>
+		<put-attribute name="center" value="/WEB-INF/views/together.board/mainboard.jsp"/>
 		<put-attribute name="right" value="/WEB-INF/views/default/right.jsp"/>
+
 	</definition>	
 	
 	<definition name="dogBoard.main" template="/WEB-INF/tiles/admin-template.jsp">
@@ -20,4 +21,18 @@
 		<put-attribute name="right" value="/WEB-INF/views/default/right.jsp"/>
 		<put-attribute name="center" expression="${requestScope.center}"/>
 	</definition>	
+	
+	<definition name="main.selectboard" template="/WEB-INF/tiles/admin-template.jsp">
+		<put-attribute name="head" value="/WEB-INF/views/default/head.jsp"/>
+		<put-attribute name="menu" value="/WEB-INF/views/default/menu.jsp"/>
+		<put-attribute name="center" value="/WEB-INF/views/together.board/selectboard.jsp"/>
+		<put-attribute name="right" value="/WEB-INF/views/default/right.jsp"/>
+	</definition>
+	
+	<definition name="main.newboard" template="/WEB-INF/tiles/admin-template.jsp">
+		<put-attribute name="head" value="/WEB-INF/views/default/head.jsp"/>
+		<put-attribute name="menu" value="/WEB-INF/views/default/menu.jsp"/>
+		<put-attribute name="center" value="/WEB-INF/views/together.board/new.jsp"/>
+		<put-attribute name="right" value="/WEB-INF/views/default/right.jsp"/>
+	</definition>
 </tiles-definitions>
