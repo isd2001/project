@@ -1,4 +1,4 @@
-package app.controller.index;
+package app.controller.board;
 
 import java.util.Map;
 
@@ -20,9 +20,23 @@ public class TogetherBoardController {
 	
 	@GetMapping("/selectboard.do")
 	public String selsctboard(@RequestParam Map target) {
-		System.out.println("target>"+target.get("area"));
+		String area=(String)target.get("area");
+		
+		System.out.println("target>"+area);
 		
 		return "main.selectboard";
+	}
+	
+	@GetMapping("/new.do")
+	public String newGetboard() {
+		return "main.newboard";
+	}
+	
+	@PostMapping("/new.do")
+	public String newPostboard(@RequestParam Map map) {
+		System.out.println("정보 > "+ map);
+		
+		return "";
 	}
 	
 	

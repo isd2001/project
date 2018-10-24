@@ -18,5 +18,12 @@
 		<put-attribute name="menu" value="/WEB-INF/views/default/menu.jsp"/>
 		<put-attribute name="center" value="/WEB-INF/views/together.board/selectboard.jsp"/>
 		<put-attribute name="right" value="/WEB-INF/views/default/right.jsp"/>
-	</definition>	
+	</definition>
+	
+	<definition name="main.newboard" template="/WEB-INF/tiles/admin-template.jsp">
+		<put-attribute name="head" value="/WEB-INF/views/default/head.jsp"/>
+		<put-attribute name="menu" value="/WEB-INF/views/default/menu.jsp"/>
+		<put-attribute name="center" value="/WEB-INF/views/together.board/new.jsp"/>
+		<put-attribute name="right" value="/WEB-INF/views/default/right.jsp"/>
+	</definition>		
 </tiles-definitions>
