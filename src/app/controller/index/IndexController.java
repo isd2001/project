@@ -15,10 +15,5 @@ public class IndexController {
 	
 		return "main.index";
 	}
-	@GetMapping("/test.do")
-	public String testHandle(WebRequest wr) {
-	
-		return "main.test";
-	}
 		
 }
