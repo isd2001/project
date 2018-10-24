@@ -9,13 +9,21 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-2.0.xsd">
 
-<bean id="handlerMapping"
+	 <context:component-scan base-package="app"/>
+
+	<bean id="handlerMapping"
 	 	class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
 	 <!-- controller registration -->
-	 <context:component-scan base-package="app"/>
-	 <!-- 
-	 	
-	  -->
+<!-- 	  
+	<websocket:handlers>
+		<websocket:mapping handler="findSocketController" path="/find.do" />
+	
+		<websocket:handshake-interceptors>
+			<bean
+				class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
+		</websocket:handshake-interceptors>
+	</websocket:handlers> -->
+	 
 	 <!-- viewResolver configuration -->
 	<bean id="gson" class="com.google.gson.Gson"/>
 	
@@ -44,7 +52,7 @@
 	 <bean id="sqlTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 	 	<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
 	 </bean>
-	 <context:component-scan base-package="models"></context:component-scan>
+	 <context:component-scan base-package="app.models"></context:component-scan>
 	 
 	 <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id = "multipartResolver"/>
 	
