@@ -21,13 +21,10 @@
 						<div class="card-body">
 							<p class="card-text">This is a wider card with supporting
 								text below as a natural lead-in to additional content. This
-								content is a little bit longer.</p>
+								content is a little bit longer.</p><br/><br/><br/>
 							<div class="d-flex justify-content-between align-items-center">
-								<div class="btn-group">
-									<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-									<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-								</div>
-								<small class="text-muted">9 mins</small>
+								<button type="button" class="btn btn-sm btn-outline-secondary">우리[쀼쀼]를 찾아요 !</button>
+								<small class="text-muted">닉네임</small>							
 							</div>
 						</div>
 					</div>
@@ -43,8 +40,12 @@
 								content is a little bit longer.</p>
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="btn-group">
-									<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+									<p>
+										<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+									</p>
+									<p>
 									<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+									</p>
 								</div>
 								<small class="text-muted">9 mins</small>
 							</div>
@@ -144,11 +145,11 @@
 					</ul>
 				</nav>
 				<br />
-	<!-- 			<p style="text-align: center">
+	<!-- 		<p style="text-align: center">
 					<input type="text" placeholder="검색어 입력">
 					<button type="button">검색</button>
 				</p>
-	 -->		</div>
+	 -->	</div>
 		</div>
 	</div>
 </div>
