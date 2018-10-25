@@ -5,10 +5,9 @@
 	action="${pageContext.servletContext.contextPath }/together/new.do"
 	method="post">
 	<p style="align-content: center;">
-		<small> 현재 페이지는 (같이가요) 글올리기 입니다.<br /> 
-		본 목적은 주변 또는 지역을 설정해 같이 산책할 친구를 찾는것입니다.<br/>
-		(*) 부분은 필수입니다. 내용을 기재하지않으면 ,등록이 되지 않습니다.<br />
-		 
+		<small> 현재 페이지는 (같이가요) 글올리기 입니다.<br /> 본 목적은 주변 또는 지역을 설정해 같이
+			산책할 친구를 찾는것입니다.<br /> (*) 부분은 필수입니다. 내용을 기재하지않으면 ,등록이 되지 않습니다.<br />
+
 		</small>
 	</p>
 	<hr />
@@ -47,7 +46,11 @@
 				<option value="종로구">종로구</option>
 				<option value="중구">중구</option>
 				<option value="중량구">중량구</option>
-			</select>
+				</select>
+		</div>
+		<div class="col-md-6 mb-3">
+			<label for="date">상세지역 </label>
+			<input readonly="readonly" class="form-control">
 		</div>
 	</div>
 
@@ -65,10 +68,18 @@
 
 
 	<div class="mb-3">
-		<label for="text">(*)내 용</label> <small id="size2">(0/500)</small> <input
+		<label for="text">(*)내 용</label><small id="size2">(0/500)</small>
+		<textarea class="form-control" id="content" name="content" aria-label="With textarea"
+			placeholder="ex)&#13;&#10;견종 : 코카 스파니엘 " style="width: 99%; height: 100px; resize: none;"></textarea>
+		
+		
+		
+		
+		
+		<!--  <input
 			type="text" class="form-control" id="content" name="content"
 			placeholder="ex)견종:xxxx &#13;&#10; 500글자 내외로 작성해주세요"
-			style="width: 99%; height: 100px; resize: none;">
+			style="width: 99%; height: 100px; resize: none;"> -->
 	</div>
 	<hr />
 	<p>(*)상세지역</p>
@@ -83,7 +94,7 @@
 				</button>
 			</a>
 		</div>
-<%-- 
+		<%-- 
 		<div class="col-md-1.5 mb-2">
 			<button type="button" class="btn btn-outline-light">
 				<img class="btn-img"
@@ -150,7 +161,6 @@
 		$("#map").on("click",function() {
 			window.open("${pageContext.servletContext.contextPath }/together/map2.do",
 			"map", "width=600,height=450");
-			
 
 			
 		}); 

@@ -3,107 +3,100 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="utf-8">
+    <title>좌표로 주소를 얻어내기</title>
+    <style>
+    .map_wrap {position:relative;width:100%;height:350px;}
+    .title {font-weight:bold;display:block;}
+    .hAddr {position:absolute;left:10px;top:10px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;}
+    #centerAddr {display:block;margin-top:2px;font-weight: normal;}
+    .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+</style>
 </head>
 <body>
-	<div id="map" style="width: 100%; height: 350px;"></div>
-	<p>
-		<em>산책할 곳을 선택해주세요</em>
-	</p>
-	<div id="click"></div>
+<div class="map_wrap">
+    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+    <div class="hAddr">
+        <span class="title">지도중심기준 행정동 주소정보</span>
+        <span id="centerAddr"></span>
+    </div>
+</div>
 
-	<button type="submit">완료</button>
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=117ad48755b824c438ab2ac9c6b6ad6e"></script>
-	<script>
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-		mapOption = {
-			center : new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-			level : 3
-		// 지도의 확대 레벨
-		};
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=117ad48755b824c438ab2ac9c6b6ad6e&libraries=services"></script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        level: 1 // 지도의 확대 레벨
+    };  
 
-		var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+// 지도를 생성합니다    
+var map = new daum.maps.Map(mapContainer, mapOption); 
 
-		// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
-		var positions = [ {
-			content : '<div>카카오</div>',
-			latlng : new daum.maps.LatLng(33.450705, 126.570677)
-		}, {
-			content : '<div>먼지</div>',
-			latlng : new daum.maps.LatLng(33.450936, 126.569477)
-		}, {
-			content : '<div>초코</div>',
-			latlng : new daum.maps.LatLng(33.450879, 126.569940)
-		}, {
-			content : '<div>해피</div>',
-			latlng : new daum.maps.LatLng(33.451393, 126.570738)
-		} ];
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new daum.maps.services.Geocoder();
 
-		for (var i = 0; i < positions.length; i++) {
-			// 마커를 생성합니다
-			var marker = new daum.maps.Marker({
-				map : map, // 마커를 표시할 지도
-				position : positions[i].latlng
-			// 마커의 위치
-			});
+var marker = new daum.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
+    infowindow = new daum.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
 
-			// 마커에 표시할 인포윈도우를 생성합니다 
-			var infowindow = new daum.maps.InfoWindow({
-				content : positions[i].content
-			// 인포윈도우에 표시할 내용
-			});
+// 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
+/* searchAddrFromCoords(map.getCenter(), displayCenterInfo); */
 
-			// 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-			// 이벤트 리스너로는 클로저를 만들어 등록합니다 
-			// for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-			daum.maps.event.addListener(marker, 'mouseover', makeOverListener(
-					map, marker, infowindow));
-			daum.maps.event.addListener(marker, 'mouseout',
-					makeOutListener(infowindow));
-		}
+// 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
+daum.maps.event.addListener(map, 'click', function(mouseEvent) {
+	console.log("mouse > "+mouseEvent.latLng);
+    searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+        if (status === daum.maps.services.Status.OK) {
+            /* var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : ''; */
+            var detailAddr = '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
+            
+            var content = '<div class="bAddr">' +
+                            '<span class="title">법정동 주소정보</span>' + 
+                            detailAddr + 
+                        '</div>';
 
-		// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
-		function makeOverListener(map, marker, infowindow) {
-			return function() {
-				infowindow.open(map, marker);
-			};
-		}
+            // 마커를 클릭한 위치에 표시합니다 
+            marker.setPosition(mouseEvent.latLng);
+            marker.setMap(map);
 
-		// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
-		function makeOutListener(infowindow) {
-			return function() {
-				infowindow.close();
-			};
-		}
-		//---------------------------------------------------
-		// 지도를 클릭한 위치에 표출할 마커입니다
-		var marker = new daum.maps.Marker({
-			// 지도 중심좌표에 마커를 생성합니다 
-			position : map.getCenter()
-		});
-		// 지도에 마커를 표시합니다
-		marker.setMap(map);
-  
-		// 지도에 클릭 이벤트를 등록합니다
-		// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
-		daum.maps.event.addListener(map, 'click', function(mouseEvent) {
+            // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+            infowindow.setContent(content);
+            infowindow.open(map, marker);
+        }   
+    });
+});
 
-			// 클릭한 위도, 경도 정보를 가져옵니다 
-			var latlng = mouseEvent.latLng;
+// 중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
+daum.maps.event.addListener(map, 'idle', function() {
+    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+});
 
-			// 마커 위치를 클릭한 위치로 옮깁니다
-			marker.setPosition(latlng);
+function searchAddrFromCoords(coords, callback) {
+    // 좌표로 행정동 주소 정보를 요청합니다
+    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);   
+    
+}
 
-			var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
-			message += '경도는 ' + latlng.getLng() + ' 입니다';
+function searchDetailAddrFromCoords(coords, callback) {
+    // 좌표로 법정동 상세 주소 정보를 요청합니다
+    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+    console.log("coords > "+coords);
+}
 
-			var resultDiv = document.getElementById('click');
-			resultDiv.innerHTML = message;
-		
+// 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
+function displayCenterInfo(result, status) {
+    if (status === daum.maps.services.Status.OK) {
+        var infoDiv = document.getElementById('centerAddr');
 
-		});
-	</script>
+        /* for(var i = 0; i < result.length; i++) {
+            // 행정동의 region_type 값은 'H' 이므로
+            if (result[i].region_type === 'H') {
+                infoDiv.innerHTML = result[i].address_name;
+                break;
+            }
+        } */
+    }    
+}
+</script>
 </body>
 </html>

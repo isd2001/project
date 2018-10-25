@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,22 +22,15 @@ public class SearchController {
 	
 	@GetMapping("/search.do")
 	@ResponseBody
-	public void searchHandle(@RequestParam Map map) {
+	public String searchHandle(@RequestParam Map map,ModelMap modelmap) {
 		System.out.println("param>"+map);
 		
-		
-	/*	List<Map> searchlist = new ArrayList<>();
-		Map m = new HashMap<>();
-			m.put("dog_name", "해피");
-			m.put("x", "127.01182625885103");
-			m.put("y", "37.66432536253668");
-		searchlist.add(m);*/
-		
+		modelmap.addAttribute("info", map);
 				
 		
-		//gson.toJson(searchlist);
 		
 		
+		return "redirect:/";
 	};
 	
 }

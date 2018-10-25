@@ -7,11 +7,24 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>산책로 선택</title>
+<style>
+	.map_wrap {position:relative;width:100%;height:350px;}
+    .title {font-weight:bold;display:block;}
+    .hAddr {position:absolute;left:10px;top:10px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;}
+    #centerAddr {display:block;margin-top:2px;font-weight: normal;}
+    .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
 
+</style>
 </head>
 <body>
 	
-	<div id="map" style="width: 100%; height: 350px;"></div>
+	<div class="map_wrap">
+    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+    <div class="hAddr">
+        <span id="centerAddr"></span>
+    </div>
+</div>
+
 
 	<div id="clickLatlng"></div>
 	<small>현재 설정한 지역 기반의 지도 입니다.<br/>
@@ -38,7 +51,10 @@
 
 		// 지도를 생성합니다    
 		var map = new daum.maps.Map(mapContainer, mapOption);
-
+		
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new daum.maps.services.Geocoder();
+		
 		// 장소 검색 객체를 생성합니다
 		var ps = new daum.maps.services.Places();
 		
@@ -86,7 +102,7 @@
 			position : markerPosition,
 			image : markerImage
 		// 마커이미지 설정 
-		});
+		}),infowindow = new daum.maps.InfoWindow({zindex:1});
 
 		//================================================================================
 		/* // 지도를 클릭한 위치에 표출할 마커입니다
@@ -105,28 +121,96 @@
 			var latlng = mouseEvent.latLng;
 			// 마커 위치를 클릭한 위치로 옮깁니다
 			marker.setPosition(latlng);
-			var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
+			/* var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
 			message += '경도는 ' + latlng.getLng() + ' 입니다';
-			document.getElementById('clickLatlng').innerHTML = message;
+			document.getElementById('clickLatlng').innerHTML = message; */
+			var area ="";
+			searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+		        if (status === daum.maps.services.Status.OK) {
+		            /* var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : ''; */
+		            var detailAddr = '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
+		     		area+=result[0].address.address_name;
+		            var content = '<div class="bAddr">' +
+		                            '<span class="title">법정동 주소정보</span>' + 
+		                            detailAddr + 
+		                        '</div>';
+
+		            // 마커를 클릭한 위치에 표시합니다 
+		            marker.setPosition(mouseEvent.latLng);
+		            marker.setMap(map);
+
+		            // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+		            infowindow.setContent(content);
+		            infowindow.open(map, marker);
+		        }   
+		    });
+			
+			
+			
+			// 중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
+			daum.maps.event.addListener(map, 'idle', function() {
+			    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+			});
+
+			function searchAddrFromCoords(coords, callback) {
+			    // 좌표로 행정동 주소 정보를 요청합니다
+			    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);   
+			    
+			}
+
+			function searchDetailAddrFromCoords(coords, callback) {
+			    // 좌표로 법정동 상세 주소 정보를 요청합니다
+			    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+			    console.log("coords > "+coords);
+			}
+
+			// 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
+			function displayCenterInfo(result, status) {
+			    if (status === daum.maps.services.Status.OK) {
+			        var infoDiv = document.getElementById('centerAddr');
+
+			        /* for(var i = 0; i < result.length; i++) {
+			            // 행정동의 region_type 값은 'H' 이므로
+			            if (result[i].region_type === 'H') {
+			                infoDiv.innerHTML = result[i].address_name;
+			                break;
+			            }
+			        } */
+			    }    
+			}
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			document.getElementById("result").onclick=function(){
 				$.ajax({
 					"url":"${pageContext.servletContext.contextPath }/search.do",
 					"data":{
 						"x":latlng.getLat(),
-						"y":latlng.getLng()
+						"y":latlng.getLng(),
+						"area":area
 						
 					},	
 				}).done(function(rst){
 					var obj=rst;
-					console.log(obj);
-				 	for(var i= 0; i<obj.length; i++) {
-				 		console.log(obj[i].dog_name);
-						console.log(obj[i].x);
-						console.log(obj[i].y);
-						
-					};
+					
 				});
+				
+				// 버튼 클릭시 종료
+				function end(){					   
+				    var theURL = "${pageContext.servletContext.contextPath }/together/map2.do?x="
+				    		+latlng.getLat()+"&y="+latlng.getLng()+"&area="+area; // 전송 URL
+				    // 호출 한 부모 페이지에서 URL 호출
+				    opener.window.location = theURL;
+				    // 호출 한 뒤 현재 팝업 창 닫기 이벤트
+				    close();
+				} 
+				
 			};
 		});
 		//=======================================================================
