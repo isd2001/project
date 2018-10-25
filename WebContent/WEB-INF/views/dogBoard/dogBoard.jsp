@@ -19,62 +19,136 @@
 		aria-selected="false">소형견</a></li>
 </ul>
 <div class="tab-content" id="myTabContent">
-	<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="all-tab">
-		<div class="alert-info text-success justify-content-between row"  id="connectList">	
-				<c:forEach var="list" items="${allList}" >											
-								  <div class="col-sm-3"><input type="checkbox" value="list">${list}</div>
-				</c:forEach>
-		</div>
+	<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="all-tab">		
+		<div class="dogList row" style="overflow-y: scroll;" >
+			<c:forEach var="list" items="${allList}">
+				<div class="col-sm-3">
+					<a href="#"><img
+						src="${pageContext.servletContext.contextPath}${list.IMG}"
+						width="150" height="150" data-toggle="modal"
+						data-target="#exampleModalCenter" data-name="${list.NAME}"
+						data-engname="${list.ENGNAME}"
+						data-source="${pageContext.servletContext.contextPath}${list.IMG}"
+						data-info="${list.INFO }"><br/>
+						<span style="text-align: center" data-toggle="modal"data-target="#exampleModalCenter" data-name="${list.NAME}" data-engname="${list.ENGNAME}"
+						data-source="${pageContext.servletContext.contextPath}${list.IMG}">${list.NAME}</span></a>
+				</div>
+			</c:forEach>
+		</div>		
 	</div>
-	<div class="tab-pane fade" id="bigDog" role="tabpanel"	aria-labelledby="bigDog-tab">
-		<div class="alert-info text-success justify-content-between row"  id="connectList">	
-				<c:forEach var="list" items="${bigDogList}" >											
-								  <div class="col-sm-3"><input type="checkbox" value="list">${list}</div>
-				</c:forEach>
-		</div>
+	<div class="tab-pane fade show active" id="bigDog" role="tabpanel" aria-labelledby="all-tab">		
+		<div class="dogList row" style="overflow-y: scroll;" >
+			<c:forEach var="list" items="${bigDogList}">
+				<div class="col-sm-3">
+					<a href="#"><img
+						src="${pageContext.servletContext.contextPath}${list.IMG}"
+						width="150" height="150" data-toggle="modal"
+						data-target="#exampleModalCenter" data-name="${list.NAME}"
+						data-engname="${list.ENGNAME}"
+						data-source="${pageContext.servletContext.contextPath}${list.IMG}"
+						data-info="${list.INFO }"><br/>
+						<span style="text-align: center" data-toggle="modal"data-target="#exampleModalCenter" data-name="${list.NAME}" data-engname="${list.ENGNAME}"
+						data-source="${pageContext.servletContext.contextPath}${list.IMG}">${list.NAME}</span></a>
+				</div>
+			</c:forEach>
+		</div>		
 	</div>
-	<div class="tab-pane fade" id="medDog" role="tabpanel"	aria-labelledby="medDog-tab">
-		<div class="alert-info text-success justify-content-between row"  id="connectList">	
-				<c:forEach var="list" items="${medDogList}" >											
-								  <div class="col-sm-3"><input type="checkbox" value="list">${list}</div>
-				</c:forEach>
-		</div>
+	<div class="tab-pane fade show active" id="medDog" role="tabpanel" aria-labelledby="all-tab">		
+		<div class="dogList row" style="overflow-y: scroll;" >
+			<c:forEach var="list" items="${medDogList}">
+				<div class="col-sm-3">
+					<a href="#"><img
+						src="${pageContext.servletContext.contextPath}${list.IMG}"
+						width="150" height="150" data-toggle="modal"
+						data-target="#exampleModalCenter" data-name="${list.NAME}"
+						data-engname="${list.ENGNAME}"
+						data-source="${pageContext.servletContext.contextPath}${list.IMG}"
+						data-info="${list.INFO }"><br/>
+						<span style="text-align: center" data-toggle="modal"data-target="#exampleModalCenter" data-name="${list.NAME}" data-engname="${list.ENGNAME}"
+						data-source="${pageContext.servletContext.contextPath}${list.IMG}">${list.NAME}</span></a>
+				</div>
+			</c:forEach>
+		</div>		
 	</div>
-	<div class="tab-pane fade" id="smallDog" role="tabpanel" aria-labelledby="smallDog-tab">
-		<div class="alert-info text-success justify-content-between row"  id="connectList">	
-				<c:forEach var="list" items="${smallDogList}" >											
-								  <div class="col-sm-3"><input type="checkbox" value="list">${list}</div>
-				</c:forEach>
+	<div class="tab-pane fade show active" id="smallDog" role="tabpanel" aria-labelledby="all-tab">		
+		<div class="dogList row" style="overflow-y: scroll;" >
+			<c:forEach var="list" items="${smallDogList}">
+				<div class="col-sm-3">
+					<a href="#"><img
+						src="${pageContext.servletContext.contextPath}${list.IMG}"
+						width="150" height="150" data-toggle="modal"
+						data-target="#exampleModalCenter" data-name="${list.NAME}"
+						data-engname="${list.ENGNAME}"
+						data-source="${pageContext.servletContext.contextPath}${list.IMG}"
+						data-info="${list.INFO }"><br/>
+						<span style="text-align: center" data-toggle="modal"data-target="#exampleModalCenter" data-name="${list.NAME}" data-engname="${list.ENGNAME}"
+						data-source="${pageContext.servletContext.contextPath}${list.IMG}">${list.NAME}</span></a>
+				</div>
+			</c:forEach>
+		</div>		
+	</div>
+</div>
+
+
+
+	<!-- Button trigger modal -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class= "container">
+				<div class="row">
+					<div class="col">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalCenterTitle"></h5>
+							<button type="button" class="close justify-content-end" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="modal-img"></div>
+							</div>
+							<div class="col">
+								<div class="modal-info">
+									<label class="form-control"></label>
+								</div>
+							</div>
+						</div>
+					</div>					
+				</div>
+				<div class="row">
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+				</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
 
-<hr/>
 
+<script>	
+	
+	$('#exampleModalCenter').on('show.bs.modal', function (event) {
+	  var button = $(event.relatedTarget) ;
+	  var targetName = button.data('name');
+	  var targetEng = button.data('engname');
+	  var targetImg = "<img src=\""+button.data('source')+"\"  width=\"250\" height=\"300\""+">";
+	  var targetInfo = button.data('info');
+	  var modal = $(this)
+	  modal.find('.modal-header label').val(targetName)
+	  modal.find('.modal-title').text(targetName+"("+targetEng+")")	  
+	  modal.find('.modal-img').html(targetImg)
+	  modal.find('.modal-info').text(targetInfo)
+	  
+	})
+</script>
 
-
-					
-<div class = "dogList">
-	<img src="${pageContext.servletContext.contextPath}/image/afghanHound.jpg" width="150" height="150">
-	<img src="${pageContext.servletContext.contextPath}/image/alaskanMalamute.jpg" width="150" height="150">
-	<img src="${pageContext.servletContext.contextPath}/image/bloodHound.jpg" width="150" height="150">
-	<img src="${pageContext.servletContext.contextPath}/image/borzoi.jpg" width="150" height="150">
-	<img src="${pageContext.servletContext.contextPath}/image/boxer.jpg" width="150" height="150">
-	<img src="${pageContext.servletContext.contextPath}/image/collie.jpg" width="150" height="150">
-	<img src="${pageContext.servletContext.contextPath}/image/dalmatian.png" width="150" height="150">
-	<img src="${pageContext.servletContext.contextPath}/image/dal.jpg" width="150" height="150">
-	<img src="${pageContext.servletContext.contextPath}/image/dogueDeBordeaux.jpg" width="150" height="150">
-	<img src="${pageContext.servletContext.contextPath}/image/germanShepherd.jpg" width="150" height="150">
-	<img src="${pageContext.servletContext.contextPath}/image/goldenRetriever.jpg" width="150" height="150">
-	<img src="${pageContext.servletContext.contextPath}/image/greatDane.jpg" width="150" height="150">
-	<img src="${pageContext.servletContext.contextPath}/image/greyHound.png" width="150" height="150">
-	<img src="${pageContext.servletContext.contextPath}/image/ibizanHound.jpg" width="150" height="150">
-	<img src="${pageContext.servletContext.contextPath}/image/kuvasz.jpg" width="150" height="150">
-	<img src="${pageContext.servletContext.contextPath}/image/portugueseWaterDog.jpg" width="150" height="150">
-	<img src="${pageContext.servletContext.contextPath}/image/siberianHusky.jpg" width="150" height="150">
-	<img src="${pageContext.servletContext.contextPath}/image/weimaraner.jpg" width="150" height="150">	
-</div>
-
-
-
+	
 

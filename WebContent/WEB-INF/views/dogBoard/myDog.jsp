@@ -50,6 +50,10 @@
 </div>
 
 <hr/>
+<form action = "${pageContext.servletContext.contextPath}/board/myDog/write.do">
+	<button type="submit" class="btn btn-outline-info btn-lg btn-block">우리 강아지 자랑하기!</button>
+</form>
+<hr/>
 
  <div class="album py-5 bg-light">
         <div class="container">
