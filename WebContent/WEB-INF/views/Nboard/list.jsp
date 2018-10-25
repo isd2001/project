@@ -53,30 +53,21 @@
                     <button>검색</button>
                     </div>
                     </div>
+                      <a href="${pageContext.servletContext.contextPath }/Nboard/write.do">
                     <button type="button" style="position: absolute; right: 0;" class="btn btn-outline btn-primary pull-right">
-                          <i class="fa fa-edit fa-fw"></i> 글쓰기
+                          <i class="fa fa-edit fa-fw">글쓰기</i>
                       </button>
+                      </a>
+
+	<script>
+	
+			
+                     </script> 
                       
-                      <div id="pageForm">
                       
-                     
-        <c:if test="${startPage != 1}">
-            <a href='BoardListAction.bo?page=${startPage-1}'>[ 이전 ]</a>
-        </c:if>
-        
-        <c:forEach var="pageNum" begin="${startPage}" end="${endPage}">
-            <c:if test="${pageNum == spage}">
-                ${pageNum}&nbsp;
-            </c:if>
-            <c:if test="${pageNum != spage}">
-                <a href='BoardListAction.bo?page=${pageNum}'>${pageNum}&nbsp;</a>
-            </c:if>
-        </c:forEach>
-        
-        <c:if test="${endPage != maxPage }">
-            <a href='BoardListAction.bo?page=${endPage+1 }'>[다음]</a>
-        </c:if>
-    </div>
+                      
+                  
+    
                 </div>
             </div>
         </div>
