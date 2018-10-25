@@ -5,8 +5,10 @@
 	action="${pageContext.servletContext.contextPath }/together/new.do"
 	method="post">
 	<p style="align-content: center;">
-		<small> 현재 페이지는 같이가요 글올리기 입니다.<br /> (*) 부분은 필수입니다. 내용을
-			기재하지않으면 ,등록이 되지 않습니다.<br /> 첨부에서 위치는 필수지만 , 사진 와 동영상 은 선택사항입니다.
+		<small> 현재 페이지는 (같이가요) 글올리기 입니다.<br /> 
+		본 목적은 주변 또는 지역을 설정해 같이 산책할 친구를 찾는것입니다.<br/>
+		(*) 부분은 필수입니다. 내용을 기재하지않으면 ,등록이 되지 않습니다.<br />
+		 
 		</small>
 	</p>
 	<hr />
@@ -18,7 +20,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-6 mb-3">
-			<label for="exampleFormControlSelect1">(*)지역</label> <select
+			<label for="exampleFormControlSelect1">(*)산책지역</label> <select
 				class="form-control" id="area" name="area">
 				<option value="강남구">강남구</option>
 				<option value="강동구">강동구</option>
@@ -65,11 +67,11 @@
 	<div class="mb-3">
 		<label for="text">(*)내 용</label> <small id="size2">(0/500)</small> <input
 			type="text" class="form-control" id="content" name="content"
-			placeholder="500글자 내외로 작성해주세요"
+			placeholder="ex)견종:xxxx &#13;&#10; 500글자 내외로 작성해주세요"
 			style="width: 99%; height: 100px; resize: none;">
 	</div>
 	<hr />
-	<p>정보&파일 첨부</p>
+	<p>(*)상세지역</p>
 	<div class="row">
 
 		<div class="col-md-1.5 mb-2">
@@ -81,7 +83,7 @@
 				</button>
 			</a>
 		</div>
-
+<%-- 
 		<div class="col-md-1.5 mb-2">
 			<button type="button" class="btn btn-outline-light">
 				<img class="btn-img"
@@ -98,7 +100,7 @@
 					style="opacity: 0.5;"><br /> <span class="video_text">동영상</span>
 			</button>
 		</div>
-
+ --%>
 	</div>
 
 	<span></span> <span></span> <span></span>
@@ -138,7 +140,7 @@
 
 		});
 	
-		$("b").on("click",function(){
+		$("#b").on("click",function(){
 			if ($("#title").val()=="" && $("#area").val()=="" && $("#time").val()=="" && $("#content").val()=="") {
 				window.alert("정보입력을 다시해주세요.");
 			}	
@@ -147,8 +149,27 @@
 		
 		$("#map").on("click",function() {
 			window.open("${pageContext.servletContext.contextPath }/together/map2.do",
-			"map", "width=600,height=600");
-		});
+			"map", "width=600,height=450");
+			
+
+			
+		}); 
+			
+			
+		
+		
+	/* 	$("#area").on("change",function(){
+			var area =$("#area").val();
+			console.log("지역>"+area);
+			$.ajax({
+				"url":"${pageContext.servletContext.contextPath }/search.do",
+				"data":{
+					"area":area},	
+			}).done(function(rst){
+				var obj=rst;
+				console.log(obj);
+			})
+		}); */
 </script>
 
 
