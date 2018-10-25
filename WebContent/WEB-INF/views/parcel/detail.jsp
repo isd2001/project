@@ -4,40 +4,40 @@
 <div class="row mb-2">
 	<div class="col-md-6">
 		<div class="card flex-md-row mb-4 shadow-sm h-md-250">
-			<img class="card-img-right flex-auto d-none d-lg-block" src="${pageContext.servletContext.contextPath }/image/parcelimage/dog01.jpg" alt="Thumbnail [400x400]" style="width: 400px; height: 400px;" data-holder-rendered="true">
+			<img class="card-img-right flex-auto d-none d-lg-block" src="${one.MAINIMAGE }" alt="Thumbnail [500x500]" style="width: 500px; height: 500px;" data-holder-rendered="true">
 		</div>
 	</div>
 	<div class="bd-example">
 		<table class="table">
 			<thead>
 				<tr>
-					<th scope="col">Pomeranian : 포메라니안</th>
+					<th scope="col">${one.TITLE }</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<th scope="row">견종</th>
-					<td>포메라니안</td>
+					<td>${one.BREEDS }</td>
 				</tr>
 				<tr>
 					<th scope="row">성별</th>
-					<td>남아</td>
+					<td>${one.GENDER }</td>
 				</tr>
 				<tr>
 					<th scope="row">나이</th>
-					<td>2개월</td>
+					<td>${one.AGE }</td>
 				</tr>
 				<tr>
 					<th scope="row">분류</th>
-					<td>소형견</td>
+					<td>${one.SORT }</td>
 				</tr>
 				<tr>
 					<th scope="row">성격</th>
-					<td>얌전하고 애교많음</td>
+					<td>${one.CHARACTER }</td>
 				</tr>
 				<tr>
 					<th scope="row">접종</th>
-					<td>접종함</td>
+					<td>${one.INOCULATION }</td>
 				</tr>
 			</tbody>
 		</table>
@@ -62,3 +62,55 @@
 	</div>
 
 </main>
+
+<hr class="mb-4">
+
+<div class="card">
+	<div class="card-body">
+		<div class="media">
+			<img class="mr-3" src="${pageContext.servletContext.contextPath }/image/parcelimage/64x64.jpg" alt="Generic placeholder image">
+			<div class="media-body">
+				<div class="alert alert-secondary" role="alert">
+					<h5 class="mt-0">Media heading</h5>
+					Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+		
+<hr class="mb-4">	
+		
+<div class="media">
+	<img class="mr-3" src="${pageContext.servletContext.contextPath }/image/parcelimage/64x64.jpg" alt="Generic placeholder image">
+	<div class="media-body">
+		<div class="alert alert-secondary" role="alert">
+			<h5 class="mt-0">Media heading</h5>
+    			Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
+    	</div>
+			<small class="d-block text-right mt-3">
+				<a href="#">[comment]</a>
+			</small>
+    <hr class="mb-4">
+		<div class="media mt-3">
+			<a class="pr-3" href="#">
+				<img src="${pageContext.servletContext.contextPath }/image/parcelimage/64x64.jpg" alt="Generic placeholder image">
+			</a>
+			<div class="media-body">
+				<div class="alert alert-secondary" role="alert">
+					<h5 class="mt-0">Media heading</h5>
+	        		Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
+	        	</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<hr class="mb-4">	
+
+<div class="input-group mb-3">
+	<input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+	<div class="input-group-append">
+		<button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+	</div>
+</div>

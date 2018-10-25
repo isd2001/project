@@ -14,7 +14,7 @@
                   <p class="card-text">${p.TITLE }</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <a href="${pageContext.servletContext.contextPath }/detail.do?no="${p.NO }><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
+                      <a href="${pageContext.servletContext.contextPath }/detail.do?no=${p.NO }"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
                     </div>
                     <small class="text-muted"><fmt:formatDate value="${p.REGDATE }" /></small>
                   </div>
