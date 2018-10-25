@@ -49,7 +49,7 @@
 	±Û ¾²±â</button></a>
 
 	<script>
-		var area = function(target) {
+		/* var area = function(target) {
 			var area = target;
 			$("${pageContext.servletContext.contextPath }/together/selectboard.do?area=10result").on("click", function() {
 
@@ -58,7 +58,7 @@
 				area = null;
 			});
 
-		}
+		} */
 	</script>
 </form>
 

@@ -36,7 +36,23 @@ public class TogetherBoardController {
 	public String newPostboard(@RequestParam Map map) {
 		System.out.println("정보 > "+ map);
 		
+		
+		
+		
 		return "";
+	}
+	
+	@GetMapping("/map.do")
+	public String mapGetHandle() {
+		
+		return "together.board/map";
+	}
+	
+
+	@GetMapping("/map2.do")
+	public String map2GetHandle() {
+		
+		return "together.board/map2";
 	}
 	
 	
