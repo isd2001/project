@@ -30,8 +30,8 @@
 		<listener-class>app.listener.AppInitializer</listener-class>
 	</listener>
 	
-	<servlet-mapping>
+	<!-- <servlet-mapping>
 	  <servlet-name>NboardController</servlet-name>
 	  <url-pattern>.do</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping> -->
 </web-app>
