@@ -18,6 +18,8 @@
 		data-toggle="tab" href="#smallDog" role="tab" aria-controls="smallDog"
 		aria-selected="false">소형견</a></li>
 </ul>
+
+
 <div class="tab-content" id="myTabContent">
 	<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="all-tab">		
 		<div class="dogList row" style="overflow-y: scroll;" >
@@ -36,7 +38,7 @@
 			</c:forEach>
 		</div>		
 	</div>
-	<div class="tab-pane fade show active" id="bigDog" role="tabpanel" aria-labelledby="all-tab">		
+	<div class="tab-pane fade " id="bigDog" role="tabpanel" aria-labelledby="all-tab"  aria-hidden="true">		
 		<div class="dogList row" style="overflow-y: scroll;" >
 			<c:forEach var="list" items="${bigDogList}">
 				<div class="col-sm-3">
@@ -53,7 +55,7 @@
 			</c:forEach>
 		</div>		
 	</div>
-	<div class="tab-pane fade show active" id="medDog" role="tabpanel" aria-labelledby="all-tab">		
+	<div class="tab-pane fade" id="medDog" role="tabpanel" aria-labelledby="all-tab"  aria-hidden="true">		
 		<div class="dogList row" style="overflow-y: scroll;" >
 			<c:forEach var="list" items="${medDogList}">
 				<div class="col-sm-3">
@@ -70,7 +72,7 @@
 			</c:forEach>
 		</div>		
 	</div>
-	<div class="tab-pane fade show active" id="smallDog" role="tabpanel" aria-labelledby="all-tab">		
+	<div class="tab-pane fade" id="smallDog" role="tabpanel" aria-labelledby="all-tab"  aria-hidden="true">		
 		<div class="dogList row" style="overflow-y: scroll;" >
 			<c:forEach var="list" items="${smallDogList}">
 				<div class="col-sm-3">

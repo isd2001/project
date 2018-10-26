@@ -30,7 +30,8 @@ public class DogBoardController {
 		wr.setAttribute("bigDogList", dr.getDogListByType(1), wr.SCOPE_REQUEST);
 		wr.setAttribute("medDogList", dr.getDogListByType(2), wr.SCOPE_REQUEST);
 		wr.setAttribute("smallDogList", dr.getDogListByType(3), wr.SCOPE_REQUEST);
-		
+				
+	
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("dogBoard.main");
 		mav.addObject("center", "/WEB-INF/views/dogBoard/dogBoard.jsp");

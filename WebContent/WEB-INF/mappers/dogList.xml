@@ -8,12 +8,12 @@
 
 <!-- 게시글 전부 뽑는거 -->
 	<select id="getDogList" resultType="java.util.HashMap" >
-		select * from dogList
+		select * from dogList order by name asc
 	</select>
 	
 <!-- 종류별 데이터 뽑는거 -->
 	<select id="getDogListByType" resultType="java.util.HashMap" parameterType="java.lang.Integer">
-		select * from dogList where type=#{type}
+		select * from dogList where type=#{type}  order by name asc
 	</select>
 	
 </mapper>

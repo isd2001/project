@@ -21,8 +21,9 @@
           	 
           </div>
     
-          <div class="col-4 d-flex justify-content-end align-items-center"> 
-            <a class="btn btn-sm btn-outline-secondary" href="#">회원가입</a>
+          <div class="col-4 d-flex justify-content-end align-items-center">
+          	<a class="btn btn-sm btn-outline-secondary" href="#">마이페이지</a> 
+            <a class="btn btn-sm btn-outline-secondary" href="${pageContext.servletContext.contextPath }/join.do">회원가입</a>
           </div>
         </div>          
 </header>
