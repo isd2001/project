@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<form method="post" enctype="multipart/form-data" action="/gaenolja/find/list.do" id="a">
+<form method="post" enctype="multipart/form-data" action="${pageContext.servletContext.contextPath }/find.list.do" id="a">
 	<div style="text-align: center">
 		<br />
 		<h3><b>우리 강아지를 찾아주세요</b></h3>

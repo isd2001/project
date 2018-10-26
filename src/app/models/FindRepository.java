@@ -25,8 +25,8 @@ public class FindRepository {
 	}
 
 	//no로 데이터 뽑기
-	public Map getByOne(String writer) {
-		return template.selectOne("find.getOneByNo", writer);
+	public Map getByOne(int no) {
+		return template.selectOne("find.getOneByNo", no);
 	}
 	
 	
