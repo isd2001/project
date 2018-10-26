@@ -14,9 +14,5 @@ public class NboardController {
 		
 		return "Nboard.list";
 	}
-	 @RequestMapping(value="/Nboard/write.do")
-	    public String NBoardForm() throws Exception{
-	        
-	        return "board.write";
-	}
+	
 }

@@ -39,7 +39,7 @@
                             </tr>
                             
                         </tbody>
-                    </table>
+                    </ta	ble>
                     <div>
                     <div id="searchForm">
         <form>
@@ -53,21 +53,10 @@
                     <button>검색</button>
                     </div>
                     </div>
-                      <a href="${pageContext.servletContext.contextPath }/Nboard/write.do">
-                    <button type="button" style="position: absolute; right: 0;" class="btn btn-outline btn-primary pull-right">
-                          <i class="fa fa-edit fa-fw">글쓰기</i>
-                      </button>
-                      </a>
-
-	<script>
-	
-			
-                     </script> 
-                      
-                      
-                      
-                  
-    
+             <div class="col-12 d-flex justify-content-end align-items-center">
+					<a class="btn btn-sm btn-outline-secondary"
+						href="${pageContext.servletContext.contextPath }/Nboard/write">글쓰기</a>
+				</div>
                 </div>
             </div>
         </div>
