@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
  <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="find">
-	<insert id="addAllFind" parameterType="java.util.HashMap">
-		insert into find values (#{writer},)
-	</insert>
 
+	<!-- 게시글 내용 모두 저장 -->
+	<insert id="addAllFind" parameterType="java.util.HashMap">
+		insert into find values (find_seq.nextval, #{title}, #{nick}, sysdate, 
+		#{fpath}, #{fcontent}, #{scontent}, #{mapx}, #{mapy})
+	</insert>
+	
+	<!-- 모든 게시글 뽑기-->
+	<select id="getAllFind" resultType="java.util.HashMap">
+		select * from find
+	</select>
+	
+	<!-- no로 게시글 뽑기 -->
+	<select id="getOneByNo" resultType="java.util.HashMap" parameterType="java.lang.Integer">
+		select * from find where no=#{no}
+	</select>
+	
 </mapper>
