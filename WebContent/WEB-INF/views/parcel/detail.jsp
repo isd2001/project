@@ -1,74 +1,124 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<div class="pet-info-layout">
-	<div class="arrow arrow_left text-none"
-		onclick="location.href='/main/sellView/971'">
-		<span><</span>
-	</div>
-	<div class="pet-profile-img-layout">
-		<li>
-			<div>
-				<img src="/preSaleUpFile/181016_강남비숑남_638.jpg"
-					title="/preSaleUpFile/181016_강남비숑남_638.jpg">
-			</div>
-		</li>
-	</div>
-	<div class="pet-profile-info-layout">
-		<div class="pet-info">
-			<ul>
-				<li class="title">Bichon frise : 비숑프리제_ 레니안</li>
-				<li><div>견종</div>
-					<div>
-						<span>비숑 프리제</span>
-					</div></li>
-				<li><div>성별</div>
-					<div>
-						<span>남 아 Male</span>
-					</div></li>
-				<li><div>나이</div>
-					<div>
-						<span>2개월령</span>
-					</div></li>
-				<li><div>성격</div>
-					<div>
-						<span>순하고 발랄함</span>
-					</div></li>
-				<li><div>분양가</div>
-					<div>
-						<span> <font color='#F0242d'>담당지점</font> 문의
-						</span>
-					</div></li>
-				<li>
-					<div>지점</div>
-					<div class="store">
-						강남점
-						<style>
-.pet-info .store {
-	line-height: 36px !important;
-}
-</style>
-					</div>
-				</li>
-				<li class="search-tag">
-					<div>검색태그</div>
-					<div>
-						<a href='/main/topSerch?keyword=비숑 프리제'><span>비숑 프리제</span><a>
-					</div>
-				</li>
-			</ul>
-		</div>
-		<div class="shop-info-layout">
-			<div class="add-wishlist "></div>
-			<!-- <div class="kakaotalk" onclick="window.open('http://plus.kakao.com/home/no8lmjrp');" style="cursor:pointer;"></div> -->
-			<div class="kakaotalk"
-				onclick="window.open('http://pf.kakao.com/_YXmyu?');"
-				style="cursor: pointer;"></div>
-			<div class="call" style="cursor: pointer"
-				onclick="location.href='tel:1800-4113'"></div>
+<hr class="mb-4">
+<div class="row mb-2">
+	<div class="col-md-6">
+		<div class="bd-example bd-example-images">
+	  		<img data-src="holder.js/400x400" class="img-thumbnail" alt="이미지 안나오면 엑박" src="${pageContext.servletContext.contextPath }${one.MAINIMAGE }" data-holder-rendered="true" style="width: 400px; height: 400px;">
 		</div>
 	</div>
-	<div class="arrow arrow_right text-none"
-		onclick="location.href='/main/sellView/973'">
-		<span>></span>
+	<div class="bd-example">
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">${one.TITLE }</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">견종</th>
+					<td>${one.BREEDS }</td>
+				</tr>
+				<tr>
+					<th scope="row">성별</th>
+					<td>${one.GENDER }</td>
+				</tr>
+				<tr>
+					<th scope="row">나이</th>
+					<td>${one.AGE }</td>
+				</tr>
+				<tr>
+					<th scope="row">분류</th>
+					<td>${one.SORT }</td>
+				</tr>
+				<tr>
+					<th scope="row">성격</th>
+					<td>${one.CHARACTER }</td>
+				</tr>
+				<tr>
+					<th scope="row">접종</th>
+					<td>${one.INOCULATION }</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </div>
+
+<hr class="mb-4">	
+
+<main role="main" class="container">
+	<div class="row">
+		<div class="col-md-8 blog-main">
+			<h3 class="pb-3 mb-4 font-italic border-bottom">
+				상세내용
+			</h3>
+        	    <p>${one.CONTENT }</p>
+			<h3 class="pb-3 mb-4 font-italic border-bottom">
+				첨부이미지 또는 동영상
+			</h3>
+		</div>
+	</div>
+</main>
+<hr class="mb-4">
+<%-- 
+<div class="card">
+	<div class="card-body">
+		<div class="media">
+			<img class="mr-3" src="${pageContext.servletContext.contextPath }/image/parcelimage/64x64.jpg" alt="Generic placeholder image">
+			<div class="media-body">
+				<div class="alert alert-secondary" role="alert">
+					<h5 class="mt-0">Media heading</h5>
+					Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+		 --%>
+<hr class="mb-4">	
+		
+<div class="media">
+	<img class="mr-3" src="${pageContext.servletContext.contextPath }/image/parcelimage/64x64.jpg" alt="Generic placeholder image">
+	<div class="media-body">
+		<div class="alert alert-secondary" role="alert">
+			<h5 class="mt-0">Media heading</h5>
+    			Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
+    	</div>
+			<small class="d-block text-right mt-3">
+				<a href="#" id="comment" name="comment">[comment]</a>
+			</small>
+<%--     
+    <hr class="mb-4">
+		<div class="media mt-3">
+			<a class="pr-3" href="#">
+				<img src="${pageContext.servletContext.contextPath }/image/parcelimage/64x64.jpg" alt="Generic placeholder image">
+			</a>
+			<div class="media-body">
+				<div class="alert alert-secondary" role="alert">
+					<h5 class="mt-0">Media heading</h5>
+	        		Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
+	        	</div>
+			</div>
+		</div>
+--%>
+	</div>
+</div>
+
+<hr class="mb-4">	
+
+<div class="input-group mb-3" id="ment"  >
+	<input type="text" class="form-control" id="test" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+	<div class="input-group-append">
+		<button class="btn btn-outline-secondary" type="submit" id="test2">New Comment</button>
+	</div>
+</div>
+
+<script>
+	$("#test").on("change", function() {
+		var m = $("#test").val();
+		console.log(m);
+		
+	});
+
+
+</script>
