@@ -12,26 +12,21 @@ public class FindRepository {
 	@Autowired
 	SqlSessionTemplate template;
 	
-//	//게시글 작성(전부 넣기)
-//	public int addWrite(Map map) {
-//		return "template.";
-//	}
-//	
-//	//게시글에서 빼기 (전부)
-//	public List<Map> removeWrite(){
-//		return "template.";
-//	}
-//	
-//	//게시글 수정
-//	public int update(Map map){
-//		return "template.";
-//	}
-//
-//	//특정 데이터 뽑기
-//	public Map getByOne(int no) {
-//		return "template.";
-//	}
-//	
-//	
-//	
+	//게시글 작성(전부 넣기)
+	public int addAllFind(Map map) {
+		return template.insert("find.addAllFind", map);
+	}
+	
+	//모든 게시글 내용 뽑기
+	public List<Map> getAllFind(){
+		return template.selectList("find.getAllFind");
+	}
+
+	//no로 데이터 뽑기
+	public Map getByOne(String writer) {
+		return template.selectOne("find.getOneByNo", writer);
+	}
+	
+	
+	
 }

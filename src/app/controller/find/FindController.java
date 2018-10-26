@@ -1,14 +1,13 @@
 package app.controller.find;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,12 +17,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
+import app.models.FindRepository;
+
 @Controller
 @RequestMapping("/find")
 public class FindController {
 
 	@Autowired
 	ServletContext ctx;
+	
+	@Autowired
+	FindRepository findRepository;
+	
 	@GetMapping("/list.do")
 	public String listHandler(ModelMap mmap) {
 		Date today = new Date();
@@ -36,8 +41,17 @@ public class FindController {
 	}
 	
 	@PostMapping("/list.do")	
-	public String listHandler(@RequestParam (required=false)String param,@RequestParam (required=false)MultipartFile findFile, ModelMap mmap) throws IOException {
+	public String listHandler(@RequestParam (required=false)String param,@RequestParam (required=false)MultipartFile findFile, 
+			ModelMap mmap, @RequestParam Map m, WebRequest wr ){
 		
+		String writer = (String)m.get("writer");
+		
+		Map map = findRepository.getByOne(writer);
+		
+		wr.setAttribute("writer", writer, WebRequest.SCOPE_SESSION);
+		wr.setAttribute("user", map, WebRequest.SCOPE_SESSION);
+		
+		// 파일 첨부
 		String fileName = findFile.getOriginalFilename();
 		System.out.println(fileName);
 		String path = ctx.getRealPath("/storage");
