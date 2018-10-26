@@ -5,7 +5,11 @@
 <div class="nav d-flex justify-content-around py-2 mb-2">		
         <nav class="nav d-flex justify-content-between">
           <a class="p-2 text-muted" >      </a>
+<<<<<<< HEAD
           <a class="p-2 text-muted" href="${pageContext.servletContext.contextPath }/nboard/index.do">공지사항</a>
+=======
+          <a class="p-2 text-muted" href="${pageContext.servletContext.contextPath }/Nboard/list.do">공지사항</a>
+>>>>>>> refs/remotes/origin/IMS
           <a class="p-2 text-muted" href="#">출석체크</a>
           <a class="p-2 text-muted"	href="${pageContext.servletContext.contextPath }/find/list.do">강아지찾기</a>
           <a class="p-2 text-muted" href="${pageContext.servletContext.contextPath }/percel.do">분양</a>

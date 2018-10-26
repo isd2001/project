@@ -2,15 +2,17 @@ package app.controller.Nboard;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/nboard")
+@RequestMapping("/Nboard")
 public class NboardController {
 
-	@GetMapping("/index.do")
-	public String nboardIndexController() {
+	@GetMapping("/list.do")
+	public String NboardHandler() {
 		
-		return "nboard.index";
+		return "Nboard.list";
 	}
+	
 }
