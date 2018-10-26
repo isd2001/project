@@ -15,6 +15,8 @@ public class TogetherBoardController {
 	@GetMapping("/mainboard.do")
 	public String mainboard() {
 		
+		
+		
 		return "main.togetherboard";
 	}
 	

@@ -13,7 +13,7 @@
 		 </div>
 	    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
 				<div class="card-body">
-					<a onclick="area(10);" href="${pageContext.servletContext.contextPath }/together/selectboard.do?area=10" class="badge badge-light" style="opacity: 0.5;">강남구</a> 
+					<a onclick="area(강남구);" href="${pageContext.servletContext.contextPath }/together/selectboard.do?area=강남구" class="badge badge-light" style="opacity: 0.5;">강남구</a> 
 					<a onclick="area(20);" href="${pageContext.servletContext.contextPath }/together/selectboard.do?area=20" class="badge badge-light" style="opacity: 0.5;">강동구</a>
 					<a onclick="area(30);" href="${pageContext.servletContext.contextPath }/together/selectboard.do?area=30"	class="badge badge-light" style="opacity: 0.5;">강북구</a>
 					<a onclick="area(40);" href="${pageContext.servletContext.contextPath }/together/selectboard.do?area=40" class="badge badge-light" style="opacity: 0.5;">강서구</a>
