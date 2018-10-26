@@ -7,5 +7,5 @@
 		<put-attribute name="right" value="/WEB-INF/views/default/right.jsp"/>
 		<put-attribute name="center" value="/WEB-INF/views/Nboard/list.jsp"/>
 	</definition>	
-	
+
 </tiles-definitions>

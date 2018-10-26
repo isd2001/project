@@ -29,4 +29,5 @@
 	<listener>
 		<listener-class>app.listener.AppInitializer</listener-class>
 	</listener>
+
 </web-app>

@@ -4,16 +4,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+div.gallery {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+}
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+</style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<<<<<<< HEAD
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath }/css/parcel.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-=======
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath }/css/gallery.css">
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
->>>>>>> refs/remotes/origin/김기현
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
@@ -28,14 +45,14 @@
 		<div >
 			<tiles:insertAttribute name="menu"/>
 		</div>
-		<div class= "row">
-			<div class = "col-md-9">
+		<div class="row at-row">
+			<div class="col-md-8 at-col at-main" >
 				<tiles:insertAttribute name="center"/>
 			</div>
-			<div class = "col-md-3">
+			<div class="col-md-4 at-col at-side" style="padding-left:0px; padding-top:5px;">
 				<tiles:insertAttribute name="right"/>
 			</div>
-		</div>
+		</div>		
 	</div>
 </body>
 </html>
