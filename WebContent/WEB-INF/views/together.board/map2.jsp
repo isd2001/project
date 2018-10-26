@@ -32,7 +32,7 @@
 	<button type="submit" id="result">확인</button>을 눌러주세요.
 	</small>
 	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=117ad48755b824c438ab2ac9c6b6ad6e&libraries=services"></script>
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d54ea73b1e9ac77ebe1409aa939d77e5&libraries=services"></script>
 	<script>
 		
 		
@@ -197,19 +197,16 @@
 						
 					},	
 				}).done(function(rst){
-					var obj=rst;
-					
+						var obj=rst;
+						
 				});
 				
-				// 버튼 클릭시 종료
-				function end(){					   
-				    var theURL = "${pageContext.servletContext.contextPath }/together/map2.do?x="
-				    		+latlng.getLat()+"&y="+latlng.getLng()+"&area="+area; // 전송 URL
-				    // 호출 한 부모 페이지에서 URL 호출
-				    opener.window.location = theURL;
-				    // 호출 한 뒤 현재 팝업 창 닫기 이벤트
-				    close();
-				} 
+				opener.document.getElementById("address").value=area;
+				opener.document.getElementById("x").value=latlng.getLat();
+				opener.document.getElementById("y").value=latlng.getLng();
+			
+				window.close();
+			
 				
 			};
 		});

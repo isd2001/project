@@ -1,9 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<c:if test="${result eq 'no' }">
+	<script>window.alert("글이 정상처리 되지 않았습니다.\n필수사항을 다시한번 확인해주세요.")</script>
+</c:if>
 
 <form class="needs-validation"
 	action="${pageContext.servletContext.contextPath }/together/new.do"
 	method="post">
+	<input type="hidden" name="latitude" id="x"/>
+	<input type="hidden" name="longitude" id="y"/>
 	<p style="align-content: center;">
 		<small> 현재 페이지는 (같이가요) 글올리기 입니다.<br /> 본 목적은 주변 또는 지역을 설정해 같이
 			산책할 친구를 찾는것입니다.<br /> (*) 부분은 필수입니다. 내용을 기재하지않으면 ,등록이 되지 않습니다.<br />
@@ -15,7 +22,7 @@
 		<label for="text">(*)제 목 <span class="text-muted"></span> <small
 			id="size1">(0/15)</small>
 		</label> <input type="text" class="form-control" id="title" name="title"
-			placeholder="15글자 내외로 작성해주세요">
+			placeholder="15글자 내외로 작성해주세요" autocomplete="off">
 	</div>
 	<div class="row">
 		<div class="col-md-6 mb-3">
@@ -48,12 +55,13 @@
 				<option value="중량구">중량구</option>
 				</select>
 		</div>
-		<div class="col-md-6 mb-3">
-			<label for="date">상세지역 </label>
-			<input readonly="readonly" class="form-control">
+		<div class="col-md-6 mb-3" >
+			<label for="text">상세주소 </label>
+			<input readonly="readonly" class="form-control" id="address" name="address">
 		</div>
+		
 	</div>
-
+	
 	<div class="row">
 		<div class="col-md-6 mb-3">
 			<label for="date">(*)날짜 </label> <input type="date"
@@ -70,16 +78,8 @@
 	<div class="mb-3">
 		<label for="text">(*)내 용</label><small id="size2">(0/500)</small>
 		<textarea class="form-control" id="content" name="content" aria-label="With textarea"
-			placeholder="ex)&#13;&#10;견종 : 코카 스파니엘 " style="width: 99%; height: 100px; resize: none;"></textarea>
-		
-		
-		
-		
-		
-		<!--  <input
-			type="text" class="form-control" id="content" name="content"
-			placeholder="ex)견종:xxxx &#13;&#10; 500글자 내외로 작성해주세요"
-			style="width: 99%; height: 100px; resize: none;"> -->
+			placeholder="ex)&#13;&#10;견종 : 코카 스파니엘 " style="width: 99%; height: 100px; resize: none;" autocomplete="off"></textarea>
+	
 	</div>
 	<hr />
 	<p>(*)상세지역</p>
@@ -94,27 +94,7 @@
 				</button>
 			</a>
 		</div>
-		<%-- 
-		<div class="col-md-1.5 mb-2">
-			<button type="button" class="btn btn-outline-light">
-				<img class="btn-img"
-					src="${pageContext.servletContext.contextPath }/image/사진.PNG"
-					style="opacity: 0.5;"><br /> <span class="image_text">사진</span>
-			</button>
-		</div>
-
-
-		<div class="col-md-1.5 mb-2">
-			<button type="button" class="btn btn-outline-light">
-				<img class="btn-img"
-					src="${pageContext.servletContext.contextPath }/image/동영상.PNG"
-					style="opacity: 0.5;"><br /> <span class="video_text">동영상</span>
-			</button>
-		</div>
- --%>
 	</div>
-
-	<span></span> <span></span> <span></span>
 	<hr>
 
 	<button class="btn btn-secondary btn-lg btn-block" type="submit" id="b">등록하기</button>
@@ -151,12 +131,12 @@
 
 		});
 	
-		$("#b").on("click",function(){
+		/* $("#b").on("click",function(){
 			if ($("#title").val()=="" && $("#area").val()=="" && $("#time").val()=="" && $("#content").val()=="") {
-				window.alert("정보입력을 다시해주세요.");
+				window.alert("필수항목을 다시 확인해주세요.");
 			}	
 			
-		});
+		}); */
 		
 		$("#map").on("click",function() {
 			window.open("${pageContext.servletContext.contextPath }/together/map2.do",
@@ -165,21 +145,7 @@
 			
 		}); 
 			
-			
-		
-		
-	/* 	$("#area").on("change",function(){
-			var area =$("#area").val();
-			console.log("지역>"+area);
-			$.ajax({
-				"url":"${pageContext.servletContext.contextPath }/search.do",
-				"data":{
-					"area":area},	
-			}).done(function(rst){
-				var obj=rst;
-				console.log(obj);
-			})
-		}); */
+
 </script>
 
 

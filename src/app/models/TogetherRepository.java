@@ -17,4 +17,9 @@ public class TogetherRepository {
 		return template.selectList("together.getAllTogether");
 	}
 	
+	//글 올리기
+	public int addTogetherBoard(Map map) {
+		return template.insert("together.addTogetherBoard",map);
+	}
+	
 }
