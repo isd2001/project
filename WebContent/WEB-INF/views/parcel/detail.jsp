@@ -3,8 +3,8 @@
 <hr class="mb-4">
 <div class="row mb-2">
 	<div class="col-md-6">
-		<div class="card flex-md-row mb-4 shadow-sm h-md-250">
-			<img class="card-img-right flex-auto d-none d-lg-block" src="${one.MAINIMAGE }" alt="Thumbnail [500x500]" style="width: 500px; height: 500px;" data-holder-rendered="true">
+		<div class="bd-example bd-example-images">
+	  		<img data-src="holder.js/400x400" class="img-thumbnail" alt="이미지 안나오면 엑박" src="${pageContext.servletContext.contextPath }${one.MAINIMAGE }" data-holder-rendered="true" style="width: 400px; height: 400px;">
 		</div>
 	</div>
 	<div class="bd-example">
@@ -44,27 +44,23 @@
 	</div>
 </div>
 
+<hr class="mb-4">	
+
 <main role="main" class="container">
 	<div class="row">
 		<div class="col-md-8 blog-main">
 			<h3 class="pb-3 mb-4 font-italic border-bottom">
-				From the Firehose
+				상세내용
 			</h3>
-
-          <div class="blog-post">
-            <h2 class="blog-post-title">Sample blog post</h2>
-            <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-
-            <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-            
-          </div>
+        	    <p>${one.CONTENT }</p>
+			<h3 class="pb-3 mb-4 font-italic border-bottom">
+				첨부이미지 또는 동영상
+			</h3>
 		</div>
 	</div>
-
 </main>
-
 <hr class="mb-4">
-
+<%-- 
 <div class="card">
 	<div class="card-body">
 		<div class="media">
@@ -78,7 +74,7 @@
 		</div>
 	</div>
 </div>
-		
+		 --%>
 <hr class="mb-4">	
 		
 <div class="media">
@@ -89,8 +85,9 @@
     			Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
     	</div>
 			<small class="d-block text-right mt-3">
-				<a href="#">[comment]</a>
+				<a href="#" id="comment" name="comment">[comment]</a>
 			</small>
+<%--     
     <hr class="mb-4">
 		<div class="media mt-3">
 			<a class="pr-3" href="#">
@@ -103,14 +100,22 @@
 	        	</div>
 			</div>
 		</div>
+--%>
 	</div>
 </div>
 
 <hr class="mb-4">	
 
-<div class="input-group mb-3">
+<div class="input-group mb-3" >
 	<input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
 	<div class="input-group-append">
-		<button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+		<button class="btn btn-outline-secondary" type="button" id="button-addon2">New Comment</button>
 	</div>
 </div>
+
+<script>
+	${"$comment"}.on("click", function() {
+		$("")
+	});
+
+</script>

@@ -13,7 +13,7 @@
 
 <!-- 게시글 전부 뽑는거 -->
 	<select id="getAllByPercel" resultType="java.util.HashMap" >
-		select * from parcel
+		select * from parcel order by regdate desc
 	</select>
 	
 <!-- 특정 게시글 데이터 뽑는거 -->

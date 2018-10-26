@@ -46,13 +46,12 @@ public class ParcelController {
 	// 새글쓰기 저장 핸들러
 	@RequestMapping("/add.do")
 	public String addByPercelHandler(@RequestParam Map param, @RequestParam MultipartFile mainimage, @RequestParam MultipartFile file1, @RequestParam MultipartFile file2, ModelMap map) throws IOException {
-		
-		String mainfileName = String.valueOf(System.currentTimeMillis()) + "_" + mainimage.getOriginalFilename();
-		String file1Name = String.valueOf(System.currentTimeMillis()) + "_" + file1.getOriginalFilename();
-		String file2Name = String.valueOf(System.currentTimeMillis()) + "_" + file2.getOriginalFilename();
-	//	long d = System.currentTimeMillis();
-	//	String t = String.
-		String path = ctx.getRealPath(String.valueOf(System.currentTimeMillis()));
+		long time = System.currentTimeMillis();
+		String mainfileName = String.valueOf(time) + "_" + mainimage.getOriginalFilename();
+		String file1Name = String.valueOf(time) + "_" + file1.getOriginalFilename();
+		String file2Name = String.valueOf(time) + "_" + file2.getOriginalFilename();
+
+		String path = ctx.getRealPath(String.valueOf(time));
 		File dir = new File(path);
 		if(!dir.exists()) {
 			dir.mkdirs();
@@ -64,13 +63,13 @@ public class ParcelController {
 		file1.transferTo(dst1);
 		file2.transferTo(dst2);
 		
-		System.out.println(dst);
-		System.out.println(dst1);
-		System.out.println(dst2);
+		String attachmain = "/" + time + "/" + mainfileName;
+		String attachfile1 = "/" + time + "/" + file1Name;
+		String attachfile2 = "/" + time + "/" + file2Name;
 		
-		param.put("mainimage", dst.toString());
-		param.put("file1", dst1.toString());
-		param.put("file2", dst2.toString());
+		param.put("mainimage", attachmain);
+		param.put("file1", attachfile1);
+		param.put("file2", attachfile2);
 		System.out.println(param);
 		
 		try {
