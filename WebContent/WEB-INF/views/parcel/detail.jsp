@@ -77,7 +77,9 @@
 		 --%>
 <hr class="mb-4">	
 		
-<div class="media">
+<div class="media" id="comment">
+
+<%-- 
 	<img class="mr-3" src="${pageContext.servletContext.contextPath }/image/parcelimage/64x64.jpg" alt="Generic placeholder image">
 	<div class="media-body">
 		<div class="alert alert-secondary" role="alert">
@@ -85,8 +87,12 @@
     			Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
     	</div>
 			<small class="d-block text-right mt-3">
-				<a href="#" id="comment" name="comment">[comment]</a>
+				<button type="button" class="btn btn-link">[comment]</button>
 			</small>
+	</div>
+ --%>
+</div>
+
 <%--     
     <hr class="mb-4">
 		<div class="media mt-3">
@@ -101,12 +107,10 @@
 			</div>
 		</div>
 --%>
-	</div>
-</div>
 
 <hr class="mb-4">	
 
-<div class="input-group mb-3" id="ment"  >
+<div class="input-group mb-3" id="input-comment"  >
 	<input type="text" class="form-control" id="test" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
 	<div class="input-group-append">
 		<button class="btn btn-outline-secondary" type="submit" id="test2">New Comment</button>
@@ -117,8 +121,34 @@
 	$("#test").on("change", function() {
 		var m = $("#test").val();
 		console.log(m);
-		
+		var html = "<img class=\"mr-3\" src=\"${pageContext.servletContext.contextPath }/image/parcelimage/64x64.jpg\" alt=\"Generic placeholder image\">";
+			html += "<div class=\"media-body\">";
+			html += "<div class=\"alert alert-secondary\" role=\"alert\">";
+			html += "<h5 class=\"mt-0\">Media heading</h5>";
+			html += m;
+			html += "</div>";
+			html += "<small class=\"d-block text-right mt-3\">";
+			html += "<button type=\"button\" class=\"btn btn-link\">[comment]</button>";
+			html += "</small>";
+			html += "</div>";
+		$("#comment").append(html);
+		document.getElementById("test").value = "";
 	});
+	
+	$("#recomment").on("click", function() {
+		var html = "<div class=\"input-group mb-3\" id=\"input-comment\">";
+			html += "<input type=\"text\" class=\"form-control\" id=\"test\" placeholder=\"Recipient's username\" aria-label=\"Recipient's username\" aria-describedby=\"button-addon2\">";
+			html += "<div class=\"input-group-append\">";
+			html += "<button class=\"btn btn-outline-secondary\" type=\"submit\" id=\"test2\">New Comment</button>";
+			html += "</div>";
+			html += "</div>";
+		$("#recomment").append(html);
+			
+	})
+	
+	
+	
+	
 
 
 </script>
