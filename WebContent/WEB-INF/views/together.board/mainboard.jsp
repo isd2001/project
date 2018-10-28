@@ -63,15 +63,18 @@
   		</thead>
   		<tbody>
      	<c:forEach var="l" items="${list }">
-     		<tr>
+    	 		<tr>
      			<th scope="row">${l.NO }</th>
      			<td><small>${l.AREA }</small></td>
-     			<td>${l.TITLE }</td>
+     			<td>
+				<a href="${pageContext.servletContext.contextPath  }/together/detail.do?no=${l.NO }">     			
+     			${l.TITLE }</a>
+     			</td>
      			<td>-</td>
      			<td>${l.DAY }</td>
      			<td>${l.GOOD }</td>
      			<td>${l.LOOKUP }</td>
-     		</tr>
+     			</tr>
      	</c:forEach>
     	
   </tbody>
@@ -84,16 +87,7 @@
 	±Û ¾²±â</button></a>
 
 	<script>
-		/* var area = function(target) {
-			var area = target;
-			$("${pageContext.servletContext.contextPath }/together/selectboard.do?area=10result").on("click", function() {
-
-				console.log(area);
-
-				area = null;
-			});
-
-		} */
+	
 	</script>
 </form>
 

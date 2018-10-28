@@ -22,4 +22,9 @@ public class TogetherRepository {
 		return template.insert("together.addTogetherBoard",map);
 	}
 	
+	public Map getOneByNo(String no) {
+		return template.selectOne("together.getOneByNo",no);
+	}
+	
+	
 }
