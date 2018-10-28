@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-
+<c:if test="${re eq 'on' }">
+	<script>window.alert("댓글이 정상적으로 처리되셨습니다.")</script>
+</c:if>
 <div class="my-3 p-5 bg-white rounded shadow-sm">
 	<div class="media text-muted pt-3">
 		<div class="d-flex justify-content-between align-items-center w-100">
@@ -36,27 +38,44 @@
 			<span class="text-gray-dark"><small>조회 > ${list.LOOKUP }</small></span>
 		</div>
 	</div>
+
+
 </div>
 <!-- 댓글 -->
-<div class="jumbotron" style="background-color: D7D1D0; opacity: 0.5; position: relative;height: 300px;" >
-	<div style="overflow: scroll;">
+<div class="jumbotron"
+	style="background-color: D7D1D0; opacity: 0.5; ">
+
+	<ul class="list-group">
 		<c:forEach var="c" items="${comment }">
-			▷ ${c.MENT }	<small style="float: right;">${c.day }</small>
-			<br/>
+			<li class="list-group-item">▷ ${c.MENT } <small
+				style="float: right;">${c.day }</small> <br />
+			</li>
 		</c:forEach>
-	</div>
-	
-<form action="${pageContext.servletContext.contextPath }/together/detail.do" method="post">
-	<div style="position: absolute; left: 10px;bottom: 10px;">
-		<label for="text">댓글</label><small id="size2">(0/100)</small>
-		<textarea class="form-control" id="comment" name="comment"
-			aria-label="With textarea" placeholder="댓글달기 "
-			style="width: 300%; height: 70px; resize: none;" autocomplete="off"></textarea>
-	</div>
-	<div style="position: absolute; left: 580px;bottom: 30px;size: 5%;" >
-	<button type="submit" class="btn btn-secondary btn-lg">댓글 올리기</button>
-	</div>
-</form>
+	</ul>
+	<hr />
+	<form
+		action="${pageContext.servletContext.contextPath }/together/detail.do?no=${list.NO}"
+		method="post">
+		<!--  <div class="row">
+			<div class="col-10">
+			<label for="text">(*)내 용</label><small id="size2">(0/500)</small>
+			<textarea class="form-control" id="comment" name="comment"
+				aria-label="With textarea" placeholder="댓글 작성 "
+				style="width: 100%; height: 100px; resize: none;" autocomplete="off"></textarea>
+			</div>
+			<div class="col-2" style="height: 30px;">
+				<button type="submit" class="btn btn-secondary btn-lg">댓글 올리기</button>
+			</div>
+		</div>-->
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="basic-addon1">Comment</span>
+			</div>
+			<input type="text" class="form-control"
+				aria-describedby="basic-addon1" id="comment" name="comment" autocomplete="off">
+		</div>
+	</form>
+
 </div>
 
 

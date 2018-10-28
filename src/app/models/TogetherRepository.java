@@ -21,10 +21,13 @@ public class TogetherRepository {
 	public int addTogetherBoard(Map map) {
 		return template.insert("together.addTogetherBoard",map);
 	}
-	
+	// 선택한 게시물 출력
 	public Map getOneByNo(String no) {
 		return template.selectOne("together.getOneByNo",no);
 	}
-	
+	// 선택한 지역 출력
+	public List<Map> getAllByArea(String area) {
+		return template.selectList("together.getAllByArea",area);
+	}
 	
 }

@@ -14,7 +14,7 @@ public class IndexController {
 	@GetMapping("/index.do")
 	public String indexHandle(WebRequest wr) {
 	
-		return "main.index";
+		return "main.indWex";
 	}
 	
 	@GetMapping("/join.do")
@@ -32,7 +32,12 @@ public class IndexController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main.join");
 		mav.addObject("center", "/WEB-INF/views/join/joinForm.jsp");
-		return mav;
+		return mav;	
+	}
+	
+	@GetMapping("/address.do")
+	public String addressHandle() {
 		
+		return "join/address";
 	}
 }

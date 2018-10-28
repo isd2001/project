@@ -50,6 +50,8 @@ public class TogetherBoardController {
 			map.put("DAY", sdf.format(list.get(i).get("DAY")));
 			map.put("GOOD", list.get(i).get("GOOD"));
 			map.put("LOOKUP", list.get(i).get("LOOKUP"));
+			map.put("LATITUDE", list.get(i).get("LATITUDE"));
+			map.put("LONGITUDE", list.get(i).get("LONGITUDE"));
 			li.add(map);
 		}
 		System.out.println("li > "+li);
@@ -58,11 +60,25 @@ public class TogetherBoardController {
 		return "main.togetherboard";
 	}
 
-	@GetMapping("/selectboard.do")
-	public String selsctboard(@RequestParam Map target) {
+	@RequestMapping("/selectboard.do")
+	public String selsctboard(@RequestParam Map target,WebRequest wreq) {
 		String area=(String)target.get("area");
-
 		System.out.println("target>"+area);
+		List<Map> list=together.getAllByArea(area);
+		System.out.println("list > "+list);
+		
+		List<Map> li = new ArrayList<>();
+		SimpleDateFormat sdf =new SimpleDateFormat("MM:dd");
+		
+		for (int i = 0; i < list.size(); i++) {
+			String day=sdf.format(list.get(i).get("DAY"));
+			list.get(i).put("day",day);
+		}
+		
+
+		System.out.println("result > "+list);
+		wreq.setAttribute("list", list, WebRequest.SCOPE_REQUEST);
+
 
 		return "main.selectboard";
 	}
@@ -120,28 +136,49 @@ public class TogetherBoardController {
 	public String detailHandle(@RequestParam Map map,WebRequest wreq) {
 		String no = (String)map.get("no");
 		Map target=together.getOneByNo(no);
-		
+
 		List<Map> comment = tocomment.getCommentByNo(no);
-		
+
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-				
+
 		for (int i = 0; i < comment.size(); i++) {
 			String day=sdf.format(comment.get(i).get("LEFTDATE"));
 			comment.get(i).put("day",day);
 		}
-		
+
 		wreq.setAttribute("comment", comment, WebRequest.SCOPE_REQUEST);
 		wreq.setAttribute("list", target, WebRequest.SCOPE_REQUEST);
 		return "main.detile";
 	}
-	
+
 	@PostMapping("/detail.do")
-	public String detailPostHandle(@RequestParam Map param) {
+	public String detailPostHandle(@RequestParam Map param,WebRequest wreq) {
 		System.out.println("param >"+param);
-		String commnet = (String)param.get("comment");
-		
-		
-		
+		String ment = (String)param.get("comment");
+		String cno=(String)param.get("no");
+		Date leftdate = new Date();
+		Map input = new HashMap<>();
+		input.put("cno", cno);
+		input.put("ment", ment);
+		input.put("leftdate", leftdate);
+
+
+		try {
+			int result = tocomment.addComment(input);
+			if (result==1) {
+				wreq.setAttribute("re","on", WebRequest.SCOPE_REQUEST);
+				return "redirect:/together/detail.do?no="+cno;
+			}else {
+				wreq.setAttribute("re","off", WebRequest.SCOPE_REQUEST);
+			}
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+
+
 		return "";
 	}//end
 }

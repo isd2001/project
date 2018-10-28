@@ -49,6 +49,14 @@
 						placeholder="비밀번호">
 				</div>
 			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">주소</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" id="address"
+						placeholder="주소">
+				</div>
+				<button type="button" class="btn btn-secondary" id="address">주소검색</button>
+			</div>
 			
 		</div>
 </div>
@@ -61,4 +69,19 @@
 		<button type="submit" class="btn btn-primary">Sign in</button>
 	</div>
 </div>
+
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script >
+
+	$("#address").on("click",function(){
+		window.open("${pageContext.servletContext.contextPath }/address.do",
+				"map", "width=600,height=450");
+		
+	});
+	
+
+</script>
+
+
+
 

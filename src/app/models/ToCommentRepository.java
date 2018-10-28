@@ -16,5 +16,9 @@ public class ToCommentRepository {
 	public List<Map> getCommentByNo(String cno) {
 		return template.selectList("tocomment.getCommentByNo",cno);
 	}
+	
+	public int addComment(Map map) {
+		return template.insert("tocomment.addComment",map);
+	}
  	
 }

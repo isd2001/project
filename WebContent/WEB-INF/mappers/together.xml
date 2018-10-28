@@ -15,6 +15,10 @@
 	<select id="getOneByNo" resultType="java.util.HashMap" parameterType="java.lang.String">
 		select * from togetherboard where no=#{no}
 	</select>
+<!-- 특정 지역 데이터 뽑는거 -->
+	<select id="getAllByArea" resultType="java.util.HashMap">
+		select * from togetherboard where area=#{area}
+	</select>
 	
 </mapper>
 

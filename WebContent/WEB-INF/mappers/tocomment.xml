@@ -7,8 +7,8 @@
 		select * from togethercomment where cno=#{no} order by leftdate desc
 	</select>
 <!-- 댓글 업로드 -->
-	<select id="addComent" resultType="java.util.HashMap"> 
-		insert into togethercomment values ()
+	<select id="addComment" resultType="java.util.HashMap"> 
+		insert into togethercomment values (#{cno},#{ment},#{leftdate})
 	</select>
 </mapper>
 
