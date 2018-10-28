@@ -3,19 +3,13 @@
 <mapper namespace="comments">
 <!-- 댓글 저장하는거 -->
 	<insert id="addByComments" parameterType="java.util.HashMap">
-		insert into comments values(opinion_seq.nextval, #{choice}, #{ment}, #{talker}, #{ino}, #{code})
+		insert into comments values(opinion_seq.nextval, #{comments}, #{talker}, #{ino}, sysdate, #{serial})
 	</insert>
 
 <!-- 특정 게시글 댓글 전부 뽑는거(오름차순) -->
 	<select id="getAllByComments" resultType="java.util.HashMap" parameterType="java.lang.Integer">
-		select * from comments where ino=#{ino} order by no asc
+		select * from comments where ino=#{ino} order by regdate desc
 	</select>
-	
-<!-- 
-	특정 게시글 댓글의 댓글 뽑는거 
-	<select id="getAllByComments" resultType="java.util.HashMap" parameterType="java.lang.String">
-		
-	</select>
--->
+
 </mapper>
 

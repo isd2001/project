@@ -29,17 +29,27 @@ public class ParcelRepository {
 	}
 	
 	// 댓글 저장하는거
-	public int addByComments() {
-		return template.insert("comments.addByComments");
+	public int addByComments(Map param) {
+		return template.insert("comments.addByComments", param);
 	}
 	
 	// 특정 게시글 댓글 전부 뽑는거(오름차순)
-	public List<Map> getAllByComments(int no) {
-		return template.selectList("comments.getAllByComments", no);
+	public List<Map> getAllByComments(int ino) {
+		return template.selectList("comments.getAllByComments", ino);
 	}
 	
 	// 특정 게시글 댓글의 댓글 뽑는거
 //	public List<Map> getAllByComments(String code) {
 //		return template.selectList("", code);
 //	}
+	
+	// 리댓글 저장하는거
+	public int addByReComments(Map param) {
+		return template.insert("recomments.addByReComments", param);
+	}
+	
+	// 특정 댓글의 리댓글 내용 뽑는거
+	public List<Map> getAllByReComments(String code) {
+		return template.selectList("recomments.getAllByReComment", code);
+	}
 }
