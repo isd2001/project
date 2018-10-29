@@ -19,6 +19,10 @@
 	<select id="getAllByArea" resultType="java.util.HashMap">
 		select * from togetherboard where area=#{area}
 	</select>
+<!-- look up -->
+	<update id="updatelookup" parameterType="java.lang.String">
+		update togetherboard set lookup = lookup+1 where no=#{no}
+	</update>
 	
 </mapper>
 

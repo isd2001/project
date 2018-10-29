@@ -30,4 +30,9 @@ public class TogetherRepository {
 		return template.selectList("together.getAllByArea",area);
 	}
 	
+	// lookup update
+	public int updatelookup(String no) {
+		return template.update("together.updatelookup",no);
+	}
+	
 }

@@ -25,6 +25,7 @@
 
 	</div>
 	<hr />
+	<form action="${pageContext.servletContext.contextPath }/" method="post">
 	<div class="pt-3">
 		<small>주소 > ${list.ADDRESS }</small>
 		<div class="d-flex justify-content-between align-items-center w-100">
@@ -37,16 +38,16 @@
 			<span class="text-gray-dark"><small>추천 > ${list.GOOD }</small></span>
 			<span class="text-gray-dark"><small>조회 > ${list.LOOKUP }</small></span>
 		</div>
+		<button type="button" class="btn btn-warning">추천</button>
 	</div>
-
+	</form>
 
 </div>
 <!-- 댓글 -->
-<div class="jumbotron"
-	style="background-color: D7D1D0; opacity: 0.5; ">
+<div class="jumbotron" >
 
-	<ul class="list-group">
-		<c:forEach var="c" items="${comment }">
+	<ul class="list-group" >
+			<c:forEach var="c" items="${comment }">
 			<li class="list-group-item">▷ ${c.MENT } <small
 				style="float: right;">${c.day }</small> <br />
 			</li>

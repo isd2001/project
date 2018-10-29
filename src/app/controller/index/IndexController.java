@@ -14,7 +14,7 @@ public class IndexController {
 	@GetMapping("/index.do")
 	public String indexHandle(WebRequest wr) {
 	
-		return "main.indWex";
+		return "main.index";
 	}
 	
 	@GetMapping("/join.do")

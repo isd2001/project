@@ -58,7 +58,7 @@ public class TogetherBoardController {
 		wreq.setAttribute("list",li, WebRequest.SCOPE_REQUEST);
 
 		return "main.togetherboard";
-	}
+	}//end mainboard
 
 	@RequestMapping("/selectboard.do")
 	public String selsctboard(@RequestParam Map target,WebRequest wreq) {
@@ -81,12 +81,12 @@ public class TogetherBoardController {
 
 
 		return "main.selectboard";
-	}
+	}//end selectboard
 
 	@GetMapping("/new.do")
 	public String newGetboard() {
 		return "main.newboard";
-	}
+	}//end new
 
 
 	@PostMapping("/new.do")
@@ -125,16 +125,20 @@ public class TogetherBoardController {
 		}
 
 
-	}
+	}//end new
 
 	@GetMapping("/map2.do")
 	public String map2GetHandle() {
 		return "together.board/map2";
-	}
+	}//end map2
 
 	@GetMapping("/detail.do")
 	public String detailHandle(@RequestParam Map map,WebRequest wreq) {
 		String no = (String)map.get("no");
+		//===============================================
+		
+		
+		//===============================================
 		Map target=together.getOneByNo(no);
 
 		List<Map> comment = tocomment.getCommentByNo(no);
@@ -148,8 +152,8 @@ public class TogetherBoardController {
 
 		wreq.setAttribute("comment", comment, WebRequest.SCOPE_REQUEST);
 		wreq.setAttribute("list", target, WebRequest.SCOPE_REQUEST);
-		return "main.detile";
-	}
+		return "main.detail";
+	}//end detail
 
 	@PostMapping("/detail.do")
 	public String detailPostHandle(@RequestParam Map param,WebRequest wreq) {
@@ -162,7 +166,6 @@ public class TogetherBoardController {
 		input.put("ment", ment);
 		input.put("leftdate", leftdate);
 
-
 		try {
 			int result = tocomment.addComment(input);
 			if (result==1) {
@@ -170,15 +173,22 @@ public class TogetherBoardController {
 				return "redirect:/together/detail.do?no="+cno;
 			}else {
 				wreq.setAttribute("re","off", WebRequest.SCOPE_REQUEST);
+				return "";
 			}
-
-
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "";
 		}
-
-
-
+	
+	}//end detail
+	
+	@PostMapping("good.do")
+	public String goodPostHandle() {
+		
+		
+		
 		return "";
-	}//end
+	}
+	
+	
 }
