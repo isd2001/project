@@ -24,12 +24,7 @@ public class SearchController {
 	@ResponseBody
 	public String searchHandle(@RequestParam Map map,ModelMap modelmap) {
 		System.out.println("param>"+map);
-		
 		modelmap.addAttribute("info", map);
-				
-		
-		
-		
 		return "redirect:/";
 	};
 	

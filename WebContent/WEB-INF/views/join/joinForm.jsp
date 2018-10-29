@@ -89,6 +89,14 @@
 						placeholder="강아지견종">
 				</div>
 			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">주소</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" id="address"
+						placeholder="주소">
+				</div>
+				<button type="button" class="btn btn-secondary" id="address">주소검색</button>
+			</div>
 			
 		</div>
 </div>
@@ -150,6 +158,7 @@
 	
 
 </script>
+
 
 
 

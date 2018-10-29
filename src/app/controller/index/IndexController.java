@@ -32,8 +32,13 @@ public class IndexController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main.join");
 		mav.addObject("center", "/WEB-INF/views/join/joinForm.jsp");
-		return mav;
+		return mav;	
+	}
+	
+	@GetMapping("/address.do")
+	public String addressHandle() {
 		
+		return "join/address";
 	}
 }
 

@@ -5,8 +5,8 @@
 	<definition name="main.togetherboard" template="/WEB-INF/tiles/guest-together-template.jsp">
 		<put-attribute name="head" value="/WEB-INF/views/default/head.jsp"/>
 		<put-attribute name="menu" value="/WEB-INF/views/default/menu.jsp"/>
-		<put-attribute name="right" value="/WEB-INF/views/default/right.jsp"/>
 		<put-attribute name="center" value="/WEB-INF/views/together.board/mainboard.jsp"/>
+		<put-attribute name="right" value="/WEB-INF/views/default/right.jsp"/>
 	</definition>
 	<!-- area 선택시 이동  -->
 	<definition name="main.selectboard" template="/WEB-INF/tiles/guest-together-template.jsp">
@@ -21,5 +21,13 @@
 		<put-attribute name="menu" value="/WEB-INF/views/default/menu.jsp"/>
 		<put-attribute name="center" value="/WEB-INF/views/together.board/new.jsp"/>
 		<put-attribute name="right" value="/WEB-INF/views/default/right.jsp"/>
+	</definition>
+	<!-- 글 자세히 보기-->
+	<definition name="main.detail" template="/WEB-INF/tiles/guest-together-template.jsp">
+		<put-attribute name="head" value="/WEB-INF/views/default/head.jsp"/>
+		<put-attribute name="menu" value="/WEB-INF/views/default/menu.jsp"/>
+		<put-attribute name="center" value="/WEB-INF/views/together.board/detail.jsp"/>
+		<put-attribute name="right" value="/WEB-INF/views/default/right.jsp"/>
 	</definition>	
+	
 </tiles-definitions>
