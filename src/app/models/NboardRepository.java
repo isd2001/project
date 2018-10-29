@@ -18,6 +18,10 @@ public class NboardRepository {
 		return template.selectList("member_board.getAllNboard");
 	}//end getAllNboard
 	
-	
-	
-}//end class
+//end class
+
+
+public List<Map> getAllnboard(){
+	return template.selectList("member_board.getAllnboard");
+}
+}//end getAllNboard
