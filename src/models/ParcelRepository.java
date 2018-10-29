@@ -1,4 +1,4 @@
-package app.models;
+package models;
 
 import java.util.*;
 
@@ -12,7 +12,6 @@ public class ParcelRepository {
 // 현재 DB 테이블 셋팅은 issue 임.
 	@Autowired
 	SqlSessionTemplate template;
-
 
 	// 게시글 작성하는거
 	public int addByPercel(Map map) {
