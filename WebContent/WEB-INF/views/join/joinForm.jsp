@@ -42,7 +42,7 @@
 				<label for="inputEmail3" class="col-sm-2 col-form-label">이름</label>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" id="name"
-						placeholder="아이디">
+						placeholder="이름">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -60,57 +60,78 @@
 					<input type="text" class="form-control" id="address" placeholder="주소">
 					<input type="text" class="form-control" id="address2" placeholder="상세주소">
 				</div>
-			</div>
-			
+			</div>			
 		</div>
-			<div class="col-md-8 offset-md-2">
+		
+		
+			<div class="col-md-8 offset-md-2">			
 			<div class="alert alert-warning row" role="alert">
-			강아지 정보 
+			강아지 정보
 			</div>
-			<div class="form-group row">
-				<label  class="col-sm-2 col-form-label">강아지 사진</label>
-				<div class="col-sm-6">
-					<input type="text" class="form-control" id="dogName"
-						placeholder="강아지 이름">
+			 <div class="row">
+			   <div class="col-4 col-sm-4">
+		        <label for="inputEmail3" class="">강아지 사진</label><br>
+				<img src="${pageContext.servletContext.contextPath }/image/noimage.png" alt="..." class="img-thumbnail">
+				<input type="file" type = "image" class="btn-outline-info" >
+				
+		      </div>
+		      <div class="col-8 col-sm-8">
+		        	<div class="form-group row">
+						<label  class="col-sm-3 col-form-label">강아지 이름</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="dogName"
+								placeholder="강아지 이름">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-3 col-form-label">강아지 견종</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="dogType"
+								placeholder="강아지견종">
+						</div>			
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-3 col-form-label">강아지 성별</label>
+						<div class="col-sm-6">
+							<select class="custom-select" required>
+						      <option value="">성별을 선택해 주세요</option>
+						      <option value="1">수컷</option>
+						      <option value="2">암컷</option>						  
+						    </select>
+															
+						</div>			
+					</div>
+		      </div>
+		      </div>			
+			
+			</div>
+			<div class="col-md-8 offset-md-2">			
+				<div class="alert alert-warning row" role="alert">
+				하고싶은 말!
 				</div>
+			<input type="text" placeholder="하고싶은말을 적어주세요!" style="width:600px" id ="joinWord">			
 			</div>
 			
-			<div class="form-group row">
-				<label  class="col-sm-2 col-form-label">강아지 이름</label>
-				<div class="col-sm-6">
-					<input type="text" class="form-control" id="dogName"
-						placeholder="강아지 이름">
-				</div>
-			</div>
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">강아지 견종</label>
-				<div class="col-sm-6">
-					<input type="text" class="form-control" id="dogType"
-						placeholder="강아지견종">
-				</div>
-			</div>
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">주소</label>
-				<div class="col-sm-6">
-					<input type="text" class="form-control" id="address"
-						placeholder="주소">
-				</div>
-				<button type="button" class="btn btn-secondary" id="address">주소검색</button>
+			<div class="offset-md-2 justify-content-center">	
+				<br>			
+				<button type="submit" class="btn btn-primary">회원가입 신청</button>
 			</div>
 			
-		</div>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
 </div>
+		
 </div>
 
 
 
 
 
-<div class="form-group row">
-	<div class="col-sm-10">
-		<button type="submit" class="btn btn-primary">Sign in</button>
-	</div>
-</div>
+
+
 
 <script>
 	var addressPopUp = function(){
