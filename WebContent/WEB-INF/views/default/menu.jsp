@@ -7,7 +7,7 @@
           <a class="p-2 text-muted" >      </a>
 
           <a class="p-2 text-muted" href="${pageContext.servletContext.contextPath }/Nboard/list.do">공지사항</a>
-          <a class="p-2 text-muted" href="#">출석체크</a>
+          <a class="p-2 text-muted" href="${pageContext.servletContext.contextPath }/dogTalk/index.do">개수다</a>
           <a class="p-2 text-muted"	href="${pageContext.servletContext.contextPath }/find/list.do">강아지찾기</a>
           <a class="p-2 text-muted" href="${pageContext.servletContext.contextPath }/percel.do">분양</a>
           <a class="p-2 text-muted" href="${pageContext.servletContext.contextPath }/together/mainboard.do">같이가요</a>

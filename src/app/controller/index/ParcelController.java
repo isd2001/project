@@ -86,7 +86,12 @@ public class ParcelController {
 	@RequestMapping("/detail.do")
 	public String getByOnePercel(@RequestParam int no, ModelMap one) {
 		Map onedata = percelRepository.getByOnePercel(no);
+		List comlist = percelRepository.getAllByComments(no);
 		one.put("one", onedata);
+		one.put("comlist", comlist);
 		return "parcel.detail";
 	}
+	
+	
+	
 }
