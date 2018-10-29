@@ -20,7 +20,7 @@ public class CommentController {
 	ServletContext ctx;
 	
 	@Autowired
-	ParcelRepository percelRepository;
+	ParcelRepository parcelRepository;
 
 	// 댓글 디비 저장
 	@PostMapping("/addcomment.do")
@@ -28,7 +28,7 @@ public class CommentController {
 		String serial = UUID.randomUUID().toString().split("-")[0];
 			param.put("serial", serial);
 		try {
-			int r = percelRepository.addByComments(param);
+			int r = parcelRepository.addByComments(param);
 			System.out.println("댓글 저장 결과값 = " + r);
 			return "parcel.detail";
 		}catch(Exception e) {
@@ -41,7 +41,14 @@ public class CommentController {
 	// 특정 게시판 리댓글 저장
 	@PostMapping("/addrecomment.do")
 	public String addByReComments(@RequestParam Map param) {
-		return "";
+		try {
+			int r = parcelRepository.addByReComments(param);
+			System.out.println("리댓글 저장 결과값 = " + r);
+			return "parcel.detail"; 
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "parcel.detail";
+		}
 	}
 	
 }

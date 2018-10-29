@@ -8,7 +8,7 @@
 
 <!-- 특정 게시글 댓글 전부 뽑는거(오름차순) -->
 	<select id="getAllByComments" resultType="java.util.HashMap" parameterType="java.lang.Integer">
-		select * from comments where ino=#{ino} order by regdate desc
+		select * from comments where ino=#{ino} order by regdate asc
 	</select>
 
 </mapper>

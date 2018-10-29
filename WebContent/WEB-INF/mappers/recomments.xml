@@ -3,7 +3,7 @@
 <mapper namespace="recomments">
 <!-- 리댓글 저장하는거 -->
 	<insert id="addByReComments" parameterType="java.util.HashMap">
-		insert into comments values(#{retalker}, #{recomments}, #{code})
+		insert into recomments values(#{retalker}, #{recomments}, #{code})
 	</insert>
 
 <!-- 특정 댓글의 리댓글 내용 뽑는거 -->

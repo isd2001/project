@@ -11,6 +11,14 @@
               <div class="card mb-4 shadow-sm">
                 <img class="card-img-top" src="${pageContext.servletContext.contextPath }${p.MAINIMAGE }" alt="Card image cap">
                 <div class="card-body">
+                	<c:choose>
+                		<c:when test="${p.CHOICE == 1 }">
+	                		<p class="card-text">[분양중]</p>
+                		</c:when>
+                		<c:otherwise>
+							<p class="card-text">[분양완료]</p>
+                		</c:otherwise>
+                	</c:choose>
                   <p class="card-text">${p.TITLE }</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">

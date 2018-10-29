@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	
-<!-- 분양 강아지 정보 보이는 뷰 시작 이미지 / 정보만 보임 -->
+<!------------------------------------------------------- 분양 강아지 정보 보이는 뷰 시작 이미지 / 정보만 보임 -->
 <hr class="mb-4">
 <div class="row mb-2">
 	<div class="col-md-6">
@@ -59,13 +59,11 @@
 <div id="collapseOne" class="collapse show" >
     <div id="map" style="width:100%;height:350px;"></div>
 </div>
-
-<!-- 분양 강아지 정보 보이는 뷰 끝 -->
+<!------------------------------------------------------- 분양 강아지 정보 보이는 뷰 끝 -->
 
 <hr class="mb-4">
 
-<!-- 글 상세 내용 및 첨부 파일 뷰 시작 -->
-
+<!------------------------------------------------------- 글 상세 내용 및 첨부 파일 뷰 시작 -->
 <main role="main" class="container">
 	<div class="row">
 		<div class="col-md-8 blog-main">
@@ -81,18 +79,17 @@
 		</div>
 	</div>
 </main>
-
-<!-- 글 상세 내용 및 첨부 파일 뷰 끝 -->
+<!------------------------------------------------------- 글 상세 내용 및 첨부 파일 뷰 끝 -->
 
 <hr class="mb-4">
 
-<!-- 타 사용자가 입력한 댓글 내용 보고 리댓글 입력 할수 있는 뷰 시작 -->
-
+<!------------------------------------------------------- 타 사용자가 입력한 댓글 내용 뷰 시작 -->
 <div class="media" id="view-comment">
 <hr class="mb-4">
 </div>
+<!------------------------------------------------------- 타 사용자가 입력한 댓글 내용 뷰 끝 -->
 
-<%--     리 댓글 입력 후 구현될 폼 뷰
+<%-- 리 댓글 입력 후 구현될 폼 뷰
     <hr class="mb-4">
 		<div class="media mt-3">
 			<a class="pr-3" href="#">
@@ -107,13 +104,14 @@
 		</div>
 --%>
 
-<!-- 타 사용자가 입력한 댓글 내용 보고 리댓글 입력 할수 있는 뷰 끝 -->
+<!------------------------------------------------------- 사용자가 입력한 댓글의 댓글내용 뷰 시작 -->
+<!-- <div class="media" id="view-recomment">
+</div> -->
+<!------------------------------------------------------- 사용자가 입력한 댓글의 댓글내용 뷰 끝 -->
 
-<div class="media" id="view-recomment">
-</div>
-
-<c:forEach var="c" items="${comlist }">
-	<div class="media" id="view-listcomment">
+<!------------------------------------------------------- 게시판 댓글 내용 전체 출력 뷰 시작 -->
+<c:forEach var="c" items="${comlist }" varStatus="vs">
+	<div class="media" id="view-listcomment_${vs.count }">
 		<img class="mr-3" src="${pageContext.servletContext.contextPath }/image/parcelimage/64x64.jpg" alt="Generic placeholder image">
 		<div class="media-body">
 			<div class="alert alert-secondary" role="alert">
@@ -121,17 +119,19 @@
 					${c.COMMENTS }
 			</div>
 			<small class="d-block text-right mt-3">
-				<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+				<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseExample_${vs.count }" aria-expanded="false" aria-controls="collapseExample">
 					[recomment]
 				</button>
 			</small>
-			<div class="collapse" id="collapseExample">
+			<div class="media" id="view-recomment">
+			</div>
+			<div class="collapse" id="collapseExample_${vs.count }">
 				<div class="card card-body">
 					<button class="btn btn-link" type="button">리댓글 입력하는 사용자 아이디 또는 닉네임 들어갈 예정</button>
-					<div class="input-group mb-3" id="input-recomment">
-						<input type="text" class="form-control" id="new-recomment" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+					<div class="input-group mb-3" id="input-recomment_${vs.count }">
+						<input type="text" class="form-control" id="${c.SERIAL }" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2" onchange="addComment(this, '${c.SERIAL }')">
 						<div class="input-group-append">
-							<button class="btn btn-outline-secondary" type="button\" id="btn-recomment">Re Comment</button>
+							<button class="btn btn-outline-secondary" type="button" id="btn-recomment">Re Comment</button>
 						</div>
 					</div>
 				</div>
@@ -140,12 +140,11 @@
 	</div>
 	<hr class="mb-4">
 </c:forEach>
-
+<!------------------------------------------------------- 게시판 댓글 내용 전체 출력 뷰 끝 -->
 
 <hr class="mb-4">
 
-<!-- 댓글 입력할수 있는 폼 뷰 시작 -->
-
+<!------------------------------------------------------- 댓글 입력할수 있는 폼 뷰 시작 -->
 <button class="btn btn-link" type="button" >아이디 또는 닉네임 들어갈 곳</button>
 <div class="input-group mb-3" id="input-comment"  >
 	<input type="text" class="form-control" id="new-comment" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
@@ -153,18 +152,45 @@
 		<button class="btn btn-outline-secondary" type="button" id="btn-comment">New Comment</button>
 	</div>
 </div>
-
-<!-- 댓글 입력할수 있는 폼 뷰 끝 -->
+<!------------------------------------------------------- 댓글 입력할수 있는 폼 뷰 끝 -->
 
 
 <div class="bd-example">
 	<a href="${pageContext.servletContext.contextPath }/percel.do"><button type="button" class="btn btn-secondary btn-lg btn-block">Back</button></a>
 </div>
 
-
 <%-- <script src="${pageContext.servletContext.contextPath }/js/recomment.js"></script> --%>
 
 <script>
+
+	var addComment =function (target, serial) {
+		console.log($(target).val() + "/ " +serial);
+		var code = serial;
+		var recomments = $(target).val();
+		var html = "<hr class=\"mb-4\">";
+			html += "<div class=\"media mt-3\">";
+			html += "<a class=\"pr-3\" href=\"#\">";
+			html += "<img src=\"${pageContext.servletContext.contextPath }/image/parcelimage/64x64.jpg\" alt=\"Generic placeholder image\">";
+			html += "</a>"
+			html += "<div class=\"media-body\">";
+			html += "<div class=\"alert alert-secondary\" role=\"alert\">";
+			html += "<h5 class=\"mt-0\">리 댓글자 아이디 또는 닉네임 들어갈 예정</h5>";
+		    html += $(target).val()
+		    html += "</div>";
+			html += "</div>";
+			html += "</div>";
+			
+		$("#view-recomment").append(html);
+		document.getElementById(code).value = "";
+		
+		var param = {"code" : code,"retalker" : "test_retalker","recomments" : recomments};
+		console.log(param);
+		$.post("${pageContext.servletContext.contextPath }/addrecomment.do", param, function(rst) {
+
+		});
+	}
+
+
 	$("#new-comment").on("change", function() {
 		var comment = $("#new-comment").val();
 		var html = "<img class=\"mr-3\" src=\"${pageContext.servletContext.contextPath }/image/parcelimage/64x64.jpg\" alt=\"Generic placeholder image\">";
@@ -198,8 +224,7 @@
 		var ino = ${one.NO };
 		var param = {"ino" : ino,"talker" : "test_talker","comments" : comment};
 		$.post("${pageContext.servletContext.contextPath }/addcomment.do", param, function(rst) {
-			var obj = JSON.parse(rst);
-			listcomment();
+
 		});
 	});
 
@@ -226,18 +251,6 @@
 	// 마커가 지도 위에 표시되도록 설정합니다
 	marker.setMap(map);
 	
-/* 	
-	$("#new-comment").on("change", function() {
-		var comment = $("#new-comment").val();
-		var ino = ${one.NO };
-		var param = {"ino" : ino,"talker" : "test_talker","comments" : comment};
-		$.post("${pageContext.servletContext.contextPath }/addcomment.do", param, function(rst) {
-			var obj = JSON.parse(rst);
-			console.log(obj.rst);
-		});
-	});
-	 */
-	
 /* 
 	$("#new-recomment").on("change", function() {
 		var recommnet = $("#new-recomment").val();
@@ -259,32 +272,5 @@
 		document.getElementById("new-recomment").value = "";
 	})
 	 */
-	 
-/* 	
-	$(document).ready(function(){
-		$("#new-recomment").live("change", function() {
-			var recommnet = $("#new-recomment").val();
-			console.log(recommnet);
-			var html = "<hr class=\"mb-4\">";
-				html += "<div class=\"media mt-3\">";
-				html += "<a class=\"pr-3\" href=\"#\">";
-				html += "<img src=\"${pageContext.servletContext.contextPath }/image/parcelimage/64x64.jpg\" alt=\"Generic placeholder image\">";
-				html += "</a>"
-				html += "<div class=\"media-body\">";
-				html += "<div class=\"alert alert-secondary\" role=\"alert\">";
-				html += "<h5 class=\"mt-0\">Media heading</h5>";
-			    html += recommnet;
-			    html += "</div>";
-				html += "</div>";
-				html += "</div>";
-		});
-		$("#view-recomment").append(html);
-		document.getElementById("new-recomment").value = "";
-	});
-	 */
-	
-	
-	// recomment 입력 이벤트 function 추가 해야 함. 이건 script에 넣어 보고 이벤트 실행 안되면 js 파일로 하나 만들어 놓고 script 짜서 링크 걸어 둔다음 test 해봐야 됨.
-	// 예제 C:\Users\rogem\Desktop\eclipse-workspace\workspace web\basic05\WebContent\part1 에서 3번 6번 참고.
-	
+
 </script>
