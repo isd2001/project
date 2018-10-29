@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member_board">
+
+<!-- 공지사항 전부 뽑는거 -->
+	<select id="getAllNboard" resultType="java.util.HashMap" >
+		select * from member_board order by board_num desc
+	</select>
+
+</mapper>
+

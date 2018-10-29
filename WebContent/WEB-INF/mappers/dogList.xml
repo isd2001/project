@@ -3,7 +3,7 @@
 <mapper namespace="dogList">
 
 	<insert id="addDog" parameterType="java.util.HashMap">
-		insert into dogList values(dogList_seq.nextval, #{name}, #{engname} #{info}, #{type}, #{img})	
+		insert into dogList values(dogList_seq.nextval, #{name}, #{engname}, #{info}, #{type}, #{img})	
 	</insert>
 
 <!-- 게시글 전부 뽑는거 -->
