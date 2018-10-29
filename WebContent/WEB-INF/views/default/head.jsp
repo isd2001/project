@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet"
 	href="${pageContext.servletContext.contextPath }/css/blog.css">
 <header class="blog-header py-3" <%-- style="background: url('${pageContext.servletContext.contextPath }/image/grass.jpg') "  --%> >
@@ -19,11 +21,22 @@
 			  </form>
 			</nav>
           	 
-          </div>
-    
-          <div class="col-4 d-flex justify-content-end align-items-center">
-          	<a class="btn btn-sm btn-outline-secondary" href="#">마이페이지</a> 
-            <a class="btn btn-sm btn-outline-secondary" href="${pageContext.servletContext.contextPath }/join.do">회원가입</a>
-          </div>
-        </div>          
+          </div>           
+        
+		       <c:choose>
+				<c:when test="${not empty userInfo}">				 
+					<div class="col-4 d-flex justify-content-end align-items-center">
+		          	<a class="btn btn-sm btn-success" href="#">마이페이지</a> 
+		            <a class="btn btn-sm btn-danger" href="${pageContext.servletContext.contextPath }/logout.do">로그아웃</a>
+		     
+		          </div>
+				</c:when>
+				<c:otherwise>
+					<div class="col-4 d-flex justify-content-end align-items-center">
+		          	<a class="btn btn-sm btn-success" href="#">마이페이지</a> 
+		            <a class="btn btn-sm btn-info" href="${pageContext.servletContext.contextPath }/join.do">회원가입</a>
+		          </div>
+				</c:otherwise>
+			</c:choose>
+	 </div>
 </header>

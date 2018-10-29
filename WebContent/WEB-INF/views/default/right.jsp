@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="dropdown1" >
   <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"  >
     <span>1 </span>실시간 순위 <span class="badge badge-pill badge-success">↑</span>
@@ -15,20 +15,36 @@
   </div>
 </div>
 <hr />
-<div class="form-group">
-	<div class="small-input" style="float: left; width: 70%;">
-		<input type="text" name="mb_id" id="mb_id"
+<div class="form-group" id="loginForm">
+<c:choose>
+	<c:when test="${not empty userInfo}">	
+		 <div class="card" style="width: 16rem;">
+			  <img class="card-img-top" src="${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE}" alt="Card image cap">
+			  <div class="card-body">
+			    <p class="card-text">울집 댕댕이 : ${userInfo.DOGNAME} <br>댕댕이 주인 : ${userInfo.NICKNAME}님 </p>
+			  </div>
+		</div>
+	
+	</c:when>
+	<c:otherwise>
+		<form action ="${pageContext.servletContext.contextPath }/login.do" method="post">
+	
+		<div class="small-input" style="float: left; width: 70%;">
+		<input type="text" name="id" id="mb_id"
 			class="form-control input-sm" placeholder="아이디" tabindex="21"
-			autocomplete="off"> <input type="password" name="mb_password"
+			autocomplete="off"> <input type="password" name="pw"
 			id="mb_password" class="form-control input-sm" placeholder="비밀번호"
 			tabindex="22">
-	</div>
-	<div style="float: left; width: 30%; padding-left: 0px;">
-		<div class="form-group">
-			<button type="submit" class="btn btn-brex-2nd btn-block en"
-				style="height: 70px;" tabindex="23">로그인</button>
 		</div>
-	</div>
+		<div style="float: left; width: 30%; padding-left: 0px;">
+			<div class="form-group">
+				<button type="submit" class="btn btn-brex-2nd btn-block en"
+					style="height: 70px;" tabindex="23">로그인</button>
+			</div>
+		</div>
+		</form>
+	</c:otherwise>
+</c:choose>
 </div>
 <hr />
 <div class="card">
