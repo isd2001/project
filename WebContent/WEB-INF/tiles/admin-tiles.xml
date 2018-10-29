@@ -10,7 +10,6 @@
 	</definition>	
 
 	
-	
 	<definition name="main.test" template="/WEB-INF/tiles/admin-template.jsp">
 		<put-attribute name="head" value="/WEB-INF/views/default/head.jsp"/>
 		<put-attribute name="menu" value="/WEB-INF/views/default/menu.jsp"/>
@@ -24,23 +23,5 @@
 		<put-attribute name="right" value="/WEB-INF/views/default/right.jsp"/>
 		<put-attribute name="center" expression="${requestScope.center}"/>
 	</definition>	
-	
-	
-
-	<!-- 강아지 찾기 -->
-	<definition name="main.find.list" template="/WEB-INF/tiles/admin-template.jsp">
-		<put-attribute name="head" value="/WEB-INF/views/default/head.jsp"/>
-		<put-attribute name="menu" value="/WEB-INF/views/default/menu.jsp"/>
-		<put-attribute name="right" value="/WEB-INF/views/default/right.jsp"/>
-		<put-attribute name="center" value="/WEB-INF/views/find/list.jsp"/>
-	</definition>
-	
-	<definition name="main.find.write" template="/WEB-INF/tiles/admin-template.jsp">
-		<put-attribute name="head" value="/WEB-INF/views/default/head.jsp"/>
-		<put-attribute name="menu" value="/WEB-INF/views/default/menu.jsp"/>
-		<put-attribute name="right" value="/WEB-INF/views/default/right.jsp"/>
-		<put-attribute name="center" value="/WEB-INF/views/find/write.jsp"/>
-	</definition>
-	
 
 </tiles-definitions>

@@ -12,6 +12,8 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
@@ -30,7 +32,9 @@ public class FindController {
 	FindRepository findRepository;
 
 	// 게시글 List 화면
-	@RequestMapping("/list.do")
+
+	
+	@GetMapping("/list.do")
 	public String listHandler(ModelMap mmap) {
 		Date today = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -46,13 +50,21 @@ public class FindController {
 		return "main.find.list";
 	}
 
+	@GetMapping("/write.do")
+	public String writeHandler() {
+		
+		return "main.find.write";
+	}
+	
 	// 게시글 write 화면
-	@RequestMapping("/write.do")
-	public String writeHandler(@RequestParam Map rmap, @RequestParam MultipartFile file,
+	@PostMapping("/start.do")
+	public String startHandler(@RequestParam Map rmap, @RequestParam MultipartFile findFile,
 			ModelMap mmap) throws IOException {
+		System.out.println(rmap);
+		System.out.println(findFile);
 		long time = System.currentTimeMillis();
 		// 파일 첨부
-		String fileName = String.valueOf(time) + "_" + file.getOriginalFilename();
+		String fileName = String.valueOf(time) + "_" + findFile.getOriginalFilename();
 		System.out.println(fileName);
 		String path = ctx.getRealPath(String.valueOf(time));
 		
@@ -63,13 +75,18 @@ public class FindController {
 		}
 		File dst = new File(dir, fileName);
 
-		file.transferTo(dst);
+		findFile.transferTo(dst);
 		
 		String attachfile = "/" + time + "/" + fileName;
-		
+						
 		rmap.put("attachfile", attachfile);
 		
-		return "main.find.write";
+		int r = findRepository.addAllFind(rmap);
+		if(r==1) {
+			return "main.find.result";
+		}else {
+			return "main.find.write";
+		}
 	}
 
 	@RequestMapping("/detail.do")

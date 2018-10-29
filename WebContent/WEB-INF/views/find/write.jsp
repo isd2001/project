@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<form method="post" enctype="multipart/form-data" action="${pageContext.servletContext.contextPath }/find.list.do" id="a">
+<form method="post" enctype="multipart/form-data" action="${pageContext.servletContext.contextPath }/find/start.do" id="a">
 	<div style="text-align: center">
 		<br />
 		<h3><b>우리 강아지를 찾아주세요</b></h3>
@@ -15,7 +15,7 @@
 			</div>
 			<input style="text-align: center" type="text" class="form-control"
 				placeholder=" ex) 우리  [강아지]를 찾아주세요." aria-describedby="basic-addon1"
-				id="findName" name="findName">
+				id="title" name="title">
 		</div>
 
 		<div class="input-group mb-1">
@@ -52,11 +52,13 @@
 				<b><em>지도를 확대해서 위치를 클릭해주세요</em></b>
 			</p>
 		<div id="clickLatlng"></div>
+	
 		<div style="text-align:center">
 			<button class="btn btn-outline-secondary" type="button" onclick="writeOn();">작성 완료</button>
 		</div>
 	</div>
 </form>
+		
 <script>
 	$("#findFile").on("change",function(){
 		var f = new FileReader();
@@ -67,7 +69,7 @@
 	});
 	
 	var writeOn = function(){
-		if(document.getElementById("findName").value != "" && document.getElementById("findFile").files[0] != "" 
+		if(document.getElementById("title").value != "" && document.getElementById("findFile").files[0] != "" 
 				&& document.getElementById("findContent1").value != "" && document.getElementById("findContent2").value != ""){
 			window.alert("작성 완료되었습니다.");	
 			$("#a").trigger("submit");
