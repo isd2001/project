@@ -119,7 +119,7 @@
 					${c.COMMENTS }
 			</div>
 			<small class="d-block text-right mt-3">
-				<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseExample_${vs.count }" aria-expanded="false" aria-controls="collapseExample">
+				<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseExample_${vs.count }" aria-expanded="false" aria-controls="collapseExample" onclick="getReComment(this, '${c.SERIAL }')">
 					[recomment]
 				</button>
 			</small>
@@ -162,6 +162,11 @@
 <%-- <script src="${pageContext.servletContext.contextPath }/js/recomment.js"></script> --%>
 
 <script>
+	var getReComment = function(target, serial) {
+		var code = serial;
+		var param = {"code" : code};
+		$.post("${pageContext.servletContext.contextPath }/addrecomment.do")
+	}
 
 	var addComment =function (target, serial) {
 		console.log($(target).val() + "/ " +serial);

@@ -1,4 +1,4 @@
-package models;
+package app.models;
 
 import java.util.*;
 
@@ -37,12 +37,7 @@ public class ParcelRepository {
 	public List<Map> getAllByComments(int ino) {
 		return template.selectList("comments.getAllByComments", ino);
 	}
-	
-	// 특정 게시글 댓글의 댓글 뽑는거
-//	public List<Map> getAllByComments(String code) {
-//		return template.selectList("", code);
-//	}
-	
+		
 	// 리댓글 저장하는거
 	public int addByReComments(Map param) {
 		return template.insert("recomments.addByReComments", param);

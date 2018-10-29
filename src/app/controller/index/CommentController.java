@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import models.ParcelRepository;
+import app.models.ParcelRepository;
 
 @Controller
 public class CommentController {
@@ -49,6 +49,14 @@ public class CommentController {
 			e.printStackTrace();
 			return "parcel.detail";
 		}
+	}
+	
+	// 특정 댓글의 댓글 전체 출력
+	@RequestMapping("/getrecomment.do")
+	public String getAllByReComments(@RequestParam String code, ModelMap map) {
+		List recomlist = parcelRepository.getAllByReComments(code);
+		map.put("recomlist", recomlist);
+		return "parcel.detail";
 	}
 	
 }
