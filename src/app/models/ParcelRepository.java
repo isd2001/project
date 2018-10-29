@@ -45,6 +45,6 @@ public class ParcelRepository {
 	
 	// 특정 댓글의 리댓글 내용 뽑는거
 	public List<Map> getAllByReComments(String code) {
-		return template.selectList("recomments.getAllByReComment", code);
+		return template.selectList("recomments.getAllByReComments", code);
 	}
 }

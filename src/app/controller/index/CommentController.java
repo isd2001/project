@@ -1,5 +1,6 @@
 package app.controller.index;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.*;
 
 import javax.servlet.ServletContext;
@@ -53,10 +54,12 @@ public class CommentController {
 	
 	// 특정 댓글의 댓글 전체 출력
 	@RequestMapping("/getrecomment.do")
-	public String getAllByReComments(@RequestParam String code, ModelMap map) {
+	public String getAllByReComments(@RequestParam Map param, ModelMap map) {
+		String code = (String)param.get("code");
 		List recomlist = parcelRepository.getAllByReComments(code);
-		map.put("recomlist", recomlist);
-		return "parcel.detail";
+			map.put("recomlist", recomlist);
+			System.out.println(map.get("recomlist"));
+			return "parcel.detail";
+
 	}
-	
 }

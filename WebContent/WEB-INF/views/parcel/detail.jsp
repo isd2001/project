@@ -136,6 +136,7 @@
 					</div>
 				</div>
 			</div>
+
 		</div>
 	</div>
 	<hr class="mb-4">
@@ -165,7 +166,12 @@
 	var getReComment = function(target, serial) {
 		var code = serial;
 		var param = {"code" : code};
-		$.post("${pageContext.servletContext.contextPath }/addrecomment.do")
+		console.log(param);
+		$.post("${pageContext.servletContext.contextPath }/getrecomment.do", param, function(rst) {
+			var obj = JSON.parse(rst);
+			console.log(obj);
+			console.log(obj.rst);
+		});
 	}
 
 	var addComment =function (target, serial) {
