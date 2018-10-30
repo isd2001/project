@@ -108,7 +108,36 @@
 <!-- <div class="media" id="view-recomment">
 </div> -->
 <!------------------------------------------------------- 사용자가 입력한 댓글의 댓글내용 뷰 끝 -->
-
+<%-- <c:forEach var="c" items="${comlist }" varStatus="vs">
+<ul class="list-unstyled">
+  <li class="media" id="view-listcomment_${vs.count }">
+    <img class="mr-3" src="${pageContext.servletContext.contextPath }/image/parcelimage/64x64.jpg" alt="Generic placeholder image">
+    <div class="media-body">
+      <h5 class="mt-0 mb-1">${c.TALKER }</h5>
+		${c.COMMENTS }
+    </div>
+    <small class="d-block text-right mt-3">
+		<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseExample_${vs.count }" aria-expanded="false" aria-controls="collapseExample" onclick="getReComment(this, '${c.SERIAL }')">
+		[recomment]
+		</button>
+	</small>
+	<div class="media" id="view-recomment">
+	</div>
+	<div class="collapse" id="collapseExample_${vs.count }">
+		<div class="card card-body">
+			<button class="btn btn-link" type="button">리댓글 입력하는 사용자 아이디 또는 닉네임 들어갈 예정</button>
+			<div class="input-group mb-3" id="input-recomment_${vs.count }">
+				<input type="text" class="form-control" id="${c.SERIAL }" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2" onchange="addComment(this, '${c.SERIAL }')">
+				<div class="input-group-append">
+					<button class="btn btn-outline-secondary" type="button" id="btn-recomment">Re Comment</button>
+				</div>
+			</div>
+		</div>
+	</div>
+  </li>
+</ul>
+	<hr class="mb-4">
+</c:forEach> --%>
 <!------------------------------------------------------- 게시판 댓글 내용 전체 출력 뷰 시작 -->
 <c:forEach var="c" items="${comlist }" varStatus="vs">
 	<div class="media" id="view-listcomment_${vs.count }">
