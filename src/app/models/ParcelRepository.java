@@ -47,4 +47,10 @@ public class ParcelRepository {
 	public List<Map> getAllByReComments(String code) {
 		return template.selectList("recomments.getAllByReComments", code);
 	}
+	
+	// 댓글의 리댓글 카운트 뽑는거
+	public List<Map> getByCmtCount(int no) {
+		return template.selectList("comments.getByCmtCount", no);
+	}
+
 }

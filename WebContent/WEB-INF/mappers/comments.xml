@@ -11,5 +11,10 @@
 		select * from comments where ino=#{ino} order by regdate asc
 	</select>
 
+<!-- 게시글 댓글별 리댓글 카운트 뽑는거 -->
+	<select id="getByCmtCount" resultType="java.util.HashMap" parameterType="java.lang.Integer">
+		select cnt, serial, code from (COMMENTS join (select code, count(*) as cnt from RECOMMENTS GROUP by CODE)r on COMMENTS.serial = r.code) where ino = #{no}
+	</select>
+	
 </mapper>
 
