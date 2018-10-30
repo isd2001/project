@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<form method="post" enctype="multipart/form-data" action="${pageContext.servletContext.contextPath }/find/start.do" id="a">
+<form method="post" enctype="multipart/form-data" action="${pageContext.servletContext.contextPath }/find/start.do" id="formAction">
 	<div style="text-align: center">
 		<br />
 		<h3><b>우리 강아지를 찾아주세요</b></h3>
@@ -25,7 +25,7 @@
 			</div>
 			<div class="custom-file">
 				<input type="file" class="custom-file-input"
-					aria-describedby="inputGroupFileAddon03" id="findFile" name="findFile" accept="image/*"> <label
+					aria-describedby="inputGroupFileAddon03" id="picture" name="picture" accept="image/*"> <label
 					class="custom-file-label" for="inputGroupFile03"> 파일이 필요하신가요?</label>
 			</div>
 		</div>
@@ -38,13 +38,13 @@
 			</div>
 			<div class="col">
 				<textarea class="form-control" style="resize: none; height: 240px;"
-					placeholder="특징을 적어주세요" id="findContent1" name="findContent1"></textarea>
+					placeholder="특징을 적어주세요" id="fcontent" name="fcontent"></textarea>
 			</div>
 		</div>
 		<div class="row" style="height: 250px;">
 			<div class="col">
 				<textarea class="form-control" placeholder="자세한 상황, 위치 등을 적어주세요" 
-				style="resize: none; height: 245px;" id="findContent2" name="findContent2"></textarea>
+				style="resize: none; height: 245px;" id="scontent" name="scontent"></textarea>
 			</div>
 		</div>
 		<div id="map" style="width: 100%; height: 350px;"></div>
@@ -60,7 +60,7 @@
 </form>
 		
 <script>
-	$("#findFile").on("change",function(){
+	$("#picture").on("change",function(){
 		var f = new FileReader();
 		f.onload= function(e){
 			$("#preview").attr("src", e.target.result);
@@ -69,10 +69,10 @@
 	});
 	
 	var writeOn = function(){
-		if(document.getElementById("title").value != "" && document.getElementById("findFile").files[0] != "" 
-				&& document.getElementById("findContent1").value != "" && document.getElementById("findContent2").value != ""){
+		if(document.getElementById("title").value != "" && document.getElementById("picture").files[0] != "" 
+				&& document.getElementById("fcontent").value != "" && document.getElementById("scontent").value != ""){
 			window.alert("작성 완료되었습니다.");	
-			$("#a").trigger("submit");
+			$("#formAction").trigger("submit");
 		}else{
 			window.alert("빠짐없이 작성해주세요.");
 			window.location.reload(true);

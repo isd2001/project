@@ -38,7 +38,7 @@
 		</div>
 		<div class="col-md-6 mb-3">
 			<label for="lastName">분양자 핸드폰 번호</label>
-			<input type="text" class="form-control" id="phone" name="phone"">
+			<input type="text" class="form-control" id="phone" name="phone">
 		</div>
 		<div class="col-md-6 mb-3">
 			<label for="lastName">분양장소(상세주소입력)</label>			

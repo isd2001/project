@@ -3,7 +3,9 @@ package app.controller.find;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.theme.SessionThemeResolver;
+import org.springframework.web.socket.WebSocketSession;
 
 import app.models.FindRepository;
 
@@ -33,18 +37,28 @@ public class FindController {
 
 	// 게시글 List 화면
 
-	
 	@GetMapping("/list.do")
-	public String listHandler(ModelMap mmap) {
+	public String listHandler(ModelMap mmap, WebRequest wr, @RequestParam (required=false)String nick
+			,@RequestParam (required=false)Integer no) {
 		Date today = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String date = sdf.format(today);
 
+		nick = (String)wr.getAttribute("nick", WebRequest.SCOPE_SESSION);
+		no = (Integer)wr.getAttribute("no", WebRequest.SCOPE_SESSION);
+		
+		System.out.println("nick = " + nick);
+		System.out.println("no = " + no);
+		mmap.put("nick", nick);
+		mmap.put("no", no);
 		mmap.put("date", date);
+		
+		System.out.println(mmap);
 
 		//-------------------------------------
 
 		List<Map> every = findRepository.getAllFind();
+		System.out.println(every);
 		mmap.put("every",every);
 		
 		return "main.find.list";
@@ -58,13 +72,14 @@ public class FindController {
 	
 	// 게시글 write 화면
 	@PostMapping("/start.do")
-	public String startHandler(@RequestParam Map rmap, @RequestParam MultipartFile findFile,
-			ModelMap mmap) throws IOException {
+	public String startHandler(@RequestParam Map rmap, @RequestParam MultipartFile picture,
+		ModelMap mmap, WebRequest wr) throws IOException {
+	
 		System.out.println(rmap);
-		System.out.println(findFile);
+		System.out.println(picture);
 		long time = System.currentTimeMillis();
 		// 파일 첨부
-		String fileName = String.valueOf(time) + "_" + findFile.getOriginalFilename();
+		String fileName = String.valueOf(time) + "_" + picture.getOriginalFilename();
 		System.out.println(fileName);
 		String path = ctx.getRealPath(String.valueOf(time));
 		
@@ -75,18 +90,22 @@ public class FindController {
 		}
 		File dst = new File(dir, fileName);
 
-		findFile.transferTo(dst);
+		picture.transferTo(dst);
 		
-		String attachfile = "/" + time + "/" + fileName;
-						
-		rmap.put("attachfile", attachfile);
+		String pictureName = "/" + time + "/" + fileName;
+		rmap.put("picture", pictureName);
+
+		System.out.println(rmap);
 		
-		int r = findRepository.addAllFind(rmap);
-		if(r==1) {
+		try {
+			int r = findRepository.addAllFind(rmap);
+			System.out.println(r);
 			return "main.find.result";
-		}else {
+		}catch(Exception e) {
+			e.printStackTrace();
 			return "main.find.write";
 		}
+
 	}
 
 	@RequestMapping("/detail.do")
