@@ -113,13 +113,13 @@
 		</li>
 		<hr style="margin-top: 3px; margin-bottom: 3px;" />
 	</c:forEach>
+	<div id="view-comment"></div>
 </ul>
-	<div id="new-comment"></div>
 <!------------------------------------------------------- 게시판 댓글 내용 전체 출력 뷰 끝 -->
 
 <!------------------------------------------------------- 댓글 입력할수 있는 폼 뷰 시작 -->
 <button class="btn btn-link" type="button">아이디 또는 닉네임 들어갈 곳</button>
-<div class="input-group mb" id="input-comment">
+<div class="input-group mb-3" id="input-comment">
 	<input type="text" class="form-control" id="new-comment" aria-describedby="button-addon2">
 	<div class="input-group-append">
 		<button class="btn btn-outline-secondary" type="button" id="btn-comment">New Comment</button>
@@ -140,12 +140,12 @@
 		console.log(param);
 		$.post("${pageContext.servletContext.contextPath }/getrecomment.do", param, function(rst) {
 			var obj = JSON.parse(rst);
+			console.log(rst);
 			console.log(obj);
-			console.log(obj.rst);
 		});
 	}
-
-	var addComment =function (target, serial) {
+// 리플 저장
+	var addReComment =function (target, serial) {
 		console.log($(target).val() + "/ " +serial);
 		var code = serial;
 		var recomments = $(target).val();
@@ -171,15 +171,15 @@
 
 		});
 	}
-
-
+// 댓글 저장
 	$("#new-comment").on("change", function() {
 		var comment = $("#new-comment").val();
+		console.log(comment);
 		var html = "<li class=\"media border-top-0\" id=\"view-listcomment_${vs.count }\" style=\"margin-bottom: 3px;\" data-toggle=\"collapse\" data-target=\"#collapseExample_${vs.count }\" aria-expanded=\"false\" aria-controls=\"collapseExample\ onclick=\"getReComment(this, '${c.SERIAL }')\">";
 			html += "<img class=\"mr-3\" src=\"${pageContext.servletContext.contextPath }/image/parcelimage/40.jpg\" alt=\"프로필 이미지\">";
 			html += "<div class=\"media-body\">";
-			html += "<h5 class=\"mt-0 mb-1\" style=\"font-size: 15px;\">${c.TALKER }</h5>";
-			html += "<div style=\"font-size: 13px;\">${c.COMMENTS }</div>";
+			html += "<h5 class=\"mt-0 mb-1\" style=\"font-size: 15px;\">사용자닉네임</h5>";
+			html += "<div style=\"font-size: 13px;\">" + comment + "</div>";
 			html += "</div></li>";
 			html += "<div class=\"media\" id=\"view-recomment\"></div>";
 			html += "<li class=\"collapse\" id=\"collapseExample_${vs.count }\">";

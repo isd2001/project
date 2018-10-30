@@ -11,6 +11,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 import app.models.ParcelRepository;
 
@@ -19,6 +22,9 @@ public class CommentController {
 
 	@Autowired
 	ServletContext ctx;
+	
+	@Autowired
+	Gson gson;
 	
 	@Autowired
 	ParcelRepository parcelRepository;
@@ -54,12 +60,13 @@ public class CommentController {
 	
 	// 특정 댓글의 댓글 전체 출력
 	@RequestMapping("/getrecomment.do")
+	@ResponseBody
 	public String getAllByReComments(@RequestParam Map param, ModelMap map) {
 		String code = (String)param.get("code");
 		List recomlist = parcelRepository.getAllByReComments(code);
 			map.put("recomlist", recomlist);
 			System.out.println(map.get("recomlist"));
-			return "parcel.detail";
+			return gson.toJson(recomlist);
 
 	}
 }
