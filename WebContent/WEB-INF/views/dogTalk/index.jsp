@@ -34,7 +34,7 @@
 							</div>
 							<footer class="blockquote-footer d-flex justify-content-end ">
 								<span id="address">${list.ADDRESS} </span> <cite title="Source Title"><span
-									id="talker">${list.TALKER}..</span></cite>
+									id="talker">${list.TALKER}이(가)..</span></cite>
 							</footer>
 	
 						</blockquote>
@@ -74,8 +74,8 @@
 								
 					html +=  "<div class=\"card\" id=\"form\">";
 					html += "<div class=\"card-header d-flex bd-highlight\"><div class=\"flex-grow-1\">Today's comment</div>";
-					html += "<div class=\"bd-highlight\"><small id="+date+" class=\"d-flex justify-content-end\">";
-					html += "${list.WRITEDATE}"+"</small></div></div>";	
+					html += "<div class=\"bd-highlight\"><small id=\"date\" class=\"d-flex justify-content-end\">";
+					html += date+"</small></div></div>";	
 					html += " <div class=\"card-body\">";
 					html += "<blockquote class=\"blockquote mb-0\">";
 					html += "<div class=\"row align-items-center\">";

@@ -15,7 +15,7 @@
           <div class="dropdown p-2 text-muted">
           <a class="p-2 text-muted" id="dropdownMenuButton" data-toggle="dropdown" href="#">똥개훈련</a>
 	           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/board/main.do">개동</a>
+			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/dogTraining/training.do">개동</a>
 			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/board/myDog.do">개자랑</a>
 			    </div>
 		  </div>
@@ -29,4 +29,5 @@
 		  
 		   <a class="p-2 text-muted" href="${pageContext.servletContext.contextPath }/dogTalk/index.do">추천개시판</a>
         </nav>	
+   
 </div>

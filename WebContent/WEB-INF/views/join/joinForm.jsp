@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 	
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!DOCTYPE html>
 
 <form action="${pageContext.servletContext.contextPath}/joinFormHandle.do" method="post" enctype="multipart/form-data">
@@ -15,7 +16,7 @@
 			<div class="form-group row">
 				<label for="inputEmail3" class="col-sm-2 col-form-label">아이디</label>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" name="id"	placeholder="아이디">
+					<input type="text" class="form-control" name="id"	placeholder="아이디" onchange="checkId(this)" id="id" ><span id="checkId" style="color:white;"></span>
 				</div>
 			</div>
 			<div class="form-group row">
@@ -49,9 +50,8 @@
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">닉네임</label>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" name="nickname"
-						placeholder="닉네임">
-				</div>
+					<input type="text" class="form-control" name="nickname"	placeholder="닉네임" onchange="checkNick(this)" id ="nick"><span id="checkNick" style="color:white;"></span>
+				</div>				
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">주소</label>
@@ -135,6 +135,53 @@
 
 
 <script>
+
+	var checkId = function (id) {
+		var input =id.value;
+				
+		console.log("id function");
+		var url = "/gaenolja/validate.do";		
+		
+		var param = {
+				"mode"  : "id",
+				"input" : input			
+		};	
+		
+		$.get(url, param, function(rst) {	 			
+			if(rst==true){
+				$("#checkId").html("사용가능한 아이디 입니다.");
+				$("#checkId").css("color","blue");
+			}else{
+				$("#checkId").html("이미 사용중인 아이디 입니다.");
+				$("#checkId").css("color","red");
+				$("#id").val("");
+			}
+		
+		});
+	};
+	
+	var checkNick = function (nick) {
+		var input =nick.value;
+		
+		var url = "/gaenolja/validate.do";		
+		
+		var param = {
+				"mode"  : "nick",
+				"input" : input			
+		};	
+		
+		$.get(url, param, function(rst) {	 			
+			if(rst==true){
+				$("#checkNick").html("사용가능한 닉네임 입니다.");
+				$("#checkNick").css("color","blue");
+			}else{
+				$("#checkNick").html("이미 사용중인 닉네임 입니다.");
+				$("#checkNick").css("color","red");
+				$("#nickname").val("");
+			}
+		
+		});
+	};
 	
 	$("#dogProfile").on("change",function(){
 		var f = new FileReader();

@@ -34,4 +34,12 @@ public class accountRepository {
 	public Map getUserInfo(String id) {
 		return template.selectOne("gaenoljaaccount.getUserInfo", id);
 	}
+	
+	public String checkId(String id) {
+		return template.selectOne("gaenoljaaccount.checkId", id);
+	}
+	
+	public String checkNick(String nickname) {
+		return template.selectOne("gaenoljaaccount.checkNick", nickname);
+	}
 }

@@ -23,5 +23,7 @@
 		<put-attribute name="right" value="/WEB-INF/views/default/right.jsp"/>
 		<put-attribute name="center" expression="${requestScope.center}"/>
 	</definition>	
+	
+	
 
 </tiles-definitions>

@@ -10,9 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
 
 import app.models.accountRepository;
 import app.service.WeatherService;
@@ -29,6 +32,9 @@ public class IndexController {
 	
 	@Autowired
 	WeatherService ws;
+	
+	@Autowired
+	Gson gson;
 	
 	@GetMapping("/index.do")
 	public ModelAndView indexHandle(WebRequest wr) {
@@ -135,6 +141,31 @@ public class IndexController {
 		mav.addObject("center", "/WEB-INF/views/default/center.jsp");
 		
 		return mav;
+	}
+	
+	@GetMapping(path="/validate.do", produces="application/json;charset=UTF-8")	
+	@ResponseBody
+	public String validate(@RequestParam Map param) {
+		String mode = (String) param.get("mode");
+		
+		switch(mode) {
+		case "id" :
+				if(ar.checkId((String)param.get("input"))==null){
+					return gson.toJson(true);
+				}else {
+					return gson.toJson(false);
+				}	
+				
+		case "nick" :
+			System.out.println(ar.checkNick((String)param.get("input"))==null);
+			System.out.println((String)param.get("input"));
+				if(ar.checkNick((String)param.get("input"))==null){
+					return gson.toJson(true);
+				}else {
+					return gson.toJson(false);
+				}				
+		}
+		return "";
 	}
 			
 			
