@@ -4,13 +4,13 @@
 
 	<!-- 게시글 내용 모두 저장 -->
 	<insert id="addAllFind" parameterType="java.util.HashMap">
-		insert into find values (find_seq.nextval, #{title}, #{nick}, sysdate, 
-		#{fpath}, #{fcontent}, #{scontent}, #{mapx}, #{mapy})
+		insert into find values (find_seq.nextval, #{title}, sysdate, 
+		#{picture}, #{fcontent}, #{scontent}, 11.11, 22.22)
 	</insert>
 	
 	<!-- 모든 게시글 뽑기-->
 	<select id="getAllFind" resultType="java.util.HashMap">
-		select * from find
+		select * from find order by no desc
 	</select>
 	
 	<!-- no로 게시글 뽑기 -->
