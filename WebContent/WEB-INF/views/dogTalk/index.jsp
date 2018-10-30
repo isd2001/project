@@ -1,50 +1,111 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    	
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <h2>강아지 수다공간</h2>
 
      
-   <form>
+ 	
      <div class="input-group">
 	  <div class="input-group-prepend">
 	     <img src="${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE}" style="width: 80px; height: 80px;"class="rounded-circle">
 	  </div>
-	  <textarea class="form-control" aria-label="With textarea" placeholder="댕댕이가 하고싶은말을 써주세요!"></textarea>
-	  <button type="submit" class="btn btn-secondary btn-med ">왈왈!</button>
+	  <textarea class="form-control" aria-label="With textarea" placeholder="댕댕이가 하고싶은말을 써주세요!" id="content"></textarea>
+	  <button type="submit" class="btn btn-secondary btn-med " onclick="addComment();">왈왈!</button>
 	</div>
-	</form>
 	
 	<hr/>
+	<div id="list">
+		<c:forEach var="list" items="${dogTalkList}">			
+				<div class="card" id="form">
+					<div class="card-header d-flex bd-highlight"><div class="flex-grow-1">Today's comment</div>
+					 <div class="bd-highlight"><small id="date" class="d-flex justify-content-end">${list.WRITEDATE}</small></div></div>
+					<div class="card-body">
+						<blockquote class="blockquote mb-0">
+							<div class="row align-items-center">
+								<img
+									src="${pageContext.servletContext.contextPath }${list.PICTURE}"
+									style="width: 80px; height: 80px;" class="rounded-circle"
+									id="image">
 	
-	<div class="card">
-  		<div class="card-header">
-	    Today's comment
-	  </div>
-	  <div class="card-body">
-	    <blockquote class="blockquote mb-0">
-	      <div class="row align-items-center">
-	      <img src="${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE}" style="width: 80px; height: 80px;"class="rounded-circle">
-		  
-	      <p>아 산책가서 개처럼 뛰어놀고 싶다....</p></div>
-	      <footer class="blockquote-footer d-flex justify-content-end ">서울시 강서구에서 <cite title="Source Title">개달이가...</cite></footer>
-	   
-	    </blockquote>
-	  </div>
+								<p>${list.CONTENT}</p>
+							</div>
+							<footer class="blockquote-footer d-flex justify-content-end ">
+								<span id="address">${list.ADDRESS} </span> <cite title="Source Title"><span
+									id="talker">${list.TALKER}..</span></cite>
+							</footer>
+	
+						</blockquote>
+					</div>
+				</div>		
+		</c:forEach>
 	</div>
 	
-	<div class="card">
-  		<div class="card-header">
-	    Today's comment
-	  </div>
-	  <div class="card-body">
-	    <blockquote class="blockquote mb-0">
-	      <div class="row align-items-center">
-	      <img src="${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE}" style="width: 80px; height: 80px;"class="rounded-circle">
-		  
-	      <p>아 까까나 개같이 먹고싶다....하...사료 그만좀 먹고싶다</p>
-	     </div>
-	     <footer class="blockquote-footer d-flex justify-content-end align-items-center ">서울시 강남구에서 <cite title="Source Title">먼지가...</cite></footer>
-	      
-	    </blockquote>
-	  </div>
-	</div>
+<script>
+	
+	var addComment = function(){
+		console.log("addComment Function");
+		var url = "/gaenolja/dogTalk/add.do";
+		console.log(document.getElementById("content").value);
+		console.log("${userInfo.DOGPROFILE}");		
+		var param = {
+				"talker"  : "${userInfo.DOGNAME}",
+				"content" : document.getElementById("content").value,
+				"picture" : "${userInfo.DOGPROFILE}",
+				"address" : "${userInfo.ADDRESS}"
+		};	
+		
+		$.get(url, param, function(rst) {					 
+			window.alert("글이 등록되었습니다.")
+			document.getElementById("content").innerHTML = "";
+			
+			
+			console.log(rst.length);
+			console.log("rst.length = "+rst.length);
+			var html = "";
+			for (var i = 0; i <rst.length; i++) {
+				var talker = rst[i].TALKER;
+				var content = rst[i].CONTENT;
+				var picture = "${pageContext.servletContext.contextPath}" + rst[i].PICTURE;
+				var address = rst[i].ADDRESS;
+				var date = rst[i].WRITEDATE;
+								
+					html +=  "<div class=\"card\" id=\"form\">";
+					html += "<div class=\"card-header d-flex bd-highlight\"><div class=\"flex-grow-1\">Today's comment</div>";
+					html += "<div class=\"bd-highlight\"><small id="+date+" class=\"d-flex justify-content-end\">";
+					html += "${list.WRITEDATE}"+"</small></div></div>";	
+					html += " <div class=\"card-body\">";
+					html += "<blockquote class=\"blockquote mb-0\">";
+					html += "<div class=\"row align-items-center\">";
+					html += "<img src=\""+picture+"\" style=\"width: 80px; height: 80px;\"class=\"rounded-circle\" id =\"image\">";
+					html += " <p>"+content+"</p></div>";
+					html += "<footer class=\"blockquote-footer d-flex justify-content-end \"><span id=\"address\">"+address+"</span>";
+					html += "<cite title=\"Source Title\"><span id=\"talker\">"+talker+"가...</span></cite></footer>";
+					html += "</blockquote>";
+					html += "</div>";
+					html += "</div>";			
+					
+					
+			}
+		
+			document.getElementById("list").innerHTML = html;
+			document.getElementById("content").value ="";
+		});			
+	};
+/* 	
+ * // $() 탑색 ..document.getElement(s)By..
+	// "#txt" id, ".word" :class , "input" : tagName
+ 
+	$("#p").html("<i>HTML</i>");	// .innerHTML = ??;
+	$("#p").append(" document traversal");	// .innerHTML +=
+	
+ 	<li>val() : value 제어에 사용하는 함수</li>
+	<li>attr() : 속성 제어에 사용하는 함수</li>
+	<li>prop() : true,false 로 제어하는 요소에 사용하는 함수</li>
+	<li>css() : style 제어에 사용되는 함수</li>
+	<li>html(), append() : innerHTML 에 제에에 사용되는 함수</li> */
+	
+	
+</script>

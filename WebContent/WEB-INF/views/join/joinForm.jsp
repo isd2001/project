@@ -72,8 +72,8 @@
 			 <div class="row">
 			   <div class="col-4 col-sm-4">
 		        <label class="">강아지 사진</label><br>
-				<img src="${pageContext.servletContext.contextPath }/image/noimage.png" alt="..." class="img-thumbnail">
-				<input type="file" type = "file" class="btn-outline-info" name="dogProfile" >
+				<img src="${pageContext.servletContext.contextPath }/image/noimage.png"  class="img-thumbnail" id="preview">
+				<input type="file" type = "file" class="btn-outline-info" name="dogProfile" id="dogProfile">
 				
 		      </div>
 		      <div class="col-8 col-sm-8">
@@ -135,6 +135,14 @@
 
 
 <script>
+	
+	$("#dogProfile").on("change",function(){
+		var f = new FileReader();
+		f.onload= function(e){
+			$("#preview").attr("src", e.target.result);
+		}
+		f.readAsDataURL(this.files[0]);
+	});
 	var addressPopUp = function(){
 		
 		new daum.Postcode({
