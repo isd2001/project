@@ -1,6 +1,5 @@
-package app.controller.find;
+package app.controller.index;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,10 +13,12 @@ import com.google.gson.Gson;
 
 import app.service.SocketService;
 
-public class FindSocketController extends TextWebSocketHandler{
-
+public class IndexSocketController extends TextWebSocketHandler{
 	@Autowired
 	Gson gson;
+	
+	@Autowired
+	SocketService service;
 	
 	List<WebSocketSession> sockets;
 	
@@ -37,3 +38,5 @@ public class FindSocketController extends TextWebSocketHandler{
 		
 	}
 }
+
+

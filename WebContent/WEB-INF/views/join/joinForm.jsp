@@ -2,8 +2,10 @@
 	pageEncoding="UTF-8"%>
 	
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-
 <!DOCTYPE html>
+
+<form action="${pageContext.servletContext.contextPath}/joinFormHandle.do" method="post" enctype="multipart/form-data">
+
 <div class="container">
 	<div class="row  justify-content-center">	
 		<div class="col-md-8 offset-md-2">
@@ -13,14 +15,13 @@
 			<div class="form-group row">
 				<label for="inputEmail3" class="col-sm-2 col-form-label">아이디</label>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" id="id"
-						placeholder="아이디">
+					<input type="text" class="form-control" name="id"	placeholder="아이디">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">비밀번호</label>
 				<div class="col-sm-6">
-					<input type="password" class="form-control" id="inputPassword"
+					<input type="password" class="form-control" name="pw"
 						placeholder="비밀번호">
 				</div>
 			</div>
@@ -28,7 +29,7 @@
 				<label class="col-sm-2 col-form-label">비밀번호확인</label>
 				<div class="col-sm-6">
 					<input type="password" class="form-control"
-						id="inputPasswordConfirm" placeholder="비밀번호 확인">
+						id="pwConfirm" placeholder="비밀번호 확인">
 				</div>
 			</div>
 		</div>
@@ -41,14 +42,14 @@
 			<div class="form-group row">
 				<label for="inputEmail3" class="col-sm-2 col-form-label">이름</label>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" id="name"
+					<input type="text" class="form-control" name="name"
 						placeholder="이름">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">닉네임</label>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" id="nickName"
+					<input type="text" class="form-control" name="nickname"
 						placeholder="닉네임">
 				</div>
 			</div>
@@ -57,8 +58,8 @@
 				<div class="col-sm-6">
 					<button type="button" 
 						onclick="addressPopUp()" >주소 입력</button>
-					<input type="text" class="form-control" id="address" placeholder="주소">
-					<input type="text" class="form-control" id="address2" placeholder="상세주소">
+					<input type="text" class="form-control" name="address" id = "address" placeholder="주소">
+					<input type="text" class="form-control" name="address2"  id = "address2" placeholder="상세주소">
 				</div>
 			</div>			
 		</div>
@@ -70,33 +71,33 @@
 			</div>
 			 <div class="row">
 			   <div class="col-4 col-sm-4">
-		        <label for="inputEmail3" class="">강아지 사진</label><br>
+		        <label class="">강아지 사진</label><br>
 				<img src="${pageContext.servletContext.contextPath }/image/noimage.png" alt="..." class="img-thumbnail">
-				<input type="file" type = "image" class="btn-outline-info" >
+				<input type="file" type = "file" class="btn-outline-info" name="dogProfile" >
 				
 		      </div>
 		      <div class="col-8 col-sm-8">
 		        	<div class="form-group row">
 						<label  class="col-sm-3 col-form-label">강아지 이름</label>
 						<div class="col-sm-6">
-							<input type="text" class="form-control" id="dogName"
+							<input type="text" class="form-control" name="dogName"
 								placeholder="강아지 이름">
 						</div>
 					</div>
 					<div class="form-group row">
 						<label class="col-sm-3 col-form-label">강아지 견종</label>
 						<div class="col-sm-6">
-							<input type="text" class="form-control" id="dogType"
+							<input type="text" class="form-control" name="dogType"
 								placeholder="강아지견종">
 						</div>			
 					</div>
 					<div class="form-group row">
 						<label class="col-sm-3 col-form-label">강아지 성별</label>
 						<div class="col-sm-6">
-							<select class="custom-select" required>
+							<select class="custom-select" required name="dogGender">
 						      <option value="">성별을 선택해 주세요</option>
-						      <option value="1">수컷</option>
-						      <option value="2">암컷</option>						  
+						      <option value="수컷">수컷</option>
+						      <option value="암컷">암컷</option>						  
 						    </select>
 															
 						</div>			
@@ -109,7 +110,7 @@
 				<div class="alert alert-warning row" role="alert">
 				하고싶은 말!
 				</div>
-			<input type="text" placeholder="하고싶은말을 적어주세요!" style="width:600px" id ="joinWord">			
+			<input type="text" placeholder="하고싶은말을 적어주세요!" style="width:600px" name ="usercomment">			
 			</div>
 			
 			<div class="offset-md-2 justify-content-center">	
@@ -126,7 +127,7 @@
 		
 </div>
 
-
+</form>
 
 
 
