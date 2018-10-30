@@ -26,7 +26,7 @@ public class TogetherBoardController {
 	@Autowired
 	TogetherRepository together;
 	@Autowired
-	ToCommentRepository tocomment;
+	ToCommentRepository tocomment;	
 
 	@GetMapping("/mainboard.do")
 	public String mainboard(WebRequest wreq,@RequestParam Map param) {
