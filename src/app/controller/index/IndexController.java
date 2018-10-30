@@ -111,8 +111,10 @@ public class IndexController {
 			Map userInfo =  ar.getUserInfo((String)param.get("id"));
 			wr.setAttribute("userInfo", userInfo, wr.SCOPE_SESSION);
 			String gu = ws.getCoordinateByAddress((String)userInfo.get("ADDRESS"));
-			wr.setAttribute("gu", gu, wr.SCOPE_SESSION);			
-			System.out.println(gu);
+			wr.setAttribute("gu", gu, wr.SCOPE_SESSION);
+			
+			
+			System.out.println("userinfo > "+userInfo);
 			
 			mav.setViewName("main.index");
 			mav.addObject("center", "/WEB-INF/views/default/center.jsp");		

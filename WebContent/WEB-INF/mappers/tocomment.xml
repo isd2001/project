@@ -8,7 +8,7 @@
 	</select>
 <!-- 댓글 업로드 -->
 	<select id="addComment" resultType="java.util.HashMap"> 
-		insert into togethercomment values (#{cno},#{ment},#{leftdate})
+		insert into togethercomment values (#{cno},#{ment},#{leftdate},#{nick})
 	</select>
 </mapper>
 

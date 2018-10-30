@@ -46,14 +46,14 @@ div.desc {
 		<div >
 			<tiles:insertAttribute name="menu"/>
 		</div>
-		<div class="row at-row">
-			<div class="col-md-8 at-col at-main" >
+		<div class= "row">
+			<div class = "col-md-9">
 				<tiles:insertAttribute name="center"/>
 			</div>
-			<div class="col-md-4 at-col at-side" style="padding-left:0px; padding-top:5px;">
+			<div class = "col-md-3">
 				<tiles:insertAttribute name="right"/>
 			</div>
-		</div>		
+		</div>
 	</div>
 </body>
 </html>

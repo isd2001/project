@@ -26,7 +26,7 @@
 		 <div class="card" style="width: 16rem; ">
 			  <img class="card-img-top" src="${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE}" alt="Card image cap" style="height: 200px">
 			  <div class="card-body">
-			    <p class="card-text">울집 댕댕이 : ${userInfo.DOGNAME} <br>댕댕이 주인 : ${userInfo.NICKNAME}님 </p>
+			    <p class="card-text">울집 댕댕이 : ${userInfo.DOGNAME} <br>댕댕이 주인 : ${userInfo.NICKNAME} 님 </p>
 			  </div>
 		</div>
 	
@@ -65,16 +65,6 @@
 					"APPID":"221d0de36835fe0cf4b1d4b196c711bb"
 			};	
 				$.get(apiURI, param, function(rst) {					 
-					console.log("ajax start !!");
-					console.log(rst);
-					console.log("구름  : "+ (rst.clouds.all) +"%" )
-					console.log("도시:"+rst.name);
-					console.log("바람   : "+ rst.wind.speed );
-					console.log("현재습도 : "+ rst.main.humidity);
-					console.log("현재온도 : "+ rst.main.temp);
-					console.log("최저온도 : "+ rst.main.temp_min);
-					console.log("최고온도 : "+ rst.main.temp_max);
-					console.log("ajax end ..!");
 					document.getElementById("currentTemp").innerHTML = rst.main.temp+"℃";
 					document.getElementById("tempMax").innerHTML = rst.main.temp_max+"℃";
 					document.getElementById("tempMin").innerHTML = rst.main.temp_min+"℃";
@@ -86,7 +76,7 @@
 		<div class="card border-success " style="width: 100%; height: 15rem;">
 		  <div class="card-header">오늘의 ${gu} 날씨</div>
 		  <div class="card-body text-success">
-		    <h5 class="card-title"><span id="currentTemp"></span><br>(최고 : <span id="tempMax"></span>최저:<span id="tempMin"></span>)</h5>
+		    <h5 class="card-title">평균기온 : <span id="currentTemp"></span><br>(최고 : <span id="tempMax"></span>,최저:<span id="tempMin"></span>)</h5>
 		    <p class="card-text">날씨사진!</p>
 		  </div>
 		</div>
