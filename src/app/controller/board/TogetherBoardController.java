@@ -42,7 +42,6 @@ public class TogetherBoardController {
 		}
 		//------------------------------------------------
 		List<Map> list=together.getAllTogether();
-		System.out.println("list > "+list);
 
 		List<Map> li = new ArrayList<>();
 
@@ -71,9 +70,7 @@ public class TogetherBoardController {
 	@RequestMapping("/selectboard.do")
 	public String selsctboard(@RequestParam Map target,WebRequest wreq) {
 		String area=(String)target.get("area");
-		System.out.println("target>"+area);
 		List<Map> list=together.getAllByArea(area);
-		System.out.println("list > "+list);
 		
 		List<Map> li = new ArrayList<>();
 		SimpleDateFormat sdf =new SimpleDateFormat("MM:dd");
@@ -152,10 +149,7 @@ public class TogetherBoardController {
 		//===============================================
 		// lookup
 		int t = together.updatelookup(no);
-		// good
 		
-		
-		//===============================================
 		Map target=together.getOneByNo(no);
 
 		List<Map> comment = tocomment.getCommentByNo(no);

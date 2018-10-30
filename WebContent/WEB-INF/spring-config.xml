@@ -67,14 +67,13 @@
 	-->
 	<!-- <bean id="zulu" class="controllers.study.ZuluController"/> -->
 	
-	<!-- <websocket:handlers>
-		<websocket:mapping handler="chatSocketController" path="/chat.do"/>
-		<websocket:mapping handler="webSocketController" path="/conn.do"/>
+	<websocket:handlers>
+		<websocket:mapping handler="accesslistController" path="/access.do"/>
 		<websocket:handshake-interceptors>
 			<bean class = "org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"></bean>
 		</websocket:handshake-interceptors>
 		
-	</websocket:handlers> -->
+	</websocket:handlers> 
 	
 	<mongo:mongo-client host="turn.mockingu.com" port="36936"/>
 	 

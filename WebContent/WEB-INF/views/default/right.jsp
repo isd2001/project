@@ -97,58 +97,30 @@
 
 <li class="list-group-item list-group-item-success">현재 접속자</li>
 <div style="height: 150px; overflow-y: scroll;" id="connectList">
-	<ul class="list-group">
-		<li class="list-group-item">접속자 1</li>
-		<li class="list-group-item">접속자 2</li>
-		<li class="list-group-item">접속자 3</li>
-		<li class="list-group-item">접속자 4</li>
-		<li class="list-group-item">접속자 5</li>
+	<ul class="list-group" id="list">
+	<!-- 	<li class="list-group-item"></li>
+		<li class="list-group-item"></li>
+		<li class="list-group-item"></li>
+		<li class="list-group-item"></li>
+		<li class="list-group-item"></li> -->
 	</ul>
 
 </div>
 
 <script>
-	/* 	$("#dropdownMenuButton1").on("mouse", function(){	
-	 $("#dropdownMenuButton1").trigger("click");
-	 })
-	 */
-	/*   $.ajax({
-	      url: apiURI,
-	      dataType: "json",
-	      type: "GET",
-	      async: "false",
-	      success: function(resp) {
-	          console.log(resp);
-	          console.log("현재습도 : "+ resp.main.humidity);
-	          console.log("날씨 : "+ resp.weather[0].main );
-	          console.log("상세날씨설명 : "+ resp.weather[0].description );
-	          console.log("날씨 이미지 : "+ resp.weather[0].icon );
-	          console.log("바람   : "+ resp.wind.speed );
-	          console.log("나라   : "+ resp.sys.country );
-	          console.log("도시이름  : "+ resp.name );
-	          console.log("구름  : "+ (resp.clouds.all) +"%" );  
-	      }
-	  }) */
+	var ws = new WebSocket("ws://"+location.host+"${pageContext.servletContext.contextPath}/access.do");
 	
-	 
-/* 	$("#login").on("click", function() {
-		$.ajax({   
-			"url" : "http://api.openweathermap.org/data/2.5/weather?q=seoul&units=metric&APPID=221d0de36835fe0cf4b1d4b196c711bb",
-			
-			"method" : "get" // 기본이 GET으로 요청 들어간다.
-			,
-			"async" : true
-		} // 비동기도 기본이 true
-		).done(function(rst) {
-			// onreadystatechange , 에 readyState 4 잡아서 처리했던 부분이다.
-			// 매개변수로(rst)로 받겠다고 설정한게 응답문서가 된다.
-			console.log(rst);
-			
-
-		});
-
-	});
-	   */
-
+	ws.onmessage = function(evt) {
+		console.log(evt.data);
+		var obj = JSON.parse(evt.data);
+		console.log("obj > "+obj);
+		var html="";
+		for (var i = 0; i < obj.length; i++) {
+			html+="<li class=\"list-group-item\">"+obj[i]+"</li>";			
+		}//end for
+			document.getElementById("list").innerHTML=html;
+		
+	};
+	
 
 </script>

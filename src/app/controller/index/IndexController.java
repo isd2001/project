@@ -1,6 +1,7 @@
 package app.controller.index;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -15,11 +16,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import app.models.accountRepository;
+import app.service.SocketService;
 import app.service.WeatherService;
 
 
 @Controller
 public class IndexController {
+	@Autowired
+	SocketService socketservice;
 	
 	@Autowired
 	accountRepository ar;
@@ -118,6 +122,8 @@ public class IndexController {
 			
 			mav.setViewName("main.index");
 			mav.addObject("center", "/WEB-INF/views/default/center.jsp");		
+			
+			
 			
 			return mav;
 		}else {
