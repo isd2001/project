@@ -8,8 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class ParcelRepository {
-// 지금은 테스트 DB로 설정해놈. 나중에 최종적으로 붙일때 DB 테이블 명 변경해야 함.
-// 현재 DB 테이블 셋팅은 issue 임.
+
 	@Autowired
 	SqlSessionTemplate template;
 
