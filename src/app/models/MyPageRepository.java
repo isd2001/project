@@ -16,8 +16,8 @@ public class MyPageRepository {
 	}
 	
 	// 비밀번호 수정
-	public int updatePassWord(Map userInfo) {
-		return template.update("gaenoljaaccount.updatePassWord", userInfo);
+	public int updatePassWord(Map idpass) {
+		return template.update("gaenoljaaccount.updatePassWord", idpass);
 	}
 	
 	// 회원정보 수정

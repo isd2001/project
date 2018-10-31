@@ -62,10 +62,10 @@ public class ModifyInfoController {
 		String originpass = (String)param.get("originpass");
 		String pass = myPageRepository.getByPassWord(id);
 		if(originpass.equals(pass)) {
-			Map userInfo = new HashMap<>();
-				userInfo.put("id", id);
-				userInfo.put("pass", param.get("newpass"));
-			int r = myPageRepository.updatePassWord(userInfo);
+			Map idpass = new HashMap<>();
+				idpass.put("id", id);
+				idpass.put("pass", param.get("newpass"));
+			int r = myPageRepository.updatePassWord(idpass);
 			if(r == 1) {
 				wr.removeAttribute("auth_check", wr.SCOPE_SESSION);
 			}
