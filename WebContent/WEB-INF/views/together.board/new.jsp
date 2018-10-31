@@ -139,7 +139,7 @@
 		}); */
 		
 		$("#map").on("click",function() {
-			window.open("${pageContext.servletContext.contextPath }/together/map2.do",
+			window.open("${pageContext.servletContext.contextPath }/dogTalk/",
 			"map", "width=600,height=450");
 
 			
