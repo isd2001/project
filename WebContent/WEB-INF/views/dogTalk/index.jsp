@@ -20,7 +20,7 @@
 	<div id="list">
 		<c:forEach var="list" items="${dogTalkList}">			
 				<div class="card" id="form">
-					<div class="card-header d-flex bd-highlight"><div class="flex-grow-1">Today's comment</div>
+					<div class="card-header d-flex bd-highlight"><div class="flex-grow-1">${list.TALKER}'s comment</div>
 					 <div class="bd-highlight"><small id="date" class="d-flex justify-content-end">${list.WRITEDATE}</small></div></div>
 					<div class="card-body">
 						<blockquote class="blockquote mb-0">
@@ -32,9 +32,9 @@
 	
 								<p>${list.CONTENT}</p>
 							</div>
-							<footer class="blockquote-footer d-flex justify-content-end ">
-								<span id="address">${list.ADDRESS} </span> <cite title="Source Title"><span
-									id="talker">${list.TALKER}이(가)..</span></cite>
+							<footer class="blockquote-footer d-flex justify-content-end "><cite title="Source Title">
+								<span id="address">${list.ADDRESS}...</span> </cite>
+								
 							</footer>
 	
 						</blockquote>
@@ -73,7 +73,7 @@
 				var date = rst[i].WRITEDATE;
 								
 					html +=  "<div class=\"card\" id=\"form\">";
-					html += "<div class=\"card-header d-flex bd-highlight\"><div class=\"flex-grow-1\">Today's comment</div>";
+					html += "<div class=\"card-header d-flex bd-highlight\"><div class=\"flex-grow-1\">"+talker+"'s comment</div>";
 					html += "<div class=\"bd-highlight\"><small id=\"date\" class=\"d-flex justify-content-end\">";
 					html += date+"</small></div></div>";	
 					html += " <div class=\"card-body\">";
@@ -81,8 +81,8 @@
 					html += "<div class=\"row align-items-center\">";
 					html += "<img src=\""+picture+"\" style=\"width: 80px; height: 80px;\"class=\"rounded-circle\" id =\"image\">";
 					html += " <p>"+content+"</p></div>";
-					html += "<footer class=\"blockquote-footer d-flex justify-content-end \"><span id=\"address\">"+address+"</span>";
-					html += "<cite title=\"Source Title\"><span id=\"talker\">"+talker+"가...</span></cite></footer>";
+					html += "<footer class=\"blockquote-footer d-flex justify-content-end \"><span id=\"address\">";
+					html += "<cite title=\"Source Title\">"+address+"..</span></cite></footer>";
 					html += "</blockquote>";
 					html += "</div>";
 					html += "</div>";			
