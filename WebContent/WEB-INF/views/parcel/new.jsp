@@ -41,11 +41,13 @@
 			<input type="text" class="form-control" id="phone" name="phone">
 		</div>
 		<div class="col-md-6 mb-3">
+
 			<label for="lastName">분양장소(상세주소입력)</label>			
 			<!-- ======================================================= -->
 			<button type="button" onclick="addressPopUp()" >간편 주소 입력</button>
-					<input type="text" class="form-control" id="address1" placeholder="간편 주소" readonly="readonly">					
+					<input type="text" class="form-control" id="address1" placeholder="간편 주소" readonly="readonly" onchange="address(this);" name="area" >					
 			<!-- ======================================================= -->
+
 		</div>
 	</div>
 	<hr class="mb-4">
@@ -125,7 +127,7 @@
 	// 주소-좌표 변환 객체를 생성합니다
 	var geocoder = new daum.maps.services.Geocoder();
 	
-	var address = function() {
+	var address = function(target) {
 		// 주소 작성 값 추출
 		var area = $("#address1").val();
 	

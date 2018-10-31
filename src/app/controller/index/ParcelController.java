@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+
 import app.models.ParcelRepository;
 
 @Controller
@@ -26,12 +28,15 @@ public class ParcelController {
 	ServletContext ctx;
 	
 	@Autowired
-	ParcelRepository percelRepository;
+	Gson gson;
+	
+	@Autowired
+	ParcelRepository parcelRepository;
 	
 	// 분양게시판 index 페이지 게시물 전체 뽑아서 보여줌 / 게시물 리스트 출력 핸들러
 	@RequestMapping("/percel.do")
 	public String getAllByPercel(ModelMap map) {
-		List<Map> list = percelRepository.getAllByPercel();
+		List<Map> list = parcelRepository.getAllByPercel();
 		map.put("list", list);
 		System.out.println(map);
 		return "parcel.index";
@@ -73,7 +78,7 @@ public class ParcelController {
 		System.out.println(param);
 		
 		try {
-			int r = percelRepository.addByPercel(param);
+			int r = parcelRepository.addByPercel(param);
 			return "parcel.result";
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -83,12 +88,16 @@ public class ParcelController {
 		
 	}
 	
+	// 특정 게시글의 내용 및 댓글 뽑기
 	@RequestMapping("/detail.do")
 	public String getByOnePercel(@RequestParam int no, ModelMap one) {
-		Map onedata = percelRepository.getByOnePercel(no);
-		List comlist = percelRepository.getAllByComments(no);
-		one.put("one", onedata);
-		one.put("comlist", comlist);
+		Map onedata = parcelRepository.getByOnePercel(no);
+		List comlist = parcelRepository.getAllByComments(no);
+		List cmtcnt = parcelRepository.getByCmtCount(no);
+			one.put("one", onedata);
+			one.put("comlist", comlist);
+			one.put("cmtcnt", cmtcnt);
+			System.out.println(one.get("cmtcnt"));
 		return "parcel.detail";
 	}
 	

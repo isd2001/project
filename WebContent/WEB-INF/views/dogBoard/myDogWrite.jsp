@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <hr class="mb-4">
-<h4 class="mb-3" align="center">분양 글쓰기</h4>
+<h4 class="mb-3" align="center">자랑하기</h4>
 
 <form action="${pageContext.servletContext.contextPath }/add.do" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="lat" value="" id="lat"/>
@@ -25,18 +26,21 @@
 		</div>		
 		<div class="col-md-6 mb-3">
 			<label for="lastName">나이</label>
-			<input type="text" class="form-control" id="age" name="age">
+			<select class="custom-select" required name="dogAge">
+						      <option value="">성별을 선택해 주세요</option>
+						      <c:forEach var="age" begin="1" end="50">
+						      		<option value="${age}">${age}살</option>						      
+						     </c:forEach>						      					  
+			</select>
 		</div>		
 	</div>	
-		 <div class="row justify-content-center">
+		 <div class="row">
 		  <div class="col-sm-9">
 		 <label class="">강아지 동영상</label><br>
 		 <div class="row">
-			  <div class="col-md-6 mb-3">		     
-			  	<div class="embed-responsive embed-responsive-1by1">
-				  <iframe class="embed-responsive-item " src="${pageContext.servletContext.contextPath }/image/noimage.png" style="width:300px; height:300px;" id="preview" allowfullscreen ></iframe>
-				</div>  								 
-			   <div class="col-md-6 mb-3">
+			  <div class="col-md-6 mb-3">					  
+				  <video class="img-thumbnail" src="${pageContext.servletContext.contextPath }/image/noimage.png"  id="preview"></video>				
+			   <div class="col-md-6 mb-3">				
 				<input type="file" class="btn-outline-info" name="video" id="video" accept="video/*">
 			   </div>
 		     </div>
