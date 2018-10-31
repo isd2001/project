@@ -22,7 +22,7 @@
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">비밀번호</label>
 				<div class="col-sm-6">
-					<input type="password" class="form-control" name="pw"
+					<input type="password" class="form-control" name="pw" id="pw"
 						placeholder="비밀번호">
 				</div>
 			</div>
@@ -30,7 +30,8 @@
 				<label class="col-sm-2 col-form-label">비밀번호확인</label>
 				<div class="col-sm-6">
 					<input type="password" class="form-control"
-						id="pwConfirm" placeholder="비밀번호 확인">
+						id="pwConfirm" placeholder="비밀번호 확인" onchange="confirmPw()">
+						<span id="error"></span>
 				</div>
 			</div>
 		</div>
@@ -135,7 +136,18 @@
 
 
 <script>
-
+	var confirmPw = function(pw){
+		console.log("confrimPw function");
+		var pw = document.getElementById("pw").value;
+		var confirm = document.getElementById("pwConfirm").value;		
+		if(pw != confirm){
+			document.getElementById("error").innerHTML = "비밀번호 값이 일치하지 않음";
+			$("#error").css("color","red");
+			$("#pwConfirm").val("");	
+			
+		}
+	}
+	
 	var checkId = function (id) {
 		var input =id.value;
 				
@@ -190,6 +202,7 @@
 		}
 		f.readAsDataURL(this.files[0]);
 	});
+	
 	var addressPopUp = function(){
 		
 		new daum.Postcode({
