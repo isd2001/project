@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!DOCTYPE html>
 
-<form action="${pageContext.servletContext.contextPath}/modify_info.do" method="post" enctype="multipart/form-data">
-
+<form action="${pageContext.servletContext.contextPath}/change_info.do" method="post" enctype="multipart/form-data">
 <div class="container">
 	<div class="row  justify-content-center">	
 		<div class="col-md-8 offset-md-2">
@@ -33,7 +33,7 @@
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">닉네임</label>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" name="nickname" id="nickname" placeholder="닉네임">
+					<input type="text" class="form-control" name="nickname"	placeholder="닉네임" onchange="checkNick(this)" id ="nick" value="${userInfo.NICKNAME }"><span id="checkNick" style="color:white;"></span>
 				</div>
 			</div>
 			<div class="form-group row">
@@ -41,7 +41,7 @@
 				<div class="col-sm-6">
 					<button type="button" 
 						onclick="addressPopUp()" >주소 입력</button>
-					<input type="text" class="form-control" name="address" id = "address" placeholder="주소">
+					<input type="text" class="form-control" name="address" id = "address" value="${userInfo.ADDRESS }" >
 					<input type="text" class="form-control" name="address2"  id = "address2" placeholder="상세주소">
 				</div>
 			</div>			
@@ -55,7 +55,7 @@
 			 <div class="row">
 			   <div class="col-4 col-sm-4">
 		        <label class="">강아지 사진</label><br>
-				<img src="${pageContext.servletContext.contextPath }/image/noimage.png" alt="..." class="img-thumbnail">
+				<img src="${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE }" class="img-thumbnail" id="preview">
 				<input type="file" type = "file" class="btn-outline-info" name="dogProfile" id="dogProfile">
 				
 		      </div>
@@ -63,20 +63,20 @@
 		        	<div class="form-group row">
 						<label  class="col-sm-3 col-form-label">강아지 이름</label>
 						<div class="col-sm-6">
-							<input type="text" class="form-control" name="dogName" id="dogName" placeholder="강아지 이름">
+							<input type="text" class="form-control" name="dogName" value="${userInfo.DOGNAME }" placeholder="강아지 이름">
 						</div>
 					</div>
 					<div class="form-group row">
 						<label class="col-sm-3 col-form-label">강아지 견종</label>
 						<div class="col-sm-6">
-							<input type="text" class="form-control" name="dogType" id="dogType" placeholder="강아지견종">
+							<input type="text" class="form-control" name="dogType" value="${userInfo.DOGTYPE }" placeholder="강아지견종">
 						</div>			
 					</div>
 					<div class="form-group row">
 						<label class="col-sm-3 col-form-label">강아지 성별</label>
 						<div class="col-sm-6">
-							<select class="custom-select" required name="dogGender" id="dogGender">
-						      <option value="">성별을 선택해 주세요</option>
+							<select class="custom-select" required name="dogGender" >
+						      <option value="${userInfo.DOGGENDER }">${userInfo.DOGGENDER }</option>
 						      <option value="수컷">수컷</option>
 						      <option value="암컷">암컷</option>						  
 						    </select>
@@ -91,7 +91,7 @@
 				<div class="alert alert-warning row" role="alert">
 				하고싶은 말!
 				</div>
-			<input type="text" placeholder="하고싶은말을 적어주세요!" style="width:600px" name ="usercomment" id="usercomment">			
+			<input type="text" placeholder="하고싶은말을 적어주세요!" style="width:600px" name ="usercomment" id="usercomment" value="${userInfo.USERCOMMENT }">			
 			</div>
 			
 			<div class="offset-md-2 justify-content-center">	
@@ -111,6 +111,62 @@
 </form>
 
 <script>
+
+var checkId = function (id) {
+	var input =id.value;
+			
+	console.log("id function");
+	var url = "/gaenolja/validate.do";		
+	
+	var param = {
+			"mode"  : "id",
+			"input" : input			
+	};	
+	
+	$.get(url, param, function(rst) {	 			
+		if(rst==true){
+			$("#checkId").html("사용가능한 아이디 입니다.");
+			$("#checkId").css("color","blue");
+		}else{
+			$("#checkId").html("이미 사용중인 아이디 입니다.");
+			$("#checkId").css("color","red");
+			$("#id").val("");
+		}
+	
+	});
+};
+
+var checkNick = function (nick) {
+	var input =nick.value;
+	
+	var url = "/gaenolja/validate.do";		
+	
+	var param = {
+			"mode"  : "nick",
+			"input" : input			
+	};	
+	
+	$.get(url, param, function(rst) {	 			
+		if(rst==true){
+			$("#checkNick").html("사용가능한 닉네임 입니다.");
+			$("#checkNick").css("color","blue");
+		}else{
+			$("#checkNick").html("이미 사용중인 닉네임 입니다.");
+			$("#checkNick").css("color","red");
+			$("#nickname").val("");
+		}
+	
+	});
+};
+
+$("#dogProfile").on("change",function(){
+	var f = new FileReader();
+	f.onload= function(e){
+		$("#preview").attr("src", e.target.result);
+	}
+	f.readAsDataURL(this.files[0]);
+});
+
 	var addressPopUp = function(){
 		
 		new daum.Postcode({

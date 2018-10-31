@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<hr style="margin-top: 3px; margin-bottom: 3px;" />
 <div class="row">
 	<div class="col-md-6">
 		<div class="bd-example bd-example-images">
 			<img data-src="holder.js/450x520" class="img-thumbnail"
 				alt="이미지 안나오면 엑박"
-				src="${pageContext.servletContext.contextPath }${user.DOGPROFILE }"
+				src="${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE }"
 				data-holder-rendered="true" style="width: 450px; height: 520px;">
 		</div>
 	</div>
@@ -20,11 +21,11 @@
   <tbody>
     <tr>
       <th scope="row">아이디</th>
-      <td>${user.ID }</td>
+      <td>${userInfo.ID }</td>
     </tr>
     <tr>
       <th scope="row">닉네임</th>
-      <td>${user.NICKNAME }</td>
+      <td>${userInfo.NICKNAME }</td>
     </tr>
   </tbody>
 </table>
@@ -38,15 +39,15 @@
   <tbody>
     <tr>
       <th scope="row">개 이름</th>
-      <td>${user.DOGNAME }</td>
+      <td>${userInfo.DOGNAME }</td>
     </tr>
     <tr>
       <th scope="row">개 종류</th>
-      <td>${user.DOGTYPE }</td>
+      <td>${userInfo.DOGTYPE }</td>
     </tr>
     <tr>
       <th scope="row">개 성별</th>
-      <td>${user.DOGGENDER }</td>
+      <td>${userInfo.DOGGENDER }</td>
     </tr>
   </tbody>
 </table>
@@ -59,7 +60,7 @@
   </thead>
   <tbody>
   <tr>
-      <th scope="row">${user.USERCOMMENT }</th>
+      <th scope="row">${userInfo.USERCOMMENT }</th>
     </tr>
  </tbody>
 </table>

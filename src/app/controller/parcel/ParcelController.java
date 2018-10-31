@@ -1,4 +1,4 @@
-package app.controller.index;
+package app.controller.parcel;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +21,7 @@ import com.google.gson.Gson;
 
 import app.models.ParcelRepository;
 
-@Controller
+@Controller("/percel")
 public class ParcelController {
 
 	@Autowired
@@ -35,10 +35,9 @@ public class ParcelController {
 	
 	// 분양게시판 index 페이지 게시물 전체 뽑아서 보여줌 / 게시물 리스트 출력 핸들러
 	@RequestMapping("/percel.do")
-	public String getAllByPercel(ModelMap map) {
-		List<Map> list = parcelRepository.getAllByPercel();
+	public String getAllByParcel(ModelMap map) {
+		List<Map> list = parcelRepository.getAllByParcel();
 		map.put("list", list);
-		System.out.println(map);
 		return "parcel.index";
 	}
 	
@@ -50,7 +49,7 @@ public class ParcelController {
 	
 	// 새글쓰기 저장 핸들러
 	@RequestMapping("/add.do")
-	public String addByPercelHandler(@RequestParam Map param, @RequestParam MultipartFile mainimage, @RequestParam MultipartFile file1, @RequestParam MultipartFile file2, ModelMap map) throws IOException {
+	public String addByParcelHandler(@RequestParam Map param, @RequestParam MultipartFile mainimage, @RequestParam MultipartFile file1, @RequestParam MultipartFile file2, ModelMap map) throws IOException {
 		long time = System.currentTimeMillis();
 		String mainfileName = String.valueOf(time) + "_" + mainimage.getOriginalFilename();
 		String file1Name = String.valueOf(time) + "_" + file1.getOriginalFilename();
@@ -75,10 +74,10 @@ public class ParcelController {
 		param.put("mainimage", attachmain);
 		param.put("file1", attachfile1);
 		param.put("file2", attachfile2);
-		System.out.println(param);
 		
+		System.out.println(param);
 		try {
-			int r = parcelRepository.addByPercel(param);
+			int r = parcelRepository.addByParcel(param);
 			return "parcel.result";
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -91,13 +90,12 @@ public class ParcelController {
 	// 특정 게시글의 내용 및 댓글 뽑기
 	@RequestMapping("/detail.do")
 	public String getByOnePercel(@RequestParam int no, ModelMap one) {
-		Map onedata = parcelRepository.getByOnePercel(no);
+		Map onedata = parcelRepository.getByOneParcel(no);
 		List comlist = parcelRepository.getAllByComments(no);
 		List cmtcnt = parcelRepository.getByCmtCount(no);
 			one.put("one", onedata);
 			one.put("comlist", comlist);
 			one.put("cmtcnt", cmtcnt);
-			System.out.println(one.get("cmtcnt"));
 		return "parcel.detail";
 	}
 	

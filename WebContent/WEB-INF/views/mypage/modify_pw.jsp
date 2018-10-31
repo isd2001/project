@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-	<form class="form-signin" action="${pageContext.servletContext.contextPath }/change.do" method="post" >
+	<form class="form-signin" action="${pageContext.servletContext.contextPath }/change_pw.do" method="post" >
 		<h1 class="h3 mb-3 font-weight-normal">Please Password Change</h1>
      
 		<c:if test="${!empty err }">
@@ -32,11 +32,12 @@
 
 <script>
 	var ar = [false];
+	console.log(ar);
 	var vaild = function() {
 		if(ar.includes(false)) {
-			$("#btn").prop("disabled", true);
-		}else {
 			$("#btn").prop("disabled", false);
+		}else {
+			$("#btn").prop("disabled", true);
 		}
 	}
 	

@@ -1,6 +1,6 @@
 package app.models;
 
-import java.util.Map;
+import java.util.*;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +25,10 @@ public class MyPageRepository {
 	// 회원정보 수정
 	public int updateUserInfo(Map userInfo) {
 		return template.update("gaenoljaaccount.updateUserInfo", userInfo);
+	}
+	
+	// 분양게시판 아이디 별로 가져오기
+	public List<Map> getByParcelList(String writer) {
+		return template.selectList("parcel.getByParcelList", writer);
 	}
 }
