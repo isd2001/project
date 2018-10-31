@@ -39,14 +39,7 @@ public class DogBoardController {
 		
 	
 	}
-	
-	@GetMapping("/myDog/write.do")
-	public ModelAndView myDogWriteHandle() {
-			ModelAndView mav = new ModelAndView();
-			mav.setViewName("dogBoard.main");
-			mav.addObject("center", "/WEB-INF/views/dogBoard/myDogWrite.jsp");
-			return mav;
-	}
+
 	
 	
 	@GetMapping("/myDog.do")
@@ -58,7 +51,7 @@ public class DogBoardController {
 	
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("dogBoard.main");
-		mav.addObject("center", "/WEB-INF/views/dogBoard/myDog.jsp");
+		mav.addObject("center", "/WEB-INF/views/dogTraining/gajalang.jsp");
 		return mav;
 	} 
 	

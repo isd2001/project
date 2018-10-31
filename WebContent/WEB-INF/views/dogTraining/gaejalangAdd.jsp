@@ -5,7 +5,7 @@
 <hr class="mb-4">
 <h4 class="mb-3" align="center">자랑하기</h4>
 
-<form action="${pageContext.servletContext.contextPath }/add.do" method="post" enctype="multipart/form-data">
+<form action="${pageContext.servletContext.contextPath }/dogTraining/add.do" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="lat" value="" id="lat"/>
 	<input type="hidden" name="longi" value="" id="longi"/>
 	<div class="row">
@@ -18,19 +18,19 @@
 	<div class="row">
 		<div class="col-md-6 mb-3">
 			<label for="firstName">견종</label>
-			<input type="text" class="form-control" id="breeds" name="breeds">
+			<input type="text" class="form-control" id="breeds" name="dogType">
 		</div>
 		<div class="col-md-6 mb-3">
 			<label for="lastName">성별</label>
-			<input type="text" class="form-control" id="gender" name="gender">
+			<input type="text" class="form-control" id="gender" name="dogGender">
 		</div>		
 		<div class="col-md-6 mb-3">
 			<label for="lastName">나이</label>
 			<select class="custom-select" required name="dogAge">
-						      <option value="">성별을 선택해 주세요</option>
+						      <option value="">나이를 선택해주세요</option>
 						      <c:forEach var="age" begin="1" end="50">
 						      		<option value="${age}">${age}살</option>						      
-						     </c:forEach>						      					  
+						     </c:forEach> 
 			</select>
 		</div>		
 	</div>	
@@ -41,16 +41,12 @@
 			  <div class="col-md-6 mb-3">					  
 				  <video class="img-thumbnail" src="${pageContext.servletContext.contextPath }/image/noimage.png"  id="preview"></video>				
 			   <div class="col-md-6 mb-3">				
-				<input type="file" class="btn-outline-info" name="video" id="video" accept="video/*">
+				<input type="file" class="btn-outline-info" name="upload" id="upload" accept="video/*">
 			   </div>
 		     </div>
 		 </div>
 		 </div>
-		 </div>
-		
-		
-		
-		
+		 </div>		
 		<div class="col-md-12">
 			<div class="input-group-prepend">
 				<span class="input-group-text">상세내용</span>
@@ -62,10 +58,10 @@
  
 	<div class="row">
 		<div class="col-md-6 mb-3">
-			<button type="submit" class="form-control btn btn-outline-primary">Save</button>
+			<button type="submit" class="form-control btn btn-outline-primary">글올리기</button>
 		</div>
 		<div class="col-md-6 mb-3">
-			<a href="${pageContext.servletContext.contextPath }/percel.do"><button type="button" class="form-control btn btn-outline-primary" >Cencel</button></a>
+			<a href="${pageContext.servletContext.contextPath }/dogTraining/gaejalang.do"><button type="button" class="form-control btn btn-outline-primary" >Cancel</button></a>
 		</div>
 	</div>
 
