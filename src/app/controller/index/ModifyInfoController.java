@@ -28,10 +28,14 @@ public class ModifyInfoController {
 	// 수정처리 요청시 중간 인증 체크 핸들
 	// 정상 로그인 후 인증세션이 있으면 check.do 부분에 인증 유무에 따른 페이지 변환이 우선적으로 들어가야 함.
 	@RequestMapping("check.do")
-	public String authCherckHandle(@RequestParam String pass, @RequestParam String mode ,WebRequest wr, ModelMap map) {
-		String id = (String)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
-		String originpass = myPageRepository.getByPassWord(id);
-		
+	public String authCherckHandle(@RequestParam String mode ,WebRequest wr) {
+		if(mode.equals("memberInfo")) {
+			wr.setAttribute("mode", "memberInfo", wr.SCOPE_SESSION);
+			return "mypage.check";
+		}else {
+			return "mypage.check";
+		}
+/*		
 		if(originpass.equals(pass)) {
 			if(mode.equals("memberInfo")) {
 				wr.setAttribute("auth_check", true, wr.SCOPE_SESSION);
@@ -43,6 +47,15 @@ public class ModifyInfoController {
 			map.put("err", "on");
 			return "mypage.check";
 		}
+		*/
+	}
+	
+	@RequestMapping("/checkpass.do")
+	public String checkPassHandle(WebRequest wr, @RequestParam String param) {
+		String mode = (String)wr.getAttribute("mode", wr.SCOPE_SESSION);
+		String id = (String)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
+		String pass = myPageRepository.getByPassWord(id);
+		return "";
 	}
 
 	// 비밀번호 수정 페이지 핸들러

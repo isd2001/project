@@ -26,7 +26,7 @@
 		       <c:choose>
 				<c:when test="${not empty userInfo}">				 
 					<div class="col-4 d-flex justify-content-end align-items-center">
-		          	<a class="btn btn-sm btn-success" href="#">마이페이지</a> 
+		          	<a class="btn btn-sm btn-success" href="${pageContext.servletContext.contextPath }/mypage.do">마이페이지</a> 
 		            <a class="btn btn-sm btn-danger" href="${pageContext.servletContext.contextPath }/logout.do">로그아웃</a>
 		     
 		          </div>
