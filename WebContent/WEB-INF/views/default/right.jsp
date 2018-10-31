@@ -113,37 +113,39 @@
 <hr />
 
 <li class="list-group-item list-group-item-success">현재 접속자</li>
-<div style="height: 150px; overflow-y: scroll;" id="connectList">	
-	<div class="nav-dropdown" id="list">
+<div style="height: 150px; overflow-y: scroll;" id="connectlist">	
 	
-	</div>
+	
+	
 </div>
+
 
 <script>
 	var ws = new WebSocket("ws://" + location.host
 			+ "${pageContext.servletContext.contextPath}/access.do");
 
 	ws.onmessage = function(evt) {
-		console.log(evt.data);
 		var obj = JSON.parse(evt.data);
 		console.log("obj > " + obj);
 		var html = "";
 		for (var i = 0; i < obj.length; i++) {
-			html += "<a class=\"nav-link\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">";
+			html += "<div class=\"nav-dropdown\" >";
+			html += "<a class=\"nav-link\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">";
 			html += obj[i] + "</a>";
 			html += "<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\" >";
-			html += "<a class=\"dropdown-item\" onclick='openchat();'>1:1 대화 </a>";
+			html += "<a name = \"f\" class=\"dropdown-item\" value=\""+obj[i]+"\" onclick=\"openchat('" + obj[i] + "');\">1:1 대화 </a>";
 			html += "<a class=\"dropdown-item\" href=\"${pageContext.servletContext.contextPath }/chat/Departmentchat.do\">회원 정보 보기</a>";
 			html += "</div>";
-			
+			html += "<hr/>";
+			html += "</div>";
 		}//end for
-		document.getElementById("list").innerHTML = html;
-
+		document.getElementById("connectlist").innerHTML = html;
 	};
 	
 	
-	var openchat= function() {
-		window.open("${pageContext.servletContext.contextPath }/onetalk.do",
+	var openchat= function(target) {
+		console.log(target);
+		window.open("${pageContext.servletContext.contextPath }/onetalk.do?talk="+target,
 				"talk", "width=600,height=450");
 	}; 
 	

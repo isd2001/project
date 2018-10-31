@@ -10,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import app.models.OnechatRepository;
 import app.models.accountRepository;
 import app.service.SocketService;
 import app.service.WeatherService;
@@ -33,6 +35,9 @@ public class IndexController {
 	
 	@Autowired
 	WeatherService ws;
+	
+	@Autowired
+	OnechatRepository onechat;
 	
 	@GetMapping("/index.do")
 	public ModelAndView indexHandle(WebRequest wr) {
@@ -114,6 +119,7 @@ public class IndexController {
 		if(ar.getPwById(param)) {						
 			Map userInfo =  ar.getUserInfo((String)param.get("id"));
 			wr.setAttribute("userInfo", userInfo, wr.SCOPE_SESSION);
+			System.out.println("userInfo >"+userInfo);
 			String gu = ws.getCoordinateByAddress((String)userInfo.get("ADDRESS"));
 			wr.setAttribute("gu", gu, wr.SCOPE_SESSION);
 			
@@ -143,11 +149,18 @@ public class IndexController {
 		return mav;
 	}
 			
-	@GetMapping("/onetalk.do")	
-	public String onetalkHandle() {
+	@RequestMapping("/onetalk.do")	
+	public String onetalkHandle(@RequestParam Map param,WebRequest wreq) {	
+		String target = (String)param.get("talk");
+		wreq.setAttribute("recipient", target, wreq.SCOPE_REQUEST);
+		//========================================
+		
+		
+		
+		
 		
 		return "dogTalk/onetalk";
-	}//end onetalk
+	}//end onetalk.do
 	
 }
 
