@@ -43,13 +43,15 @@ public class ParcelController {
 	
 	// 새글쓰기 뷰어 출력 핸들러
 	@RequestMapping("/new.do")
-	public String newHandler() {
+	public String newHandler(ModelMap map, WebRequest wr) {
+		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
+		map.put("userInfo", userInfo);
 		return "parcel.new";
 	}
 	
 	// 새글쓰기 저장 핸들러
 	@RequestMapping("/add.do")
-	public String addByParcelHandler(@RequestParam Map param, @RequestParam MultipartFile mainimage, @RequestParam MultipartFile file1, @RequestParam MultipartFile file2, ModelMap map) throws IOException {
+	public String addByParcelHandler(@RequestParam Map param, @RequestParam MultipartFile mainimage, @RequestParam MultipartFile file1, @RequestParam MultipartFile file2, ModelMap map, WebRequest wr) throws IOException {
 		long time = System.currentTimeMillis();
 		String mainfileName = String.valueOf(time) + "_" + mainimage.getOriginalFilename();
 		String file1Name = String.valueOf(time) + "_" + file1.getOriginalFilename();
@@ -70,6 +72,11 @@ public class ParcelController {
 		String attachmain = "/" + time + "/" + mainfileName;
 		String attachfile1 = "/" + time + "/" + file1Name;
 		String attachfile2 = "/" + time + "/" + file2Name;
+		
+		String mode = (String)wr.getAttribute("mode", wr.SCOPE_SESSION);
+		Map data = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
+		String id = (String)data.get("ID");
+		param.put("id", id);
 		
 		param.put("mainimage", attachmain);
 		param.put("file1", attachfile1);

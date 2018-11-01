@@ -34,7 +34,7 @@
 		
 		<div class="col-md-6 mb-3">
 			<label for="lastName">분양자 ID</label>
-			<input type="text" class="form-control" id="writer" name="writer">
+			<input type="text" class="form-control" id="writer" name="writer" value="${userInfo.ID }" disabled>
 		</div>
 		<div class="col-md-6 mb-3">
 			<label for="lastName">분양자 핸드폰 번호</label>
