@@ -110,6 +110,7 @@ public class FindController {
 		
 		String pictureName = "/" + time + "/" + fileName;
 		rmap.put("picture", pictureName);
+		rmap.put("id", "까치");
 
 		try {
 			int r = findRepository.addAllFind(rmap);

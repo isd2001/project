@@ -34,7 +34,7 @@
 		
 		<div class="col-md-6 mb-3">
 			<label for="lastName">분양자 ID</label>
-			<input type="text" class="form-control" id="writer" name="writer">
+			<input type="text" class="form-control" id="writer" name="writer" value="${userInfo.ID }" disabled>
 		</div>
 		<div class="col-md-6 mb-3">
 			<label for="lastName">분양자 핸드폰 번호</label>
@@ -45,7 +45,7 @@
 			<label for="lastName">분양장소(상세주소입력)</label>			
 			<!-- ======================================================= -->
 			<button type="button" onclick="addressPopUp()" >간편 주소 입력</button>
-					<input type="text" class="form-control" id="address1" placeholder="간편 주소" readonly="readonly" onchange="address(this);" name="area" >					
+					<input type="text" class="form-control" id="area" placeholder="간편 주소" readonly="readonly" onchange="address(this);" name="area" >					
 			<!-- ======================================================= -->
 
 		</div>
@@ -129,7 +129,7 @@
 	
 	var address = function(target) {
 		// 주소 작성 값 추출
-		var area = $("#address1").val();
+		var area = $("#area").val();
 	
 	// 주소로 좌표를 검색합니다
 		geocoder.addressSearch(area, function(result, status) {
@@ -204,13 +204,13 @@
 		            }
 		
 		            // 우편번호와 주소 정보를 해당 필드에 넣는다.		            
-		            document.getElementById('address1').value = fullAddr;
+		            document.getElementById('area').value = fullAddr;
 		            
 		            //
 		            address();
 		
 		            // 커서를 상세주소 필드로 이동한다.
-		            document.getElementById('address1').focus();
+		            document.getElementById('area').focus();
 		        }
 	   		}).open();
 		}

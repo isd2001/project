@@ -2,19 +2,24 @@
  <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="parcel">
 <!-- 게시글 저장하는거 -->
-	<insert id="addByPercel" parameterType="java.util.HashMap">
+	<insert id="addByParcel" parameterType="java.util.HashMap">
 		insert into parcel values(parcel_seq.nextval, #{title}, #{choice}, #{phone}, #{area}, #{lat}, #{longi}, #{breeds}, #{gender}, #{sort}, #{age}, #{inoculation}, 
 									#{content}, #{writer}, sysdate, #{mainimage} #{file1}, #{file2})
 	</insert>
 
 <!-- 게시글 전부 뽑는거 -->
-	<select id="getAllByPercel" resultType="java.util.HashMap" >
+	<select id="getAllByParcel" resultType="java.util.HashMap" >
 		select * from parcel
 	</select>
 	
 <!-- 특정 게시글 데이터 뽑는거 -->
-	<select id="getByOnePercel" resultType="java.util.HashMap" parameterType="java.lang.Integer">
+	<select id="getByOneParcel" resultType="java.util.HashMap" parameterType="java.lang.Integer">
 		select * from parcel where no=#{no}
+	</select>
+	
+<!-- 특정 아이디의 게시글 전체 뽑는거 -->
+	<select id="getByParcelList" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select * from parcel where writer = #{writer}
 	</select>
 	
 </mapper>

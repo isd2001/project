@@ -1,4 +1,4 @@
-package app.controller.index;
+package app.controller.parcel;
 
 import java.util.List;
 import java.util.Map;
@@ -37,7 +37,6 @@ public class CommentController {
 			param.put("serial", serial);
 		try {
 			int r = parcelRepository.addByComments(param);
-			System.out.println("댓글 저장 결과값 = " + r);
 			return "parcel.detail";
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -66,7 +65,6 @@ public class CommentController {
 		String code = (String)param.get("code");
 		List recomlist = parcelRepository.getAllByReComments(code);
 			map.put("recomlist", recomlist);
-			System.out.println(map.get("recomlist"));
 			return gson.toJson(recomlist);
 
 	}

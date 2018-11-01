@@ -30,5 +30,18 @@
 	<select id="checkNick" resultType="java.lang.String" parameterType="java.lang.String">
 		select NICKNAME from gaenoljaaccount where nickname=#{nickname}
 	</select>	
+	
+	<select id="getByPassWord" resultType="java.lang.String" parameterType="java.lang.String">
+		select pw from gaenoljaaccount where id = #{id}
+	</select>
+	
+	<update id="updatePassWord" parameterType="java.util.HashMap">
+		update gaenoljaaccount set pw = #{pass} where id = #{id}
+	</update>
+	
+	<update id="updateUserInfo" parameterType="java.util.HashMap">
+		update gaenoljaaccount set NAME = #{name}, NICKNAME = #{nickname}, ADDRESS = #{address}, DOGNAME = #{dogName}, DOGPROFILE = #{dogProfile}, DOGTYPE = #{dogType}, DOGGENDER = #{dogGender}, USERCOMMENT = #{usercomment} where id = #{id}
+	</update>
+	
 </mapper>
 

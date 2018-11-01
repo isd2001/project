@@ -136,7 +136,7 @@ public class testIndexController {
 	
 	@RequestMapping("/main/percel/index.do")
 	public ModelAndView getAllByPercel() {
-		List<Map> list = parcelRepository.getAllByPercel();
+		List<Map> list = parcelRepository.getAllByParcel();
 		
 				
 		ModelAndView mav = new ModelAndView();

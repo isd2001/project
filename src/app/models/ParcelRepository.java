@@ -9,24 +9,22 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ParcelRepository {
 
-// 지금은 테스트 DB로 설정해놈. 나중에 최종적으로 붙일때 DB 테이블 명 변경해야 함.
-// 현재 DB 테이블 셋팅은 issue 임.
 	@Autowired
 	SqlSessionTemplate template;
 	
 	// 게시글 작성하는거
-	public int addByPercel(Map map) {
-		return template.insert("parcel.addByPercel", map);
+	public int addByParcel(Map param) {
+		return template.insert("parcel.addByParcel", param);
 	}
 	
 	// 게시글 전부 뽑는거
-	public List<Map> getAllByPercel() {
-		return template.selectList("parcel.getAllByPercel");
+	public List<Map> getAllByParcel() {
+		return template.selectList("parcel.getAllByParcel");
 	}
 	
 	// 특정 게시글 데이터 뽑는거
-	public Map getByOnePercel(int no) {
-		return template.selectOne("parcel.getByOnePercel", no);
+	public Map getByOneParcel(int no) {
+		return template.selectOne("parcel.getByOneParcel", no);
 	}
 	
 	// 댓글 저장하는거

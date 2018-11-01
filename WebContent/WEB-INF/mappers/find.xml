@@ -5,7 +5,7 @@
 	<!-- 게시글 내용 모두 저장 -->
 	<insert id="addAllFind" parameterType="java.util.HashMap">
 		insert into find values (find_seq.nextval, #{title}, #{dogname}, #{phone}, sysdate, 
-		#{picture}, #{fcontent}, #{scontent}, #{mapx}, #{mapy}, #{nick})
+		#{picture}, #{fcontent}, #{scontent}, #{mapx}, #{mapy}, #{nick}, #{id})
 	</insert>
 	
 	<!-- 모든 게시글 뽑기-->
