@@ -52,7 +52,13 @@ public class OneChatSocketController extends TextWebSocketHandler{
 		
 		//====================================
 		
-		
+		for (int i = 0; i < sockets.size(); i++) {
+			try {
+				sockets.get(i).sendMessage(message);
+			} catch (Exception e) {
+				e.printStackTrace();				
+		}
+	}//end for
 		
 	}
 	

@@ -2,12 +2,14 @@ package app.controller.index;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -150,14 +152,21 @@ public class IndexController {
 	}
 			
 	@RequestMapping("/onetalk.do")	
-	public String onetalkHandle(@RequestParam Map param,WebRequest wreq) {	
+	public String onetalkHandle(@RequestParam Map param,WebRequest wreq,ModelMap map) {	
 		String target = (String)param.get("talk");
+		System.out.println("target > "+ target);
 		wreq.setAttribute("recipient", target, wreq.SCOPE_REQUEST);
 		//========================================
+		Map user =(Map) wreq.getAttribute("userInfo",wreq.SCOPE_SESSION);
+		String sender = (String) user.get("NICKNAME");
+		System.out.println("sender > "+sender);
 		
-		
-		
-		
+		Map result = new HashMap<>();
+			result.put("sender", sender);
+			result.put("recipient", target);
+			
+		List<Map> chatlist=onechat.getOneChat(result);
+		System.out.println("chatlist>"+chatlist);
 		
 		return "dogTalk/onetalk";
 	}//end onetalk.do

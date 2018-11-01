@@ -20,11 +20,14 @@ public class OnechatRepository {
 		return template.insert(map,"onechat");
 	}
 	
-/*	// 해당 채팅 불러오기
-	public Map getOneChat(Map map){
-		Criteria c = Criteria.where("").and(); 
-		return template.find(new Query(c), Map.class,"onechat");	
-	}*/
+	// 해당 채팅 불러오기
+	public List<Map> getOneChat(Map map){
+		
+		System.out.println("map >> "+ map);
+		
+		Criteria c = Criteria.where("sender").is(map.get("sender")).and("recipient").is(map.get("recipient"));
+		return template.find(new Query(c),Map.class,"onechat");
+	}
 	
 	
 }//end class

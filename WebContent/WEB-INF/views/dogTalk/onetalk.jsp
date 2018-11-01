@@ -13,8 +13,10 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-	
-<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900"
+	rel="stylesheet">
 
 </head>
 <body>
@@ -27,7 +29,9 @@
 		<div class="input-group-prepend">
 			<span class="input-group-text" id="inputGroup-sizing-lg">글 입력</span>
 		</div>
-		<input type="text" class="form-control" id="input" aria-label="Sizing example input"aria-describedby="inputGroup-sizing-lg">
+		<input type="text" class="form-control" id="input"
+			aria-label="Sizing example input"
+			aria-describedby="inputGroup-sizing-lg">
 	</div>
 	<script>
 		var onechat = new WebSocket("ws://" + location.host
@@ -45,7 +49,40 @@
 			this.value="";
 		};
 		
+		onechat.onmessage = function(evt){
+			console.log("결과"+evt.data);
+			var obj = JSON.parse(evt.data);
+			console.log(obj);
+			if (obj.sender=="${userInfo.NICKNAME}") {
+				lightHandle(obj);
+			}else{
+				warningHandle(obj);
+			}
+			
+		};
 		
+		var lightHandle = function(obj){
+			var html="<small>"+obj.sender+"</small><br/>";
+				html+="<div class=\"alert alert-light\" role=\"alert\">";
+			html += obj.text;
+			html += "</div>";
+			document.getElementById("chatView").innerHTML += html;
+			document.getElementById("chatView").scrollTop = 
+				document.getElementById("chatView").scrollHeight; 
+			
+		};
+		
+		var warningHandle = function(obj){
+			var html="<small>"+obj.sender+"</small><br/>";
+				html+="<div class=\"alert alert-warning\" role=\"alert\">";
+				html += obj.text;
+				html += "</div>";
+				document.getElementById("chatView").innerHTML += html;
+				document.getElementById("chatView").scrollTop = 
+			document.getElementById("chatView").scrollHeight; 
+		
+			
+		};
 		
 		
 	</script>

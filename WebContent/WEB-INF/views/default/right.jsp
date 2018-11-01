@@ -146,7 +146,7 @@
 	var openchat= function(target) {
 		console.log(target);
 		window.open("${pageContext.servletContext.contextPath }/onetalk.do?talk="+target,
-				"talk", "width=600,height=450");
+				"talk", "width=750,height=550");
 	}; 
 	
 </script>
