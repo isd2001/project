@@ -138,6 +138,7 @@
 <script>	
 	
 	$('#exampleModalCenter').on('show.bs.modal', function (event) {
+	  console.log("original page function");
 	  var button = $(event.relatedTarget) ;
 	  var targetName = button.data('name');
 	  var targetEng = button.data('engname');

@@ -4,9 +4,10 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+<h2>강아지 수다공간</h2>
 
-<h2>강아지 수다공간</h2>    
- 
+     
+ 	
      <div class="input-group">
 	  <div class="input-group-prepend">
 	     <img src="${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE}" style="width: 80px; height: 80px;"class="rounded-circle">

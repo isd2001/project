@@ -20,12 +20,12 @@
             </div>
           </div>
           <div class="carousel-item">
-            <img class="second-slide" src="${pageContext.servletContext.contextPath }/image/ad1.jpg" style="width:70%;" alt="Second slide">
+            <img class="second-slide" src="${pageContext.servletContext.contextPath }/image/parcelbanner.jpg" style="width:70%;" alt="Second slide">
             <div class="container">
-              <div class="carousel-caption">
-                <h1>사지말고 입양해 주세요</h1>
+              <div class="carousel-caption text-right " style="color:maroon;">
+                <h1 >사지말고 입양해 주세요</h1>
                 <p>개놀자 공식 광고 입니다.</p>
-                <p><a class="btn btn-lg btn-primary" href="#" role="button">공지사항</a></p>
+                <p><a class="btn btn-lg btn-primary" href="#" role="button">Click to 키워주시개</a></p>
               </div>
             </div>
           </div>

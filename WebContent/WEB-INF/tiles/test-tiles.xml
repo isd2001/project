@@ -13,8 +13,7 @@
 	<definition name="test.login" template="/WEB-INF/tiles/test-noTop-template.jsp">
 		<put-attribute name="nav" value="/WEB-INF/views/testfiles/nav.jsp"/>				
 		<put-attribute name="bottom" value="/WEB-INF/views/testfiles/bottom.jsp"/>
-		<put-attribute name="main" expression="${requestScope.main}"/>	
-			
+		<put-attribute name="main" expression="${requestScope.main}"/>				
 	</definition>	
 	
 </tiles-definitions>

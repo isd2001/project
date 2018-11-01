@@ -3,9 +3,7 @@ package app.controller.find;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,8 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.theme.SessionThemeResolver;
-import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.servlet.ModelAndView;
 
 import app.models.FindRepository;
 
@@ -38,7 +35,7 @@ public class FindController {
 	// 게시글 List 화면
 
 	@GetMapping("/list.do")
-	public String listHandler(ModelMap mmap, WebRequest wr, @RequestParam (required=false)String nick
+	public ModelAndView listHandler(ModelMap mmap, WebRequest wr, @RequestParam (required=false)String nick
 			,@RequestParam (required=false)Integer no) {
 		Date today = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -61,8 +58,16 @@ public class FindController {
 		System.out.println(every);
 		mmap.put("every",every);
 		
-		return "main.find.list";
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("master");
+		mav.addObject("top", "/WEB-INF/views/master/fine/top.jsp");
+		mav.addObject("main", "/WEB-INF/views/master/fine/list.jsp");
+		
+		return mav;
 	}
+	
+	// 이 밑으로 손 안댔음
 
 	@GetMapping("/write.do")
 	public String writeHandler() {

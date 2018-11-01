@@ -36,6 +36,8 @@ public class IndexController {
 	@Autowired
 	Gson gson;
 	
+
+
 	@GetMapping("/index.do")
 	public ModelAndView indexHandle(WebRequest wr) {
 		ModelAndView mav = new ModelAndView();

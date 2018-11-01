@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import app.models.ToCommentRepository;
 import app.models.TogetherRepository;
@@ -29,7 +30,7 @@ public class TogetherBoardController {
 	ToCommentRepository tocomment;	
 
 	@GetMapping("/mainboard.do")
-	public String mainboard(WebRequest wreq,@RequestParam Map param) {
+	public ModelAndView mainboard(WebRequest wreq,@RequestParam Map param) {
 		String re=(String)wreq.getAttribute("result",WebRequest.SCOPE_REQUEST);
 		if (re=="on") {
 			wreq.setAttribute("result","yes",WebRequest.SCOPE_REQUEST);
@@ -56,12 +57,18 @@ public class TogetherBoardController {
 		}
 		System.out.println("li > "+li);
 		wreq.setAttribute("list",li, WebRequest.SCOPE_REQUEST);
-
-		return "main.togetherboard";
+		
+		ModelAndView mav = new ModelAndView();	
+		
+		mav.setViewName("master");
+		mav.addObject("top", "/WEB-INF/views/master/together/top.jsp");
+		mav.addObject("main", "/WEB-INF/views/master/together/mainboard.jsp");		
+		
+		return mav;		
 	}//end mainboard
 
 	@RequestMapping("/selectboard.do")
-	public String selsctboard(@RequestParam Map target,WebRequest wreq) {
+	public ModelAndView selsctboard(@RequestParam Map target,WebRequest wreq) {
 		String area=(String)target.get("area");
 		System.out.println("target>"+area);
 		List<Map> list=together.getAllByArea(area);
@@ -77,10 +84,15 @@ public class TogetherBoardController {
 		
 
 		System.out.println("result > "+list);
-		wreq.setAttribute("list", list, WebRequest.SCOPE_REQUEST);
-
-
-		return "main.selectboard";
+		wreq.setAttribute("list", list, WebRequest.SCOPE_REQUEST);		
+		
+		ModelAndView mav = new ModelAndView();	
+		
+		mav.setViewName("master");
+		mav.addObject("top", "/WEB-INF/views/master/together/top.jsp");
+		mav.addObject("main", "/WEB-INF/views/master/together/selectboard.jsp");		
+		
+		return mav;		
 	}//end selectboard
 
 	@GetMapping("/new.do")

@@ -1,19 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <div id="topad" class = "topad " data-ride="topad">
 	 <div class="topad-inner">
 	 <div class="top-item">
-	 	<img src="${pageContext.servletContext.contextPath }/image/dal.jpg"	class="img">
+	 	<img src="${pageContext.servletContext.contextPath }/image/dogwalkbanner.jpg" class="img" >
 	 </div>
 	  <div class="container">
               <div class="topad-caption text-left">
-               <h1 class="display-3">Sign up</h1>
-				<p class="lead">개놀자의 가족이 되어 주세요</p>             
+              	<h1 >같이가시개</h1>		
+			<p>반려견과 함께 건강해 지세요!</p>         
               </div>
       </div>
       </div>
 </div>
-
-
-

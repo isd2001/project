@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div class="jumbotron jumbotron-fluid" style="width:100%;">	
-		<div class="form-inline justify-content-center">			
-			<img src="${pageContext.servletContext.contextPath }/image/ad1.jpg"
-					class="img" style="width: 100px;">
-				<h1 class="display-3">숙지하시개</h1>		
-			<p class="lead">반려견과 함께하는 행복한 세상 개 놀 자</p>
-		</div>
+<div id="topad" class = "topad " data-ride="topad">
+	 <div class="topad-inner">
+	 <div class="top-item">
+	 	<img src="${pageContext.servletContext.contextPath }/image/dogbanner1.jpg" class="img" >
+	 </div>
+	  <div class="container">
+              <div class="topad-caption text-left">
+              	<h1 >숙지하시개</h1>		
+			<p>반려견과 함께하는 행복한 세상 개 놀 자</p>         
+              </div>
+      </div>
+      </div>
 </div>
-
-

@@ -8,8 +8,8 @@
 	 </div>
 	  <div class="container">
               <div class="topad-caption text-left">
-               <h1 class="display-3">Sign up</h1>
-				<p class="lead">개놀자의 가족이 되어 주세요</p>             
+               <h1 >Sign up</h1>
+				<p >개놀자의 가족이 되어 주세요</p>             
               </div>
       </div>
       </div>

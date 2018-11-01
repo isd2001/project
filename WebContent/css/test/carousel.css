@@ -24,7 +24,7 @@ body {
 
 /* Declare heights because of positioning of img element */
 .carousel-item {
-  height: 32rem;
+  height: 25rem;
   background-color: #777;
 }
 .carousel-item > img {
@@ -32,10 +32,33 @@ body {
   top: 0;
   left: 0;
   min-width: 100%;
-  height: 35rem;
+  height: 28rem;
 
 }
+/* ==========탑 부분 임의 조정===============*/
+.topad {
+  margin-bottom: 4rem;
+}
 
+.topad-caption {
+  bottom: 3rem;
+  z-index: 10;
+  color: white;
+}
+.top-item {
+	height:15rem;
+	background-color: #777;
+}
+
+.top-item > img {
+  
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 21rem;
+  
+
+}
 
 /* MARKETING CONTENT
 -------------------------------------------------- */

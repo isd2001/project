@@ -33,10 +33,12 @@ public class DogBoardController {
 				
 	
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("dogBoard.main");
-		mav.addObject("center", "/WEB-INF/views/dogBoard/dogBoard.jsp");
-		return mav;
 		
+		mav.setViewName("master");
+		mav.addObject("top", "/WEB-INF/views/master/gaekipedia/top.jsp");
+		mav.addObject("main", "/WEB-INF/views/master/gaekipedia/main.jsp");
+		
+		return mav;
 	
 	}
 

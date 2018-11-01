@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
@@ -28,9 +29,15 @@ public class dogTalkController {
 	Gson gson;
 	
 	@GetMapping("/index.do")
-	public String indexController(WebRequest wr) {
+	public ModelAndView indexController(WebRequest wr) {
 		wr.setAttribute("dogTalkList", dtr.getDogTalk(), wr.SCOPE_REQUEST);
-		return "dogTalk.index";
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("master");
+		mav.addObject("top", "/WEB-INF/views/master/dogTalk/top.jsp");
+		mav.addObject("main", "/WEB-INF/views/master/dogTalk/main.jsp");
+		
+		return mav;
 	}
 	
 	@GetMapping(path="/add.do", produces="application/json;charset=UTF-8")	
