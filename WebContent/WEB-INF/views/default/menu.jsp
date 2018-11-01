@@ -22,7 +22,7 @@
        	 <div class="dropdown p-2 text-muted">
        	   <a class="p-2 text-muted" id="dropdownMenuButton" data-toggle="dropdown" href="#">개아파</a>
 	           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/board/main.do">도와주시개</a>
+			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/help/list.do">도와주시개</a>
 			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/board/myDog.do">개병원ㅜ</a>
 			    </div>
 		  </div>

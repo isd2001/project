@@ -3,7 +3,6 @@ package app.controller.find;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,10 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.theme.SessionThemeResolver;
-import org.springframework.web.socket.WebSocketSession;
 
 import app.models.FindRepository;
+import app.models.accountRepository;
 
 @Controller
 @RequestMapping("/find")
@@ -38,19 +36,37 @@ public class FindController {
 	// 게시글 List 화면
 
 	@GetMapping("/list.do")
-	public String listHandler(ModelMap mmap, WebRequest wr, @RequestParam (required=false)String nick
-			,@RequestParam (required=false)Integer no) {
+	public String listNeoHandler(ModelMap mmap, WebRequest wr, @RequestParam (required=false)String p) {
+		Date today = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String date = sdf.format(today);
+		mmap.put("date", date);
+		
+		Map user = (Map)wr.getAttribute("userInfo", WebRequest.SCOPE_SESSION);
+		String nick = (String)user.get("NICKNAME");
+		mmap.put("nick", nick);
+		//-------------------------------------
+		Map map = new HashMap();
+		int pp = (p == null) ? 1 : Integer.parseInt(p);
+		
+		map.put("s", 1 + (pp-1) * 6);
+		map.put("e", pp*6);
+		
+		List<Map> every = findRepository.getSomeFind(map);
+		mmap.put("every",every);
+		
+		return "main.find.list";
+	}
+/*
+	public String listHandler(ModelMap mmap, WebRequest wr, @RequestParam (required=false)String nick) {
 		Date today = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String date = sdf.format(today);
 
 		nick = (String)wr.getAttribute("nick", WebRequest.SCOPE_SESSION);
-		no = (Integer)wr.getAttribute("no", WebRequest.SCOPE_SESSION);
 		
 		System.out.println("nick = " + nick);
-		System.out.println("no = " + no);
 		mmap.put("nick", nick);
-		mmap.put("no", no);
 		mmap.put("date", date);
 		
 		System.out.println(mmap);
@@ -63,7 +79,7 @@ public class FindController {
 		
 		return "main.find.list";
 	}
-
+*/
 	@GetMapping("/write.do")
 	public String writeHandler() {
 		
@@ -74,11 +90,19 @@ public class FindController {
 	@PostMapping("/start.do")
 	public String startHandler(@RequestParam Map rmap, @RequestParam MultipartFile picture,
 		ModelMap mmap, WebRequest wr) throws IOException {
-	
-		System.out.println(rmap);
+		
+		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
+		
+		String nick =  (String) userInfo.get("NICKNAME");
+		
+		System.out.println("rmap = "+rmap);
 		System.out.println(picture);
-		long time = System.currentTimeMillis();
+
+//		System.out.println("mapx: + " + mapx);
+		rmap.put("nick",nick);
+		
 		// 파일 첨부
+		long time = System.currentTimeMillis();
 		String fileName = String.valueOf(time) + "_" + picture.getOriginalFilename();
 		System.out.println(fileName);
 		String path = ctx.getRealPath(String.valueOf(time));
@@ -95,11 +119,10 @@ public class FindController {
 		String pictureName = "/" + time + "/" + fileName;
 		rmap.put("picture", pictureName);
 
-		System.out.println(rmap);
-		
 		try {
 			int r = findRepository.addAllFind(rmap);
 			System.out.println(r);
+			mmap.put("map", rmap);
 			return "main.find.result";
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -109,10 +132,36 @@ public class FindController {
 	}
 
 	@RequestMapping("/detail.do")
-	public String detailHandler(@RequestParam int no, ModelMap map) {
-		Map data = findRepository.getByOne(no);
-		map.put("data", data);
+	public String detailHandler(@RequestParam (required=false)int no, ModelMap mmap) {	
+		
+		Map data = findRepository.getByNo(no);
+		mmap.put("data", data);
 		
 		return "main.find.detail";
+	}
+	
+	@RequestMapping("/result.do")
+	public String resultHandler(ModelMap mmap, @RequestParam (required=false)int no ) {
+		Date today = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String date = sdf.format(today);
+		mmap.put("date", date);
+		
+		List<Map> map = findRepository.getAllFind();
+		mmap.put("map", map);
+				
+		return "main.find.result";
+	}
+	
+	@RequestMapping("/remove.do")
+	public String removeHandler(int no) {
+		
+		int i = findRepository.removeByNo(no);
+		System.out.println(i);
+		if(i == 1) {
+			return "redirect:/find/list.do";
+		}else {
+			return "main.find.detail";
+		}
 	}
 }
