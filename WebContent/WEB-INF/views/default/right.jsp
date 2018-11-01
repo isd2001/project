@@ -14,8 +14,7 @@
 	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 		<a class="dropdown-item"> <span>2 </span>실시간 순위 <span
 			class="badge badge-pill badge-success">↑</span>
-		</a>
-		<a class="dropdown-item"> <span>3 </span>실시간 순위 <span
+		</a> <a class="dropdown-item"> <span>3 </span>실시간 순위 <span
 			class="badge badge-pill badge-danger">↓</span>
 		</a>
 	</div>
@@ -88,7 +87,7 @@
 			};
 			getWeather("${gu}");
 		</script>
-		
+
 		</span>
 		<div class="card border-success " style="width: 100%; height: 15rem;">
 			<div class="card-header">오늘의 ${gu} 날씨</div>
@@ -116,10 +115,16 @@
 <hr />
 
 <li class="list-group-item list-group-item-success">현재 접속자</li>
-<div style="height: 150px; overflow-y: scroll;" id="connectlist">	
-	
-	
-	
+<div style="height: 150px; overflow-y: scroll;" id="connectlist">
+
+</div>
+<!-- modal -->
+
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
+	aria-labelledby="mySmallModalLabel" id="selectmodal" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">...</div>
+	</div>
 </div>
 
 
@@ -136,37 +141,50 @@
 			html += "<a class=\"nav-link\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">";
 			html += obj[i] + "</a>";
 			html += "<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\" >";
-			html += "<a name = \"f\" class=\"dropdown-item\" value=\""+obj[i]+"\" onclick=\"openchat('" + obj[i] + "');\">1:1 대화 </a>";
-			html += "<a class=\"dropdown-item\" id=\"Infomodal\" onclick=\"openmodal('"+obj[i]+"')\" \">회원 정보 보기</a>";
+			html += "<a name = \"f\" class=\"dropdown-item\" value=\"" + obj[i]
+					+ "\" onclick=\"openchat('" + obj[i] + "');\">1:1 대화 </a>";
+			html += "<a class=\"dropdown-item\" id=\"Infomodal\" onclick=\"openmodal('"
+					+ obj[i] + "')\" \">회원 정보 보기</a>";
 			html += "</div>";
 			html += "<hr/>";
 			html += "</div>";
 		}//end for
 		document.getElementById("connectlist").innerHTML = html;
 	};
-	
-	
-	var openchat= function(target) {
+
+	var openchat = function(target) {
 		console.log(target);
-		window.open("${pageContext.servletContext.contextPath }/onetalk.do?talk="+target,
-				"talk", "width=750,height=550");
-	}; 
-	
+		window.open(
+				"${pageContext.servletContext.contextPath }/onetalk.do?talk="
+						+ target, "talk", "width=350,height=550");
+	};
+
 	//====================================================================
-	<!-- modal -->
-	var openmodal= function(target){
+	// modal
+	var openmodal = function(target) {
 		console.log("openmodal start!");
 		console.log(target);
-		var param = {
-			"nick":target	
-		};
+
+		$.ajax({
+			"url" : "Infomodal.do",
+			"data" : {
+				"nick" : target
+			},
+			contentType : "application/x-www-form-urlencoded; charset=UTF-8"
+
+		}).done(function(rst) {
+			var obj = JSON.parse(rst);
+			console.log(obj);
+
 		
-		$.get("${pageContext.servletContext.contextPath}/Infomodal.do",param,function(rst){
-			
-			
-		});
+
+				$("#selectmodal").on("show.bs.modal", function(event) {
+					console.log("event" + event);
+
+				});//end selectmodal
+
 		
+			
+		});//end ajax
 	};//end openmodal
-	
-	
 </script>

@@ -220,6 +220,6 @@ public class TogetherBoardController {
 			return gson.toJson(goodajax); 
 		}
 		return "";
-	}//end ajax;
+	}//end ajax.do
 	
 }

@@ -19,6 +19,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+
 import app.models.OnechatRepository;
 import app.models.accountRepository;
 import app.service.SocketService;
@@ -41,6 +43,9 @@ public class IndexController {
 	
 	@Autowired
 	OnechatRepository onechat;
+	
+	@Autowired
+	Gson gson;
 	
 	@GetMapping("/index.do")
 	public ModelAndView indexHandle(WebRequest wr) {
@@ -173,7 +178,7 @@ public class IndexController {
 	}//end onetalk.do
 	
 	
-	@GetMapping("/Infomodal.do")
+	@RequestMapping(path="/Infomodal.do",produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String InfomodalHandle(@RequestParam Map param,WebRequest wreq) {
 		System.out.println("Infomodal>"+param);
@@ -181,11 +186,8 @@ public class IndexController {
 		
 		Map result =ar.getInfomodalByNick(nick);
 		System.out.println("result >>>"+result);
-		wreq.setAttribute("model", result, wreq.SCOPE_REQUEST);
-		
-		
-		return "";
-	}
+		return gson.toJson(result);
+	}//end Infomodal.do
 	
 }
 

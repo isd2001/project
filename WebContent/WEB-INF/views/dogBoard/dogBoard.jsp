@@ -115,21 +115,21 @@
 							<div class="col">
 								<div class="modal-img"></div>
 							</div>
-							<div class="col">
-								<div class="modal-info">
-									<label class="form-control"></label>
+								<div class="col">
+									<div class="modal-info">
+										<label class="form-control"></label>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>					
+						</div>					
+					</div>
+					<div class="row">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Close</button>
+					</div>
+					</div>
 				</div>
-				<div class="row">
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>
-				</div>
-				</div>
-			</div>
 		</div>
 	</div>
 </div>
@@ -138,6 +138,7 @@
 <script>	
 	
 	$('#exampleModalCenter').on('show.bs.modal', function (event) {
+	  console.log("eve > "+event);
 	  var button = $(event.relatedTarget) ;
 	  var targetName = button.data('name');
 	  var targetEng = button.data('engname');
