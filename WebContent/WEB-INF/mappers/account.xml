@@ -22,5 +22,10 @@
 	<select id="getUserInfo" resultType="java.util.HashMap" parameterType="java.lang.String" >
 		select ID,NAME,NICKNAME,ADDRESS,DOGNAME,DOGPROFILE,DOGTYPE,DOGGENDER,USERCOMMENT from gaenoljaaccount where id=#{id}
 	</select>
+	
+	<!-- index 페이지에서 접속자 클릭시 회원 정보 출력용 -->
+	<select id="getInfomodalByNick" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select * from gaenoljaaccount where nickname=#{nick}
+	</select>
 </mapper>
 

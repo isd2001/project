@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -166,10 +167,25 @@ public class IndexController {
 			result.put("recipient", target);
 			
 		List<Map> chatlist=onechat.getOneChat(result);
-		System.out.println("chatlist>"+chatlist);
-		
+		System.out.println("chatlist >"+chatlist);
+		map.addAttribute("chatlist",chatlist);
 		return "dogTalk/onetalk";
 	}//end onetalk.do
+	
+	
+	@GetMapping("/Infomodal.do")
+	@ResponseBody
+	public String InfomodalHandle(@RequestParam Map param,WebRequest wreq) {
+		System.out.println("Infomodal>"+param);
+		String nick = (String)param.get("nick");
+		
+		Map result =ar.getInfomodalByNick(nick);
+		System.out.println("result >>>"+result);
+		wreq.setAttribute("model", result, wreq.SCOPE_REQUEST);
+		
+		
+		return "";
+	}
 	
 }
 

@@ -25,8 +25,7 @@ public class OnechatRepository {
 		
 		System.out.println("map >> "+ map);
 		
-		Criteria c = Criteria.where("sender").is(map.get("sender")).and("recipient").is(map.get("recipient"));
-		return template.find(new Query(c),Map.class,"onechat");
+		return template.find(new Query(Criteria.where("roomlist").in(map.get("sender")).andOperator(Criteria.where("roomlist").in(map.get("recipient")))),Map.class,"onechat");
 	}
 	
 	

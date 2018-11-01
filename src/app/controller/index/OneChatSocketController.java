@@ -43,11 +43,18 @@ public class OneChatSocketController extends TextWebSocketHandler{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date d = new Date();
 		
+		
+		List roomlist = new ArrayList<>();
+			roomlist.add(read.get("sender"));
+			roomlist.add(read.get("recipient"));
+			
 		Map result = new HashMap<>();
+			result.put("roomlist", roomlist);
 			result.put("sender", read.get("sender"));
-			result.put("recipient", read.get("recipient"));
 			result.put("text", read.get("text"));
 			result.put("day", sdf.format(d));
+			
+		System.out.println("result >>>"+result);
 		onechat.addChat(result);
 		
 		//====================================

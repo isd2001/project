@@ -14,7 +14,8 @@
 	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 		<a class="dropdown-item"> <span>2 </span>실시간 순위 <span
 			class="badge badge-pill badge-success">↑</span>
-		</a> <a class="dropdown-item"> <span>3 </span>실시간 순위 <span
+		</a>
+		<a class="dropdown-item"> <span>3 </span>실시간 순위 <span
 			class="badge badge-pill badge-danger">↓</span>
 		</a>
 	</div>
@@ -87,6 +88,8 @@
 			};
 			getWeather("${gu}");
 		</script>
+		
+		</span>
 		<div class="card border-success " style="width: 100%; height: 15rem;">
 			<div class="card-header">오늘의 ${gu} 날씨</div>
 			<div class="card-body text-success">
@@ -134,7 +137,7 @@
 			html += obj[i] + "</a>";
 			html += "<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\" >";
 			html += "<a name = \"f\" class=\"dropdown-item\" value=\""+obj[i]+"\" onclick=\"openchat('" + obj[i] + "');\">1:1 대화 </a>";
-			html += "<a class=\"dropdown-item\" href=\"${pageContext.servletContext.contextPath }/chat/Departmentchat.do\">회원 정보 보기</a>";
+			html += "<a class=\"dropdown-item\" id=\"Infomodal\" onclick=\"openmodal('"+obj[i]+"')\" \">회원 정보 보기</a>";
 			html += "</div>";
 			html += "<hr/>";
 			html += "</div>";
@@ -148,5 +151,22 @@
 		window.open("${pageContext.servletContext.contextPath }/onetalk.do?talk="+target,
 				"talk", "width=750,height=550");
 	}; 
+	
+	//====================================================================
+	<!-- modal -->
+	var openmodal= function(target){
+		console.log("openmodal start!");
+		console.log(target);
+		var param = {
+			"nick":target	
+		};
+		
+		$.get("${pageContext.servletContext.contextPath}/Infomodal.do",param,function(rst){
+			
+			
+		});
+		
+	};//end openmodal
+	
 	
 </script>
