@@ -13,11 +13,11 @@
 	</script>
 </c:if>
   <div class="text-center" style="margin-right: 20rem;  margin-left: 20rem;">
-    <form class="form-signin" action="${pageContext.servletContext.contextPath }/test/login.do" method="post">
+    <form class="form-signin" action="${pageContext.servletContext.contextPath }/main/login.do" method="post">
       <img class="mb-4" src="${pageContext.servletContext.contextPath }/image/dal.jpg" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
       <label for="inputEmail" class="sr-only">아이디</label>
-      <input type="text" id="id" name = "id" class="form-control" placeholder="아이디" required autofocus>
+      <input type="text" id="id" name = "id" class="form-control" placeholder="아이디" required autofocus autocomplete="off">
       <label for="inputPassword" class="sr-only">비밀번호</label>
       <input type="password" id="pw" name = "pw" class="form-control" placeholder="비밀번호" required>
       

@@ -4,18 +4,26 @@
 
 	<!-- 게시글 내용 모두 저장 -->
 	<insert id="addAllFind" parameterType="java.util.HashMap">
-		insert into find values (find_seq.nextval, #{title}, sysdate, 
-		#{picture}, #{fcontent}, #{scontent}, 11.11, 22.22)
+		insert into find values (find_seq.nextval, #{title}, #{dogname}, #{phone}, sysdate, 
+		#{picture}, #{fcontent}, #{scontent}, #{mapx}, #{mapy}, #{nick})
 	</insert>
 	
 	<!-- 모든 게시글 뽑기-->
 	<select id="getAllFind" resultType="java.util.HashMap">
-		select * from find order by no desc
+		select * from find
 	</select>
 	
+	<!-- 페이징에 들어갈 만큼 게시글 뽑기 -->
+	<select id="getSomeFind" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		select * from (select rownum r, o.* from (select * from find order by no desc) o ) where r between #{s} and #{e}
+	</select>
 	<!-- no로 게시글 뽑기 -->
 	<select id="getOneByNo" resultType="java.util.HashMap" parameterType="java.lang.Integer">
 		select * from find where no=#{no}
 	</select>
+	
+	<delete id="deleteFind" >
+		delete * from find where no#={no}
+	</delete>
 	
 </mapper>

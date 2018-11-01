@@ -99,7 +99,7 @@
 			<button type="submit" class="form-control btn btn-outline-primary">Save</button>
 		</div>
 		<div class="col-md-6 mb-3">
-			<a href="${pageContext.servletContext.contextPath }/percel.do"><button type="button" class="form-control btn btn-outline-primary" >Cencel</button></a>
+			<a href="${pageContext.servletContext.contextPath }/percel.do"><button type="button" class="form-control btn btn-outline-primary" >Cancel</button></a>
 		</div>
 	</div>
 
