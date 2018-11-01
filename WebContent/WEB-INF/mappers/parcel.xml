@@ -4,12 +4,12 @@
 <!-- 게시글 저장하는거 -->
 	<insert id="addByParcel" parameterType="java.util.HashMap">
 		insert into parcel values(parcel_seq.nextval, #{title}, #{choice}, #{phone}, #{area}, #{lat}, #{longi}, #{breeds}, #{gender}, #{sort}, #{age}, #{inoculation}, 
-									#{content}, #{writer}, sysdate, #{mainimage} #{file1}, #{file2})
+									#{content}, #{writer}, sysdate, #{mainimage}, #{file1}, #{file2}, #{character})
 	</insert>
 
 <!-- 게시글 전부 뽑는거 -->
 	<select id="getAllByParcel" resultType="java.util.HashMap" >
-		select * from parcel
+		select * from parcel order by regdate desc
 	</select>
 	
 <!-- 특정 게시글 데이터 뽑는거 -->
@@ -24,3 +24,16 @@
 	
 </mapper>
 
+<!-- 
+
+특정 아이디의 게시글 전체 뽑는거 (강아지찾기)
+	<select id="getByFindlList" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select * from find where id = #{id}
+	</select>
+	
+특정 아이디의 게시글 전체 뽑는거 (같이가시개)
+	<select id="getByTogetherlList" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select * from find where id = #{id}
+	</select>
+	
+-->

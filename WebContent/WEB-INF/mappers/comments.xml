@@ -3,7 +3,7 @@
 <mapper namespace="comments">
 <!-- 댓글 저장하는거 -->
 	<insert id="addByComments" parameterType="java.util.HashMap">
-		insert into comments values(opinion_seq.nextval, #{comments}, #{talker}, #{ino}, sysdate, #{serial})
+		insert into comments values(opinion_seq.nextval, #{comments}, #{talker}, #{ino}, sysdate, #{serial}, #{nick})
 	</insert>
 
 <!-- 특정 게시글 댓글 전부 뽑는거(오름차순) -->

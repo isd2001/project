@@ -29,7 +29,6 @@ public class MyPageController {
 		String writer = (String)userInfo.get("ID");
 		List parcelList = myPageRepository.getByParcelList(writer);
 			map.put("parcelList", parcelList);
-		System.out.println(map.get("parcelList"));
 		
 		return "mypage.myboard";
 	}

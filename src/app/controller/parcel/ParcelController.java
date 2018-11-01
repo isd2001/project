@@ -93,14 +93,13 @@ public class ParcelController {
 		String mode = (String)wr.getAttribute("mode", wr.SCOPE_SESSION);
 		Map data = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
 		String id = (String)data.get("ID");
-		param.put("id", id);
+		param.put("writer", id);
 		
 		param.put("mainimage", attachmain);
 		param.put("file1", attachfile1);
 		param.put("file2", attachfile2);
 		
 		ModelAndView mav = new ModelAndView();
-		System.out.println(param);
 		try {
 			int r = parcelRepository.addByParcel(param);
 			
@@ -126,10 +125,12 @@ public class ParcelController {
 	
 	// 특정 게시글의 내용 및 댓글 뽑기
 	@RequestMapping("/detail.do")
-	public ModelAndView getByOnePercel(@RequestParam int no, ModelMap one) {
+	public ModelAndView getByOnePercel(@RequestParam int no, ModelMap one, WebRequest wr) {
+		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
 		Map onedata = parcelRepository.getByOneParcel(no);
 		List comlist = parcelRepository.getAllByComments(no);
 		List cmtcnt = parcelRepository.getByCmtCount(no);
+			one.put("userInfo", userInfo);
 			one.put("one", onedata);
 			one.put("comlist", comlist);
 			one.put("cmtcnt", cmtcnt);

@@ -64,7 +64,7 @@
 	</div>
 </div>
 <div id="collapseOne" class="collapse show">
-	<div id="map" style="width: 100%; height: 350px;"></div>
+	<div id="map" style="width: 100%; height: 350px;"></div> 
 </div>
 <!------------------------------------------------------- 분양 강아지 정보 보이는 뷰 끝 -->
 
@@ -105,7 +105,7 @@
 		<li class="collapse" id="collapseExample_${vs.count }">
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">
-					<span class="input-group-text" id="basic-addon1">사용자닉네임</span>
+					<span class="input-group-text" id="basic-addon1">${userInfo.NICKNAME }</span>
 				</div>
 				<input type="text" class="form-control" placeholder="Username"
 					aria-label="Username" aria-describedby="basic-addon1">
@@ -118,7 +118,7 @@
 <!------------------------------------------------------- 게시판 댓글 내용 전체 출력 뷰 끝 -->
 
 <!------------------------------------------------------- 댓글 입력할수 있는 폼 뷰 시작 -->
-<button class="btn btn-link" type="button">아이디 또는 닉네임 들어갈 곳</button>
+<button class="btn btn-link" type="button">${userInfo.NICKNAME }(${userInfo.ID })</button>
 <div class="input-group mb-3" id="input-comment">
 	<input type="text" class="form-control" id="new-comment" aria-describedby="button-addon2">
 	<div class="input-group-append">
@@ -129,7 +129,7 @@
 
 
 <div class="bd-example">
-	<a href="${pageContext.servletContext.contextPath }/percel.do"><button
+	<a href="${pageContext.servletContext.contextPath }/parcel.do"><button
 			type="button" class="btn btn-secondary btn-lg btn-block">Back</button></a>
 </div>
 
@@ -151,12 +151,12 @@
 		var recomments = $(target).val();
 		var html = "<hr class=\"mb-4\">";
 			html += "<div class=\"media mt-3\">";
-			html += "<a class=\"pr-3\" href=\"#\">";
-			html += "<img src=\"${pageContext.servletContext.contextPath }/image/parcelimage/40.jpg\" alt=\"Generic placeholder image\">";
-			html += "</a>"
+	//		html += "<a class=\"pr-3\" href=\"#\">";
+	//		html += "<img src=\"${pageContext.servletContext.contextPath }/image/parcelimage/40.jpg\" alt=\"Generic placeholder image\">";
+	//		html += "</a>"
 			html += "<div class=\"media-body\">";
 			html += "<div class=\"alert alert-secondary\" role=\"alert\">";
-			html += "<h5 class=\"mt-0\">리 댓글자 아이디 또는 닉네임 들어갈 예정</h5>";
+			html += "<h5 class=\"mt-0\">${userInfo.NICKNAME }(${userInfo.ID })</h5>";
 		    html += $(target).val()
 		    html += "</div>";
 			html += "</div>";
@@ -165,7 +165,9 @@
 		$("#view-recomment").append(html);
 		document.getElementById(code).value = "";
 		
-		var param = {"code" : code,"retalker" : "test_retalker","recomments" : recomments};
+		var retalker = ${userInfo.ID };
+		var nick = ${userInfo.NICKNAME };
+		var param = {"code" : code,"retalker" : retalker,"recomments" : recomments,"nick" : nick};
 		console.log(param);
 		$.post("${pageContext.servletContext.contextPath }/addrecomment.do", param, function(rst) {
 
@@ -176,16 +178,16 @@
 		var comment = $("#new-comment").val();
 		console.log(comment);
 		var html = "<li class=\"media border-top-0\" id=\"view-listcomment_${vs.count }\" style=\"margin-bottom: 3px;\" data-toggle=\"collapse\" data-target=\"#collapseExample_${vs.count }\" aria-expanded=\"false\" aria-controls=\"collapseExample\ onclick=\"getReComment(this, '${c.SERIAL }')\">";
-			html += "<img class=\"mr-3\" src=\"${pageContext.servletContext.contextPath }/image/parcelimage/40.jpg\" alt=\"프로필 이미지\">";
+		//	html += "<img class=\"mr-3\" src=\"${pageContext.servletContext.contextPath }/image/parcelimage/40.jpg\" alt=\"프로필 이미지\">";
 			html += "<div class=\"media-body\">";
-			html += "<h5 class=\"mt-0 mb-1\" style=\"font-size: 15px;\">사용자닉네임</h5>";
+			html += "<h5 class=\"mt-0 mb-1\" style=\"font-size: 15px;\">${userInfo.NICKNAME }(${userInfo.ID })</h5>";
 			html += "<div style=\"font-size: 13px;\">" + comment + "</div>";
 			html += "</div></li>";
 			html += "<div class=\"media\" id=\"view-recomment\"></div>";
 			html += "<li class=\"collapse\" id=\"collapseExample_${vs.count }\">";
 			html += "<div class=\"input-group mb-3\">";
 			html += "<div class=\"input-group-prepend\">";
-			html += "<span class=\"input-group-text\" id=\"basic-addon1\">사용자닉네임</span>";
+			html += "<span class=\"input-group-text\" id=\"basic-addon1\">${userInfo.NICKNAME }(${userInfo.ID })</span>";
 			html += "</div>";
 			html += "<input type=\"text\" class=\"form-control\" aria-describedby=\"basic-addon1\">";
 			html += "</div></li>";
@@ -195,7 +197,9 @@
 		document.getElementById("new-comment").value = "";
 		
 		var ino = ${one.NO };
-		var param = {"ino" : ino,"talker" : "test_talker","comments" : comment};
+		var talker = ${userInfo.ID };
+		var nick = ${userInfo.NICKNAME };
+		var param = {"ino" : ino,"talker" : talker,"comments" : comment,"nick" : nick};
 		$.post("${pageContext.servletContext.contextPath }/addcomment.do", param, function(rst) {
 
 		});
