@@ -10,7 +10,7 @@
           <a class="p-2 text-muted" href="${pageContext.servletContext.contextPath }/dogTalk/index.do">개수다</a>
           <a class="p-2 text-muted"	href="${pageContext.servletContext.contextPath }/board/main.do">Gaekipedia</a>
           <a class="p-2 text-muted"	href="${pageContext.servletContext.contextPath }/find/list.do">강아지찾기</a>
-          <a class="p-2 text-muted" href="${pageContext.servletContext.contextPath }/percel.do">데려가시개(분양)</a>
+          <a class="p-2 text-muted" href="${pageContext.servletContext.contextPath }/parcel.do">데려가시개(분양)</a>
           <a class="p-2 text-muted" href="${pageContext.servletContext.contextPath }/together/mainboard.do">같이가시개</a>
           <div class="dropdown p-2 text-muted">
           <a class="p-2 text-muted" id="dropdownMenuButton" data-toggle="dropdown" href="#">똥개훈련</a>
@@ -23,7 +23,7 @@
        	   <a class="p-2 text-muted" id="dropdownMenuButton" data-toggle="dropdown" href="#">개아파</a>
 	           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/help/list.do">도와주시개</a>
-			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/board/myDog.do">개병원ㅜ</a>
+			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/doghospital.do">개병원ㅜ</a>
 			    </div>
 		  </div>
 		  

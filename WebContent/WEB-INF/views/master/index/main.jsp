@@ -12,16 +12,26 @@
 			<div id="recent"></div>
 			<div style="height: 200px; overflow-y: scroll;" id="recentUpdates">				
 					<c:forEach var="list" items="${dtrList}">	
-					<div class="media text-muted pt-3">
-						<p	class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">								
-								<strong class="d-block text-gray-dark form-inline">
-								<img src="${pageContext.servletContext.contextPath }${list.PICTURE}" style="width: 25px; height: 25px;" class="rounded-circle" id="image">
+					<div class="media text-muted pt-3 media-body pb-3 mb-0 small lh-125 border-bottom border-gray ">	
+						<div class="col-sm-4">
+							<img src="${pageContext.servletContext.contextPath }${list.PICTURE}" style="width: 25px; height: 25px;" class="rounded-circle" id="image">
 								${list.TALKER}
-								<small class="d-flex justify-content-end">(${list.WRITEDATE})</small></strong>									
+						</div>
+						<div class="col">
+							<div class="row">
+								${list.TALKER} 
+								<small class="d-flex justify-content-end">(${list.WRITEDATE})</small>
+							</div>
+							<div class="row">
 								 ${list.CONTENT}
-						</p>
+							</div>
+						</div>
+											
+					
 					</div>
-					</c:forEach>						
+					</c:forEach>			
+					
+								
 				</div>			
 			</div>			
 		

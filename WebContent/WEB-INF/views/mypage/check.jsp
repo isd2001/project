@@ -5,7 +5,7 @@
       
 			<c:if test="${!empty err }">
 				<div class="alert alert-danger alert-dismissible fade show" role="alert">
-					<strong>실패!</strong> 비밀번호를 잘못 입력 하셨습니다. 확인 후 다시 입력 부탁 드립니다.
+					<strong>비밀번호를 다시 한번 입력해 주시기 바랍니다.</strong>
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -14,5 +14,5 @@
       
 	      	<label for="id" class="sr-only">비밀번호</label>
 	      		<input type="password" id="param" name="param" class="form-control" placeholder="비밀번호" required autofocus>
-	     	 <button class="btn btn-lg btn-primary btn-block" type="submit">Change</button>
+	     	 <button class="btn btn-lg btn-primary btn-block" type="submit">확인</button>
 		</form>

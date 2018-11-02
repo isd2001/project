@@ -23,7 +23,7 @@ public class MyPageController {
 			map.put("userInfo", userInfo);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("master");
-		mav.addObject("top", "/WEB-INF/views/master/mypage/top.jsp");
+		mav.addObject("top", "/WEB-INF/views/master/mypage/menu.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/mypage/index.jsp");
 		
 		return mav;
@@ -35,11 +35,10 @@ public class MyPageController {
 		String writer = (String)userInfo.get("ID");
 		List parcelList = myPageRepository.getByParcelList(writer);
 			map.put("parcelList", parcelList);
-		System.out.println(map.get("parcelList"));
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("master");
-		mav.addObject("top", "/WEB-INF/views/master/mypage/top.jsp");
+		mav.addObject("top", "/WEB-INF/views/master/mypage/menu.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/mypage/myboard.jsp");
 		
 		return mav;
@@ -49,7 +48,7 @@ public class MyPageController {
 	public ModelAndView myCommentHandle() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("master");
-		mav.addObject("top", "/WEB-INF/views/master/mypage/top.jsp");
+		mav.addObject("top", "/WEB-INF/views/master/mypage/menu.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/mypage/mycomment.jsp");
 		
 		return mav;

@@ -64,7 +64,7 @@
 			<input type="text" class="form-control" id="gender" name="gender">
 		</div>	
 		<div class="col-md-6 mb-3">
-			<label for="lastName">분류</label>
+			<label for="lastName">분류<small style="color: green;">(소형견, 중형견, 대형견..)</small></label></label>
 			<input type="text" class="form-control" id="sort" name="sort">
 		</div>	
 		<div class="col-md-6 mb-3">
@@ -99,7 +99,7 @@
 			<button type="submit" class="form-control btn btn-outline-primary">Save</button>
 		</div>
 		<div class="col-md-6 mb-3">
-			<a href="${pageContext.servletContext.contextPath }/percel.do"><button type="button" class="form-control btn btn-outline-primary" >Cencel</button></a>
+			<a href="${pageContext.servletContext.contextPath }/parcel.do"><button type="button" class="form-control btn btn-outline-primary" >Cencel</button></a>
 		</div>
 	</div>
 

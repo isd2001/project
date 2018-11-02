@@ -138,9 +138,10 @@ public class IndexController {
 	@GetMapping("/logout.do")
 	public ModelAndView logoutHandle(WebRequest wr) {
 		wr.removeAttribute("userInfo", wr.SCOPE_SESSION);
+		
+		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("main.index");
-		mav.addObject("center", "/WEB-INF/views/default/center.jsp");
+		mav.setViewName("redirect:/main/index.do");
 		
 		return mav;
 	}

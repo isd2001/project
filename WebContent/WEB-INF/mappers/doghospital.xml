@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="animalhospital">
+<!-- 특정 지역구 병원 전체 뽑기 -->
+	<select id="getDogHospitalByGu" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select * from ANIMALHOSPITAL where gu = #{gu}
+	</select>
+
+</mapper>
