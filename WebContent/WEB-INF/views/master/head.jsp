@@ -5,6 +5,21 @@
 <link rel="stylesheet"
 	href="${pageContext.servletContext.contextPath }/css/blog.css">
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  
+<style>
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;   
+    margin-top: -1px;
+}
+</style>
 	
 <script>
   var getWeather = function(gu){
@@ -55,37 +70,22 @@
           	<div class ="row form-inline justify-content-end ">              
 		       <c:choose>
 					<c:when test="${not empty userInfo}">				 
-						<div class=" justify-content-end align-items-center">					
-						<!-- <div class="dropdown">
-						  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						   	 접속자 리스트
-						  </button>
-						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="connectlist">
-						    <a class="dropdown-item" href="#">Action</a>
-						    <a class="dropdown-item" href="#">Another action</a>
-						    <a class="dropdown-item" href="#">Something else here</a>
-						  </div>
-						</div> -->
-						<div class="btn-group dropleft">
-						  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuButton1">
-						    Dropleft
-						  </button>
-						  <div class="dropdown-menu"  aria-labelledby="dropdownMenuButton1">
-						 	 <a class="dropdown-item" href="#">Action</a>
-						    <a class="dropdown-item" href="#">Another action</a>
-						    <a class="dropdown-item" href="#">Something else here</a>
-						  </div>
-						</div>
-						
-						<div class="btn-group dropleft">
-						  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						    Dropleft
-						  </button>
-						  <div class="dropdown-menu">
-						     <a class="dropdown-item" href="#">Action</a>
-						  </div>
-						</div>
-						
+						<div class=" justify-content-end align-items-center form-inline">					
+						                                  
+							   <div class="dropdown">
+								    <button class="btn btn-info btn-sm dropdown-toggle" type="button" data-toggle="dropdown">접속자 리스트   </button>
+								    <ul class="dropdown-menu">								      
+								      <li class="dropdown-submenu">
+								        <a class="test list-group-item list-group-item-action list-group-item-primary" href="#">유저1</a>
+								        <ul class="dropdown-menu">
+								          <li><a  class="list-group-item list-group-item-action list-group-item-warning" href="#">1:1채팅</a></li>
+								          <li><a class="list-group-item list-group-item-action list-group-item-warning" href="#">유저 정보 보기</a></li>		        
+								        </ul>
+								      </li>
+								    </ul>
+								  </div>
+												    
+							
 			          	<a class="btn btn-sm btn-success" href="${pageContext.servletContext.contextPath }/mypage.do">마이페이지</a> 
 			            <a class="btn btn-sm btn-danger" href="${pageContext.servletContext.contextPath }/logout.do">로그아웃</a>
 			     
@@ -125,7 +125,21 @@
 			
 </header>
 
+<body>
+   
+
+
+
 <script>
+
+	$(document).ready(function(){
+	  $('.dropdown-submenu a.test').on("click", function(e){
+	    $(this).next('ul').toggle();
+	    e.stopPropagation();
+	    e.preventDefault();
+	  });
+	});
+	
 	var ws = new WebSocket("ws://" + location.host
 			+ "${pageContext.servletContext.contextPath}/access.do");
 
@@ -135,16 +149,7 @@
 		var html = "";
 		for (var i = 0; i < obj.length; i++) {	
 			
-			<div class="dropdown">
-			  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			   	 접속자 리스트
-			  </button>
-			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="connectlist">
-			    <!-- <a class="dropdown-item" href="#">Action</a>
-			    <a class="dropdown-item" href="#">Another action</a>
-			    <a class="dropdown-item" href="#">Something else here</a> -->
-			  </div>
-			</div>
+			
 			
 			/* <div class="btn-group dropleft">
 			  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuButton1">
