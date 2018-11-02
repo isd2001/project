@@ -55,14 +55,44 @@
           	<div class ="row form-inline justify-content-end ">              
 		       <c:choose>
 					<c:when test="${not empty userInfo}">				 
-						<div class=" justify-content-end align-items-center">
+						<div class=" justify-content-end align-items-center">					
+						<!-- <div class="dropdown">
+						  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						   	 접속자 리스트
+						  </button>
+						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="connectlist">
+						    <a class="dropdown-item" href="#">Action</a>
+						    <a class="dropdown-item" href="#">Another action</a>
+						    <a class="dropdown-item" href="#">Something else here</a>
+						  </div>
+						</div> -->
+						<div class="btn-group dropleft">
+						  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuButton1">
+						    Dropleft
+						  </button>
+						  <div class="dropdown-menu"  aria-labelledby="dropdownMenuButton1">
+						 	 <a class="dropdown-item" href="#">Action</a>
+						    <a class="dropdown-item" href="#">Another action</a>
+						    <a class="dropdown-item" href="#">Something else here</a>
+						  </div>
+						</div>
+						
+						<div class="btn-group dropleft">
+						  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    Dropleft
+						  </button>
+						  <div class="dropdown-menu">
+						     <a class="dropdown-item" href="#">Action</a>
+						  </div>
+						</div>
+						
 			          	<a class="btn btn-sm btn-success" href="${pageContext.servletContext.contextPath }/mypage.do">마이페이지</a> 
 			            <a class="btn btn-sm btn-danger" href="${pageContext.servletContext.contextPath }/logout.do">로그아웃</a>
 			     
 			          </div>
 					</c:when>
 					<c:otherwise>
-						<div class="justify-content-end align-items-center">
+						<div class="justify-content-end align-items-center">											
 			          	<a class="btn btn-sm btn-success" href="${pageContext.servletContext.contextPath}/main/login.do">로그인</a> 
 			            <a class="btn btn-sm btn-info" href="${pageContext.servletContext.contextPath }/main/terms.do">회원가입</a>
 			          </div>
@@ -95,5 +125,90 @@
 			
 </header>
 
+<script>
+	var ws = new WebSocket("ws://" + location.host
+			+ "${pageContext.servletContext.contextPath}/access.do");
+
+	ws.onmessage = function(evt) {
+		var obj = JSON.parse(evt.data);
+		console.log("obj > " + obj);
+		var html = "";
+		for (var i = 0; i < obj.length; i++) {	
+			
+			<div class="dropdown">
+			  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			   	 접속자 리스트
+			  </button>
+			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="connectlist">
+			    <!-- <a class="dropdown-item" href="#">Action</a>
+			    <a class="dropdown-item" href="#">Another action</a>
+			    <a class="dropdown-item" href="#">Something else here</a> -->
+			  </div>
+			</div>
+			
+			/* <div class="btn-group dropleft">
+			  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuButton1">
+			    Dropleft
+			  </button>
+			  <div class="dropdown-menu"  aria-labelledby="dropdownMenuButton1">
+			 	 <a class="dropdown-item" href="#">Action</a>
+			    <a class="dropdown-item" href="#">Another action</a>
+			    <a class="dropdown-item" href="#">Something else here</a>
+			  </div>
+			</div>
+			 */
+			
+		    html += "<div class=\"dropdown-item nav-dropdown\" >";
+			html += "<a class=\"nav-link\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">";
+			html += obj[i] + "</a>";
+			html += "<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\" >";
+			html += "<a name = \"f\" class=\"dropdown-item\" value=\"" + obj[i]
+					+ "\" onclick=\"openchat('" + obj[i] + "');\">1:1 대화 </a>";
+			html += "<a class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\"  id=\"Infomodal\" onclick=\"openmodal('"
+					+ obj[i] + "')\" \">회원 정보 보기</a>";
+			html += "</div>";
+			html += "<hr/>";
+			html += "</div>";
+		}//end for
+		document.getElementById("connectlist").innerHTML = html;
+	};
+
+	var openchat = function(target) {
+		console.log(target);
+		window.open(
+				"${pageContext.servletContext.contextPath }/onetalk.do?talk="
+						+ target, "talk", "width=350,height=550");
+	};
+
+	//====================================================================
+	// modal
+	var openmodal = function(target) {
+		console.log("openmodal start!");
+		console.log(target);
+
+		$.ajax({
+			"url" : "Infomodal.do",
+			"data" : {
+				"nick" : target
+			},
+			"async" : false,
+			contentType : "application/x-www-form-urlencoded; charset=UTF-8"
+		}).done(function(rst) {
+			var obj = JSON.parse(rst);
+			console.log(obj);
+
+			document.getElementById("id").innerHTML = obj.ID;
+			document.getElementById("nickname").innerHTML = obj.NICKNAME;
+			document.getElementById("dogname").innerHTML = obj.DOGNAME;
+			document.getElementById("dogtype").innerHTML = obj.DOGTYPE;
+			document.getElementById("usercomment").innerHTML = obj.USERCOMMENT;
+			var src=obj.DOGPROFILE;
+			var html = "<img src=\""+src+"\" width=\"150\" height=\"150\" >";
+			document.getElementById("modal-img").innerHTML = html;
+
+		});
+
+	};//end openmodal
+</script>
 
 		

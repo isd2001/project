@@ -3,7 +3,7 @@
 <mapper namespace="together">
 <!-- 게시글 저장하는거 -->
 	<insert id="addTogetherBoard" parameterType="java.util.HashMap">
-		insert into togetherboard values(togetherboard_seq.nextval, #{title},#{content},to_date(#{day},'YYYY-MM-DD HH24:MI'),#{area},#{latitude},#{longitude},0,0,#{address})
+		insert into togetherboard values(togetherboard_seq.nextval, #{title},#{content},to_date(#{day},'YYYY-MM-DD HH24:MI'),#{area},#{latitude},#{longitude},0,0,#{address},#{nick})
 	</insert>
 
 <!-- 게시글 전부 뽑는거 -->
@@ -23,6 +23,15 @@
 	<update id="updatelookup" parameterType="java.lang.String">
 		update togetherboard set lookup = lookup+1 where no=#{no}
 	</update>
+<!-- good -->
+	<update id="updategood" parameterType="java.lang.String">
+		update togetherboard set good = good+1 where no=#{no}
+	</update>
+<!-- good ajax -->
+	<select id="getGoodByNo" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select good from togetherboard where no=#{no}	
+	</select>
+	
 	
 </mapper>
 

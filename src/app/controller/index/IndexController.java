@@ -1,14 +1,18 @@
 package app.controller.index;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
@@ -17,12 +21,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
+import app.models.OnechatRepository;
+
 import app.models.accountRepository;
+import app.service.SocketService;
 import app.service.WeatherService;
 
 
 @Controller
 public class IndexController {
+	@Autowired
+	SocketService socketservice;
 	
 	@Autowired
 	accountRepository ar;
@@ -36,8 +45,10 @@ public class IndexController {
 	@Autowired
 	Gson gson;
 	
-
-
+	@Autowired
+	OnechatRepository onechat;
+	
+	
 	@GetMapping("/index.do")
 	public ModelAndView indexHandle(WebRequest wr) {
 		ModelAndView mav = new ModelAndView();
@@ -118,12 +129,15 @@ public class IndexController {
 		if(ar.getPwById(param)) {						
 			Map userInfo =  ar.getUserInfo((String)param.get("id"));
 			wr.setAttribute("userInfo", userInfo, wr.SCOPE_SESSION);
+			System.out.println("userInfo >"+userInfo);
 			String gu = ws.getCoordinateByAddress((String)userInfo.get("ADDRESS"));
-			wr.setAttribute("gu", gu, wr.SCOPE_SESSION);			
-			System.out.println(gu);
+			wr.setAttribute("gu", gu, wr.SCOPE_SESSION);
+			
 			
 			mav.setViewName("main.index");
 			mav.addObject("center", "/WEB-INF/views/default/center.jsp");		
+			
+			
 			
 			return mav;
 		}else {
@@ -171,7 +185,37 @@ public class IndexController {
 		return "";
 	}
 			
+	@RequestMapping("/onetalk.do")	
+	public String onetalkHandle(@RequestParam Map param,WebRequest wreq,ModelMap map) {	
+		String target = (String)param.get("talk");
+		System.out.println("target > "+ target);
+		wreq.setAttribute("recipient", target, wreq.SCOPE_REQUEST);
+		//========================================
+		Map user =(Map) wreq.getAttribute("userInfo",wreq.SCOPE_SESSION);
+		String sender = (String) user.get("NICKNAME");
+		System.out.println("sender > "+sender);
+		
+		Map result = new HashMap<>();
+			result.put("sender", sender);
+			result.put("recipient", target);
 			
+		List<Map> chatlist=onechat.getOneChat(result);
+		System.out.println("chatlist >"+chatlist);
+		map.addAttribute("chatlist",chatlist);
+		return "dogTalk/onetalk";
+	}//end onetalk.do
+	
+	
+	@RequestMapping(path="/Infomodal.do",produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String InfomodalHandle(@RequestParam Map param,WebRequest wreq) {
+		System.out.println("Infomodal>"+param);
+		String nick = (String)param.get("nick");
+		
+		Map result =ar.getInfomodalByNick(nick);
+		System.out.println("result >>>"+result);
+		return gson.toJson(result);
+	}//end Infomodal.do
 	
 }
 

@@ -98,7 +98,7 @@
 		var positions = [
 			<c:forEach var="i" items="${list}" varStatus="vs">
 			{
-				"content": "<div>${i.TITLE}</div>",
+				"content": "<div><small>${i.TITLE}</small></div>",
 				"latlng" : new daum.maps.LatLng(${i.LATITUDE}, ${i.LONGITUDE})
 			}
 			<c:if test="${!vs.last}">,</c:if>

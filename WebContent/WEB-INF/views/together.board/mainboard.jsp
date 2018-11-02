@@ -124,9 +124,9 @@
 					<th scope="row">${l.NO }</th>
 					<td><small>${l.AREA }</small></td>
 					<td><a
-						href="${pageContext.servletContext.contextPath  }/together/detail.do?no=${l.NO }">
+						href="${pageContext.servletContext.contextPath  }/together/detail.do?no=${l.NO }" >
 							${l.TITLE }</a></td>
-					<td>-</td>
+					<td>${l.NICK }</td>
 					<td>${l.DAY }</td>
 					<td>${l.GOOD }</td>
 					<td>${l.LOOKUP }</td>
@@ -155,7 +155,7 @@
 		var positions = [
 			<c:forEach var="i" items="${list}" varStatus="vs">
 			{
-				"content": "<div>${i.TITLE}</div>",
+				"content": "<div><small>${i.TITLE}</small></div>",
 				"latlng" : new daum.maps.LatLng(${i.LATITUDE}, ${i.LONGITUDE})
 			}
 			<c:if test="${!vs.last}">,</c:if>

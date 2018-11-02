@@ -25,8 +25,7 @@ public class dogTalkRepository {
 	
 
 	public List<Map> getSomeFromDogTalk() {
-		List some =  template.selectList("dogTalk.getSomeFromDogTalk");
-		System.out.println(some);
+		List some =  template.selectList("dogTalk.getSomeFromDogTalk");	
 		List result = new ArrayList();
 		for (int i = 0; i < 5; i++) {
 			result.add(some.get(i));

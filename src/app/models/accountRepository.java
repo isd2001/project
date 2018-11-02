@@ -35,11 +35,17 @@ public class accountRepository {
 		return template.selectOne("gaenoljaaccount.getUserInfo", id);
 	}
 	
+
 	public String checkId(String id) {
 		return template.selectOne("gaenoljaaccount.checkId", id);
 	}
 	
 	public String checkNick(String nickname) {
 		return template.selectOne("gaenoljaaccount.checkNick", nickname);
+	}
+	// index 페이지에서 접속자 클릭시 회원 정보 출력용
+	public Map getInfomodalByNick(String nick) {
+		return template.selectOne("gaenoljaaccount.getInfomodalByNick", nick);
+
 	}
 }

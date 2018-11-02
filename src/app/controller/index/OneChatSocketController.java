@@ -1,0 +1,83 @@
+package app.controller.index;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.socket.CloseStatus;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.handler.TextWebSocketHandler;
+
+import com.google.gson.Gson;
+
+import app.models.OnechatRepository;
+
+@Controller
+public class OneChatSocketController extends TextWebSocketHandler{
+	@Autowired
+	Gson gson;
+	@Autowired
+	OnechatRepository onechat;
+	
+	List<WebSocketSession> sockets;
+	
+	public OneChatSocketController() {
+		sockets = new ArrayList<>();
+	};
+	
+	@Override
+	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+		String me = message.getPayload();
+		System.out.println("me >"+me);
+		
+		Map read = gson.fromJson(me, Map.class);
+		//====================================
+		// mongodb insert
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date d = new Date();
+		
+		
+		List roomlist = new ArrayList<>();
+			roomlist.add(read.get("sender"));
+			roomlist.add(read.get("recipient"));
+			
+		Map result = new HashMap<>();
+			result.put("roomlist", roomlist);
+			result.put("sender", read.get("sender"));
+			result.put("text", read.get("text"));
+			result.put("day", sdf.format(d));
+			
+		System.out.println("result >>>"+result);
+		onechat.addChat(result);
+		
+		//====================================
+		
+		for (int i = 0; i < sockets.size(); i++) {
+			try {
+				sockets.get(i).sendMessage(message);
+			} catch (Exception e) {
+				e.printStackTrace();				
+		}
+	}//end for
+		
+	}
+	
+	@Override
+	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+		sockets.add(session);
+	}
+	
+	@Override
+	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+		sockets.remove(session);
+	}
+	
+	
+}

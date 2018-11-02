@@ -2,9 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<c:if test="${re eq 'on' }">
-	<script>window.alert("댓글이 정상적으로 처리되셨습니다.")</script>
-</c:if>
+
 <div class="my-3 p-5 bg-white rounded shadow-sm">
 	<div class="media text-muted pt-3">
 		<div class="d-flex justify-content-between align-items-center w-100">
@@ -25,7 +23,7 @@
 
 	</div>
 	<hr />
-	<form action="${pageContext.servletContext.contextPath }/" method="post">
+	<form action="${pageContext.servletContext.contextPath }/" >
 	<div class="pt-3">
 		<small>주소 > ${list.ADDRESS }</small>
 		<div class="d-flex justify-content-between align-items-center w-100">
@@ -35,20 +33,22 @@
 	<div class="d-flex justify-content-between align-items-center w-100"
 		style="float: right;">
 		<div class="media text-muted pt-3" style="float: right;">
-			<span class="text-gray-dark"><small>추천 > ${list.GOOD }</small></span>
+			<span class="text-gray-dark">
+			<small id="sgood">추천 > ${list.GOOD }</small>
+			</span>
 			<span class="text-gray-dark"><small>조회 > ${list.LOOKUP }</small></span>
 		</div>
-		<button type="button" class="btn btn-warning">추천</button>
+		<button type="button" class="btn btn-warning" id="good">추천</button>
+		
 	</div>
 	</form>
 
 </div>
 <!-- 댓글 -->
 <div class="jumbotron" >
-
 	<ul class="list-group" >
 			<c:forEach var="c" items="${comment }">
-			<li class="list-group-item">▷ ${c.MENT } <small
+			<li class="list-group-item">${c.NICK } ▷  ${c.MENT } <small
 				style="float: right;">${c.day }</small> <br />
 			</li>
 		</c:forEach>
@@ -83,6 +83,21 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d54ea73b1e9ac77ebe1409aa939d77e5&libraries=services"></script>
 <script>
+$("#good").on("click",function(){
+	var param={
+			"no":"${list.NO}",
+			"mode":"good"
+			};
+	$.get("${pageContext.servletContext.contextPath }/together/ajax.do",param,function(rst){
+		var obj = JSON.parse(rst);
+		console.log(obj.GOOD);
+		var html="추천 >"+obj.GOOD;
+		$("#sgood").html(html);		
+	}); 
+	/* window.location.href="${pageContext.servletContext.contextPath}/together/detail.do?no=${list.NO}"; */
+});
+
+
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
         center: new daum.maps.LatLng(${list.LATITUDE},${list.LONGITUDE}), // 지도의 중심좌표
