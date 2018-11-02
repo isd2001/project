@@ -9,7 +9,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th style="text-align: center;">내정보</th>
+      <th colspan="2" style="text-align: center;">내정보</th>
     </tr>
   </thead>
   <tbody>
@@ -27,7 +27,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th style="text-align: center;">강아지 정보</th>
+      <th colspan="2" style="text-align: center;">강아지 정보</th>
     </tr>
   </thead>
   <tbody>

@@ -12,31 +12,31 @@
 		</div>
 		<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
 			<div class="card-body">
-				<a onclick="area(강남구);" href="#" class="badge badge-light" style="opacity: 0.5;">강남구</a> 
-				<a onclick="area(강동구);" href="#" class="badge badge-light" style="opacity: 0.5;">강동구</a>
-				<a onclick="area(강북구);" href="#"	class="badge badge-light" style="opacity: 0.5;">강북구</a>
-				<a onclick="area(강서구);" href="#" class="badge badge-light" style="opacity: 0.5;">강서구</a>
-				<a onclick="area(관악구);" href="#"	class="badge badge-light" style="opacity: 0.5;">관악구</a>
-				<a onclick="area(광진구);" href="#" class="badge badge-light" style="opacity: 0.5;">광진구</a>
-				<a onclick="area(구로구);" href="#" class="badge badge-light" style="opacity: 0.5;">구로구</a>
-				<a onclick="area(금천구);" href="#" class="badge badge-light" style="opacity: 0.5;">금천구</a>
-				<a onclick="area(노원구);" href="#" class="badge badge-light" style="opacity: 0.5;">노원구</a>
-				<a onclick="area(도봉구);" href="#" class="badge badge-light" style="opacity: 0.5;">도봉구</a>
-				<a onclick="area(동대문구);" href="#" class="badge badge-light" style="opacity: 0.5;">동대문구</a>
-				<a onclick="area(동작구);" href="#" class="badge badge-light" style="opacity: 0.5;">동작구</a>
-				<a onclick="area(마포구);" href="#" class="badge badge-light" style="opacity: 0.5;">마포구</a>
-				<a onclick="area(서대문구);" href="#" class="badge badge-light" style="opacity: 0.5;">서대문구</a>
-				<a onclick="area(서초구);" href="#" class="badge badge-light" style="opacity: 0.5;">서초구</a>
-				<a onclick="area(성동구);" href="#" class="badge badge-light" style="opacity: 0.5;">성동구</a>
-				<a onclick="area(성북구);" href="#" class="badge badge-light" style="opacity: 0.5;">성북구</a>
-				<a onclick="area(송파구);" href="#" class="badge badge-light" style="opacity: 0.5;">송파구</a>
-				<a onclick="area(양천구);" href="#" class="badge badge-light" style="opacity: 0.5;">양천구</a>
-				<a onclick="area(영등포구);" href="# class="badge badge-light" style="opacity: 0.5;">영등포구</a>
-				<a onclick="area(용산구);" href="#" class="badge badge-light" style="opacity: 0.5;">용산구</a>
-				<a onclick="area(은평구);" href="#" class="badge badge-light" style="opacity: 0.5;">은평구</a>
-				<a onclick="area(종로구);" href="#" class="badge badge-light" style="opacity: 0.5;">종로구</a>
-				<a onclick="area(중구);" href="#" class="badge badge-light" style="opacity: 0.5;">중구</a>
-				<a onclick="area(중량구);" href="#" class="badge badge-light" style="opacity: 0.5;">중량구</a>
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" onclick="target();" style="font-size: 12px;" value="강남구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="강동구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="강북구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="강서구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="관악구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="광진구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="구로구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="금천구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="노원구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="도봉구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="동대문구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="동작구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="마포구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="서대문구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="서초구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="성동구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="성북구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="송파구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="양천구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="영등포구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="용산구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="은평구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="종로구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="중구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="중랑구">
 			</div>
 		</div>
 	</div>
@@ -55,10 +55,10 @@
 			</tr>
 		</thead>
 	<tbody>
-	<c:forEach var="" items="">
+	<c:forEach var="dh" items="${dhlist }">
 		<tr>
 			<th scope="row">#</th>
-				<td><small>#</small></td>
+				<td>#</td>
 				<td>
 					<a href="#">#</a>
 				</td>
@@ -70,3 +70,20 @@
 	</c:forEach>
 	</tbody>
 </table>
+
+<script>
+	var target = function() {
+		var g = document.getElementsByName("gu")[0].value;
+		console.log(g);
+		console.log(document.getElementsByName("gu")[0].value);
+		
+		$.get("/doghospital.do?gu="+g).done(function(obj) {
+			console.log(obj.rst);
+		});
+	}
+	
+	
+
+
+
+</script>
