@@ -3,6 +3,7 @@
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
@@ -120,12 +121,44 @@
 </div>
 <!-- modal -->
 
-<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
-	aria-labelledby="mySmallModalLabel" id="selectmodal" aria-hidden="true">
-	<div class="modal-dialog modal-sm">
-		<div class="modal-content">...</div>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+	role="dialog" aria-labelledby="exampleModalCenterTitle"
+	aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="text-align: center;">
+				<h5 class="modal-title" id="exampleModalCenterTitle">회원정보</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-5">
+						<div id="modal-img"></div>
+					</div>
+					<div class="col-7">
+						ID ▶ <span id="id"></span><br /> 
+						닉네임 ▶<span id="nickname"></span><br />
+					 	강아리 이름▶ <span id="dogname"></span><br />
+						강아지 종류▶ <span id="dogtype"></span><br />
+						한마디 ▶ <span id="usercomment"></span><br />
+					</div>
+
+
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
 	</div>
 </div>
+
+
+
+
 
 
 <script>
@@ -143,7 +176,7 @@
 			html += "<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\" >";
 			html += "<a name = \"f\" class=\"dropdown-item\" value=\"" + obj[i]
 					+ "\" onclick=\"openchat('" + obj[i] + "');\">1:1 대화 </a>";
-			html += "<a class=\"dropdown-item\" id=\"Infomodal\" onclick=\"openmodal('"
+			html += "<a class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\"  id=\"Infomodal\" onclick=\"openmodal('"
 					+ obj[i] + "')\" \">회원 정보 보기</a>";
 			html += "</div>";
 			html += "<hr/>";
@@ -170,21 +203,22 @@
 			"data" : {
 				"nick" : target
 			},
+			"async" : false,
 			contentType : "application/x-www-form-urlencoded; charset=UTF-8"
-
 		}).done(function(rst) {
 			var obj = JSON.parse(rst);
 			console.log(obj);
 
-		
+			document.getElementById("id").innerHTML = obj.ID;
+			document.getElementById("nickname").innerHTML = obj.NICKNAME;
+			document.getElementById("dogname").innerHTML = obj.DOGNAME;
+			document.getElementById("dogtype").innerHTML = obj.DOGTYPE;
+			document.getElementById("usercomment").innerHTML = obj.USERCOMMENT;
+			var src=obj.DOGPROFILE;
+			var html = "<img src=\""+src+"\" width=\"150\" height=\"150\" >";
+			document.getElementById("modal-img").innerHTML = html;
 
-				$("#selectmodal").on("show.bs.modal", function(event) {
-					console.log("event" + event);
+		});
 
-				});//end selectmodal
-
-		
-			
-		});//end ajax
 	};//end openmodal
 </script>
