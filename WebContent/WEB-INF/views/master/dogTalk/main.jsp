@@ -17,20 +17,20 @@
 	</div>
 	
 	<hr/>
-	<div id="list">
+	<div id="list" >
 		<c:forEach var="list" items="${dogTalkList}">			
 				<div class="card" id="form">
-					<div class="card-header d-flex bd-highlight"><div class="flex-grow-1">${list.TALKER}'s comment</div>
+					<div class="card-header d-flex bd-highlight" style="background-color: #FFDEAD  "><div class="flex-grow-1">${list.TALKER}'s comment</div>
 					 <div class="bd-highlight"><small id="date" class="d-flex justify-content-end">${list.WRITEDATE}</small></div></div>
-					<div class="card-body">
-						<blockquote class="blockquote mb-0">
-							<div class="row align-items-center">
+					<div class="card-body" style="background-color: #AED6F1;">
+						<blockquote class="blockquote mb-0" >
+							<div class="row align-items-center" >
 								<img
 									src="${pageContext.servletContext.contextPath }${list.PICTURE}"
 									style="width: 80px; height: 80px;" class="rounded-circle"
 									id="image">
 	
-								<p>${list.CONTENT}</p>
+								<p >&nbsp;&nbsp;<span style="background-color: white;">${list.CONTENT}</span></p>
 							</div>
 							<footer class="blockquote-footer d-flex justify-content-end "><cite title="Source Title">
 								<span id="address">${list.ADDRESS}...</span> </cite>
@@ -42,7 +42,7 @@
 				</div>		
 		</c:forEach>
 	</div>
-	
+
 <script>
 	
 	var addComment = function(){

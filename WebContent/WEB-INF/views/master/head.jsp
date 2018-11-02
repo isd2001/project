@@ -6,6 +6,7 @@
 	href="${pageContext.servletContext.contextPath }/css/blog.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
   
@@ -75,9 +76,9 @@
 							   <div class="dropdown">
 								    <button class="btn btn-info btn-sm dropdown-toggle" type="button" data-toggle="dropdown">접속자 리스트   </button>
 								    <ul class="dropdown-menu">								      
-								      <li class="dropdown-submenu">
-								        <a class="test list-group-item list-group-item-action list-group-item-primary" href="#">유저1</a>
-								        <ul class="dropdown-menu">
+								      <li class="dropdown-submenu" id="connectlist">
+								        <a class="test list-group-item list-group-item-action list-group-item-primary" >유저1</a>
+								        <ul class="dropdown-menu" id="menu">
 								          <li><a  class="list-group-item list-group-item-action list-group-item-warning" href="#">1:1채팅</a></li>
 								          <li><a class="list-group-item list-group-item-action list-group-item-warning" href="#">유저 정보 보기</a></li>		        
 								        </ul>
@@ -126,19 +127,44 @@
 </header>
 
 <body>
-   
+<div class="modal fade" id="exampleModalCenter2" tabindex="-1"
+	role="dialog" aria-labelledby="exampleModalCenterTitle2"
+	aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="text-align: center;">
+				<h5 class="modal-title" id="exampleModalCenterTitle2">회원정보</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-5">
+						<div id="modal-img"></div>
+					</div>
+					<div class="col-7">
+						ID ▶ <span id="id"></span><br /> 
+						닉네임 ▶<span id="nickname"></span><br />
+					 	강아리 이름▶ <span id="dogname"></span><br />
+						강아지 종류▶ <span id="dogtype"></span><br />
+						한마디 ▶ <span id="usercomment"></span><br />
+					</div>
 
 
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 <script>
 
-	$(document).ready(function(){
-	  $('.dropdown-submenu a.test').on("click", function(e){
-	    $(this).next('ul').toggle();
-	    e.stopPropagation();
-	    e.preventDefault();
-	  });
-	});
+	
 	
 	var ws = new WebSocket("ws://" + location.host
 			+ "${pageContext.servletContext.contextPath}/access.do");
@@ -148,36 +174,24 @@
 		console.log("obj > " + obj);
 		var html = "";
 		for (var i = 0; i < obj.length; i++) {	
-			
-			
-			
-			/* <div class="btn-group dropleft">
-			  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuButton1">
-			    Dropleft
-			  </button>
-			  <div class="dropdown-menu"  aria-labelledby="dropdownMenuButton1">
-			 	 <a class="dropdown-item" href="#">Action</a>
-			    <a class="dropdown-item" href="#">Another action</a>
-			    <a class="dropdown-item" href="#">Something else here</a>
-			  </div>
-			</div>
-			 */
-			
-		    html += "<div class=\"dropdown-item nav-dropdown\" >";
-			html += "<a class=\"nav-link\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">";
-			html += obj[i] + "</a>";
-			html += "<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\" >";
-			html += "<a name = \"f\" class=\"dropdown-item\" value=\"" + obj[i]
-					+ "\" onclick=\"openchat('" + obj[i] + "');\">1:1 대화 </a>";
-			html += "<a class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\"  id=\"Infomodal\" onclick=\"openmodal('"
-					+ obj[i] + "')\" \">회원 정보 보기</a>";
-			html += "</div>";
-			html += "<hr/>";
-			html += "</div>";
-		}//end for
+			html += "<a class=\"test list-group-item list-group-item-action list-group-item-primary\">"+obj[i]+"</a>";
+			html+="<ul class=\"dropdown-menu\">";
+			html += "<li><a class=\"list-group-item list-group-item-action list-group-item-warning\" value=\"" + obj[i]+ "\" onclick=\"openchat('" + obj[i] + "');\">1:1채팅</a></li>";
+	        html += "<li><a class=\"list-group-item list-group-item-action list-group-item-warning\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\"  id=\"Infomodal\" onclick=\"openmodal('"
+					 + obj[i] + "')\" \">유저 정보 보기</a></li>";	
+			html += "</ul>"	       
+		}//end for		
 		document.getElementById("connectlist").innerHTML = html;
 	};
-
+	
+	$(document).ready(function(){
+		  $('.dropdown-submenu a.test').on("click", function(e){
+		    $(this).next('ul').toggle();
+		    e.stopPropagation();
+		    e.preventDefault();
+		  });
+		});
+		
 	var openchat = function(target) {
 		console.log(target);
 		window.open(
@@ -192,7 +206,7 @@
 		console.log(target);
 
 		$.ajax({
-			"url" : "Infomodal.do",
+			"url" : "infomodal.do",
 			"data" : {
 				"nick" : target
 			},
@@ -200,7 +214,7 @@
 			contentType : "application/x-www-form-urlencoded; charset=UTF-8"
 		}).done(function(rst) {
 			var obj = JSON.parse(rst);
-			console.log(obj);
+			console.log("obj = "+obj);
 
 			document.getElementById("id").innerHTML = obj.ID;
 			document.getElementById("nickname").innerHTML = obj.NICKNAME;

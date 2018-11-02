@@ -16,5 +16,10 @@
 		select * from dogList where type=#{type}  order by name asc
 	</select>
 	
+	<select id="resultForSearchFromDogList" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select * from dogList where name like #{search} or engname like #{search} or  info like #{search} or type like #{search} or img like #{search} 
+	</select>
+	
+	
 </mapper>
 

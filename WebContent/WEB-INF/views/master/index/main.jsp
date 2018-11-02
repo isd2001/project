@@ -13,9 +13,9 @@
 			<div style="height: 200px; overflow-y: scroll;" id="recentUpdates">				
 					<c:forEach var="list" items="${dtrList}">	
 					<div class="media text-muted pt-3 media-body pb-3 mb-0 small lh-125 border-bottom border-gray ">	
-						<div class="col-sm-4">
-							<img src="${pageContext.servletContext.contextPath }${list.PICTURE}" style="width: 25px; height: 25px;" class="rounded-circle" id="image">
-								${list.TALKER}
+						<div class="col-sm-2">
+							<img src="${pageContext.servletContext.contextPath }${list.PICTURE}" style="width: 45px; height:45px;" class="rounded-circle" id="image">
+								
 						</div>
 						<div class="col">
 							<div class="row">

@@ -55,7 +55,7 @@ public class MainController {
 
 	@GetMapping("/login.do")
 	public ModelAndView mainLoginHandle(WebRequest wr) {
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView();		
 		mav.setViewName("master");
 		mav.addObject("top", "/WEB-INF/views/master/login/top.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/login/main.jsp");
@@ -75,19 +75,22 @@ public class MainController {
 			System.out.println(gu);
 			
 			mav.setViewName("master");
-			mav.addObject("top", "/WEB-INF/views/master/index/top.jsp");
-			mav.addObject("main", "/WEB-INF/views/master/index/main.jsp");
+			mav.setViewName("redirect:/main/index.do");
+			
 			
 			return mav;
 		}else {
 			wr.setAttribute("loginFailed", 1, wr.SCOPE_REQUEST);
+			mav.setViewName("master");
 			mav.addObject("top", "/WEB-INF/views/master/login/top.jsp");
-			mav.addObject("main", "/WEB-INF/views/master/login/main.jsp");
+			mav.addObject("main", "/WEB-INF/views/master/login/main.jsp");			
 			
 			return mav;
 			
 		}
 	}
+	
+
 	
 	@GetMapping("/terms.do")
 	public ModelAndView mainTermsHandle(WebRequest wr) {

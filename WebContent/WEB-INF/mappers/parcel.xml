@@ -22,6 +22,10 @@
 		select * from parcel where writer = #{writer}
 	</select>
 	
+	<select id="resultForSearchFromParcel" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select * from parcel where title like #{search} or breeds like #{search} or gender like #{search} or sort like #{search} or age like #{search} or inoculation like #{search} or 
+		content like #{search} or writer like #{search} or mainimage like #{search} or file1 like #{search} or file2 like #{search} or character like #{search}
+	</select>
 </mapper>
 
 <!-- 

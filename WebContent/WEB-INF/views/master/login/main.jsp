@@ -28,3 +28,7 @@
     </form>
   </div>
   
+  <script>
+ 	console.log("${loginFailed}");
+ 	console.log("dd="+${loginFailed});
+  </script>
