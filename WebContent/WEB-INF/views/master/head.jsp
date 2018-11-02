@@ -34,7 +34,7 @@
 	
 </script>
 <header class="blog-header py-3" <%-- style="background: url('${pageContext.servletContext.contextPath }/image/grass.jpg') "  --%> >
-       
+		  			       	
          <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1" >
            	 <a class="blog-header-logo text-dark" href="${pageContext.servletContext.contextPath }/main/index.do">개놀자</a>
@@ -44,8 +44,8 @@
           </div>
           <div class="col-4 text-center">
            <nav class="navbar navbar-light bg-light">
-			  <form class="form-inline">
-			    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+			  <form class="form-inline" action="${pageContext.servletContext.contextPath }/search/result.do">
+			    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
 			    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			  </form>
 			</nav>
@@ -56,7 +56,7 @@
 		       <c:choose>
 					<c:when test="${not empty userInfo}">				 
 						<div class=" justify-content-end align-items-center">
-			          	<a class="btn btn-sm btn-success" href="#">마이페이지</a> 
+			          	<a class="btn btn-sm btn-success" href="${pageContext.servletContext.contextPath }/mypage.do">마이페이지</a> 
 			            <a class="btn btn-sm btn-danger" href="${pageContext.servletContext.contextPath }/logout.do">로그아웃</a>
 			     
 			          </div>
@@ -92,6 +92,7 @@
 				</div>
 			</div>
 		</div>	 
+			
 </header>
 
 

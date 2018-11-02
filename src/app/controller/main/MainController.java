@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 
 import app.models.accountRepository;
+import app.models.dogTalkRepository;
 import app.service.WeatherService;
 
 @Controller
@@ -36,14 +37,18 @@ public class MainController {
 	@Autowired
 	Gson gson;	
 
-	
+	@Autowired
+	dogTalkRepository dtr;
 	@GetMapping("/index.do")
 	public ModelAndView mainIndexHandle(WebRequest wr) {
+		
+		dtr.getSomeFromDogTalk();
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("master");
 		mav.addObject("top", "/WEB-INF/views/master/index/top.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/index/main.jsp");
-		
+		mav.addObject("dtrList",dtr.getSomeFromDogTalk());
 		return mav;
 	}
 	
@@ -88,8 +93,8 @@ public class MainController {
 	public ModelAndView mainTermsHandle(WebRequest wr) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("master");
-		mav.addObject("top", "/WEB-INF/views/master/login/top.jsp");
-		mav.addObject("main", "/WEB-INF/views/master/login/main.jsp");
+		mav.addObject("top", "/WEB-INF/views/master/join/top.jsp");
+		mav.addObject("main", "/WEB-INF/views/master/join/terms.jsp");
 		
 		return mav;
 	}

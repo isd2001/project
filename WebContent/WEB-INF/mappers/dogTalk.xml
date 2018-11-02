@@ -16,5 +16,9 @@
 		select * from dogList where type=#{type}  order by name asc
 	</select>
 	
+	<select id="getSomeFromDogTalk" resultType="java.util.HashMap">
+		select * from dogTalk order by writedate desc
+	</select>
+	
 </mapper>
 

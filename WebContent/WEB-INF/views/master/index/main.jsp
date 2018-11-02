@@ -1,51 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
+	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <body>
 <div class= "container">
 	<div class="row">	
 			
 		<div class="col-md-6">		
 		<div class="my-3 p-3 bg-white rounded shadow-sm">
-			<h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
+			<h6 class="border-bottom border-gray pb-2 mb-0">Recent GaeTalk</h6>
 			<div id="recent"></div>
-			<div style="height: 200px; overflow-y: scroll;" id="recentUpdates">
-			<div class="media text-muted pt-3">
-				<p
-					class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-					<strong class="d-block text-gray-dark">@달이</strong> 오늘 까치산으로 산책갑니당.
-				</p>
-			</div>
-			<div class="media text-muted pt-3">
-				<p
-					class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-					<strong class="d-block text-gray-dark">@개달이</strong>
-					오늘 산책갔다와서 개저아
-				</p>
-			</div>
-			
-			<div class="media text-muted pt-3">
-				<p
-					class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-					<strong class="d-block text-gray-dark">@복돌이</strong>
-					오늘 바빠서 산책 못시킴 ㅜㅜ흑흑
-				</p>
-			</div>
-			<div class="media text-muted pt-3">
-				<p
-					class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-					<strong class="d-block text-gray-dark">@럭키</strong>
-					나는 맨날 까까가 먹고싶다.
-				</p>
-			</div>
-			</div>
-			</div>
-
-			<small class="d-block text-right mt-3"> <a href="#">All
-					updates</a>
+			<div style="height: 200px; overflow-y: scroll;" id="recentUpdates">				
+					<c:forEach var="list" items="${dtrList}">	
+					<div class="media text-muted pt-3">
+						<p	class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">								
+								<strong class="d-block text-gray-dark form-inline">
+								<img src="${pageContext.servletContext.contextPath }${list.PICTURE}" style="width: 25px; height: 25px;" class="rounded-circle" id="image">
+								${list.TALKER}
+								<small class="d-flex justify-content-end">(${list.WRITEDATE})</small></strong>									
+								 ${list.CONTENT}
+						</p>
+					</div>
+					</c:forEach>						
+				</div>			
+			</div>			
+		
+			<small class="d-block text-right mt-3">
+			 <a href="${pageContext.servletContext.contextPath }/dogTalk/index.do">
+			<img src="${pageContext.servletContext.contextPath }/image/talkimg.png" style="width:25px; height: 25px;">개톡 더보기</a>
 			</small>
 		</div>
+	
 		
 		<div class="col-md-6">
 		<div class="my-3 p-3 bg-white rounded shadow-sm">

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import app.models.MyPageRepository;
 import app.models.accountRepository;
@@ -32,7 +33,7 @@ public class ModifyInfoController {
 	// 수정처리 요청시 중간 인증 체크 핸들
 	// 정상 로그인 후 인증세션이 있으면 check.do 부분에 인증 유무에 따른 페이지 변환이 우선적으로 들어가야 함.
 	@RequestMapping("check.do")
-	public String authCherckHandle(@RequestParam String mode ,WebRequest wr) {
+	public ModelAndView authCherckHandle(@RequestParam String mode ,WebRequest wr) {
 		switch(mode) {
 		case "memberInfo" : 
 			wr.setAttribute("mode", "memberInfo", wr.SCOPE_SESSION);
@@ -41,36 +42,53 @@ public class ModifyInfoController {
 			wr.setAttribute("mode", "password", wr.SCOPE_SESSION);
 			break;
 		}
-		return "mypage.check";
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("master");
+		mav.addObject("top", "/WEB-INF/views/master/mypage/top.jsp");
+		mav.addObject("main", "/WEB-INF/views/master/mypage/check.jsp");
+		
+		return mav;
 	}
 	
 	@RequestMapping("/sort.do")
-	public String checkPassHandle(WebRequest wr, @RequestParam String param, ModelMap map) {
+	public ModelAndView checkPassHandle(WebRequest wr, @RequestParam String param, ModelMap map) {
 		String mode = (String)wr.getAttribute("mode", wr.SCOPE_SESSION);
 		Map data = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
 		String id = (String)data.get("ID");
 		String pass = myPageRepository.getByPassWord(id);
 		
-		if(param.equals(pass) && mode.equals("memberInfo")) {
-			return "redirect:/modify_info.do";
-		}else if(param.equals(pass) && mode.equals("password")) {
-			return "redirect:/modify_pw.do";
+		ModelAndView mav = new ModelAndView();
+		if(param.equals(pass) && mode.equals("memberInfo")) {	
+			mav.setViewName("redirect:/modify_info.do");			
+			return mav;
+		}else if(param.equals(pass) && mode.equals("password")) {			
+			mav.setViewName("redirect:/modify_pw.do");			
+			return mav;			
 		}else {
 			map.put("err", "on");
-			return "mypage.check";
+			mav.setViewName("master");
+			mav.addObject("top", "/WEB-INF/views/master/mypage/top.jsp");
+			mav.addObject("main", "/WEB-INF/views/master/mypage/check.jsp");
+			
+			return mav;
 		}
 		
 	}
 
 	// 비밀번호 수정 페이지 핸들러
 	@RequestMapping("/modify_pw.do")
-	public String modifyPasswordHandle() {
-		return "mypage.modify_pw";
+	public ModelAndView modifyPasswordHandle() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("master");
+		mav.addObject("top", "/WEB-INF/views/master/mypage/top.jsp");
+		mav.addObject("main", "/WEB-INF/views/master/mypage/modify_pw.jsp");
+		
+		return mav;
 	}
 	
 	// 비밀번호 업데이트
 	@RequestMapping("/change_pw.do")
-	public String updatePassWord(@RequestParam Map param, WebRequest wr, ModelMap map) {
+	public ModelAndView updatePassWord(@RequestParam Map param, WebRequest wr, ModelMap map) {
 		Map data = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
 		String id = (String)data.get("ID");
 		String originpass = (String)param.get("originpass");
@@ -84,22 +102,37 @@ public class ModifyInfoController {
 			if(r == 1) {
 				wr.removeAttribute("mode", wr.SCOPE_SESSION);
 			}
-			return "mypage.index";
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("master");
+			mav.addObject("top", "/WEB-INF/views/master/mypage/top.jsp");
+			mav.addObject("main", "/WEB-INF/views/master/mypage/index.jsp");
+			
+			return mav;
 		}else {
 			map.put("err", "on");
-			return "mypage.modify_pw";
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("master");
+			mav.addObject("top", "/WEB-INF/views/master/mypage/top.jsp");
+			mav.addObject("main", "/WEB-INF/views/master/mypage/modify_pw.jsp");
+			
+			return mav;
 		}
 	}
 	
 	// 회원정보 수정 핸들
 	@RequestMapping("/modify_info.do")
-	public String modifyMemberInfoHandle(WebRequest wr, @RequestParam Map param, ModelMap map) {
-		return "mypage.modify_info";
+	public ModelAndView modifyMemberInfoHandle(WebRequest wr, @RequestParam Map param, ModelMap map) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("master");
+		mav.addObject("top", "/WEB-INF/views/master/mypage/top.jsp");
+		mav.addObject("main", "/WEB-INF/views/master/mypage/modify_info.jsp");
+		
+		return mav;
 	}
 	
 	// 회원정보 업데이트
 	@RequestMapping("/change_info.do")
-	public String updateUserInfo(@RequestParam Map param, WebRequest wr, MultipartFile dogProfile, ModelMap map ) throws IOException{
+	public ModelAndView updateUserInfo(@RequestParam Map param, WebRequest wr, MultipartFile dogProfile, ModelMap map ) throws IOException{
 		Map data = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
 		String id = (String)data.get("ID");
 			param.put("id", id);
@@ -132,11 +165,21 @@ public class ModifyInfoController {
 				wr.removeAttribute("auth_check", wr.SCOPE_SESSION);
 				wr.removeAttribute("mode", wr.SCOPE_SESSION);
 			}
-			return "mypage.index";
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("master");
+			mav.addObject("top", "/WEB-INF/views/master/mypage/top.jsp");
+			mav.addObject("main", "/WEB-INF/views/master/mypage/index.jsp");
+			
+			return mav;
 		}catch(Exception e) {
 			e.printStackTrace();
 			map.put("err","on");
-			return "mypage.modify_info";
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("master");
+			mav.addObject("top", "/WEB-INF/views/master/mypage/top.jsp");
+			mav.addObject("main", "/WEB-INF/views/master/mypage/modify_info.jsp");
+			
+			return mav;
 		}
 		
 	}

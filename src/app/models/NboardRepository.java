@@ -20,4 +20,18 @@ public class NboardRepository {
 	
 	
 	
-}//end class
+	// 글쓰기 저장
+	public int addlistBoard(Map map) {
+		return template.insert("member_board.addlistBoard",map);
+	}
+	
+	//글 상세보기
+	public Map nboardread(int BOARD_NUM) {
+		return template.selectOne("member_board.nboardread" , BOARD_NUM);
+	}
+
+
+	
+	
+}
+//end class

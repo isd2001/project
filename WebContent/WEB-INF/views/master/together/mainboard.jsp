@@ -7,7 +7,7 @@
 		window.alert("글이 정상적으로 처리되셨습니다.")
 	</script>
 </c:if>
-
+<div class="container">
 <form
 	action="${pageContext.servletContext.contextPath }/together/selectboard.do"
 	method="post">
@@ -135,9 +135,8 @@
 		</tbody>
 	</table>
 	<!-- ======================================== -->
-	<a href="${pageContext.servletContext.contextPath }/together/new.do">
-		<button type="button" class="btn btn-outline-success"
-			style="position: absolute; right: 0;">글 쓰기</button>
+	<a href="${pageContext.servletContext.contextPath }/together/new.do" class="d-flex justify-content-end">
+		<button type="button" class="btn btn-outline-success">글 쓰기</button>
 	</a>
 
 	<script type="text/javascript"
@@ -200,4 +199,4 @@
 		}
 	</script>
 </form>
-
+</div>

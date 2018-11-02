@@ -1,5 +1,6 @@
 package app.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,15 @@ public class dogTalkRepository {
 	}
 	
 
-
+	public List<Map> getSomeFromDogTalk() {
+		List some =  template.selectList("dogTalk.getSomeFromDogTalk");
+		System.out.println(some);
+		List result = new ArrayList();
+		for (int i = 0; i < 5; i++) {
+			result.add(some.get(i));
+		}
+		
+		return result;
+	}
 	
 }

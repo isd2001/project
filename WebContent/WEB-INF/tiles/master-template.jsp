@@ -20,12 +20,13 @@
 <link href="${pageContext.servletContext.contextPath }/css/top.css"	rel="stylesheet">
 <title>개놀자!</title>
 </head>
-<body>
+
+<body>		
+
 	<div class="container">
-		<div class="" >
+		<div class="">
 			<tiles:insertAttribute name="head"/>
 		</div>
-		
 		<nav class="">
 			<tiles:insertAttribute name="nav"/>
 		</nav>

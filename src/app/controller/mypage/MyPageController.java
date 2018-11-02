@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import app.models.MyPageRepository;
 
@@ -17,25 +18,40 @@ public class MyPageController {
 	MyPageRepository myPageRepository;
 
 	@RequestMapping("/mypage.do")
-	public String indexHandle(WebRequest wr, ModelMap map) {
+	public ModelAndView indexHandle(WebRequest wr, ModelMap map) {
 		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
 			map.put("userInfo", userInfo);
-		return "mypage.index";
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("master");
+		mav.addObject("top", "/WEB-INF/views/master/mypage/top.jsp");
+		mav.addObject("main", "/WEB-INF/views/master/mypage/index.jsp");
+		
+		return mav;
 	}
 	
 	@RequestMapping("/myboard.do")
-	public String myboardHandle(WebRequest wr, ModelMap map) {
+	public ModelAndView myboardHandle(WebRequest wr, ModelMap map) {
 		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
 		String writer = (String)userInfo.get("ID");
 		List parcelList = myPageRepository.getByParcelList(writer);
 			map.put("parcelList", parcelList);
 		System.out.println(map.get("parcelList"));
 		
-		return "mypage.myboard";
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("master");
+		mav.addObject("top", "/WEB-INF/views/master/mypage/top.jsp");
+		mav.addObject("main", "/WEB-INF/views/master/mypage/myboard.jsp");
+		
+		return mav;
 	}
 	
 	@RequestMapping("/mycomment.do")
-	public String myCommentHandle() {
-		return "mypage.mycomment";
+	public ModelAndView myCommentHandle() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("master");
+		mav.addObject("top", "/WEB-INF/views/master/mypage/top.jsp");
+		mav.addObject("main", "/WEB-INF/views/master/mypage/mycomment.jsp");
+		
+		return mav;
 	}
 }
