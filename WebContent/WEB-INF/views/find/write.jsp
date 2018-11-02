@@ -46,7 +46,7 @@
 			<div class="form-group">
 				<div class="row" style="height: 250px;">
 					<div class="col-6">
-						<img src="" id="preview" style="height: 240px"
+						<img src="" id="preview" style="1height: 240px"
 							onchange="putImage(this)" class="rounded img-fluid" />
 					</div>
 					<div class="col">

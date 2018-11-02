@@ -19,7 +19,7 @@
 					<p class="card-text mb-auto">
 						회원님의 소중한 가족 <b>${map.dogname}</b>이(가)<br/> 
 						<br />
-						다시 회원님의 곁으로 가길 바랍니다.
+						다시 회원님께 돌아가길 바랍니다.
 					</p>
 				</div>
 			</div>

@@ -4,9 +4,9 @@
 	
 	<!-- 게시물에 내용 다 넣기  -->
 	<insert id = "addAllHelp" parameterType="java.util.HashMap">
-		insert into help values(help_seq.nextval, #{title}, #{writer}, to_date(#{day},'YYYY-MM-DD'),0,0,#{file})
+		insert into help values(help_seq.nextval, #{title}, #{writer}, to_date(#{regdate},'YYYY-MM-DD'), 0, 0, #{content}, #{inputfile1}, #{inputfile2})
 	</insert>
-
+ 
 	<!-- 게시물에서 내용 다 빼오기 -->
 	<select id = "getAllHelp" resultType="java.util.HashMap">
 		select * from help

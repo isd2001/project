@@ -32,9 +32,10 @@
 		<tbody>
 			<c:forEach var="h" items="${help}">
 				<tr>
-					<th scope="row">1</th>
-					<td>${h.NO }</td>
-					<td>${h.TITLE }</td>
+					<th scope="row">${h.NO }</th>
+					<td><a
+						href="${pageContext.servletContext.contextPath  }/help/detail.do?no=${h.NO }">
+							${h.TITLE }</a></td>
 					<td>${h.WRITER }</td>
 					<td>${h.REGDATE }</td>
 					<td>${h.VIEW }</td>
