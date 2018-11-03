@@ -1,11 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<style>
+#sidebar {
+	position: fixed;
+	width: 265px;
+	height: 130%;
+	background: black;
+	left: -265px;
+	transition : all 500ms linear;
+	opacity: 0.3;
+}
+#sidebar.active {
+	left: 0px;
 
+}
+#sidebar ul li {
+	color: rgba(230, 230, 230, 0.9);
+	list-style: none;
+	padding: 15px 10px;
+	border-bottom: 1px solid rgba(100, 100, 100, 0.3);
+}
+#sidebar .toggle-btn {
+	position: absolute;
+	left: 230px;
+	top: 20px;
 
-<div class="nav d-flex justify-content-around py-2 mb-2">		
-        <nav class="nav d-flex justify-content-between">
-          <a class="p-2 text-muted" >      </a>
+}
+#sidebar .toggle-btn span{ 
+	display: block;
+	width: 30px;
+	height: 5px; 
+	background: black;	
+	margin: 5px 0px ;
+}
+</style>
 
+<div class="nav d-flex justify-content-around py-2 mb-2">
+  <nav class="nav d-flex justify-content-between">
+    		 <div id="sidebar">
+    		 안녕하세요
+    		 
+			</div>
+		  <a class="toggle-btn p-2 text-muted" onclick="togglesidebar()">
+		  	더보개
+		  </a>		
           <a class="p-2 text-muted" href="${pageContext.servletContext.contextPath }/Nboard/list.do">공지사항</a>
           <a class="p-2 text-muted" href="${pageContext.servletContext.contextPath }/dogTalk/index.do">개톡</a>
           <a class="p-2 text-muted"	href="${pageContext.servletContext.contextPath }/board/main.do">Gaekipedia</a>
@@ -29,6 +67,11 @@
 		  </div>
 		  
 		   <a class="p-2 text-muted" href="${pageContext.servletContext.contextPath }/dogTalk/index.do">추천개시판</a>
-        </nav>	
-   
+        </nav>
+        
 </div>
+<script>
+function togglesidebar(){
+	document.getElementById("sidebar").classList.toggle('active');	
+}
+</script>
