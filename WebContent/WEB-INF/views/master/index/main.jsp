@@ -2,6 +2,20 @@
 	pageEncoding="UTF-8"%>
 	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
+
+<style>
+      h6 {
+        font-family: "Anton", sans-serif;
+        font-size: 20px;
+      }
+      af.f {
+        font-weight: 200;
+      
+      }
+</style>
 <body>
 <div class= "container">
 	<div class="row">	
@@ -10,7 +24,7 @@
 		<div class="my-3 p-3 bg-white rounded shadow-sm">
 			<h6 class="border-bottom border-gray pb-2 mb-0">Recent GaeTalk</h6>
 			<div id="recent"></div>
-			<div style="height: 200px; overflow-y: scroll;" id="recentUpdates">				
+			<div style="height: 300px; overflow-y: scroll;" id="recentUpdates">				
 					<c:forEach var="list" items="${dtrList}">	
 					<div class="media text-muted pt-3 media-body pb-3 mb-0 small lh-125 border-bottom border-gray ">	
 						<div class="col-sm-2">
@@ -32,54 +46,82 @@
 					</c:forEach>			
 					
 								
-				</div>			
-			</div>			
-		
-			<small class="d-block text-right mt-3">
+				</div>	
+				<small class="d-block text-right mt-3">
 			 <a href="${pageContext.servletContext.contextPath }/dogTalk/index.do">
 			<img src="${pageContext.servletContext.contextPath }/image/talkimg.png" style="width:25px; height: 25px;">개톡 더보기</a>
-			</small>
+			</small>		
+			</div>			
+		
+			
 		</div>
 	
 		
 		<div class="col-md-6">
 		<div class="my-3 p-3 bg-white rounded shadow-sm">
-			<h6 class="border-bottom border-gray pb-2 mb-0">Suggestions</h6>
-			<div class="media text-muted pt-3">
-				<div
-					class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-					<div
-						class="d-flex justify-content-between align-items-center w-100">
-						<strong class="text-gray-dark">Full Name</strong> <a href="#">Follow</a>
-					</div>
-					<span class="d-block">@username</span>
+			<h6 class="border-bottom border-gray pb-2 mb-0">찾아주시개</h6>
+			<div class="container">
+				<div class="row">
+					<c:forEach var="e" items="${findList}" begin="0" end="1">
+						<div class="col-sm-6" id="post">
+							<div class="card mb-4 shadow-sm" style="width: 240px; max-height: 300px">
+								<img class="card-img-top"
+								src="${pageContext.servletContext.contextPath}${e.PICTURE}"
+								width="200" height="225">
+								<div class="card-body">
+									<p class="card-text">
+									<div class="d-flex justify-content-between align-items-center">
+										<small class="text-muted"
+											style="position: absolute; bottom: 30px">${e.TITLE}</small> <small
+											class="text-muted" style="position: absolute; bottom: 10px">${e.NICK}
+										</small>
+									</div>
+									<a href="${pageContext.servletContext.contextPath}/find/detail.do?no=${e.NO }">
+									<button type="button" class="btn btn-sm btn-outline-secondary"
+										style="position: absolute; right: 15px; bottom: 15px"
+										id="detailBt" name="detailBt">자세히</button></a>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
 				</div>
 			</div>
-			<div class="media text-muted pt-3">
-				<div
-					class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-					<div
-						class="d-flex justify-content-between align-items-center w-100">
-						<strong class="text-gray-dark">Full Name</strong> <a href="#">Follow</a>
-					</div>
-					<span class="d-block">@username</span>
-				</div>
-			</div>
-			<div class="media text-muted pt-3">
-				<div
-					class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-					<div
-						class="d-flex justify-content-between align-items-center w-100">
-						<strong class="text-gray-dark">Full Name</strong> <a href="#">Follow</a>
-					</div>
-					<span class="d-block">@username</span>
-				</div>
-			</div>
-			<small class="d-block text-right mt-3"> <a href="#">All
-					suggestions</a>
+			<small class="d-block text-right mt-3"> <a href="${pageContext.servletContext.contextPath }/find/list.do">+더보기</a>
 			</small>
 		</div>
 	</div>
+	</div>	
+	<div class="my-3 p-3 bg-white rounded shadow-sm">
+	<h6 class="border-bottom border-gray pb-2 mb-0">데려가시개</h6>
+	<div class= "row">	
+		<c:forEach var="p" items="${parcelList }" begin="0" end="1">
+			 <div class="col-md-6">
+	          <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+	         	 <img class="card-img-left flex-auto d-none d-lg-block" data-src="${pageContext.servletContext.contextPath }${p.MAINIMAGE}" alt="Card image cap">
+	            <div class="card-body d-flex flex-column align-items-start">
+	              <strong class="d-inline-block mb-2 text-primary">
+	              	<c:choose>
+                		<c:when test="${p.CHOICE == 1 }">
+	                		<p class="card-text">[분양중]</p>
+                		</c:when>
+                		<c:otherwise>
+							<p class="card-text">[분양완료]</p>
+                		</c:otherwise>
+                	</c:choose>
+	              </strong>
+	              <h3 class="mb-0">
+	                <a class="text-dark" href="#">${p.TITLE }</a>
+	              </h3>
+	              <div class="mb-1 text-muted"><fmt:formatDate value="${p.REGDATE }" /></div>
+	              <p class="card-text mb-auto">견종 : ${p.BREEDS}<br> 성별 : ${p.GENDER } <br> 나이 : ${p.AGE }</p>
+	              <a href="${pageContext.servletContext.contextPath }/detail.do?no=${p.NO }">View</a>
+	            </div>  
+	          </div>
+	        </div>
+        </c:forEach>
+        <small class="d-flex text-right mt-3 d-flex justify-content-end">
+         <a href="${pageContext.servletContext.contextPath }/parcel.do">+더보기</a>	</small>
+      </div>        
 	</div>
 
 </div>

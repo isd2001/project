@@ -1,6 +1,9 @@
 package app.controller.main;
 
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.SystemEnvironmentPropertySource;
@@ -16,6 +19,7 @@ import app.models.searchRepository;
 @RequestMapping("/search")
 public class MainSearchController {
 	
+	
 	@Autowired
 	searchRepository sr;
 	
@@ -24,9 +28,32 @@ public class MainSearchController {
 		ModelAndView mav = new ModelAndView();
 		System.out.println(search);		
 		
+		String[] searchKeyWords = search.split("\\s");
+		
+		System.out.println(searchKeyWords.toString());
+		
+		List list1 ;
+		
+		
+		for (int i = 0; i < searchKeyWords.length; i++) {
+			list1=sr.resultForSearchFromDogList(searchKeyWords[i]);
+			for (int j = 1; j < searchKeyWords.length; j++) {
+				Map map= (Map) list1.get(i);
+				if(map.containsValue(searchKeyWords[j])==false){
+					list1.remove(i);
+				}
+			}
+		}
+				
+		
+		
+		
 		List resultFromFind = sr.resultForSearchFromFindTitle(search);
 		List resultFromParcel = sr.resultForSearchFromParcelTitle(search);
 		List resultFromDogList = sr.resultForSearchFromDogList(search);
+		
+		
+		
 		
 		if(resultFromFind.size()!=0) {
 			mav.addObject("find",resultFromFind);

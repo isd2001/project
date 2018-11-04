@@ -7,74 +7,8 @@
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<style>
-	ul#navmenu , ul.sub1 ,ul.sub2{
-		list-style-type: none;
-		font-size: 10pt; 	
-	}
-	
-	ul#navmenu li {
-		width: 125px;
-		text-align: center;
-		position: relative;
-		float: left;
-		margin-right: 4px;    
-	}
-	
-	ul#navmenu a{
-		text-decoration: none;
-		display: block;
-		width: 125px;
-		height: 25px;
-		line-height: 25px;
-		background-color: #FFF;
-		border: 1px solid #CCC;
-		border-radius: 5px; 
-	}
-	ul#navmenu .sub1 li {
-		
-	}
-	
-	ul#navmenu .sub1 a {
-		margin-top: 0px;
-	}
-	
-	ul#navmenu .sub2 a{
-		margin-left: 10px;
-	}
-	
-	ul#navmenu li:hover>a {
-		background-color: #CFC;
-	
-	}
-	ul#navmenu li:hover>a:hover {
-		background-color: #FF0;
-	
-	}
-	ul#navmenu ul.sub1 {
-		display: none;
-		position: absolute; 
-		top: 26px;
-		left: -40px; 
-	}
-	
-	ul#navmenu ul.sub2 {
-		display: none;
-		position: absolute;
-		top: 0px;
-		left: 80px;
-	}		
-	
-	ul#navmenu li:hover .sub1 {
-		display: block;
-		
-	}
-	
-	ul#navmenu .sub1 li:hover .sub2{
-		display: block; 
-	}
-</style>
 
+<link rel="stylesheet"	href="${pageContext.servletContext.contextPath }/css/navcss.css">
 <script>
 	var getWeather = function(gu) {
 		console.log("function Strar !!");
@@ -122,7 +56,7 @@
 		</div>
 				<c:choose>
 					<c:when test="${not empty userInfo}">
-						<div class=" justify-content-end align-items-center form-inline">
+						<div class="container justify-content-end align-items-center form-inline">
 
 						<ul id="navmenu">
 							<li><a href="#">접속중유저</a>
