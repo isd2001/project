@@ -206,7 +206,7 @@ public class IndexController {
 	}//end onetalk.do
 	
 	
-	@RequestMapping(path="/infomodal.do",produces = "application/text; charset=utf8")
+	@GetMapping(path="/infomodal.do",produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String InfomodalHandle(@RequestParam Map param,WebRequest wreq) {
 		System.out.println("Infomodal>"+param);

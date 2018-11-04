@@ -7,21 +7,72 @@
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
 <style>
-.dropdown-submenu {
-	position: relative;
-}
-
-.dropdown-submenu .dropdown-menu {
-	top: 0;
-	left: 100%;
-	margin-top: -1px;
-}
+	ul#navmenu , ul.sub1 ,ul.sub2{
+		list-style-type: none;
+		font-size: 10pt; 	
+	}
+	
+	ul#navmenu li {
+		width: 125px;
+		text-align: center;
+		position: relative;
+		float: left;
+		margin-right: 4px;    
+	}
+	
+	ul#navmenu a{
+		text-decoration: none;
+		display: block;
+		width: 125px;
+		height: 25px;
+		line-height: 25px;
+		background-color: #FFF;
+		border: 1px solid #CCC;
+		border-radius: 5px; 
+	}
+	ul#navmenu .sub1 li {
+		
+	}
+	
+	ul#navmenu .sub1 a {
+		margin-top: 0px;
+	}
+	
+	ul#navmenu .sub2 a{
+		margin-left: 10px;
+	}
+	
+	ul#navmenu li:hover>a {
+		background-color: #CFC;
+	
+	}
+	ul#navmenu li:hover>a:hover {
+		background-color: #FF0;
+	
+	}
+	ul#navmenu ul.sub1 {
+		display: none;
+		position: absolute; 
+		top: 26px;
+		left: -40px; 
+	}
+	
+	ul#navmenu ul.sub2 {
+		display: none;
+		position: absolute;
+		top: 0px;
+		left: 80px;
+	}		
+	
+	ul#navmenu li:hover .sub1 {
+		display: block;
+		
+	}
+	
+	ul#navmenu .sub1 li:hover .sub2{
+		display: block; 
+	}
 </style>
 
 <script>
@@ -69,34 +120,17 @@
 			</nav>
 
 		</div>
-		<div class="container">
-			<div class="row form-inline justify-content-end ">
-				<!--  -->
-				
-			
-				<!--  -->
 				<c:choose>
 					<c:when test="${not empty userInfo}">
 						<div class=" justify-content-end align-items-center form-inline">
 
-							<div class="dropdown">
-								<button class="btn btn-info btn-sm dropdown-toggle"
-									type="button" data-toggle="dropdown">접속자 리스트</button>
-								<ul class="dropdown-menu">
-									<li class="dropdown-submenu" id="connectlist"><a
-										class="test list-group-item list-group-item-action list-group-item-primary">유저1</a>
-										<ul class="dropdown-menu" id="menu">
-											<li><a
-												class="list-group-item list-group-item-action list-group-item-warning"
-												href="#">1:1채팅</a></li>
-											<li><a
-												class="list-group-item list-group-item-action list-group-item-warning"
-												href="#">유저 정보 보기</a></li>
-										</ul></li>
+						<ul id="navmenu">
+							<li><a href="#">접속중유저</a>
+								<ul class="sub1" id="connectlist">
+												
 								</ul>
-							</div>
-
-
+							</li>
+						</ul>
 							<a class="btn btn-sm btn-success"
 								href="${pageContext.servletContext.contextPath }/mypage.do">마이페이지</a>
 							<a class="btn btn-sm btn-danger"
@@ -113,7 +147,6 @@
 						</div>
 					</c:otherwise>
 				</c:choose>
-			</div>
 			<div class="row justify-content-end">
 				<c:choose>
 					<c:when test="${not empty userInfo}">
@@ -138,11 +171,10 @@
 					</c:otherwise>
 				</c:choose>
 
-			</div>
 		</div>
 	</div>
 </header>
-
+<!-- modal view -->
 <body>
 	<div class="modal fade" id="exampleModalCenter2" tabindex="-1"
 		role="dialog" aria-labelledby="exampleModalCenterTitle2"
@@ -162,12 +194,12 @@
 							<div id="modal-img"></div>
 						</div>
 						<div class="col-7">
-							ID ▶ <span id="id"></span><br /> 닉네임 ▶<span id="nickname"></span><br />
-							강아리 이름▶ <span id="dogname"></span><br /> 강아지 종류▶ <span
-								id="dogtype"></span><br /> 한마디 ▶ <span id="usercomment"></span><br />
+							ID ▶ <span id="id"></span><br />
+							닉네임 ▶<span id="nickname"></span><br />
+							강아리 이름▶ <span id="dogname"></span><br />
+							강아지 종류▶ <span id="dogtype"></span><br />
+							한마디 ▶ <span id="usercomment"></span><br />
 						</div>
-
-
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -178,7 +210,7 @@
 		</div>
 	</div>
 
-	<script>
+	<script>	
 		var ws = new WebSocket("ws://" + location.host
 				+ "${pageContext.servletContext.contextPath}/access.do");
 
@@ -187,29 +219,22 @@
 			console.log("obj > " + obj);
 			var html = "";
 			for (var i = 0; i < obj.length; i++) {
-				html += "<a class=\"test list-group-item list-group-item-action list-group-item-primary\">"
-						+ obj[i] + "</a>";
-				html += "<ul class=\"dropdown-menu\">";
-				html += "<li><a class=\"list-group-item list-group-item-action list-group-item-warning\" value=\""
-						+ obj[i]
-						+ "\" onclick=\"openchat('"
-						+ obj[i]
-						+ "');\">1:1채팅</a></li>";
-				html += "<li><a class=\"list-group-item list-group-item-action list-group-item-warning\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\"  id=\"Infomodal\" onclick=\"openmodal('"
-						+ obj[i] + "')\" \">유저 정보 보기</a></li>";
-				html += "</ul>"
+
+				html+="<li><a href=\"#\">"+obj[i]+"</a>";
+				html+="<ul class=\"sub2\">";
+				html+="<li><a onclick=\"openchat('"+obj[i]+"')\" value=\""+obj[i]+ "\" >1:1대화</a></li>";
+				html+="<li><a data-toggle=\"modal\" data-target=\"#exampleModalCenter2\" id=\"Infomodal\" onclick=\"openmodal('"
+					+ obj[i] + "')\" \">정보 보기</a></li>";
+				html+="</ul>";
+				html+="</li>";
 			}//end for		
+				
 			document.getElementById("connectlist").innerHTML = html;
 		};
-
-		$(document).ready(function() {
-			$('.dropdown-submenu a.test').on("click", function(e) {
-				$(this).next('ul').toggle();
-				e.stopPropagation();
-				e.preventDefault();
-			});
-		});
-
+	
+		
+		//====================================================================
+		// chat
 		var openchat = function(target) {
 			console.log(target);
 			window.open(
@@ -223,18 +248,14 @@
 			console.log("openmodal start!");
 			console.log(target);
 
-			$
-					.ajax(
-							{
-								"url" : "infomodal.do",
-								"data" : {
-									"nick" : target
-								},
-								"async" : false,
-								contentType : "application/x-www-form-urlencoded; charset=UTF-8"
-							})
-					.done(
-							function(rst) {
+			$.ajax({
+					"url" : "${pageContext.servletContext.contextPath }/infomodal.do",
+					"data" : {
+						"nick" : target
+						},
+					"async" : false,
+					"contentType" : "application/x-www-form-urlencoded; charset=UTF-8"
+				}).done(function(rst) {
 								var obj = JSON.parse(rst);
 								console.log("obj = " + obj);
 
@@ -247,7 +268,7 @@
 								var html = "<img src=\""+src+"\" width=\"150\" height=\"150\" >";
 								document.getElementById("modal-img").innerHTML = html;
 
-							});
+				});
 
 		};//end openmodal
 	</script>

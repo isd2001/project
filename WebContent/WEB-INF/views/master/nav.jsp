@@ -3,10 +3,10 @@
 <style>
 #sidebar {
 	position: fixed;
-	width: 265px;
+	width: 210px;
 	height: 130%;
 	background: black;
-	left: -265px;
+	left: -210px;
 	transition : all 500ms linear;
 	opacity: 0.3;
 }
@@ -37,8 +37,8 @@
 
 <div class="nav d-flex justify-content-around py-2 mb-2">
   <nav class="nav d-flex justify-content-between">
-    		 <div id="sidebar">
-    		 안녕하세요
+    		 <div id="sidebar" style="background-color: black; opacity: 0.5; text-align: center; color: white;">
+    		 테스트중 입니다.
     		 
 			</div>
 		  <a class="toggle-btn p-2 text-muted" onclick="togglesidebar()">
