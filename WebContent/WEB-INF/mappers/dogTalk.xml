@@ -20,5 +20,10 @@
 		select * from dogTalk order by writedate desc
 	</select>
 	
+<!-- 특정 개가 작성한 talk 뽑는거 -->
+	<select id="getByMyDogTalk" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select * from dogtalk where talker = #{talker} order by writedate desc
+	</select>
+	
 </mapper>
 

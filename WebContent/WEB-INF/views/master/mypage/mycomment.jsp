@@ -3,68 +3,52 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<h2>강아지 찾기</h2>
-<table class="table table-hover">
-  		<thead>
-	     <tr>
-    	  <th><small>NO</small></th>
-    	  <th><small>제목</small></th>
-    	  <th><small>작성자</small></th>
-     	  <th><small>날짜</small></th>
-	     </tr>
-  		</thead>
-  		<tbody>
-     		<tr>
-				<td></td>
-				<td></td>
-     			<td><a href="#"></a></td>
-     			<td></td>
-     		</tr>
-	  </tbody>
-</table>
 <h2>데려가시개(분양)</h2>
 <table class="table table-hover">
   		<thead>
 	     <tr>
-     	  <th><small>분양유무</small></th>
-    	  <th><small>제목</small></th>
-     	  <th><small>날짜</small></th>
+     	  <th style="text-align: center;"><small>분양유무</small></th>
+    	  <th style="text-align: center;"><small>제목</small></th>
+     	  <th style="text-align: center;"><small>날짜</small></th>
 	     </tr>
   		</thead>
   		<tbody>
-	     	<c:forEach var="p" items="${parcelList }">
+	     	<c:forEach var="p" items="#">
 	     		<tr>
 					<c:choose>
-						<c:when test="${p.CHOICE == 1 }">
-							<td>[분양중]</td>
+						<c:when test="#">
+							<td style="text-align: center;">[분양중]</td>
 						</c:when>
 						<c:otherwise>
-							<td>[분양완료]</td>
+							<td style="text-align: center;">[분양완료]</td>
 						</c:otherwise>
 					</c:choose>
-	     			<td><a href="${pageContext.servletContext.contextPath }/detail.do?no=${p.NO }">${p.TITLE }</a></td>
-	     			<td><fmt:formatDate value="${p.REGDATE }" /></small></td>
+	     			<td style="text-align: center;"><a href="#">#</a></td>
+	     			<td style="text-align: center;"><fmt:formatDate value="#" /></small></td>
 	     		</tr>
 	     	</c:forEach>
-    	
-  </tbody>
+		</tbody>
 </table>
-<h2>강아지 찾기</h2>
+<h2>같이가시개</h2>
 <table class="table table-hover">
   		<thead>
 	     <tr>
-    	  <th><small>NO</small></th>
-    	  <th><small>제목</small></th>
-    	  <th><small>작성자</small></th>
-     	  <th><small>날짜</small></th>
+    	  <th style="width:80px; text-align: center;"><small>지역구</small></th>
+    	  <th style="width:150px; text-align: center;"><small>제목</small></th>
+    	  <th style="width:50px; text-align: center;"><small>댓글내용</small></th>
+    	  <th style="width:80px; text-align: center;"><small>작성자</small></th>
+     	  <th style="width:80px; text-align: center;"><small>댓글작성 날짜</small></th>
 	     </tr>
   		</thead>
   		<tbody>
+  			<c:forEach var="tc" items="${tocmt }">
      		<tr>
-				<td></td>
-				<td></td>
-     			<td><a href="#"></a></td>
-     			<td></td>
+				<td style="text-align: center;">${tc.AREA }</td>
+     			<td style="text-align: center;"><a href="${pageContext.servletContext.contextPath }/together/detail.do?no=${tc.NO }">${tc.TITLE }</a></td>
+				<td style="text-align: center;">${tc.CONTENT }</td>
+     			<td style="text-align: center;">${tc.NICK_1 }</td>
+				<td style="text-align: center;"><fmt:formatDate value="${tc.LEFTDATE }" /></td>
      		</tr>
+     		</c:forEach>
 	  </tbody>
 </table>

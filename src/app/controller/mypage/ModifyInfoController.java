@@ -44,7 +44,7 @@ public class ModifyInfoController {
 		}
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("master");
-		mav.addObject("top", "/WEB-INF/views/master/mypage/top.jsp");
+		mav.addObject("top", "/WEB-INF/views/master/mypage/menu.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/mypage/check.jsp");
 		
 		return mav;
@@ -67,7 +67,7 @@ public class ModifyInfoController {
 		}else {
 			map.put("err", "on");
 			mav.setViewName("master");
-			mav.addObject("top", "/WEB-INF/views/master/mypage/top.jsp");
+			mav.addObject("top", "/WEB-INF/views/master/mypage/menu.jsp");
 			mav.addObject("main", "/WEB-INF/views/master/mypage/check.jsp");
 			
 			return mav;
@@ -104,7 +104,7 @@ public class ModifyInfoController {
 			}
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("master");
-			mav.addObject("top", "/WEB-INF/views/master/mypage/top.jsp");
+			mav.addObject("top", "/WEB-INF/views/master/mypage/menu.jsp");
 			mav.addObject("main", "/WEB-INF/views/master/mypage/index.jsp");
 			
 			return mav;
@@ -112,7 +112,7 @@ public class ModifyInfoController {
 			map.put("err", "on");
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("master");
-			mav.addObject("top", "/WEB-INF/views/master/mypage/top.jsp");
+			mav.addObject("top", "/WEB-INF/views/master/mypage/menu.jsp");
 			mav.addObject("main", "/WEB-INF/views/master/mypage/modify_pw.jsp");
 			
 			return mav;
@@ -124,7 +124,7 @@ public class ModifyInfoController {
 	public ModelAndView modifyMemberInfoHandle(WebRequest wr, @RequestParam Map param, ModelMap map) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("master");
-		mav.addObject("top", "/WEB-INF/views/master/mypage/top.jsp");
+		mav.addObject("top", "/WEB-INF/views/master/mypage/menu.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/mypage/modify_info.jsp");
 		
 		return mav;
@@ -167,7 +167,7 @@ public class ModifyInfoController {
 			}
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("master");
-			mav.addObject("top", "/WEB-INF/views/master/mypage/top.jsp");
+			mav.addObject("top", "/WEB-INF/views/master/mypage/menu.jsp");
 			mav.addObject("main", "/WEB-INF/views/master/mypage/index.jsp");
 			
 			return mav;
@@ -176,7 +176,7 @@ public class ModifyInfoController {
 			map.put("err","on");
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("master");
-			mav.addObject("top", "/WEB-INF/views/master/mypage/top.jsp");
+			mav.addObject("top", "/WEB-INF/views/master/mypage/menu.jsp");
 			mav.addObject("main", "/WEB-INF/views/master/mypage/modify_info.jsp");
 			
 			return mav;

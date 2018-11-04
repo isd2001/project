@@ -26,4 +26,9 @@
 		delete * from find where no#={no}
 	</delete>
 	
+	<!-- 특정 아이디의 게시글 전체 뽑는거 -->
+	<select id="getByFindList" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select * from find where nick = #{nick}
+	</select>
+	
 </mapper>

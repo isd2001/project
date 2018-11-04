@@ -5,14 +5,12 @@
 	<div class="card">
 		<div class="card-header" id="headingOne">
 			<h5 class="mb-0">
-				<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-					지역구를 선택 하시면 해당 지역구의 동물병원이 나옵니다. 원하시는 지역구를 선택 하세요.
-        		</button>
+				<strong><label style="font-size: 18px;">지역구를 선택 하시면 해당 지역구의 동물병원이 나옵니다. 원하시는 지역구를 선택 하세요.</label></strong>
       		</h5>
 		</div>
-		<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+		<div>
 			<div class="card-body">
-				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" onclick="target();" style="font-size: 12px;" value="강남구">
+				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="강남구">
 				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="강동구">
 				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="강북구">
 				<input type="button" class="btn btn-primary btn-sm btn-light" name="gu" style="font-size: 12px;" value="강서구">

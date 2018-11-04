@@ -62,7 +62,6 @@ public class ParcelController {
 		mav.addObject("top", "/WEB-INF/views/master/parcel/top.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/parcel/new.jsp");	
 		
-		
 		return mav;
 	}
 	
@@ -108,7 +107,6 @@ public class ParcelController {
 			mav.addObject("top", "/WEB-INF/views/master/parcel/top.jsp");
 			mav.addObject("main", "/WEB-INF/views/master/parcel/result.jsp");	
 			
-			
 			return mav;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -117,10 +115,8 @@ public class ParcelController {
 			mav.addObject("top", "/WEB-INF/views/master/parcel/top.jsp");
 			mav.addObject("main", "/WEB-INF/views/master/parcel/new.jsp");	
 			
-			
 			return mav;
 		}
-		
 	}
 	
 	// 특정 게시글의 내용 및 댓글 뽑기
@@ -140,8 +136,54 @@ public class ParcelController {
 		mav.addObject("top", "/WEB-INF/views/master/parcel/top.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/parcel/detail.jsp");	
 		
-		
 		return mav;
+	}
+	
+	// 수정할 게시판 내용 추출
+	@RequestMapping("detailmodify.do")
+	public ModelAndView getDetailModify(@RequestParam int no, ModelMap one, WebRequest wr) {
+		Map onedata = parcelRepository.getByOneParcel(no);
+		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
+			one.put("one", onedata);
+			one.put("no", no);
+			
+			ModelAndView mav = new ModelAndView();
+			
+			mav.setViewName("master");
+			mav.addObject("top", "/WEB-INF/views/master/parcel/top.jsp");
+			mav.addObject("main", "/WEB-INF/views/master/parcel/detailmodify.jsp");
+			
+			return mav;
+	}
+	
+	// 게시글 수정 업데이트
+	@RequestMapping("/updatedetail.do")
+//	public modifyDetail(@RequestParam Map param, @RequestParam MultipartFile mainimage, @RequestParam MultipartFile file1, @RequestParam MultipartFile file2, ModelMap map, WebRequest wr) throws IOException
+	public ModelAndView updateDetail(@RequestParam Map param, ModelMap map, WebRequest wr) {
+		Map data = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
+		String id = (String)data.get("ID");
+		param.put("writer", id);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		try {
+			int r = parcelRepository.updateDetail(param);
+			
+			mav.setViewName("master");
+			mav.addObject("top", "/WEB-INF/views/master/parcel/top.jsp");
+			mav.addObject("main", "/WEB-INF/views/master/parcel/result.jsp");	
+			
+			return mav;
+		}catch(Exception e) {
+			e.printStackTrace();
+			map.put("err", "on");
+			mav.setViewName("master");
+			mav.addObject("top", "/WEB-INF/views/master/parcel/top.jsp");
+			mav.addObject("main", "/WEB-INF/views/master/parcel/new.jsp");	
+			
+			return mav;
+		}
+		
 	}
 	
 	

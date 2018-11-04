@@ -53,7 +53,7 @@
 	<hr class="mb-4">
 		<div id="map" style="width:100%;height:350px;"></div>
 	<hr class="mb-4">
-	<h5 class="mb-3" >강아지 정보</h5>
+	<h4 class="mb-3" align="center">강아지 정보</h4>
 	<div class="row">
 		<div class="col-md-6 mb-3">
 			<label for="firstName">견종</label>
@@ -105,7 +105,7 @@
 
 </form>
 
-<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8732ddf8bab883cf85aa0180da9e413d&libraries=services,clusterer,drawing"></script> -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8732ddf8bab883cf85aa0180da9e413d&libraries=services,clusterer,drawing"></script>
 <script>
 /* 	var address = function() {
 		// 주소 작성 값 추출
@@ -116,8 +116,7 @@
 	var mapContainer = document.getElementById("map"), // 지도를 표시할 div 
 	mapOption = {
 		center : new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-		level : 3
-	// 지도의 확대 레벨
+		level : 3	// 지도의 확대 레벨
 	};
 
 	// 지도를 생성합니다    

@@ -16,3 +16,4 @@
 	      		<input type="password" id="param" name="param" class="form-control" placeholder="비밀번호" required autofocus>
 	     	 <button class="btn btn-lg btn-primary btn-block" type="submit">확인</button>
 		</form>
+	     	 <a href="${pageContext.servletContext.contextPath }/mypage.do"><button type="button" class="btn btn-lg btn-primary btn-block" >취소</button></a>

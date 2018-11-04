@@ -31,4 +31,24 @@ public class MyPageRepository {
 	public List<Map> getByParcelList(String writer) {
 		return template.selectList("parcel.getByParcelList", writer);
 	}
+	
+	// 찾아주시개 게시판 아이디 별로 가져오기
+	public List<Map> getByFindList(String nick) {
+		return template.selectList("find.getByFindList", nick);
+	}
+	
+	// 같이가시개 게시판 닉네임 별로 가져오기
+	public List<Map> getByTogetherList(String nick) {
+		return template.selectList("together.getByTogetherList", nick);
+	}
+	
+	// 같이가시개 게시판 닉네임 별로 댓글 가져오기
+	public List<Map> getByTogetherComment(String nick) {
+		return template.selectList("tocomment.getByTogetherComment", nick);
+	}
+	
+	// 개톡 개이름 별로 뽑기
+	public List<Map> getByMyDogTalk(String talker) {
+		return template.selectList("dogTalk.getByMyDogTalk", talker);
+	}
 }

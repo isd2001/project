@@ -5,7 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 	<form class="form-signin" action="${pageContext.servletContext.contextPath }/change_pw.do" method="post" >
-		<h1 class="h3 mb-3 font-weight-normal">Please Password Change</h1>
+		<h1 class="h3 mb-3 font-weight-normal" style="margin-top: 50px;">비밀번호 변경</h1>
      
 		<c:if test="${!empty err }">
 			<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -16,18 +16,13 @@
 			</div>
      		</c:if>
      
-      	<label for="id" class="sr-only">기존 비밀번호</label>
-      		<input type="password" id="originpass" name="originpass" class="form-control" placeholder="기존 비밀번호" required autofocus>
-      	<label for="pass" class="sr-only">신규 비밀번호</label>
-      		<input type="password" id="newpass" name="newpass" class="form-control" placeholder="신규 비밀번호" required>
-      	<label for="pass" class="sr-only">신규 비밀번호 재입력</label>
-      		<input type="password" id="renewpass" name="newpass" class="form-control" placeholder="신규 비밀번호 재입력" required>
+      		<input type="password" id="originpass" name="originpass" class="form-control" style="margin-top: 50px;" placeholder="기존 비밀번호" required autofocus>
+      		<input type="password" id="newpass" name="newpass" class="form-control" style="margin-top: 10px;" placeholder="신규 비밀번호" required>
+      		<input type="password" id="renewpass" name="newpass" class="form-control" style="margin-top: 10px;" placeholder="신규 비밀번호 재입력" required>
       		<span id="msg"></span>
-     	 <button class="btn btn-lg btn-primary btn-block" type="submit" id="btn" disabled>수정</button>
+     	 <button class="btn btn-lg btn-primary btn-block" type="submit" id="btn" style="margin-top: 50px;" disabled>수정</button>
+     	 <a href="${pageContext.servletContext.contextPath }/mypage.do"><button type="button" class="btn btn-secondary btn-lg btn-block" style="margin-top: 10px;" >취소</button></a>
 	</form>
-	<div class="col-md-6 mb-3">
-			<a href="${pageContext.servletContext.contextPath }/mypage.do"><button type="button" class="form-control btn btn-outline-primary" >취소</button></a>
-		</div>
 
 
 <script>
