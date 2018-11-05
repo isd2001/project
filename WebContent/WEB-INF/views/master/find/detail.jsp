@@ -57,7 +57,7 @@
 <div style="text-align: center">
 	<a href="${pageContext.servletContext.contextPath }/find/list.do">
 		<button type="button" class="btn btn-outline-primary">목록으로</button>
-	</a> <a href="${pageContext.servletContext.contextPath }/index.do">
+	</a> <a href="${pageContext.servletContext.contextPath }/main/index.do">
 		<button type="button" class="btn btn-outline-primary">메인으로</button>
 	</a>
 	<div style="text-align: right">

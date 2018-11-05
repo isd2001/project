@@ -28,32 +28,47 @@ public class dogTrainingController {
 	
 	//리스트 불러오기
 	@GetMapping("training.do")
-	public String dtboardHandler(WebRequest wreq,@RequestParam Map map,Model model) {
+	public ModelAndView dtboardHandler(WebRequest wreq,@RequestParam Map map,Model model) {
 		
 		List<Map> getAlldt = dr.getAlldt();
 		System.out.println("getAlldt >>" + getAlldt);
 		
 		wreq.setAttribute("list", getAlldt, WebRequest.SCOPE_REQUEST);
 		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("master");
+		mav.addObject("top", "/WEB-INF/views/master/dogTraining/top.jsp");
+		mav.addObject("main", "/WEB-INF/views/master/dogTraining/main.jsp");
 		
-		return "dogTraining.training";
+		return mav;
+	
 	} // end dtboard
 	
 	//글 목록 클릭해서 디테일
 		@GetMapping("/detail.do")
-		public String readdt(@RequestParam int NUM,WebRequest wreq) {
+		public ModelAndView readdt(@RequestParam int NUM,WebRequest wreq) {
 			Map read =dr.readdt(NUM);
 			System.out.println("글 정보>>"+ read );
 			
 			wreq.setAttribute("read",read, WebRequest.SCOPE_REQUEST);
 
-			return "dogTraining/detail";
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("master");
+			mav.addObject("top", "/WEB-INF/views/master/dogTraining/top.jsp");
+			mav.addObject("main", "/WEB-INF/views/master/dogTraining/detail.jsp");
+			
+			return mav;
 		} //end dtboardread
 		
 		//글쓰기
 		@GetMapping("/write.do")
-		public String writeHandle() {	
-			return "dogTraining/write";
+		public ModelAndView writeHandle() {	
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("master");
+			mav.addObject("top", "/WEB-INF/views/master/dogTraining/top.jsp");
+			mav.addObject("main", "/WEB-INF/views/master/dogTraining/write.jsp");
+			
+			return mav;
 		}//end dttwrite
 	
 }
