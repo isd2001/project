@@ -6,68 +6,68 @@
 <link rel="stylesheet"
 	href="${pageContext.servletContext.contextPath }/css/blog.css">
 <form method="post" enctype="multipart/form-data"
-	action="${pageContext.servletContext.contextPath }/help/add.do">
+	action="${pageContext.servletContext.contextPath }/help/write.do">
 		<div class="container text-center">
 			<br/>
 			<div>
-				<h2><b>우리집 댕댕이는요~</b></h2>
+				<h3><b>우리 강아지가..</b></h3>
 			</div>
 			<br/>
-			<div>
-				<p style="text-align: right">${today}</p>
-			</div>
 			<hr class="mb-4">
 		</div>
-	
+
 	<div class="row" >
-		<div class="col-md-6 mb-3">
-			<label for="lastName">제 목</label> <input type="text"
-				class="form-control" id="title" name="title">
+		<div class="col-md-5 mb-3">
+			<label for="lastName">제 목</label> 
+			<input type="text" class="form-control" id="title" name="title">
 		</div>
-		<div class="col-md-6 mb-3">
-			<label for="lastName">사진 첨부</label>
-			<div class="custom-file ">
-				<input type="file" class="custom-file-input"
-					aria-describedby="inputGroupFileAddon03" id="inputfile1" name="inputfile1"
-					accept="image/*, video/*"> <label class="custom-file-label"
-					for="inputGroupFile03"> 사진이 필요시 클릭</label>
-			</div>
+		<div class="col-md-5 mb-3">
+			<label for="lastName">날 짜</label> 
+			<input type="text" class="form-control" id="regdate" name="regdate" placeholder="ex)xxxx-xx-xx">
 			
-			<div class="custom-file ">
-				<input type="file" class="custom-file-input"
-					aria-describedby="inputGroupFileAddon03" id="inputfile2" name="inputfile2"
-					accept="image/*, video/*"> <label class="custom-file-label"
-					for="inputGroupFile03"> 사진이 더 필요하다면 클릭 </label>
+		</div>
+		<div class="col-md-5 mb-3">
+			<label>사진 첨부</label>
+				<div class="custom-file ">
+					<input type="file" class="custom-file-input" aria-describedby="inputGroupFileAddon03" 
+					id="inputfile1" name="inputfile1" accept="image/*, video/*"> 
+					<label class="custom-file-label" for="inputGroupFile03"> If you need a File</label>
+			</div>
+				<div class="custom-file ">
+					<input type="file" class="custom-file-input" aria-describedby="inputGroupFileAddon03" 
+					id="inputfile2" name="inputfile2" accept="image/*, video/*"> 
+					<label class="custom-file-label" for="inputGroupFile03"> If you need a another File</label>
+				</div>
 			</div>
 		</div>
-	</div>
+	
 	<br />
 	<div>
 		<div class="row">
-			<div class="col-md-5 mb-3" style="height: 300px;">
+			<div class="col-md-6 mb-3" style="height: 300px;">
 				<div class="col-6" >
-					<img src="" id="preview1" style="width:300px; height: 290px;"
-						onchange="putImage(this)" class="rounded img-fluid" />
+				<img src="${pageContext.servletContext.contextPath }/image/noimage.png"
+				id="preview1" style="width:300px; height: 290px;" onchange="putImage(this)" class="rounded img-fluid" />
 				</div>
 			</div>
-			<div class="col-md-5 mb-3" style="height: 300px;">
-				<div class="col-6">
-					<img src="" id="preview2" style="width:300px; height: 290px;"
-						onchange="putImage(this)" class="rounded img-fluid"  />
+			<div class="col-md-6 mb-3" style="height: 300px;">
+				<div class="col-6" >
+					<img src="${pageContext.servletContext.contextPath }/image/noimage.png"
+					id="preview2" style="width:300px; height: 290px;" onchange="putImage(this)" class="rounded img-fluid" />
 				</div>
 			</div>
 		</div>
 	</div>
 		<div>
-			<div class="col-12">
+			<div class="col-10">
 				<textarea class="form-control" style="resize: none; height: 240px;"
 					placeholder="내용을 적어주세요" id="content" name="content"></textarea>
 			</div>
 		</div>
 	
 	<br />
-	<div style="text-align: center">
-		<div>
+	<div class="col-10" style="text-align:center">
+		<div >
 			<button type="submit" class="btn btn-outline-primary"
 				onclick="writeOn();">작성 완료</button>
 			<br />
@@ -83,6 +83,7 @@
 			<br/>
 		</div>
 	</div>
+	
 </form>
 <script>
 		$("#inputfile1").on("change", function() {

@@ -39,7 +39,7 @@
 		<div class="container">
 			<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
-				<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
+				<li class="page-item disable-d"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
 				<c:forEach var="p" begin="1" end="4">
 				<li class="page-item"><a class="page-link" href="${pageContext.servletContext.contextPath }/find/list.do?p=${p}">${p }</a></li>
 				</c:forEach>

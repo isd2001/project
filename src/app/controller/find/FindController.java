@@ -86,11 +86,10 @@ public class FindController {
 		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
 		
 		String nick =  (String) userInfo.get("NICKNAME");
-		
-		System.out.println("rmap = "+rmap);
-		System.out.println(picture);
+		String id = (String) userInfo.get("ID");
 
 //		System.out.println("mapx: + " + mapx);
+		rmap.put("id", id);;
 		rmap.put("nick",nick);
 		
 		// 파일 첨부
@@ -110,7 +109,6 @@ public class FindController {
 		
 		String pictureName = "/" + time + "/" + fileName;
 		rmap.put("picture", pictureName);
-		rmap.put("id", "까치");
 
 		try {
 			int r = findRepository.addAllFind(rmap);

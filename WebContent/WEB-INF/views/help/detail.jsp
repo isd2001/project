@@ -21,7 +21,7 @@
 	
 	<div class="row" >
 		<div class="col-md-6 mb-3">
-			<label for="lastName">제 목</label> <input type="text" readonly
+			<label>제 목</label> <input type="text" readonly
 				class="form-control">${data.TITLE}
 		</div>
 	</div>
@@ -44,7 +44,7 @@
 	</div>
 		<div>
 			<div class="col-13">
-				<label for="lasName">내 용</label>
+				<label>내 용</label>
 				<textarea class="form-control" style="resize: none; height: 240px;"
 					  readonly>${data.CONTENT}</textarea>
 			</div>

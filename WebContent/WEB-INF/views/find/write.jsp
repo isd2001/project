@@ -142,11 +142,7 @@
 		// 마커 위치를 클릭한 위치로 옮깁니다
 		marker.setPosition(latlng);
 
-		var message = '클릭한 위치의 위도 : ' + latlng.getLat() + "   /   ";
-		message += '클릭한 위치의 경도 : ' + latlng.getLng();
-
-		var resultDiv = document.getElementById('clickLatlng');
-		resultDiv.innerHTML = message;
+		
 		
 		document.getElementById('mapx').value = latlng.getLat();
 		document.getElementById('mapy').value = latlng.getLng();
