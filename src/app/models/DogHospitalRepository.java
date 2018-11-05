@@ -16,4 +16,9 @@ public class DogHospitalRepository {
 	public List<Map> getDogHospitalByGu(String gu) {
 		return template.selectList("animalhospital.getDogHospitalByGu", gu);
 	}
+	
+	// 전체 좌표뽑기
+	public List<Map> getByCoord() {
+		return template.selectList("animalhospital.getByCoord");
+	}
 }

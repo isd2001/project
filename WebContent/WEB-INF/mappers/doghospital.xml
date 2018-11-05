@@ -5,5 +5,10 @@
 	<select id="getDogHospitalByGu" resultType="java.util.HashMap" parameterType="java.lang.String">
 		select * from ANIMALHOSPITAL where gu = #{gu}
 	</select>
+	
+<!-- 좌표뽑기 -->
+	<select id="getByCoord" resultType="java.util.HashMap" >
+		select xcoord, ycoord from ANIMALHOSPITAL
+	</select>
 
 </mapper>
