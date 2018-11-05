@@ -31,15 +31,14 @@ public class DogHospitalController {
 	
 	@RequestMapping("/getdh.do")
 	public ModelAndView getDogHospital(@RequestParam String gu, ModelMap map) {
-		List<Map> dhlist = dhr.getDogHospitalByGu(gu);
-		map.put("dhlist", dhlist);
+		List dhlist = dhr.getDogHospitalByGu(gu);
+			map.put("dhlist", dhlist);
 		
 		ModelAndView mav = new ModelAndView();
 		
 		mav.setViewName("master");
 		mav.addObject("top", "/WEB-INF/views/master/doghospital/top.jsp");
-		mav.addObject("main", "/WEB-INF/views/master/doghospital/index.jsp");
-		mav.addObject("dhlist", dhlist);
+		mav.addObject("main", "/WEB-INF/views/master/doghospital/select.jsp");
 		
 		return mav;
 		

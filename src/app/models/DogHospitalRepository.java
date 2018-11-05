@@ -13,7 +13,7 @@ public class DogHospitalRepository {
 	SqlSessionTemplate template;
 	
 	// 특정 지역구 병원 출력
-	public List<Map> getDogHospitalByGu(String param) {
-		return template.selectList("animalhospital.getDogHospitalByGu", param);
+	public List<Map> getDogHospitalByGu(String gu) {
+		return template.selectList("animalhospital.getDogHospitalByGu", gu);
 	}
 }
