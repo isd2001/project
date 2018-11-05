@@ -2,11 +2,17 @@
 	pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:if test="${result eq 'yes' }">
+<c:if test="${result eq 'on' }">
 	<script>
 		window.alert("글이 정상적으로 처리되셨습니다.")
 	</script>
 </c:if>
+<c:if test="${result eq 'off' }">
+	<script>
+		window.alert("정상 등록이 되지 않았습니다. 필수항목을 다시 체크해주세요.")
+	</script>
+</c:if>
+
 <div class="container">
 <form
 	action="${pageContext.servletContext.contextPath }/together/selectboard.do"
@@ -113,8 +119,7 @@
 				<th scope="col" style="width: 10%"><small>지역</small></th>
 				<th scope="col" style="width: 35%"><small>제목</small></th>
 				<th scope="col" style="width: 20%"><small>작성자</small></th>
-				<th scope="col" style="width: 10%"><small>날짜</small></th>
-				<th scope="col" style="width: 9%"><small>추천</small></th>
+				<th scope="col" style="width: 10%"><small>날짜</small></th>	
 				<th scope="col" style="width: 9%"><small>조회수</small></th>
 			</tr>
 		</thead>
@@ -126,9 +131,8 @@
 					<td><a
 						href="${pageContext.servletContext.contextPath  }/together/detail.do?no=${l.NO }">
 							${l.TITLE }</a></td>
-					<td>-</td>
+					<td>${l.NICK }</td>
 					<td>${l.DAY }</td>
-					<td>${l.GOOD }</td>
 					<td>${l.LOOKUP }</td>
 				</tr>
 			</c:forEach>

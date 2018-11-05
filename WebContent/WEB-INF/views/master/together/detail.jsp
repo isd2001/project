@@ -23,7 +23,7 @@
 		
 	</div>
 	<hr />
-	<form action="${pageContext.servletContext.contextPath }/" method="post">
+
 	<div class="pt-3">
 		<small>주소 > ${list.ADDRESS }</small>
 		<div class="d-flex justify-content-between align-items-center w-100">
@@ -33,12 +33,13 @@
 	<div class="d-flex justify-content-between align-items-center w-100"
 		style="float: right;">
 		<div class="media text-muted pt-3" style="float: right;">
-			<span class="text-gray-dark"><small>추천 > ${list.GOOD }</small></span>
 			<span class="text-gray-dark"><small>조회 > ${list.LOOKUP }</small></span>
 		</div>
-		<button type="button" class="btn btn-warning">추천</button>
+		<a href="${pageContext.servletContext.contextPath }/together/mainboard.do">
+		<button type="button" class="btn btn-outline-dark">
+		메인으로</button></a>
 	</div>
-	</form>
+	
 
 </div>
 <!-- 댓글 -->
@@ -68,10 +69,10 @@
 		</div>-->
 		<div class="input-group mb-3">
 			<div class="input-group-prepend">
-				<span class="input-group-text" id="basic-addon1">Comment</span>
+				<span class="input-group-text" id="basic-addon1" >Comment</span>
 			</div>
 			<input type="text" class="form-control"
-				aria-describedby="basic-addon1" id="comment" name="comment" autocomplete="off">
+				aria-describedby="basic-addon1" id="comment" name="comment" autocomplete="off" placeholder="댓글 입력 후 Enter를 눌러주세요.">
 		</div>
 	</form>
 

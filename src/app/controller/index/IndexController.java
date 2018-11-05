@@ -128,6 +128,8 @@ public class IndexController {
 		
 		if(ar.getPwById(param)) {						
 			Map userInfo =  ar.getUserInfo((String)param.get("id"));
+		
+			
 			wr.setAttribute("userInfo", userInfo, wr.SCOPE_SESSION);
 			System.out.println("userInfo >"+userInfo);
 			String gu = ws.getCoordinateByAddress((String)userInfo.get("ADDRESS"));

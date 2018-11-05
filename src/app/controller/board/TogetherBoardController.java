@@ -62,7 +62,7 @@ public class TogetherBoardController {
 			
 			li.add(map);
 		}
-		System.out.println("li > "+li);
+		
 		wreq.setAttribute("list",li, WebRequest.SCOPE_REQUEST);
 		
 		ModelAndView mav = new ModelAndView();	
@@ -101,19 +101,21 @@ public class TogetherBoardController {
 	}//end selectboard
 
 	@GetMapping("/new.do")
-	public String newGetboard() {
-		return "main.newboard";
+	public ModelAndView newGetboard() {
+		ModelAndView mav = new ModelAndView();	
+		mav.setViewName("master");
+		mav.addObject("top", "/WEB-INF/views/master/together/top.jsp");
+		mav.addObject("main", "/WEB-INF/views/master/together/new.jsp");
+		return mav;	
 	}//end new
 
 
 	@PostMapping("/new.do")
-	public String newPostboard(@RequestParam Map map,WebRequest wreq) {
+	public ModelAndView newPostboard(@RequestParam Map map,WebRequest wreq) {
 		Map info=(Map)wreq.getAttribute("userInfo", wreq.SCOPE_SESSION);
 		String nick=(String)info.get("NICKNAME");
-				
 		String d=(String)map.get("day");
 		String t =(String) map.get("time");		
-
 		
 		String total = d+" "+t;
 		
@@ -127,34 +129,36 @@ public class TogetherBoardController {
 		m.put("address", map.get("address"));
 		m.put("nick", nick);
 		
+		ModelAndView mav = new ModelAndView();	
 		try {
 			int result=together.addTogetherBoard(m);
 			System.out.println("result >"+result);
 			if (result==1) {
 				wreq.setAttribute("result","on", WebRequest.SCOPE_REQUEST);
-				return "redirect:/together/mainboard.do";
+				mav.setViewName("master");
+				mav.addObject("top", "/WEB-INF/views/master/together/top.jsp");
+				mav.addObject("main", "/WEB-INF/views/master/together/mainboard.jsp");
+				return mav;	
 			}else {
 				wreq.setAttribute("result","off", WebRequest.SCOPE_REQUEST);
-				return "main.newboard";
-
+				mav.setViewName("master");
+				mav.addObject("top", "/WEB-INF/views/master/together/top.jsp");
+				mav.addObject("main", "/WEB-INF/views/master/together/mainboard.jsp");
+				return mav;	
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
-			wreq.setAttribute("result","no", WebRequest.SCOPE_REQUEST);
-			return "main.newboard";
+			mav.setViewName("master");
+			mav.addObject("top", "/WEB-INF/views/master/together/top.jsp");
+			mav.addObject("main", "/WEB-INF/views/master/together/mainboard.jsp");
+			return mav;	
 		}
 
 
 	}//end new
-
-	@GetMapping("/map2.do")
-	public String map2GetHandle() {
-		return "together.board/map2";
-	}//end map2
-
+	
 	@GetMapping("/detail.do")
-	public String detailHandle(@RequestParam Map map,WebRequest wreq) {
+	public ModelAndView detailHandle(@RequestParam Map map,WebRequest wreq) {
 		Map info=(Map)wreq.getAttribute("userInfo", wreq.SCOPE_SESSION);
 		String no = (String)map.get("no");
 		String nick=(String)info.get("NICKNAME");
@@ -163,21 +167,32 @@ public class TogetherBoardController {
 		int t = together.updatelookup(no);
 		
 		Map target=together.getOneByNo(no);
-
+		
 		List<Map> comment = tocomment.getCommentByNo(no);
-
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-
+		
 		for (int i = 0; i < comment.size(); i++) {
 			String day=sdf.format(comment.get(i).get("LEFTDATE"));
 			comment.get(i).put("day",day);
 		}
-
+		
 		wreq.setAttribute("comment", comment, WebRequest.SCOPE_REQUEST);
 		wreq.setAttribute("list", target, WebRequest.SCOPE_REQUEST);
-		return "main.detail";
 		
+		ModelAndView mav = new ModelAndView();	
+		mav.setViewName("master");
+		mav.addObject("top", "/WEB-INF/views/master/together/top.jsp");
+		mav.addObject("main", "/WEB-INF/views/master/together/detail.jsp");		
+		
+		return mav;	
 	}//end detail
+
+	@GetMapping("/map2.do")
+	public String map2GetHandle() {
+		return "together.board/map2";
+	}//end map2
+
 
 	
 	@PostMapping("/detail.do")
@@ -206,17 +221,6 @@ public class TogetherBoardController {
 		}
 	
 	}//end detail.do
-	
-	@GetMapping("good.do")
-	public String goodPostHandle(@RequestParam Map param,WebRequest wr) {
-		String no=(String)param.get("no");
-		System.out.println("no !!>"+no);
-		int result=together.updategood(no);		
-		
-		wr.setAttribute("no", no, wr.SCOPE_REQUEST);
-		return "redirect:/together/detail.do";
-	}//end good.do
-	
 	
 	@GetMapping("ajax.do")
 	@ResponseBody

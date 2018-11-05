@@ -4,8 +4,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet"
 	href="${pageContext.servletContext.contextPath }/css/blog.css">
+
+<link rel="stylesheet"
+	href="${pageContext.servletContext.contextPath }/css/navcss.css">
+
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 
 <link rel="stylesheet"	href="${pageContext.servletContext.contextPath }/css/navcss.css">
 
@@ -13,7 +19,6 @@
 
 
 <style>
-
  span.logo{
    font-family: 'Cute Font', cursive;
    font-size: 60px;
@@ -42,6 +47,7 @@
 		});
 	};
 </script>
+
 <header class="blog-header py-3"<%-- style="background: url('${pageContext.servletContext.contextPath }/image/grass.jpg') "  --%> >
 
 	<div class="row flex-nowrap justify-content-between align-items-center">
@@ -72,56 +78,37 @@
 			</c:forEach>
 			</div>
 		</div>
-				<c:choose>
-					<c:when test="${not empty userInfo}">
-						<div class="container justify-content-end align-items-center form-inline">
 
-						<ul id="navmenu">
-							<li><a href="#">접속중유저</a>
-								<ul class="sub1" id="connectlist">
-												
-								</ul>
-							</li>
-						</ul>
-							<a class="btn btn-sm btn-success"
-								href="${pageContext.servletContext.contextPath }/mypage.do">마이페이지</a>
-							<a class="btn btn-sm btn-danger"
-								href="${pageContext.servletContext.contextPath }/logout.do">로그아웃</a>
+	<div class="col-4 text-center">
+		<c:choose>
+			<c:when test="${not empty userInfo}">
+				<div class=" justify-content-end align-items-center form-inline">
 
-						</div>
-					</c:when>
-					<c:otherwise>
-						<div class="justify-content-end align-items-center">
-							<a class="btn btn-sm btn-success"
-								href="${pageContext.servletContext.contextPath}/main/login.do">로그인</a>
-							<a class="btn btn-sm btn-info"
-								href="${pageContext.servletContext.contextPath }/main/terms.do">회원가입</a>
-						</div>
-					</c:otherwise>
-				</c:choose>
-			<div class="row justify-content-end">
-				<c:choose>
-					<c:when test="${not empty userInfo}">
-						<div class="justify-content-end">
-							오늘의 ${gu} 날씨 :
-							<script>
-								getWeather("${gu}");
-							</script>
-							<span id="currentTemp"></span><br>(최고 : <span id="tempMax"></span>최저:<span
-								id="tempMin"></span>)
-						</div>
-					</c:when>
-					<c:otherwise>
-						<div class="justify-content-end">
-							오늘의 강남구 날씨 :
-							<script>
-								getWeather("강남구");
-							</script>
-							<span id="currentTemp"></span><br>(최고 : <span id="tempMax"></span>/최저:<span
-								id="tempMin"></span>)
-						</div>
-					</c:otherwise>
-				</c:choose>
+
+					<a class="btn btn-sm btn-success"
+						href="${pageContext.servletContext.contextPath }/mypage.do">마이페이지</a>
+					<a class="btn btn-sm btn-danger"
+						href="${pageContext.servletContext.contextPath }/logout.do">로그아웃</a>
+					<br/>
+				</div>
+					<ul id="navmenu" style="margin-left: 185px;">
+						<li><a href="#">접속중유저</a>
+							<ul class="sub1" id="connectlist">
+							</ul>
+						</li>
+					</ul> 
+			</c:when>
+			<c:otherwise>
+				<div class="justify-content-end align-items-center">
+					<a class="btn btn-sm btn-success"
+						href="${pageContext.servletContext.contextPath}/main/login.do">로그인</a>
+					<a class="btn btn-sm btn-info"
+						href="${pageContext.servletContext.contextPath }/main/terms.do">회원가입</a>
+				</div>
+			</c:otherwise>
+		</c:choose>
+		</div>
+		<div class="row justify-content-end">
 
 		</div>
 	</div>
@@ -146,11 +133,9 @@
 							<div id="modal-img"></div>
 						</div>
 						<div class="col-7">
-							ID ▶ <span id="id"></span><br />
-							닉네임 ▶<span id="nickname"></span><br />
-							강아리 이름▶ <span id="dogname"></span><br />
-							강아지 종류▶ <span id="dogtype"></span><br />
-							한마디 ▶ <span id="usercomment"></span><br />
+							ID ▶ <span id="id"></span><br /> 닉네임 ▶<span id="nickname"></span><br />
+							강아리 이름▶ <span id="dogname"></span><br /> 강아지 종류▶ <span
+								id="dogtype"></span><br /> 한마디 ▶ <span id="usercomment"></span><br />
 						</div>
 					</div>
 				</div>
@@ -163,15 +148,18 @@
 	</div>
 
 	<script>	
-		var ws = new WebSocket("ws://" + location.host
+		 var ws = new WebSocket("ws://" + location.host
 				+ "${pageContext.servletContext.contextPath}/access.do");
 
 		ws.onmessage = function(evt) {
 			var obj = JSON.parse(evt.data);
 			console.log("obj > " + obj);
 			var html = "";
-			for (var i = 0; i < obj.length; i++) {
-
+			for (var i = 0; i < obj.length; i++) {				
+			 	if (obj[i]=="${userInfo.NICKNAME}") {
+				html+="<li><a href=\"#\">"+obj[i]+"</a>";		
+				html+="</li>";
+				}else{	 		
 				html+="<li><a href=\"#\">"+obj[i]+"</a>";
 				html+="<ul class=\"sub2\">";
 				html+="<li><a onclick=\"openchat('"+obj[i]+"')\" value=\""+obj[i]+ "\" >1:1대화</a></li>";
@@ -179,6 +167,8 @@
 					+ obj[i] + "')\" \">정보 보기</a></li>";
 				html+="</ul>";
 				html+="</li>";
+				}//end if..else
+					
 			}//end for		
 				
 			document.getElementById("connectlist").innerHTML = html;
@@ -222,5 +212,5 @@
 
 				});
 
-		};//end openmodal
+		};//end openmodal 
 	</script>

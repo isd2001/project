@@ -101,6 +101,10 @@ public class MainController {
 		
 		if(ar.getPwById(param)) {						
 			Map userInfo =  ar.getUserInfo((String)param.get("id"));
+			String nick = (String)userInfo.get("NICKNAME");
+			System.out.println("닉에임 >>"+nick);
+				
+			wr.setAttribute("nick", nick, wr.SCOPE_SESSION);
 			wr.setAttribute("userInfo", userInfo, wr.SCOPE_SESSION);
 			String gu = ws.getCoordinateByAddress((String)userInfo.get("ADDRESS"));
 			wr.setAttribute("gu", gu, wr.SCOPE_SESSION);			
