@@ -26,16 +26,16 @@
 				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=마포구" >마포구</a>
 				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=서대문구" >서대문구</a>
 				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=서초구" >서초구</a>
-				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=성동구" >성동구</a>
-				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=성북구" >성북구</a>
-				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=송파구" >송파구</a>
-				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=양천구" >양천구</a>
-				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=영등포구" >영등포구</a>
-				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=용산구" >용산구</a>
-				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=은평구" >은평구</a>
-				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=종로구" >종로구</a>
-				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=중구" >중구</a>
-				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=중랑구" >중랑구</a>
+				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px; margin-top: 5px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=성동구" >성동구</a>
+				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px; margin-top: 5px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=성북구" >성북구</a>
+				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px; margin-top: 5px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=송파구" >송파구</a>
+				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px; margin-top: 5px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=양천구" >양천구</a>
+				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px; margin-top: 5px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=영등포구" >영등포구</a>
+				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px; margin-top: 5px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=용산구" >용산구</a>
+				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px; margin-top: 5px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=은평구" >은평구</a>
+				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px; margin-top: 5px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=종로구" >종로구</a>
+				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px; margin-top: 5px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=중구" >중구</a>
+				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px; margin-top: 5px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=중랑구" >중랑구</a>
 			</div>
 		</div>
 	</div>
@@ -44,23 +44,23 @@
 <table class="table table-hover">
 		<thead>
 			<tr>
-				<th scope="col" style="width: 10%"><small>지역</small></th>
-				<th scope="col" style="width: 35%"><small>구분</small></th>
-				<th scope="col" style="width: 20%"><small>병원이름</small></th>
-				<th scope="col" style="width: 10%"><small>주소</small></th>
-				<th scope="col" style="width: 9%"><small >전화번호</small></th>
-				<th scope="col" style="width: 9%"><small>우편번호</small></th>
+				<th scope="col" style="text-align: center; width: 8% "><small>지역</small></th>
+				<th scope="col" style="text-align: center; width: 10%"><small>구분</small></th>
+				<th scope="col" style="text-align: center; width: 20%"><small>병원이름</small></th>
+				<th scope="col" style="text-align: center; width: 40%"><small>주소</small></th>
+				<th scope="col" style="text-align: center; width: 10%"><small >전화번호</small></th>
+				<th scope="col" style="text-align: center; width: 8%"><small>우편번호</small></th>
 			</tr>
 		</thead>
 	<tbody>
 	<c:forEach var="dh" items="${dhlist }">
 		<tr>
-			<td>${dh.GU }</td>
-			<td>${dh.SORT }</td>
-			<td><a href="#">${dh.HOSPITALNAME }</a></td>
-			<td>${dh.ADDRESS }</td>
-			<td>${dh.PHONE }</td>
-			<td>${dh.POSTALCODE }</td>
+			<td style="font-size: 12px; text-align: center;">${dh.GU }</td>
+			<td style="font-size: 12px; text-align: center;">${dh.SORT }</td>
+			<td style="font-size: 12px; text-align: center;"><a href="#">${dh.HOSPITALNAME }</a></td>
+			<td style="font-size: 12px; text-align: center;">${dh.ADDRESS }</td>
+			<td style="font-size: 12px; text-align: center;">${dh.PHONE }</td>
+			<td style="font-size: 12px; text-align: center;">${dh.POSTALCODE }</td>
 		</tr>
 	</c:forEach>
 	</tbody>

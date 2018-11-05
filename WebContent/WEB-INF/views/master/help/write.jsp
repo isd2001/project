@@ -20,12 +20,7 @@
 		<div class="col-md-5 mb-3">
 			<label for="lastName">제 목</label> 
 			<input type="text" class="form-control" id="title" name="title">
-		</div>
-		<div class="col-md-5 mb-3">
-			<label for="lastName">날 짜</label> 
-			<input type="text" class="form-control" id="regdate" name="regdate" placeholder="ex)xxxx-xx-xx">
-			
-		</div>
+		</div>		
 		<div class="col-md-5 mb-3">
 			<label>사진 첨부</label>
 				<div class="custom-file ">

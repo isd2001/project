@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath }/css/parcel.css">
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath }/css/gallery.css">
 <div id="topad" class = "topad " data-ride="topad">
 	 <div class="topad-inner">
 	 <div class="top-item">

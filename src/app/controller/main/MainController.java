@@ -2,11 +2,14 @@ package app.controller.main;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.SourceFilteringListener;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +25,7 @@ import app.models.FindRepository;
 import app.models.ParcelRepository;
 import app.models.accountRepository;
 import app.models.dogTalkRepository;
+import app.models.searchRepository;
 import app.service.WeatherService;
 
 @Controller
@@ -47,10 +51,27 @@ public class MainController {
 	
 	@Autowired
 	dogTalkRepository dtr;
+	
+	@Autowired
+	searchRepository sr;
+	@SuppressWarnings("unchecked")
 	@GetMapping("/index.do")
 	public ModelAndView mainIndexHandle(WebRequest wr) {
 		
 		dtr.getSomeFromDogTalk();
+		
+		System.out.println(sr.getSearch());
+		
+		List recommendKeywords = sr.getSearch();
+		recommendKeywords.sort(new Comparator<Map>() {
+			public int compare(Map m1, Map m2)	{
+				int count1 = (int) m1.get("count");
+				int count2 = (int) m2.get("count");
+				
+				return count2-count1;
+			}
+		
+		});
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("master");
@@ -58,7 +79,8 @@ public class MainController {
 		mav.addObject("main", "/WEB-INF/views/master/index/main.jsp");
 		mav.addObject("dtrList",dtr.getSomeFromDogTalk());
 		mav.addObject("findList", fr.getAllFind());
-		mav.addObject("parcelList", pr.getAllByParcel());
+		mav.addObject("parcelList", pr.getAllByParcel());		
+		wr.setAttribute("recommendKeywords", recommendKeywords, wr.SCOPE_SESSION);
 		return mav;
 	}
 	

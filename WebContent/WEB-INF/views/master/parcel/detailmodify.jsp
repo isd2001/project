@@ -1,51 +1,64 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <hr class="mb-4">
-<h4 class="mb-3" align="center">분양 글쓰기</h4>
+<h4 class="mb-3" align="center">분양 글 수정</h4>
 
-<form action="${pageContext.servletContext.contextPath }/add.do" method="post" enctype="multipart/form-data">
-	<input type="hidden" name="lat" value="" id="lat"/>
-	<input type="hidden" name="longi" value="" id="longi"/>
+<%-- <form action="${pageContext.servletContext.contextPath }/modifyok.do" method="post" enctype="multipart/form-data"> --%>
+<form action="${pageContext.servletContext.contextPath }/updatedetail.do" method="post" >
+	<input type="hidden" name="lat" value="${one.LAT }" id="lat"/>
+	<input type="hidden" name="longi" value="${one.LONGI }" id="longi"/>
+	<input type="hidden" name="no" value="${one.NO }" id="no"/>
 	<div class="row">
 		<div class="col-md-6 mb-3">
 			<label for="lastName">제목</label>
-			<input type="text" class="form-control" id="title" name="title">
+			<input type="text" class="form-control" id="title" name="title" value="${one.TITLE }">
 		</div>
 		<div class="col-md-6 mb-3">
 			<label for="lastName">메인이미지</label>
-			<input type="file" class="form-control" id="mainimage" name="mainimage">
+			<input type="file" class="form-control" id="mainimage" name="mainimage" disabled>
 		</div>
 		<div class="col-md-6 mb-3">
 			<label for="lastName">분양정보</label>
 			<div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="choice" value="1"> <label class="form-check-label" for="inlineCheckbox1">분양중</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="choice" value="0"> <label class="form-check-label" for="inlineCheckbox2">분양완료</label>
-				</div>
+				<c:choose>
+					<c:when test="${one.CHOICE == 1 }">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="choice" value="1" checked="checked"><label class="form-check-label" for="inlineCheckbox1">분양중</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="choice" value="0"><label class="form-check-label" for="inlineCheckbox2">분양완료</label>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="choice" value="1"><label class="form-check-label" for="inlineCheckbox1">분양중</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="choice" value="0" checked="checked"><label class="form-check-label" for="inlineCheckbox2">분양완료</label>
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
-		
 		<div class="col-md-6 mb-3">
 			<label for="lastName">분양자 ID</label>
 			<input type="text" class="form-control" id="writer" name="writer" value="${userInfo.ID }" disabled>
 		</div>
 		<div class="col-md-6 mb-3">
 			<label for="lastName">분양자 핸드폰 번호</label>
-			<input type="text" class="form-control" id="phone" name="phone">
+			<input type="text" class="form-control" id="phone" name="phone" value="${one.PHONE }">
 		</div>
 		<div class="col-md-6 mb-3">
 
 			<label for="lastName">분양장소(상세주소입력)</label>			
 			<!-- ======================================================= -->
 			<button type="button" onclick="addressPopUp()" >간편 주소 입력</button>
-					<input type="text" class="form-control" id="area" placeholder="간편 주소" readonly="readonly" onchange="address(this);" name="area" >					
+					<input type="text" class="form-control" id="area" placeholder="간편 주소" readonly="readonly" onchange="address(this);" name="area" value="${one.AREA }">					
 			<!-- ======================================================= -->
 
 		</div>
@@ -53,46 +66,47 @@
 	<hr class="mb-4">
 		<div id="map" style="width:100%;height:350px;"></div>
 	<hr class="mb-4">
-	<h5 class="mb-3" >강아지 정보</h5>
+	<h4 class="mb-3" align="center">강아지 정보</h4>
 	<div class="row">
 		<div class="col-md-6 mb-3">
 			<label for="firstName">견종</label>
-			<input type="text" class="form-control" id="breeds" name="breeds">
+			<input type="text" class="form-control" id="breeds" name="breeds" value="${one.BREEDS }">
 		</div>
 		<div class="col-md-6 mb-3">
 			<label for="lastName">성별</label>
-			<input type="text" class="form-control" id="gender" name="gender">
+			<input type="text" class="form-control" id="gender" name="gender" value="${one.GENDER }">
 		</div>	
 		<div class="col-md-6 mb-3">
 			<label for="lastName">분류<small style="color: green;">(소형견, 중형견, 대형견..)</small></label></label>
-			<input type="text" class="form-control" id="sort" name="sort">
+			<input type="text" class="form-control" id="sort" name="sort" value="${one.SORT }">
 		</div>	
 		<div class="col-md-6 mb-3">
 			<label for="lastName">나이</label>
-			<input type="text" class="form-control" id="age" name="age">
+			<input type="text" class="form-control" id="age" name="age" value="${one.AGE }">
 		</div>	
 		<div class="col-md-6 mb-3">
 			<label for="lastName">성격</label>
-			<input type="text" class="form-control" id="character" name="character ">
+			<input type="text" class="form-control" id="character" name="character" value="${one.CHARACTER }">
 		</div>
 		<div class="col-md-6 mb-3">
 			<label for="lastName">접종</label>
-			<input type="text" class="form-control" id="inoculation" name="inoculation">
+			<input type="text" class="form-control" id="inoculation" name="inoculation" value="${one.INOCULATION }">
 		</div>
 		
 		<div class="col-md-12">
 			<div class="input-group-prepend">
 				<span class="input-group-text">상세내용</span>
 			</div>
-			<textarea class="form-control" aria-label="With textarea" id="content" name="content"></textarea>
+			<textarea class="form-control" aria-label="With textarea" id="content" name="content" >${one.CONTENT }</textarea>
 		</div>
 		
 	</div>
 	<hr class="mb-4">
+
  	<div class="form-group">
 		<label>파일 업로드</label>
-			<input name="file1" type="file" class="form-control" >
-			<input name="file2" type="file" class="form-control" >
+			<input name="file1" type="file" class="form-control" disabled>
+			<input name="file2" type="file" class="form-control" disabled>
 	</div>
 	<div class="row">
 		<div class="col-md-6 mb-3">
@@ -105,7 +119,7 @@
 
 </form>
 
-<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8732ddf8bab883cf85aa0180da9e413d&libraries=services,clusterer,drawing"></script> -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8732ddf8bab883cf85aa0180da9e413d&libraries=services,clusterer,drawing"></script>
 <script>
 /* 	var address = function() {
 		// 주소 작성 값 추출

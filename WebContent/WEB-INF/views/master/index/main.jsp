@@ -5,23 +5,26 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Cute+Font&amp;subset=korean" rel="stylesheet">
+
 
 <style>
-      h6 {
-        font-family: "Anton", sans-serif;
-        font-size: 20px;
-      }
-      af.f {
-        font-weight: 200;
-      
-      }
+h6 {
+  font-family: 'Cute Font', cursive;
+  font-size: 30px;
+  font-weight: 200;
+}
+af.f {
+  font-weight: 200;
+
+}
 </style>
 <body>
 <div class= "container">
 	<div class="row">	
 			
 		<div class="col-md-6">		
-		<div class="my-3 p-3 bg-white rounded shadow-sm">
+		<div class="my-3 p-3 bg-white rounded shadow-sm border border-warning">
 			<h6 class="border-bottom border-gray pb-2 mb-0">Recent GaeTalk</h6>
 			<div id="recent"></div>
 			<div style="height: 300px; overflow-y: scroll;" id="recentUpdates">				
@@ -58,7 +61,7 @@
 	
 		
 		<div class="col-md-6">
-		<div class="my-3 p-3 bg-white rounded shadow-sm">
+		<div class="my-3 p-3 bg-white rounded shadow-sm border border-success">
 			<h6 class="border-bottom border-gray pb-2 mb-0">찾아주시개</h6>
 			<div class="container">
 				<div class="row">
@@ -109,9 +112,9 @@
                 		</c:otherwise>
                 	</c:choose>
 	              </strong>
-	              <h3 class="mb-0">
+	              <h5 class="mb-0">
 	                <a class="text-dark" href="#">${p.TITLE }</a>
-	              </h3>
+	              </h5>
 	              <div class="mb-1 text-muted"><fmt:formatDate value="${p.REGDATE }" /></div>
 	              <p class="card-text mb-auto">견종 : ${p.BREEDS}<br> 성별 : ${p.GENDER } <br> 나이 : ${p.AGE }</p>
 	              <a href="${pageContext.servletContext.contextPath }/detail.do?no=${p.NO }">View</a>

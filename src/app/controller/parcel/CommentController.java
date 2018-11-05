@@ -32,7 +32,7 @@ public class CommentController {
 
 	// 댓글 디비 저장
 	@PostMapping("/addcomment.do")
-	public String addByComments(@RequestParam Map param, ModelMap map) {
+	public String addByComments(@RequestParam Map param) {
 		String serial = UUID.randomUUID().toString().split("-")[0];
 			param.put("serial", serial);
 		try {
@@ -40,7 +40,6 @@ public class CommentController {
 			return "parcel.detail";
 		}catch(Exception e) {
 			e.printStackTrace();
-			map.put("err", "on");
 			return "parcel.detail";
 		}
 	}

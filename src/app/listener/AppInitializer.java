@@ -13,3 +13,4 @@ public class AppInitializer implements ServletContextListener {
 		ctx.setRequestCharacterEncoding("UTF-8");
 	}
 }
+   

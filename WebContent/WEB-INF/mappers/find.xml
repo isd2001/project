@@ -24,8 +24,8 @@
 	
 	<delete id="deleteFind" >
 		delete * from find where no=#{no}
-	</delete>
-	
+	</delete>	
+
 	<select id="resultForSearchFromFind" resultType="java.util.HashMap" parameterType="java.lang.String">
 		select * from find where title like #{search} or dogname like #{search} or picture like #{search} or fcontent like #{search} or scontent like #{search} or nick like #{search} or id like #{search}
 	</select>
@@ -33,4 +33,10 @@
 	<select id="getRecentFind" resultType="java.util.HashMap">
 		select * from find order by regdate desc;
 	</select>
+
+	<!-- 특정 아이디의 게시글 전체 뽑는거 -->
+	<select id="getByFindList" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select * from find where nick = #{nick}
+	</select>
+
 </mapper>

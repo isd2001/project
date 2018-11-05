@@ -32,6 +32,10 @@
 		select good from togetherboard where no=#{no}	
 	</select>
 	
+<!-- 특정 닉네임의 게시글 전체 뽑는거 -->
+	<select id="getByTogetherList" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select * from togetherboard where nick = #{nick}
+	</select>
 	
 </mapper>
 

@@ -21,23 +21,15 @@
 	<select id="getByParcelList" resultType="java.util.HashMap" parameterType="java.lang.String">
 		select * from parcel where writer = #{writer}
 	</select>
-	
+
 	<select id="resultForSearchFromParcel" resultType="java.util.HashMap" parameterType="java.lang.String">
 		select * from parcel where title like #{search} or breeds like #{search} or gender like #{search} or sort like #{search} or age like #{search} or inoculation like #{search} or 
 		content like #{search} or writer like #{search} or mainimage like #{search} or file1 like #{search} or file2 like #{search} or character like #{search}
 	</select>
+
+<!-- 특정 게시글 수정 -->
+	<update id="updateDetail" parameterType="java.util.HashMap">
+		update parcel set title = #{title}, choice = #{choice}, phone = #{phone}, area = #{area}, lat = #{lat}, longi = #{longi}, breeds = #{breeds}, gender = #{gender}, sort = #{sort}, age = #{age}, inoculation = #{inoculation}, content = #{content}, writer = #{writer}, character = #{character} where no = #{no}
+	</update>
+
 </mapper>
-
-<!-- 
-
-특정 아이디의 게시글 전체 뽑는거 (강아지찾기)
-	<select id="getByFindlList" resultType="java.util.HashMap" parameterType="java.lang.String">
-		select * from find where id = #{id}
-	</select>
-	
-특정 아이디의 게시글 전체 뽑는거 (같이가시개)
-	<select id="getByTogetherlList" resultType="java.util.HashMap" parameterType="java.lang.String">
-		select * from find where id = #{id}
-	</select>
-	
--->

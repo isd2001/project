@@ -4,11 +4,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet"
 	href="${pageContext.servletContext.contextPath }/css/blog.css">
-
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <link rel="stylesheet"	href="${pageContext.servletContext.contextPath }/css/navcss.css">
+
+<link href="https://fonts.googleapis.com/css?family=Cute+Font&amp;subset=korean" rel="stylesheet">
+
+
+<style>
+
+ span.logo{
+   font-family: 'Cute Font', cursive;
+   font-size: 60px;
+   font-weight: 700;
+ }
+</style>
 <script>
 	var getWeather = function(gu) {
 		console.log("function Strar !!");
@@ -34,25 +45,32 @@
 <header class="blog-header py-3"<%-- style="background: url('${pageContext.servletContext.contextPath }/image/grass.jpg') "  --%> >
 
 	<div class="row flex-nowrap justify-content-between align-items-center">
-		<div class="col-4 pt-1">
-			<a class="blog-header-logo text-dark"
-				href="${pageContext.servletContext.contextPath }/main/index.do">개놀자</a>
+		<div class="col-4 pt-3">			
 			<a href="${pageContext.servletContext.contextPath }/main/index.do">
-				<img class="mb-4"
+				<img class="mb-4 rounded-circle"
 				src="${pageContext.servletContext.contextPath }/image/dal.jpg"
 				alt="" width="60" height="60">
 			</a>
+			<a class="blog-header-logo text-dark pt-0"
+				href="${pageContext.servletContext.contextPath }/main/index.do"><span class="logo">개놀자</span></a>
 		</div>
 		<div class="col-4 text-center">
-			<nav class="navbar navbar-light bg-light">
-				<form class="form-inline"
-					action="${pageContext.servletContext.contextPath }/search/result.do">
-					<input class="form-control mr-sm-2" type="search"
-						placeholder="Search" aria-label="Search" name="search">
-					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-				</form>
-			</nav>
-
+			<div class= "row">
+				<nav class="navbar navbar-light bg-light">
+					<form class="form-inline"
+						action="${pageContext.servletContext.contextPath }/search/result.do">
+						<input class="form-control mr-sm-2" type="search"
+							placeholder="Search" aria-label="Search" name="search">
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+					</form>
+				</nav>
+			</div>
+			<div class="row">
+				추천 검색어 : &nbsp;
+			<c:forEach var="keyword" items="${recommendKeywords}" begin="0" end="2">
+				<a href = "${pageContext.servletContext.contextPath }/search/result.do?search=${keyword.keyWord}">#${keyword.keyWord}&nbsp;</a>
+			</c:forEach>
+			</div>
 		</div>
 				<c:choose>
 					<c:when test="${not empty userInfo}">

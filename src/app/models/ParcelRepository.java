@@ -52,4 +52,8 @@ public class ParcelRepository {
 		return template.selectList("comments.getByCmtCount", no);
 	}
 
+	// 특정 게시글 수정
+	public int updateDetail(Map param) {
+		return template.update("parcel.updateDetail", param);
+	}
 }

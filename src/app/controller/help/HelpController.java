@@ -75,10 +75,15 @@ public class HelpController {
 	}
 
 	@PostMapping("/write.do")
-	public String addHandler(@RequestParam Map rmap, @RequestParam MultipartFile inputfile1,
+	public ModelAndView addHandler(@RequestParam Map rmap, @RequestParam MultipartFile inputfile1,
 			@RequestParam MultipartFile inputfile2, ModelMap mmap, WebRequest wr)
 			throws IOException, InterruptedException {
 
+		//날짜 설정
+		Date d = new Date(System.currentTimeMillis());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		rmap.put("regdate", sdf.format(d));
+		
 		// 파일 첨부
 		long time = System.currentTimeMillis();
 		String fileName1 = String.valueOf(time) + "_" + inputfile1.getOriginalFilename();
@@ -112,19 +117,23 @@ public class HelpController {
 		rmap.put("nick", nick);
 
 		System.out.println(rmap);
-		ModelAndView mav = new ModelAndView();
-
+		ModelAndView mav = new ModelAndView();		
 		try {
 			int i = help.addAllHelp(rmap);
 			System.out.println("i = " + i);
 			mmap.put("map", rmap);
-
-			return "redirect:/help/list.do";
+			
+			
+			mav.setViewName("redirect:/help/list.do");
+			
+			return mav;			
 
 		} catch (Exception e) {
 			e.printStackTrace();
 
-			return "help.write";
+			mav.setViewName("redirect:/help/write.do");
+			
+			return mav;	
 		}
 	}
 

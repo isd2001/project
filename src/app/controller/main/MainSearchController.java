@@ -1,12 +1,13 @@
 package app.controller.main;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,40 +24,32 @@ public class MainSearchController {
 	@Autowired
 	searchRepository sr;
 	
+	
+	
+	
 	@GetMapping("/result.do")
 	public ModelAndView mainSearchController(@RequestParam String search) {
-		ModelAndView mav = new ModelAndView();
-		System.out.println(search);		
+		Date d = new Date(System.currentTimeMillis());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");		
+		ModelAndView mav = new ModelAndView();		
 		
-		String[] searchKeyWords = search.split("\\s");
+		String[] searchKeyWords = search.split("\\s");	
 		
-		System.out.println(searchKeyWords.toString());
-		
-		List list1 ;
-		
-		
+		List searchList = new ArrayList();
 		for (int i = 0; i < searchKeyWords.length; i++) {
-			list1=sr.resultForSearchFromDogList(searchKeyWords[i]);
-			for (int j = 1; j < searchKeyWords.length; j++) {
-				Map map= (Map) list1.get(i);
-				if(map.containsValue(searchKeyWords[j])==false){
-					list1.remove(i);
-				}
-			}
-		}
+			 searchList.add("%"+searchKeyWords[i]+"%");			
+		}					
+		
+		List resultFromFind = sr.resultForSearchFromFind(searchList);
+		List resultFromParcel = sr.resultForSearchFromParcel(searchList);
+		List resultFromDogList = sr.resultForSearchFromDogList(searchList);		
+		List resultFromDogTalk = sr.resultForSearchFromDogTalk(searchList);
+		List resultFromTogether = sr.resultForSearchFromTogether(searchList);
+		List resultFromNboard = sr.resultForSearchFromNboard(searchList);
 				
-		
-		
-		
-		List resultFromFind = sr.resultForSearchFromFindTitle(search);
-		List resultFromParcel = sr.resultForSearchFromParcelTitle(search);
-		List resultFromDogList = sr.resultForSearchFromDogList(search);
-		
-		
-		
-		
 		if(resultFromFind.size()!=0) {
 			mav.addObject("find",resultFromFind);
+			
 		}
 		if(resultFromParcel.size()!=0) {
 			mav.addObject("parcel",resultFromParcel);
@@ -64,8 +57,40 @@ public class MainSearchController {
 		if(resultFromDogList.size()!=0) {
 			mav.addObject("dogList",resultFromDogList);		
 		}
+		if(resultFromDogTalk.size()!=0) {
+			mav.addObject("dogTalk",resultFromDogTalk);
+		}
+		if(resultFromTogether.size()!=0) {
+			mav.addObject("together",resultFromTogether);
+		}
+		if(resultFromNboard.size()!=0) {
+			mav.addObject("nbaord",resultFromNboard);		
+		}
 		
-		System.out.println(resultFromDogList);
+		if(resultFromFind.size()==0 && resultFromParcel.size()==0 && resultFromDogList.size()==0 &&
+		   resultFromDogTalk.size()==0 && resultFromTogether.size()==0 && resultFromNboard.size() ==0){
+			mav.addObject("noResult", "noResult");
+		}
+		
+		if(resultFromFind.size()!=0 || resultFromParcel.size()!=0 || resultFromDogList.size()!=0 ||
+				   resultFromDogTalk.size()!=0 || resultFromTogether.size()!=0 || resultFromNboard.size() !=0){
+			System.out.println("검색 결과 있음");
+			for (int i = 0; i < searchKeyWords.length; i++) {
+				if(sr.getSearched(searchKeyWords[i]).size()==0){
+					for (int j = 0; j < searchKeyWords.length; j++) {
+						Map map = new HashMap();
+						map.put("keyWord", searchKeyWords[i]);
+						map.put("count", 1);
+						map.put("date", sdf.format(d));		
+						sr.addSearch(map);
+					}					
+				}else {		
+					sr.updateSearch(searchKeyWords[i]);
+				}
+			}
+			
+		}
+		
 		mav.setViewName("master");
 		mav.addObject("top", "/WEB-INF/views/master/search/top.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/search/searchResult.jsp");

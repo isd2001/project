@@ -56,7 +56,7 @@
 			   <div class="col-4 col-sm-4">
 		        <label class="">강아지 사진</label><br>
 				<img src="${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE }" class="img-thumbnail" id="preview">
-				<input type="file" type = "file" class="btn-outline-info" name="dogProfile" id="dogProfile">
+				<input type="file" type = "file" class="btn-outline-info" name="dogProfile" id="dogProfile" value="${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE }">
 				
 		      </div>
 		      <div class="col-8 col-sm-8">
@@ -87,7 +87,7 @@
 		      </div>			
 			
 			</div>
-			<div class="col-md-8 offset-md-2">			
+			<div class="col-md-8 offset-md-2" style="margin-top: 10px;">			
 				<div class="alert alert-warning row" role="alert">
 				하고싶은 말!
 				</div>
@@ -97,6 +97,7 @@
 			<div class="offset-md-2 justify-content-center">	
 				<br>			
 				<button type="submit" class="btn btn-primary">수정</button>
+				<a href="${pageContext.servletContext.contextPath }/mypage.do"><button type="button" class="btn btn-dark" >취소</button></a>
 			</div>
 			
 			<br>

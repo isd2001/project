@@ -4,9 +4,15 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<c:if test="${not empty noResult}">
+	<img src="${pageContext.servletContext.contextPath}/image/noResult.jpg" width="1000px" class="justify-content-center">
+</c:if>
+
+
+
 <c:if test="${not empty find}">
 	<div class="alert alert-info" role="alert">찾아주시개 글에서 (검색결과 :
-		${fn:length(find)}개)</div>
+		${fn:length(find)}개)<a href="${pageContext.servletContext.contextPath}/board/main.do" class="justify-content-end">게시판으로</a></div>
 	<div class="container">
 		<div class="row">
 			<c:forEach var="e" items="${find}">
@@ -135,6 +141,101 @@
 		</div>
 	</div>
 </div>
+<!--========================= 같이가시개 겁색결과 ==================================================-->
+<c:if test="${not empty together}">
+	<div class="alert alert-info" role="alert">같이가시개 글에서 (검색결과 : ${fn:length(together)}개)</div>
+	<div class="row">	
+		<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col" style="width: 3%"><small>NO</small></th>
+						<th scope="col" style="width: 10%"><small>지역</small></th>
+						<th scope="col" style="width: 35%"><small>제목</small></th>
+						<th scope="col" style="width: 20%"><small>작성자</small></th>
+						<th scope="col" style="width: 10%"><small>날짜</small></th>
+						<th scope="col" style="width: 9%"><small>추천</small></th>
+						<th scope="col" style="width: 9%"><small>조회수</small></th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="l" items="${together}">
+						<tr>
+							<th scope="row">${l.NO }</th>
+							<td><small>${l.AREA }</small></td>
+							<td><a
+								href="${pageContext.servletContext.contextPath  }/together/detail.do?no=${l.NO }">
+									${l.TITLE }</a></td>
+							<td>-</td>
+							<td>${l.DAY }</td>
+							<td>${l.GOOD }</td>
+							<td>${l.LOOKUP }</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+		</table>
+		</div>
+</c:if>
+<!--========================= 개톡 겁색결과 ==================================================-->
+<c:if test="${not empty dogTalk}">
+	<div class="alert alert-info" role="alert">개톡 글에서 (검색결과 : ${fn:length(dogTalk)}개)</div>
+	<div class="row">	
+		<c:forEach var="list" items="${dogTalk}">		
+			<div class="col-md-4">	
+						<div class="card" id="form">
+							<div class="card-header d-flex bd-highlight" style="background-color: #FFDEAD  "><div class="flex-grow-1">${list.TALKER}'s comment</div>
+							 <div class="bd-highlight"><small id="date" class="d-flex justify-content-end">${list.WRITEDATE}</small></div></div>
+							<div class="card-body" style="background-color: #AED6F1;">
+								<blockquote class="blockquote mb-0" >
+									<div class="row align-items-center" >
+										<img
+											src="${pageContext.servletContext.contextPath }${list.PICTURE}"
+											style="width: 80px; height: 80px;" class="rounded-circle"
+											id="image">
+			
+										<p >&nbsp;&nbsp;<span style="background-color: white;">${list.CONTENT}</span></p>
+									</div>
+									<footer class="blockquote-footer d-flex justify-content-end "><cite title="Source Title">
+										<span id="address">${list.ADDRESS}...</span> </cite>
+										
+									</footer>
+			
+								</blockquote>
+							</div>
+						</div>		
+			</div>
+		</c:forEach>
+	</div>
+</c:if>
+<!--========================= 공지사항 겁색결과 ==================================================-->
+<c:if test="${not empty nboard}">
+	<div class="alert alert-info" role="alert">공지사항 글에서 (검색결과 : ${fn:length(nboard)}개)</div>
+	<table class="table table-hover">
+
+  		<thead>
+	     <tr>
+    	  <th scope="col" style="width: 7%"><small>NO</small></th>
+    	  <th scope="col" style="width: 50%"><small>제목</small></th>
+     	  <th scope="col" style="width: 15%"><small>날짜</small></th>
+     	  <th scope="col" style="width: 12%"><small >추천</small></th>
+     	  <th scope="col" style="width: 12%"><small>조회수</small></th>
+	     </tr>
+  		</thead>
+  		<tbody>
+     	<c:forEach var="l" items="${nboard }">
+     		<tr>
+     			<th scope="row">${l.BOARD_NUM }</th>
+     			<td>
+     			<a href="${pageContext.servletContext.contextPath }/Nboard/detail.do?BOARD_NUM=${l.BOARD_NUM }">
+     			${l.BOARD_SUBJECT }
+     			</a></td>
+     			<td>${l.BOARD_DATE }</td>
+     			<td>${l.BOARD_COUNT }</td>
+     			<td>${l.BOARD_LOOKUP }</td>
+     		</tr>     		
+     	</c:forEach> 		     	   
+		</tbody>
+</table>
+</c:if>
 
 
 <script>	

@@ -1,6 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+h1{
+   font-family: 'Cute Font', cursive;
+   font-size: 60px;
+   font-weight: 700;
+}
+h4{
+   font-family: 'Cute Font', cursive;
+   font-size: 40px;
+   font-weight: 600;
+}
+
+</style>
 <!DOCTYPE html>
+
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -12,9 +26,9 @@
           <div class="carousel-item active">
             <img class="first-slide" src="${pageContext.servletContext.contextPath }/image/dal.jpg" alt="First slide">
             <div class="container">
-              <div class="carousel-caption text-left">
+              <div class="carousel-caption text-left" style="color:black ">
                 <h1>민우네집 개달이</h1>
-                <p> 안녕 나는 개달이야. 여기서같이 개놀자!</p>
+                <h4> 안녕 나는 달이야. 여기서같이 개놀자!</h4>
                 <p><a class="btn btn-lg btn-success" href="${pageContext.servletContext.contextPath }/main/terms.do" role="button">Sign up today</a></p>
               </div>
             </div>
