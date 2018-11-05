@@ -60,18 +60,23 @@ public class OneChatSocketController extends TextWebSocketHandler{
 		System.out.println("result >>>"+result);
 		onechat.addChat(result);
 		//====================================
-			
+		String nick=(String)session.getAttributes().get("nick");
+		
+		System.out.println("nickname >>"+nick);
+		//====================================
+		
+		
+		
+		
+		
+		//====================================
 		
 		
 		
 		for (int i = 0; i < socketservice.size(); i++) {
-			
-				
-				
-				
-				
-			
-			
+			if (socketservice.list.get(i).getAttributes().get("nick").equals(read.get("recipient"))) {
+				sockets.get(i).sendMessage(message);
+			}
 		}//end for
 		
 		
@@ -95,12 +100,12 @@ public class OneChatSocketController extends TextWebSocketHandler{
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		socketservice.addSocket(session);
+		sockets.add(session);
 	}
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		socketservice.removeSocket(session);
+		sockets.remove(session);
 	}
 	
 	
