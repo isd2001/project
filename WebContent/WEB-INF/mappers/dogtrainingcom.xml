@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DCOMMENT">
+
+<!-- 댓글 조회 -->
+ <select id="readcomment" resultType="java.util.HashMap">
+   select*from DCOMMENT where BOARD=#{BOARD} order by CDATE asc
+ </select>
+ 
+ <!-- 댓글 저장 -->
+ <insert id ="addcomment" parameterType="java.util.HashMap">
+    insert into COMMENT values(DCOMMENT_SEQ.nextval,#{BOARD},#{ID},#{CDATE},{CONTENT})
+ </insert>
+ 
+</mapper>

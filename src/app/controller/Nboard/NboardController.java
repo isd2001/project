@@ -138,12 +138,7 @@ public class NboardController {
 	}//end write
 
 	
-	@RequestMapping(value="/nboard/write.do")
-    public String writeBoardForm() throws Exception{
-        
-        return "nboard/writeForm";
-		
-	}//end 글쓰기 폼
+	
 	
 	//글 목록 클릭해서 디테일
 	@GetMapping("/detail.do")

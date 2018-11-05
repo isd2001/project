@@ -12,5 +12,10 @@
    select*from DTBOARD where NUM=#{NUM}
    </select>
    
+ <!-- 글쓰고 저장 -->
+ <insert id="adddtboard" parameterType="java.util.HashMap">
+   insert into DTBOARD values(DTBOARD_SEQ.nextval,#{SUB},#{CON},#{DTBOARDID},sysdate,0)
+ </insert>
+   
    
   	 </mapper>

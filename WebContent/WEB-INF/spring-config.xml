@@ -44,6 +44,7 @@
 	 	<property name="password" value="oracle"></property>
 	 </bean>
 	 
+	
 	 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="ds"></property>	 
 		<property name="mapperLocations" value="/WEB-INF/mappers/*.xml"></property>
