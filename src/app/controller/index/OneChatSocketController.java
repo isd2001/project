@@ -17,6 +17,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import com.google.gson.Gson;
 
 import app.models.OnechatRepository;
+import app.service.OnechatService;
 import app.service.SocketService;
 
 @Controller
@@ -26,8 +27,7 @@ public class OneChatSocketController extends TextWebSocketHandler{
 	@Autowired
 	OnechatRepository onechat;
 	@Autowired
-	SocketService socketservice;
-	
+	OnechatService onecharservice;
 	
 	List<WebSocketSession> sockets;
 	
@@ -38,18 +38,19 @@ public class OneChatSocketController extends TextWebSocketHandler{
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String me = message.getPayload();
-		System.out.println("me >"+me);
+		System.out.println("me >"+me);		
 		
 		Map read = gson.fromJson(me, Map.class);
 		//====================================
 		// mongodb insert
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date d = new Date();
-		
+		System.out.println("채팅내용>"+onecharservice.list.get(0).getAttributes());
 		
 		List roomlist = new ArrayList<>();
 			roomlist.add(read.get("sender"));
 			roomlist.add(read.get("recipient"));
+		System.out.println("sender>>"+read.get("sender")+" / recipient >"+read.get("recipient"));
 			
 		Map result = new HashMap<>();
 			result.put("roomlist", roomlist);
@@ -60,23 +61,27 @@ public class OneChatSocketController extends TextWebSocketHandler{
 		System.out.println("result >>>"+result);
 		onechat.addChat(result);
 		//====================================
-			
+		String nick=(String)session.getAttributes().get("nick");
 		
+		System.out.println("nickname >>"+nick);
+		//====================================
 		
-		
-		for (int i = 0; i < socketservice.size(); i++) {
-			
-				
-				
-				
-				
+		for (int i = 0; i < sockets.size(); i++) {
+			/*if (onecharservice.list.get(i).getAttributes().get("nick").equals(read.get("recipient"))) {
+				sockets.get(i).sendMessage(message);
+			}else if(onecharservice.list.get(i).getAttributes().get("nick").equals(read.get("sender"))) {
+				sockets.get(i).sendMessage(message);
+			}*/
+			if (sockets.get(i).getAttributes().get(i).equals(read.get("recipient"))) {
+				sockets.get(i).sendMessage(message);
+			}else if (sockets.get(i).getAttributes().get(i).equals(read.get("sender"))) {
+				sockets.get(i).sendMessage(message);
+			}
 			
 			
 		}//end for
 		
-		
-		
-		
+
 		//====================================
 		for (int i = 0; i < sockets.size(); i++) {
 			try {
@@ -85,6 +90,7 @@ public class OneChatSocketController extends TextWebSocketHandler{
 				e.printStackTrace();				
 			}
 		}//end for
+		
 		//====================================
 		//noticesocket
 		
@@ -95,12 +101,12 @@ public class OneChatSocketController extends TextWebSocketHandler{
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		socketservice.addSocket(session);
+		sockets.add(session);
 	}
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		socketservice.removeSocket(session);
+		sockets.remove(session);
 	}
 	
 	

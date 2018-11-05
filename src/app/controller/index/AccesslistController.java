@@ -25,7 +25,7 @@ public class AccesslistController extends TextWebSocketHandler{
 		
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println("accessController entered");
+		
 		socketService.addSocket(session);
 		
 		//=====================================================
@@ -37,7 +37,6 @@ public class AccesslistController extends TextWebSocketHandler{
 			list.add(m.get("NICKNAME"));			
 		}
 		TextMessage tm= new TextMessage(gson.toJson(list));
-		System.out.println("tm >"+tm);
 		
 		for (int i = 0; i < socketService.size(); i++) {
 			socketService.list.get(i).sendMessage(tm);
