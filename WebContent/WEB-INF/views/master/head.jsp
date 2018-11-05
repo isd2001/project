@@ -154,24 +154,39 @@
 		ws.onmessage = function(evt) {
 			var obj = JSON.parse(evt.data);
 			console.log("obj > " + obj);
-			var html = "";
-			for (var i = 0; i < obj.length; i++) {				
-			 	if (obj[i]=="${userInfo.NICKNAME}") {
-				html+="<li><a href=\"#\">"+obj[i]+"</a>";		
-				html+="</li>";
-				}else{	 		
-				html+="<li><a href=\"#\">"+obj[i]+"</a>";
-				html+="<ul class=\"sub2\">";
-				html+="<li><a onclick=\"openchat('"+obj[i]+"')\" value=\""+obj[i]+ "\" >1:1대화</a></li>";
-				html+="<li><a data-toggle=\"modal\" data-target=\"#exampleModalCenter2\" id=\"Infomodal\" onclick=\"openmodal('"
-					+ obj[i] + "')\" \">정보 보기</a></li>";
-				html+="</ul>";
-				html+="</li>";
-				}//end if..else
+			var mode = obj.mode;
+			console.log("mode : "+mode);
+			switch(mode){			
+				case "loginUers" :
+				   var html = "";
+				   var loginList = obj.list;
+					for (var i = 0; i < loginList.length; i++) {				
+					 	if (obj[i]=="${userInfo.NICKNAME}") {
+						html+="<li><a href=\"#\">"+loginList[i]+"</a>";		
+						html+="</li>";
+						}else{	 		
+						html+="<li><a href=\"#\">"+loginList[i]+"</a>";
+						html+="<ul class=\"sub2\">";
+						html+="<li><a onclick=\"openchat('"+loginList[i]+"')\" value=\""+loginList[i]+ "\" >1:1대화</a></li>";
+						html+="<li><a data-toggle=\"modal\" data-target=\"#exampleModalCenter2\" id=\"Infomodal\" onclick=\"openmodal('"
+							+ loginList + "')\" \">정보 보기</a></li>";
+						html+="</ul>";
+						html+="</li>";
+						}//end if..else
+							
+					}//end for		
+						
+					document.getElementById("connectlist").innerHTML = html; 
+					break;
+				case "newChat" : 
+					console.log(obj.sender);
+					console.log(obj.text);
+					console.log(obj.day);
+					break;
 					
-			}//end for		
-				
-			document.getElementById("connectlist").innerHTML = html;
+			
+		}
+		
 		};
 	
 		

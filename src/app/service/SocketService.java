@@ -13,34 +13,34 @@ import com.google.gson.Gson;
 @Service
 public class SocketService {
 
-	public List<WebSocketSession> list;
+	public List<WebSocketSession> loggedInUsers;
 	
 	@Autowired
 	Gson gson;
 	
 	public SocketService() {
-		list = new ArrayList<>();
+		loggedInUsers = new ArrayList<>();
 	}
 	// 사이즈
 	public int size() {
-		return list.size();
+		return loggedInUsers.size();
 	}
 	
 	// 추가
 	public boolean addSocket(WebSocketSession session) {
-		return list.add(session);
+		return loggedInUsers.add(session);
 	}
 	//삭제
 	public boolean removeSocket(WebSocketSession session) {
-		return list.remove(session);
+		return loggedInUsers.remove(session);
 	}
 
 	// 작성한것들 보내기
 	public void sendWrite(String text) {
 		TextMessage msg = new TextMessage(text);
-		for(int i=0; i < list.size(); i++) {
+		for(int i=0; i < loggedInUsers.size(); i++) {
 			try{
-				list.get(i).sendMessage(msg);
+				loggedInUsers.get(i).sendMessage(msg);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}

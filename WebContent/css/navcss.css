@@ -65,3 +65,14 @@ ul#navmenu li:hover .sub1 {
 ul#navmenu .sub1 li:hover .sub2 {
 	display: block;
 }
+
+nav.nav {
+   font-family: 'Cute Font', cursive;
+   font-size: 30px;
+   font-weight: 700;
+ }
+ a.dropdown-item{
+ 	font-family: 'Cute Font', cursive;
+   font-size: 25px;
+   font-weight: 700;
+ }

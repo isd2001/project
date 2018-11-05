@@ -64,7 +64,7 @@
 				+ "${pageContext.servletContext.contextPath}/onechat.do");
 
 		document.getElementById("input").onchange = function() {
-
+		
 			console.log(this.value);
 			var msg = {
 				"sender" : "${userInfo.NICKNAME}",
@@ -73,16 +73,19 @@
 			};
 			onechat.send(JSON.stringify(msg));
 			this.value = "";
+			
+			
+			
 		};
 
 		onechat.onmessage = function(evt) {
 			console.log("결과" + evt.data);
 			var obj = JSON.parse(evt.data);
-			console.log(obj);
+			console.log("onetalk obk ="+obj);
 			if (obj.sender == "${userInfo.NICKNAME}") {
-				warningHandle(obj);
+				warningHandle(obj);  // 내가 보낸거
 			} else {
-				lightHandle(obj);
+				lightHandle(obj);    // 남이 보낸거
 			}
 
 		};

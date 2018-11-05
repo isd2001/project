@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 import app.models.OnechatRepository;
 import app.service.OnechatService;
 import app.service.SocketService;
+import app.service.rooms;
 
 @Controller
 public class OneChatSocketController extends TextWebSocketHandler{
@@ -26,13 +27,24 @@ public class OneChatSocketController extends TextWebSocketHandler{
 	Gson gson;
 	@Autowired
 	OnechatRepository onechat;
+	
 	@Autowired
-	OnechatService onecharservice;
+	SocketService mainSocket;
+	
+	@Autowired
+	OnechatService chatSocket;
+	
 	
 	List<WebSocketSession> sockets;
 	
+	List rooms;
+	
+	List<WebSocketSession> loggedInUsers; // = mainSocket.loggedInUsers;
+	
 	public OneChatSocketController() {
 		sockets = new ArrayList<>();
+		rooms = new ArrayList<>();
+		
 	};
 	
 	@Override
@@ -45,7 +57,7 @@ public class OneChatSocketController extends TextWebSocketHandler{
 		// mongodb insert
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date d = new Date();
-		System.out.println("채팅내용>"+onecharservice.list.get(0).getAttributes());
+		//System.out.println("채팅내용>"+onechatservice.list.get(0).getAttributes());
 		
 		List roomlist = new ArrayList<>();
 			roomlist.add(read.get("sender"));
@@ -53,7 +65,7 @@ public class OneChatSocketController extends TextWebSocketHandler{
 		System.out.println("sender>>"+read.get("sender")+" / recipient >"+read.get("recipient"));
 			
 		Map result = new HashMap<>();
-			result.put("roomlist", roomlist);
+			result.put("mode", "newChat");
 			result.put("sender", read.get("sender"));
 			result.put("text", read.get("text"));
 			result.put("day", sdf.format(d));
@@ -65,39 +77,109 @@ public class OneChatSocketController extends TextWebSocketHandler{
 		
 		System.out.println("nickname >>"+nick);
 		//====================================
+		WebSocketSession recipient = null;
+		WebSocketSession sender = null;
 		
-		for (int i = 0; i < sockets.size(); i++) {
-			/*if (onecharservice.list.get(i).getAttributes().get("nick").equals(read.get("recipient"))) {
-				sockets.get(i).sendMessage(message);
-			}else if(onecharservice.list.get(i).getAttributes().get("nick").equals(read.get("sender"))) {
-				sockets.get(i).sendMessage(message);
-			}*/
-			if (sockets.get(i).getAttributes().get(i).equals(read.get("recipient"))) {
-				sockets.get(i).sendMessage(message);
-			}else if (sockets.get(i).getAttributes().get(i).equals(read.get("sender"))) {
-				sockets.get(i).sendMessage(message);
+		loggedInUsers = mainSocket.loggedInUsers;
+		
+			for (int i = 0; i < loggedInUsers.size(); i++) {						
+				if (loggedInUsers.get(i).getAttributes().get("nick").equals(read.get("recipient"))) {				
+					recipient = loggedInUsers.get(i);
+				}
+				if (loggedInUsers.get(i).getAttributes().get("nick").equals(read.get("sender"))) {
+					sender = loggedInUsers.get(i);
+				}		
+			}//end for		
+			System.out.println("recipient : "+recipient);
+			System.out.println("sender : "+sender);
+			System.out.println("rooms : "+rooms);
+			
+			
+			if(rooms.isEmpty()==false) {
+				System.out.println("rooms is not empty");
+				for (int i = 0; i < rooms.size(); i++) {
+					if(rooms.get(i).users.contains(recipient) && rooms.get(i).users.contains(sender)) {	
+						System.out.println("roomUsers"+rooms.get(i).users);
+						rooms.get(i).sendMessage(gson.toJson(result));					
+						System.out.println("둘다 채팅창 열어놨을때");
+					}
+				}				
 			}
+			if(rooms.isEmpty()) {
+				System.out.println("rooms is empty");
+				rooms newRoom = new rooms(recipient,sender);
+				System.out.println("newRoom 생성");
+					System.out.println(rooms.add(newRoom));
+				System.out.println("rooms 에 newRoom 추가");
+				System.out.println("방생성 완료");
+				
+				for (int k = 0; k < sockets.size(); k++) {
+					if(sockets.get(k).getId().equals(recipient.getId())==false) {
+						System.out.println("recipient 채팅장 안열렸을때 ");
+						for (int i = 0; i < loggedInUsers.size(); i++) {
+							if(loggedInUsers.get(i).getId().equals(recipient.getId())) {
+								System.out.println(loggedInUsers.get(i).getId());
+								System.out.println(recipient.getId());
+								
+								Map map = new HashMap();
+									map.put("mode", "newChat");		
+									map.put("sender", read.get("sender"));
+									map.put("text", read.get("text"));
+									map.put("day", sdf.format(d));
+								TextMessage tm= new TextMessage(gson.toJson(map));
+								loggedInUsers.get(i).sendMessage(tm);
+								System.out.println("recipient 한테 메세지 보냄");
+							}
+						}					
+					}else {
+						newRoom.sendMessage(gson.toJson(result));
+						System.out.println("방에서 메세지 보냄");
+					}				
+				}
+			}			
+	}
 			
+		
 			
-		}//end for
+					
+					
+					/*for (int i = 0; i < rooms.size(); i++) {
+						if(rooms.get(i).users.contains(recipient) && rooms.get(i).users.contains(sender)) {	
+							System.out.println("roomUsers"+rooms.get(i).users);
+							rooms.get(i).sendMessage(gson.toJson(result));					
+							System.out.println("둘다 채팅창 열어놨을때");
+						}*/
+		
+			
+			/*for (int i = 0; i < rooms.size(); i++) {
+				if(rooms.get(i).users.contains(recipient) && rooms.get(i).users.contains(sender)) {				
+					rooms.get(i).sendMessage(gson.toJson(result));					
+				}else {					
+					OnechatService newRoom = new OnechatService(recipient,sender);
+					rooms.add(newRoom);					
+				}
+			}//end for
+*/		
+			
+		//end for
 		
 
 		//====================================
-		for (int i = 0; i < sockets.size(); i++) {
+		/*for (int i = 0; i < sockets.size(); i++) {
 			try {
 				sockets.get(i).sendMessage(message);
 			} catch (Exception e) {
 				e.printStackTrace();				
 			}
 		}//end for
-		
+*/		
 		//====================================
 		//noticesocket
 		
 		
 		
 		
-	}//end class
+	//end class
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
