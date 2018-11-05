@@ -27,11 +27,13 @@ public class AccesslistController extends TextWebSocketHandler{
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		System.out.println("accessController entered");
 		socketService.addSocket(session);
+		
 		//=====================================================
 		List list = new ArrayList<>();
 		
 		for (int i = 0; i < socketService.size(); i++) {
 			Map m=(Map)socketService.list.get(i).getAttributes().get("userInfo");
+			System.out.println("m>>"+m);
 			list.add(m.get("NICKNAME"));			
 		}
 		TextMessage tm= new TextMessage(gson.toJson(list));

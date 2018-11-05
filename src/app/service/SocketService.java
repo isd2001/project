@@ -21,7 +21,7 @@ public class SocketService {
 	public SocketService() {
 		list = new ArrayList<>();
 	}
-	
+	// 사이즈
 	public int size() {
 		return list.size();
 	}

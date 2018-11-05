@@ -11,28 +11,6 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
-<script>
-	/* var getWeather = function(gu) {
-		console.log("function Strar !!");
-		var apiURI = "http://api.openweathermap.org/data/2.5/weather";
-		var param = {
-			"q" : gu,
-			"units" : "metric",
-			"APPID" : "221d0de36835fe0cf4b1d4b196c711bb"
-		};
-		$.get(apiURI, param, function(rst) {
-			console.log("ajax start !!");
-			console.log(rst);
-			console.log("ajax end ..!");
-			document.getElementById("currentTemp").innerHTML = rst.main.temp
-					+ "℃";
-			document.getElementById("tempMax").innerHTML = rst.main.temp_max
-					+ "℃";
-			document.getElementById("tempMin").innerHTML = rst.main.temp_min
-					+ "℃";
-		});
-	}; */
-</script>
 <header class="blog-header py-3"<%-- style="background: url('${pageContext.servletContext.contextPath }/image/grass.jpg') "  --%> >
 
 	<div class="row flex-nowrap justify-content-between align-items-center">
@@ -85,28 +63,6 @@
 		</c:choose>
 		</div>
 		<div class="row justify-content-end">
-	<%-- 		<c:choose>
-				<c:when test="${not empty userInfo}">
-					<div class="justify-content-end">
-						오늘의 ${gu} 날씨 :
-						<script>
-								getWeather("${gu}");
-							</script>
-						<span id="currentTemp"></span><br>(최고 : <span id="tempMax"></span>최저:<span
-							id="tempMin"></span>)
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="justify-content-end">
-						오늘의 강남구 날씨 :
-						<script>
-								getWeather("강남구");
-							</script>
-						<span id="currentTemp"></span><br>(최고 : <span id="tempMax"></span>/최저:<span
-							id="tempMin"></span>)
-					</div>
-				</c:otherwise>
-			</c:choose> --%>
 
 		</div>
 	</div>
@@ -153,8 +109,11 @@
 			var obj = JSON.parse(evt.data);
 			console.log("obj > " + obj);
 			var html = "";
-			for (var i = 0; i < obj.length; i++) {
-
+			for (var i = 0; i < obj.length; i++) {				
+			 	if (obj[i]=="${userInfo.NICKNAME}") {
+				html+="<li><a href=\"#\">"+obj[i]+"</a>";		
+				html+="</li>";
+				}else{	 		
 				html+="<li><a href=\"#\">"+obj[i]+"</a>";
 				html+="<ul class=\"sub2\">";
 				html+="<li><a onclick=\"openchat('"+obj[i]+"')\" value=\""+obj[i]+ "\" >1:1대화</a></li>";
@@ -162,6 +121,8 @@
 					+ obj[i] + "')\" \">정보 보기</a></li>";
 				html+="</ul>";
 				html+="</li>";
+				}//end if..else
+					
 			}//end for		
 				
 			document.getElementById("connectlist").innerHTML = html;

@@ -70,6 +70,7 @@
 	<websocket:handlers>
 		<websocket:mapping handler="accesslistController" path="/access.do"/>
 		<websocket:mapping handler="oneChatSocketController" path="/onechat.do"/>
+		<websocket:mapping handler="noticeSocketController" path="/notice.do"/>
 		<websocket:handshake-interceptors>
 			<bean class = "org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"></bean>
 		</websocket:handshake-interceptors>

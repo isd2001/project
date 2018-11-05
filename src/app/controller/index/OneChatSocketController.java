@@ -17,6 +17,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import com.google.gson.Gson;
 
 import app.models.OnechatRepository;
+import app.service.SocketService;
 
 @Controller
 public class OneChatSocketController extends TextWebSocketHandler{
@@ -24,6 +25,9 @@ public class OneChatSocketController extends TextWebSocketHandler{
 	Gson gson;
 	@Autowired
 	OnechatRepository onechat;
+	@Autowired
+	SocketService socketservice;
+	
 	
 	List<WebSocketSession> sockets;
 	
@@ -39,7 +43,6 @@ public class OneChatSocketController extends TextWebSocketHandler{
 		Map read = gson.fromJson(me, Map.class);
 		//====================================
 		// mongodb insert
-		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date d = new Date();
 		
@@ -56,27 +59,48 @@ public class OneChatSocketController extends TextWebSocketHandler{
 			
 		System.out.println("result >>>"+result);
 		onechat.addChat(result);
+		//====================================
+			
+		
+		
+		
+		for (int i = 0; i < socketservice.size(); i++) {
+			
+				
+				
+				
+				
+			
+			
+		}//end for
+		
+		
+		
 		
 		//====================================
-		
 		for (int i = 0; i < sockets.size(); i++) {
 			try {
 				sockets.get(i).sendMessage(message);
 			} catch (Exception e) {
 				e.printStackTrace();				
-		}
-	}//end for
+			}
+		}//end for
+		//====================================
+		//noticesocket
 		
-	}
+		
+		
+		
+	}//end class
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		sockets.add(session);
+		socketservice.addSocket(session);
 	}
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		sockets.remove(session);
+		socketservice.removeSocket(session);
 	}
 	
 	
