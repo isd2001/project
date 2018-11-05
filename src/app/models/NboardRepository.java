@@ -16,9 +16,7 @@ public class NboardRepository {
 	// 전체 공지사항 출력
 	public List<Map> getAllNboard(){
 		return template.selectList("member_board.getAllNboard");
-	}//end getAllNboard
-	
-	
+	}//end getAllNboard	
 	
 	// 글쓰기 저장
 	public int addlistBoard(Map map) {
@@ -29,9 +27,12 @@ public class NboardRepository {
 	public Map nboardread(int BOARD_NUM) {
 		return template.selectOne("member_board.nboardread" , BOARD_NUM);
 	}
-
+	
+	public List<Map> getAllnboard(){
+		return template.selectList("member_board.getAllnboard");
+	}
 
 	
 	
 }
-//end class
+

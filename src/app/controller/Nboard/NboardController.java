@@ -7,11 +7,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,12 +53,15 @@ public class NboardController {
 
 		wreq.setAttribute("list", Allboard, WebRequest.SCOPE_REQUEST);
 		
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("master");
 		mav.addObject("top", "/WEB-INF/views/master/Nboard/top.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/Nboard/list.jsp");
 		
 		return mav;
+
+
 	}//end NboardHandle
     
 	//글쓰기
@@ -131,6 +138,12 @@ public class NboardController {
 	}//end write
 
 	
+	@RequestMapping(value="/nboard/write.do")
+    public String writeBoardForm() throws Exception{
+        
+        return "nboard/writeForm";
+		
+	}//end 글쓰기 폼
 	
 	//글 목록 클릭해서 디테일
 	@GetMapping("/detail.do")
@@ -147,13 +160,6 @@ public class NboardController {
 		return mav;
 	} //end getRead
 	
-	
-	}// end class
-
-
-
-
-
 
 
 /*
@@ -164,3 +170,8 @@ input.put("ntitle", title);
 input.put("ncontent", content);
 input.put("leftdate	", Date);
  */
+
+	
+}
+
+
