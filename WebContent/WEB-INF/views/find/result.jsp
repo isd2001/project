@@ -13,9 +13,6 @@
 				</div>
 				<br />
 				<div class="mb-1 text-muted">
-					<small>${map.date }</small>
-				</div>
-				<div class="mb-1 text-muted">
 					<p class="card-text mb-auto">
 						회원님의 소중한 가족 <b>${map.dogname}</b>이(가)<br/> 
 						<br />

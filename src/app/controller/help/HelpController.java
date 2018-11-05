@@ -3,6 +3,7 @@ package app.controller.help;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
@@ -33,7 +35,7 @@ public class HelpController {
 	ServletContext ctx;
 
 	@RequestMapping("/list.do")
-	public ModelAndView listHandler(ModelMap mmap, WebRequest wr, @RequestParam (required=false)String p) {
+	public ModelAndView listHandler(ModelMap mmap, WebRequest wr, @RequestParam(required = false) String p) {
 		Date day = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String today = sdf.format(day);
@@ -42,18 +44,22 @@ public class HelpController {
 
 		Map map = new HashMap();
 		int pp = (p == null) ? 1 : Integer.parseInt(p);
-
+		mmap.put("current", pp);
 		map.put("s", 1 + (pp - 1) * 10);
 		map.put("e", pp * 10);
 
-		List<Map> h = help.getSomeHelp(map);
-		mmap.put("help", h);
+		List<Map> list = help.getSomeHelp(map);
 
+		mmap.put("list", list);
+
+		
+		int tot = help.totalCount();
+		mmap.put("size", tot/10 + (tot%10>0 ? 1: 0));
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("master");
 		mav.addObject("top", "/WEB-INF/views/master/help/top.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/help/list.jsp");
-		
+
 		return mav;
 	}
 
@@ -64,17 +70,19 @@ public class HelpController {
 		mav.setViewName("master");
 		mav.addObject("top", "/WEB-INF/views/master/help/top.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/help/write.jsp");
-		
+
 		return mav;
 	}
 
-	@RequestMapping("/add.do")
-	public ModelAndView addHandler(@RequestParam Map rmap, @RequestParam MultipartFile inputfile1, @RequestParam MultipartFile inputfile2,
-			ModelMap mmap, WebRequest wr) throws IOException {
+	@PostMapping("/write.do")
+	public String addHandler(@RequestParam Map rmap, @RequestParam MultipartFile inputfile1,
+			@RequestParam MultipartFile inputfile2, ModelMap mmap, WebRequest wr)
+			throws IOException, InterruptedException {
 
 		// 파일 첨부
 		long time = System.currentTimeMillis();
 		String fileName1 = String.valueOf(time) + "_" + inputfile1.getOriginalFilename();
+		Thread.sleep(50);
 		String fileName2 = String.valueOf(time) + "_" + inputfile2.getOriginalFilename();
 		String path = ctx.getRealPath(String.valueOf(time));
 
@@ -83,67 +91,62 @@ public class HelpController {
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
-		File dst = new File(dir, fileName1);
 
-		inputfile1.transferTo(dst);
-		inputfile2.transferTo(dst);
+		if (!inputfile1.isEmpty()) {
+			File dst1 = new File(dir, fileName1);
+			inputfile1.transferTo(dst1);
+			String file1 = "/" + time + "/" + fileName1;
+			rmap.put("inputfile1", file1);
+		}
 
-		String file1 = "/" + time + "/" + fileName1;
-		String file2 = "/" + time + "/" + fileName2;
-		
-		rmap.put("inputfile1", file1);
-		rmap.put("inputfile2", file2);	
-		rmap.put("writer","까치");
-		rmap.put("regdate", "11111111");
-	
+		if (!inputfile2.isEmpty()) {
+			File dst2 = new File(dir, fileName2);
+			inputfile2.transferTo(dst2);
+			String file2 = "/" + time + "/" + fileName2;
+			rmap.put("inputfile1", file2);
+		}
+
+		Map userInfo = (Map) wr.getAttribute("userInfo", WebRequest.SCOPE_SESSION);
+		String nick = (String) userInfo.get("NICKNAME");
+
+		rmap.put("nick", nick);
+
 		System.out.println(rmap);
 		ModelAndView mav = new ModelAndView();
+
 		try {
 			int i = help.addAllHelp(rmap);
-			System.out.println("i = " + i);	
+			System.out.println("i = " + i);
 			mmap.put("map", rmap);
-			
-			mav.setViewName("master");
-			mav.addObject("top", "/WEB-INF/views/master/help/top.jsp");
-			mav.addObject("main", "/WEB-INF/views/master/help/result.jsp");
-			
-			return mav;
-		}catch(Exception e) {
+
+			return "redirect:/help/list.do";
+
+		} catch (Exception e) {
 			e.printStackTrace();
-	
-			mav.setViewName("master");
-			mav.addObject("top", "/WEB-INF/views/master/help/top.jsp");
-			mav.addObject("main", "/WEB-INF/views/master/help/write.jsp");
-			
-			return mav;
+
+			return "help.write";
 		}
 	}
-	
-	@RequestMapping("/detail.do")
-	public ModelAndView resultHandler(@RequestParam (required=false)int no, ModelMap mmap) {
-		
+
+	@GetMapping("/detail.do")
+	public ModelAndView detailHandler(@RequestParam(required = false) int no, ModelMap mmap) {
+		Date day = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String today = sdf.format(day);
+
+		mmap.put("today", today);
+
 		Map data = help.getOneByNo(no);
 		mmap.put("data", data);
-		
+
+		System.out.println(mmap);
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("master");
 		mav.addObject("top", "/WEB-INF/views/master/help/top.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/help/detail.jsp");
-		
+
 		return mav;
 	}
 
-	@RequestMapping("/result.do")
-	public ModelAndView resultHandler(ModelMap mmap, @RequestParam (required=false)int no) {
-		
-		List<Map> map = help.getAllHelp();
-		mmap.put("map", map);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("master");
-		mav.addObject("top", "/WEB-INF/views/master/help/top.jsp");
-		mav.addObject("main", "/WEB-INF/views/master/help/result.jsp");
-		
-		return mav;
-	}
 }

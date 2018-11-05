@@ -30,14 +30,14 @@
 				<input type="file" class="custom-file-input"
 					aria-describedby="inputGroupFileAddon03" id="inputfile1" name="inputfile1"
 					accept="image/*, video/*"> <label class="custom-file-label"
-					for="inputGroupFile03"> 사진이 필요시 클릭</label>
+					for="inputGroupFile03"> 메인으로 쓸 사진</label>
 			</div>
 			
 			<div class="custom-file ">
 				<input type="file" class="custom-file-input"
 					aria-describedby="inputGroupFileAddon03" id="inputfile2" name="inputfile2"
 					accept="image/*, video/*"> <label class="custom-file-label"
-					for="inputGroupFile03"> 사진이 더 필요하다면 클릭 </label>
+					for="inputGroupFile03"> 사진이 더 필요시  </label>
 			</div>
 		</div>
 	</div>

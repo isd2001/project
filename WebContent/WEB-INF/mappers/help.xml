@@ -4,7 +4,7 @@
 	
 	<!-- 게시물에 내용 다 넣기  -->
 	<insert id = "addAllHelp" parameterType="java.util.HashMap">
-		insert into help values(help_seq.nextval, #{title}, #{writer}, to_date(#{regdate},'YYYY-MM-DD'), 0, 0, #{content}, #{inputfile1}, #{inputfile2})
+		insert into help values(help_seq.nextval, #{title}, #{nick}, to_date(#{regdate},'YYYY-MM-DD'), 0, 0, #{content}, #{inputfile1, jdbcType=VARCHAR}, #{inputfile2 , jdbcType=VARCHAR})
 	</insert>
  
 	<!-- 게시물에서 내용 다 빼오기 -->
@@ -16,7 +16,9 @@
 	<select id = "getSomeHelp" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		select * from(select rownum r, o.* from (select * from help order by no desc) o ) where r between #{s} and #{e}
 	</select>
-	
+	<select id="totalCount" resultType="java.lang.Integer">
+		select count(*) from help
+	</select>	
 	<!-- no로 게시글  빼오기-->
 	<select id = "getOneByNo" resultType="java.util.HashMap" parameterType="java.lang.Integer">
 		select * from help where no=#{no}

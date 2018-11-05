@@ -6,40 +6,29 @@
 <link rel="stylesheet"
 	href="${pageContext.servletContext.contextPath }/css/blog.css">
 
-<body>
-	<section class="jumbotron text-center">
-		<div class="container">
-			<div>
-				<h3><b>우리집 댕댕이는요~</b></h3>
-			</div>
-			<div>
-				<p style="text-align: right">${today}</p>
-			</div>
-		</div>
-	</section>
 
-	<table class="table">
-		<thead class="thead-light">
+	<table class="table table-hover">
+		<thead class="thead-light" style="text-align:center">
 			<tr>
-				<th scope="col">#</th>
-				<th scope="col">제목</th>
-				<th scope="col">작성자</th>
-				<th scope="col">날짜</th>
-				<th scope="col">조회수</th>
-				<th scope="col">추천</th>
+				<th scope="col" style="width:3%">#</th>
+				<th scope="col" style="width:40%">제목</th>
+				<th scope="col" style="width:20%">작성자</th>
+				<th scope="col" style="width:15%">날짜</th>
+				<th scope="col" style="width:9%">조회수</th>
+				<th scope="col" style="width:9%">추천</th>
 			</tr>
 		</thead>
-		<tbody>
-			<c:forEach var="h" items="${help}">
+		<tbody style="text-align:center">
+			<c:forEach var="l" items="${list}">
 				<tr>
-					<th scope="row">${h.NO }</th>
+					<th scope="row">${l.NO }</th>
 					<td><a
-						href="${pageContext.servletContext.contextPath  }/help/detail.do?no=${h.NO }">
-							${h.TITLE }</a></td>
-					<td>${h.WRITER }</td>
-					<td>${h.REGDATE }</td>
-					<td>${h.VIEW }</td>
-					<td>${h.GOOD }</td>
+						href="${pageContext.servletContext.contextPath  }/help/detail.do?no=${l.NO }">
+							${l.TITLE }</a></td>
+					<td>${l.NICK }</td>
+					<td><fmt:formatDate value="${l.REGDATE }" /></td>
+					<td>${l.LOOK }</td>
+					<td>${l.GOOD }</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -50,13 +39,22 @@
 		<div class="container">
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
-					<li class="page-item disabled"><a class="page-link" href="#"
+					<li class="page-item "><a class="page-link" href=""
 						tabindex="-1">Previous</a></li>
-					<c:forEach var="p" begin="1" end="4">
-						<li class="page-item"><a class="page-link"
-							href="${pageContext.servletContext.contextPath }/help/list.do?p=${p}">${p }</a></li>
+					<c:forEach var="p" begin="1" end="${size }">
+						<c:choose>
+							<c:when test="${p==current}">
+								<li class="page-item active">
+     							 <a class="page-link" href="${pageContext.servletContext.contextPath }/help/list.do?p=${p}">${p }<span class="sr-only">(current)</span>
+     							 </a></li>	
+     						 </c:when>
+     						 <c:otherwise>
+     						 	<a class="page-link" href="${pageContext.servletContext.contextPath }/help/list.do?p=${p}">${p }</a>
+     						</c:otherwise>
+     					</c:choose>					
 					</c:forEach>
-					<li class="page-item"><a class="page-link" href="#">Next</a></li>
+					<li class="page-item"><a class="page-link" href="" 
+					tabindex="+1" >Next</a></li>
 				</ul>
 			</nav>
 

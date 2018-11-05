@@ -6,7 +6,7 @@
 <link rel="stylesheet"
 	href="${pageContext.servletContext.contextPath }/css/blog.css">
 
-<body>
+
 	<section class="jumbotron text-center">
 		<div class="container">
 			<div>
@@ -17,7 +17,7 @@
 			</div>
 		</div>
 	</section>
-
+<div class="col-8">
 	<table class="table">
 		<thead class="thead-light">
 			<tr>
@@ -38,12 +38,13 @@
 							${h.TITLE }</a></td>
 					<td>${h.WRITER }</td>
 					<td>${h.REGDATE }</td>
-					<td>${h.VIEW }</td>
+					<td>${h.LOOK }</td>
 					<td>${h.GOOD }</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+</div>
 
 	<br />
 	<footer class="text-muted">
