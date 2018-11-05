@@ -4,79 +4,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet"
 	href="${pageContext.servletContext.contextPath }/css/blog.css">
+<link rel="stylesheet"
+	href="${pageContext.servletContext.contextPath }/css/navcss.css">
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<style>
-	ul#navmenu , ul.sub1 ,ul.sub2{
-		list-style-type: none;
-		font-size: 10pt; 	
-	}
-	
-	ul#navmenu li {
-		width: 125px;
-		text-align: center;
-		position: relative;
-		float: left;
-		margin-right: 4px;    
-	}
-	
-	ul#navmenu a{
-		text-decoration: none;
-		display: block;
-		width: 125px;
-		height: 25px;
-		line-height: 25px;
-		background-color: #FFF;
-		border: 1px solid #CCC;
-		border-radius: 5px; 
-	}
-	ul#navmenu .sub1 li {
-		
-	}
-	
-	ul#navmenu .sub1 a {
-		margin-top: 0px;
-	}
-	
-	ul#navmenu .sub2 a{
-		margin-left: 10px;
-	}
-	
-	ul#navmenu li:hover>a {
-		background-color: #CFC;
-	
-	}
-	ul#navmenu li:hover>a:hover {
-		background-color: #FF0;
-	
-	}
-	ul#navmenu ul.sub1 {
-		display: none;
-		position: absolute; 
-		top: 26px;
-		left: -40px; 
-	}
-	
-	ul#navmenu ul.sub2 {
-		display: none;
-		position: absolute;
-		top: 0px;
-		left: 80px;
-	}		
-	
-	ul#navmenu li:hover .sub1 {
-		display: block;
-		
-	}
-	
-	ul#navmenu .sub1 li:hover .sub2{
-		display: block; 
-	}
-</style>
+
 
 <script>
-	var getWeather = function(gu) {
+	/* var getWeather = function(gu) {
 		console.log("function Strar !!");
 		var apiURI = "http://api.openweathermap.org/data/2.5/weather";
 		var param = {
@@ -95,7 +31,7 @@
 			document.getElementById("tempMin").innerHTML = rst.main.temp_min
 					+ "℃";
 		});
-	};
+	}; */
 </script>
 <header class="blog-header py-3"<%-- style="background: url('${pageContext.servletContext.contextPath }/image/grass.jpg') "  --%> >
 
@@ -120,56 +56,57 @@
 			</nav>
 
 		</div>
-				<c:choose>
-					<c:when test="${not empty userInfo}">
-						<div class=" justify-content-end align-items-center form-inline">
+		<div class="col-4 text-center">
+		<c:choose>
+			<c:when test="${not empty userInfo}">
+				<div class=" justify-content-end align-items-center form-inline">
 
-						<ul id="navmenu">
-							<li><a href="#">접속중유저</a>
-								<ul class="sub1" id="connectlist">
-												
-								</ul>
-							</li>
-						</ul>
-							<a class="btn btn-sm btn-success"
-								href="${pageContext.servletContext.contextPath }/mypage.do">마이페이지</a>
-							<a class="btn btn-sm btn-danger"
-								href="${pageContext.servletContext.contextPath }/logout.do">로그아웃</a>
-
-						</div>
-					</c:when>
-					<c:otherwise>
-						<div class="justify-content-end align-items-center">
-							<a class="btn btn-sm btn-success"
-								href="${pageContext.servletContext.contextPath}/main/login.do">로그인</a>
-							<a class="btn btn-sm btn-info"
-								href="${pageContext.servletContext.contextPath }/main/terms.do">회원가입</a>
-						</div>
-					</c:otherwise>
-				</c:choose>
-			<div class="row justify-content-end">
-				<c:choose>
-					<c:when test="${not empty userInfo}">
-						<div class="justify-content-end">
-							오늘의 ${gu} 날씨 :
-							<script>
+					<a class="btn btn-sm btn-success"
+						href="${pageContext.servletContext.contextPath }/mypage.do">마이페이지</a>
+					<a class="btn btn-sm btn-danger"
+						href="${pageContext.servletContext.contextPath }/logout.do">로그아웃</a>
+					<br/>
+				</div>
+					<ul id="navmenu" style="margin-left: 185px;">
+						<li><a href="#">접속중유저</a>
+							<ul class="sub1" id="connectlist">
+							</ul>
+						</li>
+					</ul> 
+			</c:when>
+			<c:otherwise>
+				<div class="justify-content-end align-items-center">
+					<a class="btn btn-sm btn-success"
+						href="${pageContext.servletContext.contextPath}/main/login.do">로그인</a>
+					<a class="btn btn-sm btn-info"
+						href="${pageContext.servletContext.contextPath }/main/terms.do">회원가입</a>
+				</div>
+			</c:otherwise>
+		</c:choose>
+		</div>
+		<div class="row justify-content-end">
+	<%-- 		<c:choose>
+				<c:when test="${not empty userInfo}">
+					<div class="justify-content-end">
+						오늘의 ${gu} 날씨 :
+						<script>
 								getWeather("${gu}");
 							</script>
-							<span id="currentTemp"></span><br>(최고 : <span id="tempMax"></span>최저:<span
-								id="tempMin"></span>)
-						</div>
-					</c:when>
-					<c:otherwise>
-						<div class="justify-content-end">
-							오늘의 강남구 날씨 :
-							<script>
+						<span id="currentTemp"></span><br>(최고 : <span id="tempMax"></span>최저:<span
+							id="tempMin"></span>)
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="justify-content-end">
+						오늘의 강남구 날씨 :
+						<script>
 								getWeather("강남구");
 							</script>
-							<span id="currentTemp"></span><br>(최고 : <span id="tempMax"></span>/최저:<span
-								id="tempMin"></span>)
-						</div>
-					</c:otherwise>
-				</c:choose>
+						<span id="currentTemp"></span><br>(최고 : <span id="tempMax"></span>/최저:<span
+							id="tempMin"></span>)
+					</div>
+				</c:otherwise>
+			</c:choose> --%>
 
 		</div>
 	</div>
@@ -194,11 +131,9 @@
 							<div id="modal-img"></div>
 						</div>
 						<div class="col-7">
-							ID ▶ <span id="id"></span><br />
-							닉네임 ▶<span id="nickname"></span><br />
-							강아리 이름▶ <span id="dogname"></span><br />
-							강아지 종류▶ <span id="dogtype"></span><br />
-							한마디 ▶ <span id="usercomment"></span><br />
+							ID ▶ <span id="id"></span><br /> 닉네임 ▶<span id="nickname"></span><br />
+							강아리 이름▶ <span id="dogname"></span><br /> 강아지 종류▶ <span
+								id="dogtype"></span><br /> 한마디 ▶ <span id="usercomment"></span><br />
 						</div>
 					</div>
 				</div>
@@ -211,7 +146,7 @@
 	</div>
 
 	<script>	
-		var ws = new WebSocket("ws://" + location.host
+		 var ws = new WebSocket("ws://" + location.host
 				+ "${pageContext.servletContext.contextPath}/access.do");
 
 		ws.onmessage = function(evt) {
@@ -270,5 +205,5 @@
 
 				});
 
-		};//end openmodal
+		};//end openmodal 
 	</script>
