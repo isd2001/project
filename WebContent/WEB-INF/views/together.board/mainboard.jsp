@@ -134,6 +134,8 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	
+	
 	<!-- ======================================== -->
 	<a href="${pageContext.servletContext.contextPath }/together/new.do">
 		<button type="button" class="btn btn-outline-success"

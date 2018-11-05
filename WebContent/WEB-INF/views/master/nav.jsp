@@ -72,7 +72,7 @@ var getWeather = function(gu) {
           <a class="p-2 text-muted"	href="${pageContext.servletContext.contextPath }/board/main.do">Gaekipedia</a>
           <a class="p-2 text-muted"	href="${pageContext.servletContext.contextPath }/find/list.do">찾아주시개</a>
           <a class="p-2 text-muted" href="${pageContext.servletContext.contextPath }/parcel.do">데려가시개(분양)</a>
-          <a class="p-2 text-muted" href="${pageContext.servletContext.contextPath }/together/mainboard.do">같이가시개</a>
+          <a class="p-2 text-muted" href="${pageContext.servletContext.contextPath }/together/mainboard.do?p=1">같이가시개</a>
           <div class="dropdown p-2 text-muted">
           <a class="p-2 text-muted" id="dropdownMenuButton" data-toggle="dropdown" href="#">똥개훈련</a>
 	           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

@@ -36,7 +36,6 @@ public class FindController {
 	// 게시글 List 화면
 
 	@GetMapping("/list.do")
-
 	public ModelAndView listNeoHandler(ModelMap mmap, WebRequest wr, @RequestParam (required=false)String p) {
 	
 		Date today = new Date();

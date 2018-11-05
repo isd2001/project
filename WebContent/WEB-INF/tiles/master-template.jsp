@@ -31,7 +31,7 @@
 			<tiles:insertAttribute name="nav"/>
 		</nav>
 	</div>
-
+		<img src="${pageContext.servletContext.contextPath }/image/post.jpg" style="width: 250px; float: left;" >
 	<div class="container">
 			<div class= "top">
 				<tiles:insertAttribute name="top"/>

@@ -38,6 +38,8 @@ public class TogetherBoardController {
 	@GetMapping("/mainboard.do")
 	public ModelAndView mainboard(WebRequest wreq,@RequestParam Map param) {
 		String re=(String)wreq.getAttribute("result",WebRequest.SCOPE_REQUEST);
+		
+		System.out.println("param >>"+param);
 		if (re=="on") {
 			wreq.setAttribute("result","yes",WebRequest.SCOPE_REQUEST);
 		}
@@ -47,7 +49,8 @@ public class TogetherBoardController {
 		List<Map> li = new ArrayList<>();
 
 		SimpleDateFormat sdf= new SimpleDateFormat("MM-dd");
-	
+		
+		
 		for (int i = 0; i < list.size(); i++) {
 			Map map = new HashMap<>();
 			map.put("NO", list.get(i).get("NO"));

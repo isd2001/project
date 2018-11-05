@@ -45,13 +45,11 @@ public class OneChatSocketController extends TextWebSocketHandler{
 		// mongodb insert
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date d = new Date();
-		System.out.println("채팅내용>"+onecharservice.list.get(0).getAttributes());
 		
 		List roomlist = new ArrayList<>();
 			roomlist.add(read.get("sender"));
 			roomlist.add(read.get("recipient"));
-		System.out.println("sender>>"+read.get("sender")+" / recipient >"+read.get("recipient"));
-			
+	
 		Map result = new HashMap<>();
 			result.put("roomlist", roomlist);
 			result.put("sender", read.get("sender"));
@@ -66,29 +64,18 @@ public class OneChatSocketController extends TextWebSocketHandler{
 		System.out.println("nickname >>"+nick);
 		//====================================
 		
-		for (int i = 0; i < sockets.size(); i++) {
-			/*if (onecharservice.list.get(i).getAttributes().get("nick").equals(read.get("recipient"))) {
-				sockets.get(i).sendMessage(message);
-			}else if(onecharservice.list.get(i).getAttributes().get("nick").equals(read.get("sender"))) {
-				sockets.get(i).sendMessage(message);
-			}*/
-			if (sockets.get(i).getAttributes().get(i).equals(read.get("recipient"))) {
-				sockets.get(i).sendMessage(message);
-			}else if (sockets.get(i).getAttributes().get(i).equals(read.get("sender"))) {
-				sockets.get(i).sendMessage(message);
-			}
-			
-			
-		}//end for
+		Map<String, List<WebSocketSession>> room= new HashMap<>();
 		
-
-		//====================================
+		
+		
+		
 		for (int i = 0; i < sockets.size(); i++) {
-			try {
+			if (sockets.get(i).getAttributes().get("nick").equals(read.get("recipient"))) {
 				sockets.get(i).sendMessage(message);
-			} catch (Exception e) {
-				e.printStackTrace();				
 			}
+			if (sockets.get(i).getAttributes().get("nick").equals(read.get("sender"))) {
+				sockets.get(i).sendMessage(message);
+			}	
 		}//end for
 		
 		//====================================

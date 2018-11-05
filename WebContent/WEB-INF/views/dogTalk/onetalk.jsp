@@ -64,8 +64,10 @@
 				+ "${pageContext.servletContext.contextPath}/onechat.do");
 
 		document.getElementById("input").onchange = function() {
-
 			console.log(this.value);
+			console.log("${userInfo.NICKNAME}");
+			console.log("${recipient}");
+			
 			var msg = {
 				"sender" : "${userInfo.NICKNAME}",
 				"recipient" : "${recipient}",
