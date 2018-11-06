@@ -13,18 +13,16 @@
 					<c:forEach var="l" items="${list}">
 						<div class="col-md-4" id="post">
 							<div class="card mb-4 shadow-sm" style="width: 250px; max-height: 300px">
-								<img class="card-img-top"
-								src="${pageContext.servletContext.contextPath}"
-								width="200" height="225">
+								<img class="card-img-top"	src="${pageContext.servletContext.contextPath}"		width="200" height="225">
 								<div class="card-body">
 									<p class="card-text">
 									<div class="d-flex justify-content-between align-items-center">
 										<small class="text-muted"
-											style="position: absolute; bottom: 30px">${l.SUB}</small> <small
-											class="text-muted" style="position: absolute; bottom: 10px">${l.DTBOARDID}
+											style="position: absolute; bottom: 30px">${l.TITLE}</small> <small
+											class="text-muted" style="position: absolute; bottom: 10px">${l.DTID}
 										</small>
 									</div>
-									<a href="${pageContext.servletContext.contextPath}/dogTraining/detail.do?NUM=${l.NUM }">
+									<a href="${pageContext.servletContext.contextPath}/dogTraining/detail.do?no=${l.NO }">
 									<button type="button" class="btn btn-sm btn-outline-secondary"
 										style="position: absolute; right: 15px; bottom: 15px"
 										id="detailBt" name="detailBt">자세히</button></a>

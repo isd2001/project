@@ -1,91 +1,66 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>±€≥ªøÎ</title>
-</head>
-<body>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <table class="table table-hover">
+	<thead>
+	</thead>
+	<tbody>
+		<tr>
 
-  		<thead>
-  		</thead>
-  		<tbody>
-	     <tr>
-	     
-    	  <th scope="row" style="width: 7%"><small>NO</small></th>
-    	  <td>${read.NUM}</td>
-    	  </tr>
-    	  <tr>
-    	  <th scope="row" style="width: 50%"><small>¡¶∏Ò</small></th>
-    	  <td>${read.SUB}</td>
-    	   </tr>
-    	   <tr>
-     	  <th scope="row" style="width: 15%"><small>≥Ø¬•</small></th>
-     	  <td>${read.CDATE}</td>
-     	    </tr>
-     	    <tr>
-     	  <th scope="row" style="width: 12%"><small>¡∂»∏ºˆ</small></th>
-     	  <td>${read.LOOKUP}</td>
-	      </tr>
-	      <tr>
-	      <th scope="row" style="width: 4%"><small>ID</small></th>
-	      <td>${read.DTBOARDID}</td>
-	      </tr>
-	      <th scope="row" style="width: 12%"><small>≥ªøÎ</small></th>
-	      <td>${read.CON}</td>
-	      </tbody>
+			<th scope="row" style="width: 7%"><small>NO</small></th>
+			<td>${read.NO}</td>
+		</tr>
+		<tr>
+			<th scope="row" style="width: 50%"><small>Ï†úÎ™©</small></th>
+			<td>${read.TITLE}</td>
+		</tr>
+		<tr>
+			<th scope="row" style="width: 15%"><small>ÎÇ†Ïßú</small></th>
+			<td>${read.UPDAY}</td>
+		</tr>
+		<tr>
+			<th scope="row" style="width: 12%"><small>Ï°∞ÌöåÏàò</small></th>
+			<td>${read.LOOKUP}</td>
+		</tr>
+		<tr>
+			<th scope="row" style="width: 4%"><small>ID</small></th>
+			<td>${read.DTID}</td>
+		</tr>
+		<tr>
+			<th scope="row" style="width: 12%"> <small>ÎÇ¥Ïö©</small></th>
+			<td>${read.CONTENT}</td>
+		</tr>
+		<tr>
+			<th scope="row" style="width: 12%"> <small>ÎèôÏòÅÏÉÅ</small></th>
+			<td>${read.CONTENT}</td>
+		</tr>
+	</tbody>
 
-     	
+
 </table>
 
-
-<section class="content container-fluid">
-  <div class="col-lg-12">
-    <div class="box box-primary">
-        <div class="box-header with-border">
-            <h3 class="box-title">¥Ò±€ ¿€º∫</h3>
-        </div>
-        <div class="box-body">
-            <div class="form-group">
-                <label for="newReplyText">¥Ò±€ ≥ªøÎ</label>
-                <input class="form-control" id="CONTENT" name="CONTENT" placeholder="¥Ò±€ ≥ªøÎ¿ª ¿‘∑¬«ÿ¡÷ººø‰">
-            </div>
-            <div class="form-group">
-           <th scope="row"><small>¿€º∫¿⁄</small></th>
-           <td>${comment.ID }
-            </div>
-        </div>
-        <div class="box-footer">
-            <ul id="replies">
-
-            </ul>
-        </div>
-        <div class="box-footer">
-            <div class="text-center">
-                <ul class="pagination pagination-sm no-margin">
-
-                </ul>
-            </div>
-        </div>
-    </div>
-  </div>
-
-
-</section>
-
-
-
-     	<tr>
-     <a href="${pageContext.servletContext.contextPath }/dogTraining.training.do">∏Ò∑œ¿∏∑Œ</a>
-        <a href="${pageContext.servletContext.contextPath }">ºˆ¡§«œ±‚</a>
-         <a href="${pageContext.servletContext.contextPath }">ªË¡¶«œ±‚</a>
-     
-     	</tr>
-    </html>
-
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">COMMENT</th>
+    </tr>
+  </thead>
+  <tbody>
+  	<c:forEach var="c" items="${comment }">
+    <tr>
+      <th scope="row">${c.ID }<small>(${c.UPDAY }) </small><br/>
+      <span class="badge badge-pill badge-warning">${c.CONTENT }</span><br/>
+      </th>
+    </tr>
+  	</c:forEach>
+    
+  </tbody>
+</table>
+<label for="newReplyText">ÎåìÍ∏ÄÏûëÏÑ± </label>
+<form action="${pageContext.servletContext.contextPath}/dogTraining/detail.do?no=${read.NO}" method="post"> 
+<input type="text" class="form-control"
+				aria-describedby="basic-addon1" id="content" name="content" autocomplete="off" placeholder="ÎåìÍ∏Ä ÏûÖÎ†• ÌõÑ EnterÎ•º ÎàåÎü¨Ï£ºÏÑ∏Ïöî.">
+</form>
 
 
