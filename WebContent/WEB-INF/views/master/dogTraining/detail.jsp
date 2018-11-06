@@ -43,7 +43,7 @@
 <table class="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">COMMENT</th>
+      <th scope="col" style="text-align: center;">COMMENT</th>
     </tr>
   </thead>
   <tbody>

@@ -128,7 +128,7 @@
 				<tr>
 					<th scope="row">${l.NO }</th>
 					<td><small>${l.AREA }</small></td>
-					<td><a
+					<td><a style="text-decoration: none; color: black;" 
 						href="${pageContext.servletContext.contextPath  }/together/detail.do?no=${l.NO }">
 							${l.TITLE }</a></td>
 					<td>${l.NICK }</td>

@@ -85,7 +85,7 @@ public class dogTrainingController {
 		}
 		wreq.setAttribute("comment",comment, wreq.SCOPE_REQUEST);
 		//------------------------------------------
-		// 조회수 늘리는 법
+		// 조회수 늘리기
 		dr.updatelookup(no);
 		
 		

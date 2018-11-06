@@ -213,26 +213,25 @@ public class TogetherBoardController {
 		Map info=(Map)wreq.getAttribute("userInfo", wreq.SCOPE_SESSION);
 		
 		String nick=(String)info.get("NICKNAME");
-		String ment = (String)param.get("comment");
+		String comment = (String)param.get("comment");
 		String cno=(String)param.get("no");
 		Date leftdate = new Date();
+		System.out.println("nick >"+nick);
+		System.out.println("comment >"+comment);
+		System.out.println("cno >"+cno);
+		System.out.println("leftdate > "+leftdate);
+		
+		
 		Map input = new HashMap<>();
 			input.put("cno", cno);
-			input.put("ment", ment);
+			input.put("ment", comment);
 			input.put("leftdate", leftdate);
 			input.put("nick", nick);
-		try {
-			int result = tocomment.addComment(input);
-			if (result==1) {
-				return "redirect:/together/detail.do?no="+cno;
-			}else {
-				return "redirect:/together/detail.do?no="+cno;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "";
-		}
-	
+			
+		tocomment.addComment(input);
+			
+		return "redirect:/together/detail.do?no="+cno;
+			
 	}//end detail.do
 	
 	@GetMapping("ajax.do")

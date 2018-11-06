@@ -85,8 +85,8 @@
 				<div class=" justify-content-end align-items-center form-inline">
 
 
-					<a class="btn btn-sm btn-success"
-						href="${pageContext.servletContext.contextPath }/mypage.do">마이페이지</a>
+					<%-- <a class="btn btn-sm btn-success"
+						href="${pageContext.servletContext.contextPath }/mypage.do">마이페이지</a> --%>
 					<a class="btn btn-sm btn-danger"
 						href="${pageContext.servletContext.contextPath }/logout.do">로그아웃</a>
 					<br/>

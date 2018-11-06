@@ -8,10 +8,8 @@
 <c:if test="${err eq 'off' }">
 	<script>window.alert("글이 정상적으로 등록되었습니다.")</script>
 </c:if>
-
-
-<body>	
-	<div class="album py-5 bg-light">
+	
+	<div class="album py-5 bg-light" style="margin-top: 10%;">
 			<div class="container">
 				<div class="row">
 					<c:forEach var="l" items="${list}">
@@ -50,7 +48,6 @@
 				</div>
 			</div>
 			<br/>
-		</div>		
-	</footer>
-</body>
+		
+
 
