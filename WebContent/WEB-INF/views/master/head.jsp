@@ -180,23 +180,23 @@
 					break;
 				case "newChat" : 
 					console.log(obj.sender);
-					console.log(obj.text);
-					console.log(obj.day);
+					console.log(obj.roomNumber);
 					newMessageHandle(obj);
 					break;					
 			
 		}
 		
 		};
-		var newMessageHandle = function(obj){			
+		var newMessageHandle = function(obj){		
+			console.log("newMessageHandle acticated");
 			var html = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">";
 			html += "<strong>【NewChatting】</strong><br/> 새로운 채팅이 있습니다.</br>";
-			html += obj.sender +" : "+obj.text;
-			html += "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">";
-			html += "<button type=\"button\" onclick=\"openchat('"+obj.sender+","+obj.roomNumber+"')\" value=\""+loginList[i].sessionId+ "\" >1:1대화</a></li>";">";				
+			html += obj.sender +"님이 채팅을 요청하였습니다. "
+			html += "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><br>";
+			html += "<button type=\"button\" onclick=\"openchat('"+obj.sender+"')\" >1:1대화</button>";				
 			html += "<span aria-hidden=\"true\">&times;</span>";
 			html += "</div>";
-			document.getElementById("alert").innerHTML += html;
+			document.getElementById("alert").innerHTML = html;
 		}
 		
 		//====================================================================
@@ -208,12 +208,6 @@
 							+nickName+"&roomNumber="+roomNumber, "", "width=350,height=550");
 		};
 		
-		var acceptchat = function(nickName, roomNumber) {			
-			console.log("nickName : "+nickName);
-			window.open(
-					"${pageContext.servletContext.contextPath }/onetalk.do?talkNick="
-							+ nickName+"&roomNumber="+roomNumber, "", "width=350,height=550");
-		};
 		
 
 		//====================================================================

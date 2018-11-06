@@ -31,7 +31,7 @@
 			<tiles:insertAttribute name="nav"/>
 		</nav>
 	</div>
-		<div id="alert" style="float: left;" ></div>
+		<div id="alert" style="float: left; width:200px;"  ></div>
 	<div class="container">
 			<div class= "top">
 				<tiles:insertAttribute name="top"/>

@@ -222,22 +222,25 @@ public class IndexController {
 		Rooms room = new Rooms(uuid);
 			room.addUsers(senderNick, targetNick );
 			*/
-		System.out.println("roomNumber : "+param.get("roomNumber"));
-		String uuid = Math.random()>0.5?  "A22131AF" : "9421AB23";			
-				
+		System.out.println("roomNumber : "+param.get("roomNumber"));						
 			
 		
 		if(param.get("roomNumber").equals("undefined")) {
 			System.out.println("roomNumber undefined");
 			String roomNumber = UUID.randomUUID().toString().split("-")[0];;
-			Set<Map<String,List<String>>> roomMembers = chatSocket.privateRoomMembers;
-			Iterator<Map<String, List<String>>> iterator = roomMembers.iterator();
-				while(iterator.hasNext()) {
-					Map each = (Map)roomMembers.iterator().next();
-						if(each.containsValue(senderNick) && each.containsValue(targetNick) ){
-							System.out.println(each.keySet());
-						}						
+			Map<String,List<String>> roomMembers = chatSocket.privateRoomMembers;
+			
+			Set keyset = roomMembers.keySet();
+			Iterator itr = keyset.iterator();
+			
+			while (itr.hasNext()) {
+				String key = (String) itr.next();
+				List list = roomMembers.get(key);
+				if(list.contains(senderNick)&&list.contains(targetNick)) {
+					roomNumber=key;
 				}
+			}
+			
 			System.out.println(roomMembers);
 		    wr.setAttribute("roomNumber", roomNumber, wr.SCOPE_REQUEST);
 		}else {

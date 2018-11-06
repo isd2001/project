@@ -25,7 +25,7 @@ public class AccesslistController extends TextWebSocketHandler{
 		
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		
+		System.out.println("mainSocket established");
 		socketService.addSocket(session);
 		
 		
@@ -53,6 +53,7 @@ public class AccesslistController extends TextWebSocketHandler{
 	}	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+		System.out.println("mainSocket closed");
 		socketService.removeSocket(session);
 	}
 	
