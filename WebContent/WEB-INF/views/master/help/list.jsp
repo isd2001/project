@@ -5,17 +5,16 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <link rel="stylesheet"
 	href="${pageContext.servletContext.contextPath }/css/blog.css">
-
-
-	<table class="table table-hover">
+<div class="d-flex justify-content-center col-12">
+	<table class="table table-hover ">
 		<thead class="thead-light" style="text-align:center">
 			<tr>
-				<th scope="col" style="width:3%">#</th>
+				<th scope="col" style="width:5%">#</th>
 				<th scope="col" style="width:40%">제목</th>
 				<th scope="col" style="width:20%">작성자</th>
 				<th scope="col" style="width:15%">날짜</th>
-				<th scope="col" style="width:9%">조회수</th>
-				<th scope="col" style="width:9%">추천</th>
+				<th scope="col" style="width:8%">조회수</th>
+				<th scope="col" style="width:8%">추천</th>
 			</tr>
 		</thead>
 		<tbody style="text-align:center">
@@ -33,7 +32,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
-
+</div>
 	<br />
 	<footer class="text-muted">
 		<div class="container">
@@ -57,19 +56,18 @@
 					tabindex="+1" >Next</a></li>
 				</ul>
 			</nav>
-
+			<br/>
 			<div>
-				<div style="text-align: center">
+				<div style="text-align: center" >
 					<a href="${pageContext.servletContext.contextPath }/help/write.do">
 						<button type="button" class="btn btn-outline-primary">글쓰기</button>
 					</a>
-				</div>
-				<div style="text-align: right">
-					<a href="${pageContext.servletContext.contextPath }/index.do">
-						<button type="button" class="btn btn-outline-secondary btn-sm">메인으로</button>
+					<a href="${pageContext.servletContext.contextPath }/main/index.do">
+						<button type="button" class="btn btn-outline-secondary">메인으로</button>
 					</a>
 				</div>
 			</div>
-			<br />
 		</div>
+		<br />
+		
 	</footer>

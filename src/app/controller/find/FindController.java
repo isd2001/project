@@ -46,14 +46,20 @@ public class FindController {
 		
 	
 		//-------------------------------------
-		Map map = new HashMap();
-		int pp = (p == null) ? 1 : Integer.parseInt(p);
 		
+		int pp = (p == null) ? 1 : Integer.parseInt(p);
+			
+		Map map = new HashMap<>();
 		map.put("s", 1 + (pp-1) * 6);
 		map.put("e", pp*6);
 		
+		mmap.put("current",pp);
+
 		List<Map> every = findRepository.getSomeFind(map);
 		mmap.put("every",every);
+		
+		int tot = findRepository.totalCount();
+		mmap.put("size", tot/6 + (tot%6>0 ? 1: 0));
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -163,7 +169,7 @@ public class FindController {
 		
 		return mav;
 	}
-	
+	/*
 	@RequestMapping("/remove.do")
 	public String removeHandler(int no) {
 		
@@ -175,4 +181,5 @@ public class FindController {
 			return "main.find.detail";
 		}
 	}
+	*/
 }

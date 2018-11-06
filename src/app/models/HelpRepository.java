@@ -19,17 +19,19 @@ public class HelpRepository {
 		return template.insert("help.addAllHelp", map);
 	}
 
-	// 게시물에 쓰는 내용 다 넣기
+	// 게시물에 따라 페이지 갯수 설정
 	public int totalCount() {
 
 		return template.selectOne("help.totalCount");
 	}
 
+	
 	// 게시물에 들어가는 내용 다 뽑기
 	public List<Map> getAllHelp() {
 
 		return template.selectList("help.getAllHelp");
 	}
+	
 
 	// 이걸 쓸 예정( 페이징 처리때문에 )
 	public List<Map> getSomeHelp(Map s) {

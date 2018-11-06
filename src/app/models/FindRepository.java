@@ -19,10 +19,12 @@ public class FindRepository {
 		return template.insert("find.addAllFind", map);
 	}
 
+	
 	// 모든 게시글 내용 뽑기
 	public List<Map> getAllFind() {
 		return template.selectList("find.getAllFind");
 	}
+	
 
 	// 페이지수 개시물에 맞게 페이징처리한 갯수만큼 게시글 내용 뽑기
 	public List<Map> getSomeFind(Map s) {
@@ -34,7 +36,9 @@ public class FindRepository {
 		return template.selectOne("find.getOneByNo", no);
 	}
 
-	public int removeByNo(int no) {
-		return template.delete("find.removeByNo", no);
+	// 게시물에 따라 페이지 갯수 설정
+	public int totalCount() {
+
+		return template.selectOne("find.totalCount");
 	}
 }

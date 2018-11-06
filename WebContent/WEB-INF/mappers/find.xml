@@ -39,4 +39,9 @@
 		select * from find where nick = #{nick}
 	</select>
 
+	<!-- 페이지 게시물 갯수에 따라  -->
+	<select id="totalCount" resultType="java.lang.Integer">
+		select count(*) from find
+	</select>	
+	
 </mapper>

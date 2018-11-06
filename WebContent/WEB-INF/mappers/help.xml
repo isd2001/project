@@ -16,6 +16,8 @@
 	<select id = "getSomeHelp" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		select * from(select rownum r, o.* from (select * from help order by no desc) o ) where r between #{s} and #{e}
 	</select>
+	
+	<!-- 페이지 게시물에 따라 -->
 	<select id="totalCount" resultType="java.lang.Integer">
 		select count(*) from help
 	</select>	

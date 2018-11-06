@@ -44,6 +44,7 @@ public class HelpController {
 
 		Map map = new HashMap();
 		int pp = (p == null) ? 1 : Integer.parseInt(p);
+		
 		mmap.put("current", pp);
 		map.put("s", 1 + (pp - 1) * 10);
 		map.put("e", pp * 10);
@@ -52,9 +53,9 @@ public class HelpController {
 
 		mmap.put("list", list);
 
-		
 		int tot = help.totalCount();
 		mmap.put("size", tot/10 + (tot%10>0 ? 1: 0));
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("master");
 		mav.addObject("top", "/WEB-INF/views/master/help/top.jsp");
@@ -116,7 +117,7 @@ public class HelpController {
 
 		rmap.put("nick", nick);
 
-		System.out.println(rmap);
+		System.out.println("rmap ? = " + rmap);
 		ModelAndView mav = new ModelAndView();		
 		try {
 			int i = help.addAllHelp(rmap);
@@ -148,7 +149,7 @@ public class HelpController {
 		Map data = help.getOneByNo(no);
 		mmap.put("data", data);
 
-		System.out.println(mmap);
+		System.out.println("detail mmap " + mmap);
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("master");
