@@ -70,6 +70,7 @@ var getWeather = function(gu) {
     		 
 
 	</div>
+
 		  <a class="toggle-btn p-2 font-weight-bold" style="color:black;" onclick="togglesidebar()"> 더보개  </a>		
           <a class="p-2 font-weight-bold" style="color:black;" href="${pageContext.servletContext.contextPath }/Nboard/list.do">공지사항</a>
           <a class="p-2 font-weight-bold" style="color:black;" href="${pageContext.servletContext.contextPath }/dogTalk/index.do">개톡</a>
@@ -77,6 +78,7 @@ var getWeather = function(gu) {
           <a class="p-2 font-weight-bold"	style="color:black;"href="${pageContext.servletContext.contextPath }/find/list.do">찾아주시개</a>
           <a class="p-2  font-weight-bold"  style="color:black;" href="${pageContext.servletContext.contextPath }/parcel.do">데려가시개(분양)</a>
           <a class="p-2  font-weight-bold"  style="color:black;" href="${pageContext.servletContext.contextPath }/together/mainboard.do">같이가시개</a>
+
           <div class="dropdown p-2 text-muted">
           <a class="p-2 font-weight-bold"  style="color:black;" id="dropdownMenuButton" data-toggle="dropdown" href="#">똥개훈련</a>
 	           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

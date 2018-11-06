@@ -34,7 +34,11 @@ public class AccesslistController extends TextWebSocketHandler{
 		List list = new ArrayList<>();
 		for (int i = 0; i < socketService.loggedInUsers.size(); i++) {
 			Map info = (Map) socketService.loggedInUsers.get(i).getAttributes().get("userInfo");
-				list.add(info.get("NICKNAME"));
+			String sessionId = socketService.loggedInUsers.get(i).getId();
+			Map map = new HashMap();
+				map.put("sessionId", sessionId);
+				map.put("nickName", info.get("NICKNAME"));
+			list.add(map);
 		}
 		Map map = new HashMap();
 			map.put("mode", "loginUers");

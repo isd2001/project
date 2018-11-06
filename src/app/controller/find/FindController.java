@@ -38,7 +38,7 @@ public class FindController {
 	@GetMapping("/list.do")
 
 	public ModelAndView listNeoHandler(ModelMap mmap, WebRequest wr, @RequestParam (required=false)String p) {
-	
+
 		Date today = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String date = sdf.format(today);

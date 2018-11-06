@@ -2,10 +2,10 @@
 
 #sidebar {
 	position: fixed;
-	width: 210px;
+	width: 200px;
 	height: 130%;
 	background: black;
-	left: -210px;
+	left: -200px;
 	transition: all 500ms linear;
 	opacity: 0.3;
 }

@@ -1,7 +1,9 @@
 package app.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +48,37 @@ public class SocketService {
 			}
 		}
 	}
+	
+	 
+   public void sendOne(Map data, String target) {
+	   sendOne(gson.toJson(data), target);
+   }
+   
+   public void sendOne(String txt, String target) {
+	   TextMessage msg =new TextMessage(txt);	      
+	      for (int i = 0; i < loggedInUsers.size(); i++) {
+	         try {
+	            WebSocketSession ws = loggedInUsers.get(i);
+	            System.out.println("service.getAttris"+ws.getAttributes());
+	            if(ws.getAttributes().get("userId").equals(target)) {	            	
+	            	ws.sendMessage(msg);
+	            }	            
+	         } catch (IOException e) {
+	            e.printStackTrace();
+	         }
+	      }
+   }
+   
+   public void sendToList (String txt, List<WebSocketSession> toList) {
+	   TextMessage msg =new TextMessage(txt);
+	   for (int i = 0; i < toList.size(); i++) {
+	         try {
+	            toList.get(i).sendMessage(msg);	                     
+	         } catch (IOException e) {
+	            e.printStackTrace();
+	         }
+	      }
+   }
 	
 	
 }

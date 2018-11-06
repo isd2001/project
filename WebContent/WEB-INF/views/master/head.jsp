@@ -162,14 +162,14 @@
 				   var loginList = obj.list;
 					for (var i = 0; i < loginList.length; i++) {				
 					 	if (obj[i]=="${userInfo.NICKNAME}") {
-						html+="<li><a href=\"#\">"+loginList[i]+"</a>";		
+						html+="<li><a href=\"#\">"+loginList[i].nickName+"</a>";		
 						html+="</li>";
 						}else{	 		
-						html+="<li><a href=\"#\">"+loginList[i]+"</a>";
+						html+="<li><a href=\"#\">"+loginList[i].nickName+"</a>";
 						html+="<ul class=\"sub2\">";
-						html+="<li><a onclick=\"openchat('"+loginList[i]+"')\" value=\""+loginList[i]+ "\" >1:1대화</a></li>";
+						html+="<li><a onclick=\"openchat('"+ loginList[i].nickName+"')\" value=\""+loginList[i].sessionId+ "\" >1:1대화</a></li>";
 						html+="<li><a data-toggle=\"modal\" data-target=\"#exampleModalCenter2\" id=\"Infomodal\" onclick=\"openmodal('"
-							+ loginList + "')\" \">정보 보기</a></li>";
+							+ loginList.nickName + "')\" \">정보 보기</a></li>";
 						html+="</ul>";
 						html+="</li>";
 						}//end if..else
@@ -182,22 +182,39 @@
 					console.log(obj.sender);
 					console.log(obj.text);
 					console.log(obj.day);
-					break;
-					
+					newMessageHandle(obj);
+					break;					
 			
 		}
 		
 		};
-	
+		var newMessageHandle = function(obj){			
+			var html = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">";
+			html += "<strong>【NewChatting】</strong><br/> 새로운 채팅이 있습니다.</br>";
+			html += obj.sender +" : "+obj.text;
+			html += "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">";
+			html += "<button type=\"button\" onclick=\"openchat('"+obj.sender+","+obj.roomNumber+"')\" value=\""+loginList[i].sessionId+ "\" >1:1대화</a></li>";">";				
+			html += "<span aria-hidden=\"true\">&times;</span>";
+			html += "</div>";
+			document.getElementById("alert").innerHTML += html;
+		}
 		
 		//====================================================================
 		// chat
-		var openchat = function(target) {
-			console.log(target);
+		var openchat = function(nickName, roomNumber) {			
+			console.log("nickName : "+nickName);
 			window.open(
-					"${pageContext.servletContext.contextPath }/onetalk.do?talk="
-							+ target, "talk", "width=350,height=550");
+					"${pageContext.servletContext.contextPath }/onetalk.do?talkNick="
+							+nickName+"&roomNumber="+roomNumber, "", "width=350,height=550");
 		};
+		
+		var acceptchat = function(nickName, roomNumber) {			
+			console.log("nickName : "+nickName);
+			window.open(
+					"${pageContext.servletContext.contextPath }/onetalk.do?talkNick="
+							+ nickName+"&roomNumber="+roomNumber, "", "width=350,height=550");
+		};
+		
 
 		//====================================================================
 		// modal

@@ -21,12 +21,13 @@
 
 </head>
 <body style="background-color: #AED6F1;">
-
+	<h1>${roomNumber }</h1>
 
 	<h4 style="text-align: center;">환영합니다. 개놀자 1:1 채팅방입니다.</h4>
 
 
 	<div style="height: 520px; overflow-y: scroll;" id="chatView">
+		<%--
 		<c:forEach var="c" items="${chatlist }">
 			<c:choose>
 				<c:when test="${c.sender== userInfo.NICKNAME}">
@@ -45,6 +46,7 @@
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
+		 --%>
 	</div>
 	<div id="chatView">
 	
@@ -63,31 +65,40 @@
 		var onechat = new WebSocket("ws://" + location.host
 				+ "${pageContext.servletContext.contextPath}/onechat.do");
 
-		document.getElementById("input").onchange = function() {
+		onechat.onopen = function() {
+			var param = {"mode":"register", "roomNumber":"${roomNumber}","recipient":"${recipient}","sender" : "${userInfo.NICKNAME}"}
+			onechat.send(JSON.stringify(param));
+		}
 		
+		
+		
+		document.getElementById("input").onchange = function() {
 			console.log(this.value);
+			console.log("${userInfo.NICKNAME}");
+			console.log("${recipient}");
+			
 			var msg = {
+				"mode" :"chat",
+				"roomNumber" : "${roomNumber}",
 				"sender" : "${userInfo.NICKNAME}",
 				"recipient" : "${recipient}",
 				"text" : this.value
 			};
 			onechat.send(JSON.stringify(msg));
 			this.value = "";
-			
-			
-			
 		};
 
 		onechat.onmessage = function(evt) {
 			console.log("결과" + evt.data);
 			var obj = JSON.parse(evt.data);
-			console.log("onetalk obk ="+obj);
+			console.log(obj);
+			/*
 			if (obj.sender == "${userInfo.NICKNAME}") {
-				warningHandle(obj);  // 내가 보낸거
+				warningHandle(obj);
 			} else {
-				lightHandle(obj);    // 남이 보낸거
+				lightHandle(obj);
 			}
-
+			*/
 		};
 
 		var lightHandle = function(obj) {

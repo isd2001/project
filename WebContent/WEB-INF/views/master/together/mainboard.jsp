@@ -123,8 +123,8 @@
 				<th scope="col" style="width: 9%"><small>조회수</small></th>
 			</tr>
 		</thead>
-		<tbody>
-			<c:forEach var="l" items="${list }">
+		<tbody id="repage">
+			<c:forEach var="l" items="${list }" >
 				<tr>
 					<th scope="row">${l.NO }</th>
 					<td><small>${l.AREA }</small></td>
@@ -138,6 +138,16 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	
+	<nav aria-label="Page navigation example" >
+	  <ul class="pagination">
+	    <li class="page-item" value=""><a class="page-link" >Previous</a></li>
+	    <li class="page-item" id="page" value="1" onclick="page(this)"><a class="page-link" href="#">1</a></li>
+	    <li class="page-item" value="2"><a class="page-link" href="#">2</a></li>
+	    <li class="page-item" value="3"><a class="page-link" href="#">3</a></li>
+	    <li class="page-item" ><a class="page-link" href="#">Next</a></li>
+	  </ul>
+	</nav>
 	<!-- ======================================== -->
 	<a href="${pageContext.servletContext.contextPath }/together/new.do" class="d-flex justify-content-end">
 		<button type="button" class="btn btn-outline-success">글 쓰기</button>
@@ -201,6 +211,9 @@
 				infowindow.close();
 			};
 		}
+		
+		// page 넘기기
+		document.getElementById("")
 	</script>
 </form>
 </div>

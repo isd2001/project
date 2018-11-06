@@ -2,8 +2,11 @@ package app.controller.index;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 import javax.servlet.ServletContext;
 
@@ -22,8 +25,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 
 import app.models.OnechatRepository;
-
 import app.models.accountRepository;
+import app.service.Rooms;
 import app.service.SocketService;
 import app.service.WeatherService;
 
@@ -46,7 +49,12 @@ public class IndexController {
 	Gson gson;
 	
 	@Autowired
-	OnechatRepository onechat;
+	OnechatRepository onechat; 
+	
+	@Autowired
+	ChatSocketController chatSocket;
+	
+	
 	
 	
 	@GetMapping("/index.do")
@@ -188,23 +196,55 @@ public class IndexController {
 	}
 			
 	@RequestMapping("/onetalk.do")	
-	public String onetalkHandle(@RequestParam Map param,WebRequest wreq,ModelMap map) {	
-		String target = (String)param.get("talk");
-		System.out.println("target > "+ target);
-		wreq.setAttribute("recipient", target, wreq.SCOPE_REQUEST);
+	public String onetalkHandle(@RequestParam Map param,WebRequest wr,ModelMap map) {	
+		String targetNick = (String)param.get("talkNick");		
+		System.out.println("target > "+ targetNick);		
+					
+		wr.setAttribute("recipient", targetNick, wr.SCOPE_REQUEST);
+		
 		//========================================
-		Map user =(Map) wreq.getAttribute("userInfo",wreq.SCOPE_SESSION);
-		String sender = (String) user.get("NICKNAME");
-		System.out.println("sender > "+sender);
+		Map user =(Map) wr.getAttribute("userInfo",wr.SCOPE_SESSION);
+		String senderNick = (String) user.get("NICKNAME");
+		System.out.println("sender > "+senderNick);
 		
 		Map result = new HashMap<>();
-			result.put("sender", sender);
-			result.put("recipient", target);
+			result.put("sender", senderNick);
+			result.put("recipient", targetNick);
+		Map nickNames = new HashMap<>();
+			nickNames.put("sender", senderNick);
+			nickNames.put("recipient", targetNick);
 			
-		List<Map> chatlist=onechat.getOneChat(result);
-		System.out.println("chatlist >"+chatlist);
+		List<Map> chatlist=onechat.getOneChat(nickNames);
 		map.addAttribute("chatlist",chatlist);
-		return "dogTalk/onetalk";
+		
+		/*String uuid = UUID.randomUUID().toString().split("-")[0];
+		
+		Rooms room = new Rooms(uuid);
+			room.addUsers(senderNick, targetNick );
+			*/
+		System.out.println("roomNumber : "+param.get("roomNumber"));
+		String uuid = Math.random()>0.5?  "A22131AF" : "9421AB23";			
+				
+			
+		
+		if(param.get("roomNumber").equals("undefined")) {
+			System.out.println("roomNumber undefined");
+			String roomNumber = UUID.randomUUID().toString().split("-")[0];;
+			Set<Map<String,List<String>>> roomMembers = chatSocket.privateRoomMembers;
+			Iterator<Map<String, List<String>>> iterator = roomMembers.iterator();
+				while(iterator.hasNext()) {
+					Map each = (Map)roomMembers.iterator().next();
+						if(each.containsValue(senderNick) && each.containsValue(targetNick) ){
+							System.out.println(each.keySet());
+						}						
+				}
+			System.out.println(roomMembers);
+		    wr.setAttribute("roomNumber", roomNumber, wr.SCOPE_REQUEST);
+		}else {
+			wr.setAttribute("roomNumber", param.get("roomNumber"), wr.SCOPE_REQUEST);
+		}
+		
+		return "master/chat/onetalk";
 	}//end onetalk.do
 	
 	
