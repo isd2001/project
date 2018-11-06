@@ -38,12 +38,49 @@
 	      <th scope="row" style="width: 12%"><small>내용</small></th>
 	      <td>${read.CON}</td>
 	      </tbody>
-  		
-  
+
      	
 </table>
+
+
+<section class="content container-fluid">
+  <div class="col-lg-12">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">댓글 작성</h3>
+        </div>
+        <div class="box-body">
+            <div class="form-group">
+                <label for="newReplyText">댓글 내용</label>
+                <input class="form-control" id="CONTENT" name="CONTENT" placeholder="댓글 내용을 입력해주세요">
+            </div>
+            <div class="form-group">
+           <th scope="row"><small>작성자</small></th>
+           <td>${comment.ID }
+            </div>
+        </div>
+        <div class="box-footer">
+            <ul id="replies">
+
+            </ul>
+        </div>
+        <div class="box-footer">
+            <div class="text-center">
+                <ul class="pagination pagination-sm no-margin">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+</section>
+
+
+
      	<tr>
-     <a href="${pageContext.servletContext.contextPath }">목록으로</a>
+     <a href="${pageContext.servletContext.contextPath }/dogTraining.training.do">목록으로</a>
         <a href="${pageContext.servletContext.contextPath }">수정하기</a>
          <a href="${pageContext.servletContext.contextPath }">삭제하기</a>
      
