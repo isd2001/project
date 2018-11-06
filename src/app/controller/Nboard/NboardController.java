@@ -42,17 +42,24 @@ public class NboardController {
 	// 공지사항 이동
 	@GetMapping("/list.do")
 	public ModelAndView NboardHandler(WebRequest wreq,@RequestParam Map map,Model model) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 		List<Map> Allboard =nr.getAllNboard();
 		System.out.println("allboard > "+ Allboard);
+		
+	for (int i =0; i<Allboard.size(); i++) {
+		Allboard.get(i).put("BOARD_DATE",sdf.format(Allboard.get(i).get("BOARD_DATE")));
+		System.out.println("Allboard" + Allboard);
+	}
+		
+		
 
-
+		
 		// webrequest - > 보낼때
 		// @requestparam -> 같고올때
 		// model -> 보낼때 , 일회성
-
-		wreq.setAttribute("list", Allboard, WebRequest.SCOPE_REQUEST);
 		
+		wreq.setAttribute("list", Allboard, WebRequest.SCOPE_REQUEST);
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("master");
@@ -84,13 +91,13 @@ public class NboardController {
 		String sub = (String)map.get("BOARD_SUBJECT");
 		String con = (String)map.get("BOARD_CONTENT");
 		Date day = new Date();
-		SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
 
 		
 		System.out.println("userinfo >" + userInfo);
 		System.out.println("sub > " + sub);
 		System.out.println("target >"+target);
-		System.out.println("day >"+day);
+		System.out.println("day >"+sdf);
 		
 		
 		
@@ -137,14 +144,34 @@ public class NboardController {
 		
 	}//end write
 
+
+	//글 삭제하기.
+	@RequestMapping("delete.do")
+	public ModelAndView nboarddelete(@RequestParam int BOARD_NUM , WebRequest wreq) {
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("master");
+		mav.addObject("top", "/WEB-INF/views/master/Nboard/top.jsp");
+		mav.addObject("main", "/WEB-INF/views/master/Nboard/list.jsp");
+		return mav;
+		
+	}
+	
 	
 	
 	
 	//글 목록 클릭해서 디테일
 	@GetMapping("/detail.do")
 	public ModelAndView nboardread(@RequestParam int BOARD_NUM ,WebRequest wreq) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
 		Map read =nr.nboardread(BOARD_NUM);
 		System.out.println("글 정보>>"+ read );
+		
+		read.put("BOARD_DATE", sdf.format(read.get("BOARD_DATE")));
+
+
 		
 		wreq.setAttribute("read",read, WebRequest.SCOPE_REQUEST);
 		ModelAndView mav = new ModelAndView();
@@ -155,16 +182,6 @@ public class NboardController {
 		return mav;
 	} //end getRead
 	
-
-
-/*
-
-Date leftdate = new Date(0);
-Map input = new HashMap<>();
-input.put("ntitle", title);
-input.put("ncontent", content);
-input.put("leftdate	", Date);
- */
 
 	
 }

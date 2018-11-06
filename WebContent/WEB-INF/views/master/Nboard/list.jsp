@@ -12,7 +12,7 @@
     	  <th scope="col" style="width: 7%"><small>NO</small></th>
     	  <th scope="col" style="width: 50%"><small>제목</small></th>
      	  <th scope="col" style="width: 15%"><small>날짜</small></th>
-     	  <th scope="col" style="width: 12%"><small >추천</small></th>
+     	 
      	  <th scope="col" style="width: 12%"><small>조회수</small></th>
 	     </tr>
   		</thead>
@@ -25,7 +25,7 @@
      			${l.BOARD_SUBJECT }
      			</a></td>
      			<td>${l.BOARD_DATE }</td>
-     			<td>${l.BOARD_COUNT }</td>
+     		
      			<td>${l.BOARD_LOOKUP }</td>
      		</tr>
      		
