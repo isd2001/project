@@ -2,6 +2,7 @@ package app.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,42 +11,43 @@ import org.springframework.web.socket.WebSocketSession;
 
 import com.google.gson.Gson;
 
-@Service
-public class SocketService {
+import app.controller.index.OneChatSocketController;
 
-	public List<WebSocketSession> loggedInUsers;
+@Service
+public class OnechatService {	
+	   
+	public List<WebSocketSession> chatConnectedUsers;	
 	
-	@Autowired
-	Gson gson;
+	public OnechatService () {
+		chatConnectedUsers = new ArrayList<>();
+		
+	}	
 	
-	public SocketService() {
-		loggedInUsers = new ArrayList<>();
-	}
 	// 사이즈
 	public int size() {
-		return loggedInUsers.size();
+		return chatConnectedUsers.size();
 	}
 	
 	// 추가
 	public boolean addSocket(WebSocketSession session) {
-		return loggedInUsers.add(session);
+		return chatConnectedUsers.add(session);
 	}
 	//삭제
 	public boolean removeSocket(WebSocketSession session) {
-		return loggedInUsers.remove(session);
+		return chatConnectedUsers.remove(session);
 	}
 
 	// 작성한것들 보내기
-	public void sendWrite(String text) {
+	public void sendMessage(String text) {	
 		TextMessage msg = new TextMessage(text);
-		for(int i=0; i < loggedInUsers.size(); i++) {
-			try{
-				loggedInUsers.get(i).sendMessage(msg);
+		for(int i=0; i < chatConnectedUsers.size(); i++) {
+			try{				
+				chatConnectedUsers.get(i).sendMessage(msg);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
 		}
 	}
-	
-	
+
+
 }

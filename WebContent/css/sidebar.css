@@ -2,7 +2,7 @@
 
 #sidebar {
 	position: fixed;
-	width: 230px;
+	width: 210px;
 	height: 130%;
 	background: black;
 	left: -210px;
@@ -33,4 +33,10 @@
 	height: 5px;
 	background: black;
 	margin: 5px 0px;
+}
+
+#sideAlert{
+	position: fixed;
+	width:250px;
+	height:500px;	
 }

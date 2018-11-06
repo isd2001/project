@@ -9,51 +9,6 @@
 <link rel="stylesheet"
 	href="${pageContext.servletContext.contextPath }/css/navcss.css">
 
-<style>
-
- nav.nav {
-   font-family: 'Cute Font', cursive;
-   font-size: 30px;
-   font-weight: 700;
- }
- a.dropdown-item{
- 	font-family: 'Cute Font', cursive;
-   font-size: 25px;
-   font-weight: 700;
- }
-
-#sidebar {
-	position: fixed;
-	width: 210px;
-	height: 130%;
-	background: black;
-	left: -210px;
-	transition : all 500ms linear;
-	opacity: 0.3;
-}
-#sidebar.active {
-	left: 0px;
-
-}
-#sidebar ul li {
-	color: rgba(230, 230, 230, 0.9);
-	list-style: none;
-	padding: 15px 10px;
-	border-bottom: 1px solid rgba(100, 100, 100, 0.3);
-}
-#sidebar .toggle-btn {
-	position: absolute;
-	left: 230px;
-	top: 20px;
-}
-#sidebar .toggle-btn span{ 
-	display: block;
-	width: 30px;
-	height: 5px; 
-	background: black;	
-	margin: 5px 0px ;
-}
-</style>
 
 <script>
 //======================================================================
@@ -77,7 +32,7 @@ var getWeather = function(gu) {
 	};
 </script>
 <div class="nav d-flex justify-content-around py-2 mb-2">
-  <nav class="nav d-flex justify-content-between">
+  <nav class="nav d-flex justify-content-between">  	
     <div id="sidebar" style="background-color: black; opacity: 0.7; text-align: center; color: white;">
     		<c:choose>
 			<c:when test="${not empty userInfo}">
@@ -114,7 +69,7 @@ var getWeather = function(gu) {
 			</c:choose>
     		 
 
-		</div>
+	</div>
 		  <a class="toggle-btn p-2 font-weight-bold" style="color:black;" onclick="togglesidebar()"> 더보개  </a>		
           <a class="p-2 font-weight-bold" style="color:black;" href="${pageContext.servletContext.contextPath }/Nboard/list.do">공지사항</a>
           <a class="p-2 font-weight-bold" style="color:black;" href="${pageContext.servletContext.contextPath }/dogTalk/index.do">개톡</a>

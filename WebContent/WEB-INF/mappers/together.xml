@@ -23,10 +23,7 @@
 	<update id="updatelookup" parameterType="java.lang.String">
 		update togetherboard set lookup = lookup+1 where no=#{no}
 	</update>
-<!-- good -->
-	<update id="updategood" parameterType="java.lang.String">
-		update togetherboard set good = good+1 where no=#{no}
-	</update>
+
 <!-- good ajax -->
 	<select id="getGoodByNo" parameterType="java.lang.String" resultType="java.util.HashMap">
 		select good from togetherboard where no=#{no}	

@@ -1,6 +1,7 @@
 package app.controller.index;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
@@ -25,35 +25,40 @@ public class AccesslistController extends TextWebSocketHandler{
 		
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println("accessController entered");
+		
 		socketService.addSocket(session);
+		
+		
 		
 		//=====================================================
 		List list = new ArrayList<>();
+		for (int i = 0; i < socketService.loggedInUsers.size(); i++) {
+			Map info = (Map) socketService.loggedInUsers.get(i).getAttributes().get("userInfo");
+				list.add(info.get("NICKNAME"));
+		}
+		Map map = new HashMap();
+			map.put("mode", "loginUers");
+			map.put("list", list);
+		
+		TextMessage tm= new TextMessage(gson.toJson(map));
 		
 		for (int i = 0; i < socketService.size(); i++) {
-			Map m=(Map)socketService.list.get(i).getAttributes().get("userInfo");
-			System.out.println("m>>"+m);
-			list.add(m.get("NICKNAME"));			
-		}
-		TextMessage tm= new TextMessage(gson.toJson(list));
-		System.out.println("tm >"+tm);
-		
-		for (int i = 0; i < socketService.size(); i++) {
-			socketService.list.get(i).sendMessage(tm);
+			socketService.loggedInUsers.get(i).sendMessage(tm);
 		}
 		
-		System.out.println("list :"+list);
-	}
-	
+	}	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		socketService.removeSocket(session);
 	}
 	
 	@Override
-	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
-
+	public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {		
+		String got = message.getPayload();
+		System.out.println("accessController handleTXT method");
+		Map jmap = gson.fromJson(got,Map.class);
 		
+		System.out.println("jmap = "+jmap);
+	
 	}
 }
