@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:if test="${err eq 'on' }">
+	<script>window.alert("글이 정상처리 되지 않았습니다.\n필수사항을 다시한번 확인해주세요.")</script>
+</c:if>
 <form class="needs-validation"
 	action="${pageContext.servletContext.contextPath }/dogTraining/write.do"
-	method="post">
+	method="post" enctype="multipart/form-data">
 <h6 style="text-align: center;">현재 페이지는 강아지 트레이닝 게시판 등록 페이지입니다.<br/><br/>
-파일 업로드는 사진 및 동영상으로 부탁드림니다.<br/><br/>
+파일 업로드는 동영상이 아니면 , 글이 정상 등록되지 않습니다.<br/><br/>
 (*) 는 필수 항목입니다. 다시 한번 확인해주세요.
 </h6>	
 
@@ -25,7 +28,7 @@
 <hr/>
 <div class="mb-3">
 		<label for="text">파일 업로드  </label>
-		<input type="file" class="form-control" name="upload">
+		<input type="file" class="form-control" name="attach">
 </div>
 <hr/>
 <button class="btn btn-secondary btn-lg btn-block" type="submit" id="b">등록하기</button>

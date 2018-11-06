@@ -5,6 +5,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <link rel="stylesheet"
 	href="${pageContext.servletContext.contextPath }/css/blog.css">
+<c:if test="${err eq 'off' }">
+	<script>window.alert("글이 정상적으로 등록되었습니다.")</script>
+</c:if>
+
 
 <body>	
 	<div class="album py-5 bg-light">
@@ -13,7 +17,7 @@
 					<c:forEach var="l" items="${list}">
 						<div class="col-md-4" id="post">
 							<div class="card mb-4 shadow-sm" style="width: 250px; max-height: 300px">
-								<img class="card-img-top"	src="${pageContext.servletContext.contextPath}"		width="200" height="225">
+								<video class="card-img-top" src="${l.UPLOAD }"	width="200" height="225" controls="controls"></video>
 								<div class="card-body">
 									<p class="card-text">
 									<div class="d-flex justify-content-between align-items-center">

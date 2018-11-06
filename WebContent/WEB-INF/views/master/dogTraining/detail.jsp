@@ -33,7 +33,7 @@
 		</tr>
 		<tr>
 			<th scope="row" style="width: 12%"> <small>동영상</small></th>
-			<td>${read.CONTENT}</td>
+			<td><video src="${read.UPLOAD}" controls="controls"></video></td>
 		</tr>
 	</tbody>
 

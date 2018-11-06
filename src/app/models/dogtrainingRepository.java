@@ -25,10 +25,14 @@ public class dogtrainingRepository{
 	} // end readdt
 
 	// 글쓰기 저장
-	public int adddtboard(Map map) {
-		return template.insert("dogtraining.adddtboard" , map);
+	public int addlist(Map map) {
+		return template.insert("dogtraining.addlist",map);
 	}
 
+	// 조회수 늘리기
+	public int updatelookup(int no) {
+		return template.update("dogtraining.updatelookup",no);
+	}
 
 
 
