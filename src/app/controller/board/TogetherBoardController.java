@@ -41,11 +41,24 @@ public class TogetherBoardController {
 		if (re=="on") {
 			wreq.setAttribute("result","yes",WebRequest.SCOPE_REQUEST);
 		}
+		
+		
+		int rp = Integer.parseInt((String) param.get("p"));
+		System.out.println("rp>"+rp);
+		Map mp = new HashMap<>();
+			mp.put("s", 1 + ( rp - 1 ) * 6 );
+			mp.put("e", rp * 10 );
+		
 		//------------------------------------------------
-		List<Map> list=together.getAllTogether();
+		//List<Map> list=together.getAllTogether();
 
+		List<Map> list = together.getSomeFind(mp);	
+			
 		List<Map> li = new ArrayList<>();
-
+		
+		
+		
+		//================================================
 		SimpleDateFormat sdf= new SimpleDateFormat("MM-dd");
 	
 		for (int i = 0; i < list.size(); i++) {

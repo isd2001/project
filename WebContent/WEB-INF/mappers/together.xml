@@ -37,5 +37,10 @@
 		select * from togetherboard where nick = #{nick}
 	</select>
 	
+<!-- 페이징에 들어갈 만큼 게시글 뽑기 -->
+	<select id="getSomeFind" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		select * from (select rownum r, o.* from (select * from togetherboard order by no desc) o ) where r between #{s} and #{e}
+	</select>
+	
 </mapper>
 

@@ -42,8 +42,13 @@ public class TogetherRepository {
 		return template.selectOne("together.getGoodByNo",no);
 	}
 
-	
-	
-	
+	// 페이지수 개시물에 맞게 페이징처리한 갯수만큼 게시글 내용 뽑기
+	public List<Map> getSomeFind(Map s) {
+		return template.selectList("together.getSomeFind",s);
+	}
+
+
+
+
 
 }//end class
