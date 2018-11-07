@@ -36,9 +36,6 @@ public class ChatSocketController extends TextWebSocketHandler{
 	@Autowired
 	chatService chatService;
 	
-	@Autowired
-	accountRepository ar;
-	
 	
 	List<WebSocketSession> chatSockets;
 	
@@ -153,7 +150,7 @@ public class ChatSocketController extends TextWebSocketHandler{
 				List<WebSocketSession> li = privateRoomSessions.get((String)read.get("roomNumber"));
 					Map toMongo = new HashMap();
 					toMongo.put("sender", read.get("sender"));
-					toMongo.put("senderProfile", ar.getDogProfileByNickname((String)read.get("sender")));
+					toMongo.put("senderProfile", read.get("senderProfile"));
 					toMongo.put("recipient", read.get("recipient"));
 					toMongo.put("text", read.get("text"));
 					toMongo.put("day", sdf.format(current));
@@ -163,6 +160,7 @@ public class ChatSocketController extends TextWebSocketHandler{
 					toMongo.put("roomlist", chatList);
 				
 					onechat.addChat(toMongo);	
+					System.out.println(toMongo);
 				
 					if(li.size()<2) {
 						for (int k = 0; k < socketService.loggedInUsers.size(); k++) {						
@@ -175,6 +173,9 @@ public class ChatSocketController extends TextWebSocketHandler{
 								TextMessage tm = new TextMessage(gson.toJson(alert));
 								recipient.sendMessage(tm);
 							}
+						}
+						for(int j=0; j<li.size(); j++) {
+							li.get(j).sendMessage(whatToSend);
 						}
 					}else {						
 						for(int j=0; j<li.size(); j++) {

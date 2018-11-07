@@ -204,6 +204,7 @@ public class IndexController {
 		wr.setAttribute("recipient", targetNick, wr.SCOPE_REQUEST);		
 		//========================================
 		Map user =(Map) wr.getAttribute("userInfo",wr.SCOPE_SESSION);
+		System.out.println(user);
 		String senderNick = (String) user.get("NICKNAME");
 		System.out.println("sender > "+senderNick);		
 		

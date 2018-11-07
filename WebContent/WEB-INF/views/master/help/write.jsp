@@ -8,90 +8,82 @@
 <form method="post" enctype="multipart/form-data"
 	action="${pageContext.servletContext.contextPath }/help/write.do">
 
-<div class="my-5 p-5 bg-white rounded shadow-sm">
-	<div class="container text-center">
-		<hr class="mb-4">
-		<br />
-		<div>
-			<h3>
-				<b>우리 강아지가..</b>
-			</h3>
-		</div>
-		<br />
-		<hr class="mb-4">
-	</div>
+		<div class="d-flex justify-content-center">
+	<div class="my-5 p-5 bg-white rounded shadow-sm ">
+			<hr size="30%" width="100%">
 
-	<div class="row " >
-		<div class="col-md-5 mb-3">
-			<label for="lastName">제 목</label> <input type="text"
-				class="form-control" id="title" name="title">
-		</div>
-		<div class="col-md-5 mb-3">
-			<label>사진 첨부</label>
-			<div class="custom-file ">
-				<input type="file" class="custom-file-input"
-					aria-describedby="inputGroupFileAddon03" id="inputfile1"
-					name="inputfile1" accept="image/*, video/*"> <label
-					class="custom-file-label" for="inputGroupFile03"> If you
-					need a File</label>
-			</div>
-			<div class="custom-file ">
-				<input type="file" class="custom-file-input"
-					aria-describedby="inputGroupFileAddon03" id="inputfile2"
-					name="inputfile2" accept="image/*, video/*"> <label
-					class="custom-file-label" for="inputGroupFile03"> If you
-					need a another File</label>
-			</div>
-		</div>
-	</div>
-
-	<br />
-	<div class="row d-flex justify-content-center col-10"> 
-		<div class="row ">
-			<div class="col-md-6 mb-3" style="height: 300px;" >
-				<div class="d-flex justify-content-center col-10" style="text-align:center">
-					<img
-						src="${pageContext.servletContext.contextPath }/image/noimage.png"
-						id="preview1" style="width: 300px; height: 290px;"
-						onchange="putImage(this)" class="rounded img-fluid" />
+			<div class="row ">
+				<div class="col-md-6">
+					<label for="lastName">제 목</label> <input type="text"
+						class="form-control" id="title" name="title">
+				</div>
+				<div class="col-md-6">
+					<label>사진 첨부</label>
+					<div class="custom-file ">
+						<input type="file" class="custom-file-input"
+							aria-describedby="inputGroupFileAddon03" id="inputfile1"
+							name="inputfile1" accept="image/*, video/*"> <label
+							class="custom-file-label" for="inputGroupFile03"> If you
+							need a File</label>
+					</div>
+					<div class="custom-file ">
+						<input type="file" class="custom-file-input"
+							aria-describedby="inputGroupFileAddon03" id="inputfile2"
+							name="inputfile2" accept="image/*, video/*"> <label
+							class="custom-file-label" for="inputGroupFile03"> If you
+							need a another File</label>
+					</div>
 				</div>
 			</div>
-			<div class="col-md-6 mb-3" style="height: 300px;">
-				<div class="col-6 d-flex justify-content-center col-10">
-					<img
-						src="${pageContext.servletContext.contextPath }/image/noimage.png"
-						id="preview2" style="width: 300px; height: 290px;"
-						onchange="putImage(this)" class="rounded img-fluid" />
+
+			<br />
+			<div class="row d-flex justify-content-center col-12">
+				
+					<div class="col-md-6" style="height: 300px;">
+						<div class="d-flex justify-content-center">
+							<img
+								src="${pageContext.servletContext.contextPath }/image/noimage.png"
+								id="preview1" style="width: 300px; height: 290px;"
+								onchange="putImage(this)" class="rounded img-fluid" />
+						</div>
+					</div>
+					<div class="col-md-6" style="height: 300px;">
+						<div class="d-flex justify-content-center">
+							<img
+								src="${pageContext.servletContext.contextPath }/image/noimage.png"
+								id="preview2" style="width: 300px; height: 290px;"
+								onchange="putImage(this)" class="rounded img-fluid" />
+						</div>
+					</div>
+			
+			</div>
+			<div>
+				<div class="col-12">
+					<textarea class="form-control" style="resize: none; height: 240px;"
+						placeholder="내용을 적어주세요" id="content" name="content"></textarea>
 				</div>
+			</div>
+
+			<br />
+			<div style="text-align: center">
+				<div>
+					<button type="submit" class="btn btn-outline-primary"
+						onclick="writeOn();">작성 완료</button>
+				</div>
+				<br />
+				<div>
+					<a href="${pageContext.servletContext.contextPath }/help/list.do">
+						<button type="button" class="btn btn-outline-secondary btn-sm">뒤로가기
+						</button>
+					</a> <a href="${pageContext.servletContext.contextPath }/main/index.do">
+						<button type="button" class="btn btn-outline-secondary btn-sm">메인으로
+						</button>
+					</a>
+				</div>
+				<br />
 			</div>
 		</div>
 	</div>
-	<div>
-		<div class="col-10">
-			<textarea class="form-control" style="resize: none; height: 240px;"
-				placeholder="내용을 적어주세요" id="content" name="content"></textarea>
-		</div>
-	</div>
-
-	<br />
-	<div class="col-10" style="text-align: center">
-		<div>
-			<button type="submit" class="btn btn-outline-primary"
-				onclick="writeOn();">작성 완료</button>
-		</div>
-		<br/>
-		<div>
-			<a href="${pageContext.servletContext.contextPath }/help/list.do">
-				<button type="button" class="btn btn-outline-secondary btn-sm">뒤로가기
-				</button>
-			</a> <a href="${pageContext.servletContext.contextPath }/index.do">
-				<button type="button" class="btn btn-outline-secondary btn-sm">메인으로
-				</button>
-			</a>
-		</div>
-		<br />
-	</div>
-</div>
 </form>
 <script>
 	$("#inputfile1").on("change", function() {

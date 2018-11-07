@@ -86,6 +86,7 @@
 				"roomNumber" : "${roomNumber}",
 				"sender" : "${userInfo.NICKNAME}",
 				"recipient" : "${recipient}",
+				"senderProfile" : "${userInfo.DOGPROFILE}",
 				"text" : this.value
 			};
 			onechat.send(JSON.stringify(msg));

@@ -52,9 +52,8 @@ public class TogetherBoardController {
 			mp.put("e", rp * 10 );
 		
 		//------------------------------------------------
-		//List<Map> list=together.getAllTogether();
 
-		List<Map> list = together.getSomeFind(mp);	
+		List<Map> list=together.getAllTogether();
 			
 		List<Map> li = new ArrayList<>();
 		
@@ -144,7 +143,7 @@ public class TogetherBoardController {
 		m.put("longitude", map.get("longitude"));
 		m.put("address", map.get("address"));
 		m.put("nick", nick);
-		
+	                                                                                                                                                                                                                                                       
 		ModelAndView mav = new ModelAndView();	
 		try {
 			int result=together.addTogetherBoard(m);

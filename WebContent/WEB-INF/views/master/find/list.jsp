@@ -6,9 +6,10 @@
 <link rel="stylesheet"
 	href="${pageContext.servletContext.contextPath }/css/blog.css">
 
+<hr size="30px" width="100%">
 <body>	
-	<div class="album py-5 bg-light">
-			<div class="container">
+	<div class="album py-5">
+			<div class="container my-5 p-5 bg-white rounded shadow-sm">
 				<div class="row">
 					<c:forEach var="e" items="${every}">
 						<div class="col-md-4" id="post">
@@ -40,7 +41,7 @@
 		<div class="container">
 			<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
-				<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
+				<li class="page-item"><a class="page-link" href="#" tabindex="-1">이전</a></li>
 				<c:forEach var="p" begin="1" end="${size }">
 						<c:choose>
 							<c:when test="${p==current}">
@@ -53,7 +54,7 @@
      						</c:otherwise>
      					</c:choose>					
 					</c:forEach>
-				<li class="page-item"><a class="page-link" href="#">Next</a></li>
+				<li class="page-item"><a class="page-link" href="#">다음</a></li>
 			</ul>
 			</nav>
 			

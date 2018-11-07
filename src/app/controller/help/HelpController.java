@@ -22,6 +22,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import app.models.HelpCommentRepository;
 import app.models.HelpRepository;
 
 @Controller
@@ -30,7 +31,10 @@ public class HelpController {
 
 	@Autowired
 	HelpRepository help;
-
+	
+	@Autowired
+	HelpCommentRepository helpComment;
+ 	
 	@Autowired
 	ServletContext ctx;
 
@@ -41,17 +45,16 @@ public class HelpController {
 		String today = sdf.format(day);
 
 		mmap.put("today", today);
-
+		//---------------------------
 		Map map = new HashMap();
 		int pp = (p == null) ? 1 : Integer.parseInt(p);
 		
 		mmap.put("current", pp);
 		map.put("s", 1 + (pp - 1) * 10);
 		map.put("e", pp * 10);
-
 		List<Map> list = help.getSomeHelp(map);
-
 		mmap.put("list", list);
+		//---------------------------
 
 		int tot = help.totalCount();
 		mmap.put("size", tot/10 + (tot%10>0 ? 1: 0));
@@ -76,8 +79,8 @@ public class HelpController {
 	}
 
 	@PostMapping("/write.do")
-	public ModelAndView addHandler(@RequestParam Map rmap, @RequestParam MultipartFile inputfile1,
-			@RequestParam MultipartFile inputfile2, ModelMap mmap, WebRequest wr)
+	public ModelAndView addHandler(@RequestParam Map rmap, ModelMap mmap, WebRequest wr,
+			@RequestParam MultipartFile inputfile1, @RequestParam MultipartFile inputfile2)
 			throws IOException, InterruptedException {
 
 		//날짜 설정
@@ -109,7 +112,7 @@ public class HelpController {
 			File dst2 = new File(dir, fileName2);
 			inputfile2.transferTo(dst2);
 			String file2 = "/" + time + "/" + fileName2;
-			rmap.put("inputfile1", file2);
+			rmap.put("inputfile2", file2);
 		}
 
 		Map userInfo = (Map) wr.getAttribute("userInfo", WebRequest.SCOPE_SESSION);
@@ -123,7 +126,6 @@ public class HelpController {
 			int i = help.addAllHelp(rmap);
 			System.out.println("i = " + i);
 			mmap.put("map", rmap);
-			
 			
 			mav.setViewName("redirect:/help/list.do");
 			
@@ -139,18 +141,40 @@ public class HelpController {
 	}
 
 	@GetMapping("/detail.do")
-	public ModelAndView detailHandler(@RequestParam(required = false) int no, ModelMap mmap) {
+	public ModelAndView detailGetHandler(@RequestParam(required = false) int no, ModelMap mmap, WebRequest wr) {
 		Date day = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String today = sdf.format(day);
-
-		mmap.put("today", today);
-
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+		String today = sdf1.format(day);
+		
+		//wr.setAttribute("today", today, WebRequest.SCOPE_REQUEST);
+		
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		//String now = sdf2.format(day);
+		//mmap.put("regdate", now);
+		//---------------------------
+		System.out.println("no>>>>"+no);
+		help.updatelook(no);
+		
+		//------------------------------------------
+		System.out.println("no : "+no);
+		
+		
 		Map data = help.getOneByNo(no);
-		mmap.put("data", data);
+			data.put("GADAY", today);
+		//mmap.put("data", data);
+		wr.setAttribute("data",data, wr.SCOPE_REQUEST);
+		List<Map> comment = helpComment.getCommentByHno(no);
+		
+		//mmap.put("comment",comment);
+		for (int i = 0; i < comment.size(); i++) {
+			comment.get(i).put("GACOMDAY", sdf2.format(comment.get(i).get("REGDATE")) );
+			
+		}
+		System.out.println("comment>"+comment);
+		wr.setAttribute("no",no, wr.SCOPE_REQUEST);
+		wr.setAttribute("comment",comment , wr.SCOPE_REQUEST);
 
-		System.out.println("detail mmap " + mmap);
-
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("master");
 		mav.addObject("top", "/WEB-INF/views/master/help/top.jsp");
@@ -159,4 +183,37 @@ public class HelpController {
 		return mav;
 	}
 
-}
+	@PostMapping("/detail.do")
+	public String detailPostHandler(WebRequest wr, @RequestParam Map rmap, ModelMap mmap) {
+		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
+		
+		String nick = (String) userInfo.get("NICKNAME");
+		
+		System.out.println("userinfo.nick = " + nick);
+		
+		int no=Integer.parseInt((String) rmap.get("no"));
+		
+		//-------------
+		Date d=new Date();
+		
+		System.out.println("hno >"+no);
+		System.out.println("reply >"+rmap.get("comment"));
+		System.out.println("regdate >"+d);
+		System.out.println("nick >"+nick);
+		
+		//---------------
+		Map map = new HashMap<>();
+			map.put("hno",no);
+			map.put("reply", rmap.get("comment"));
+			map.put("regdate",d);
+			map.put("nick", nick);
+		
+		helpComment.addHelpComment(map);
+		
+		return "redirect:/help/detail.do?no="+no;
+		
+	}//end detailPost
+
+	
+	
+}//end class
