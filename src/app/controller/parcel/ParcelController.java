@@ -36,17 +36,28 @@ public class ParcelController {
 	
 	// 분양게시판 index 페이지 게시물 전체 뽑아서 보여줌 / 게시물 리스트 출력 핸들러
 	@RequestMapping("/parcel.do")
-	public ModelAndView getAllByParcel(ModelMap map) {
+	public ModelAndView getAllByParcel(ModelMap map, @RequestParam (required=false)String p) {
 		List<Map> list = parcelRepository.getAllByParcel();
-		map.put("list", list);
+			map.put("list", list);
+		
+		//---------------------------------------------------------------
+		Map data = new HashMap();
+		int pp = (p == null) ? 1 : Integer.parseInt(p);
+		
+			data.put("s", 1 + (pp-1) * 6);
+			data.put("e", pp*6);
+		
+		List<Map> every = parcelRepository.getSomeParcel(data);
+			map.put("every",every);
+		//----------------------------------------------------------------
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("master");
-		mav.addObject("top", "/WEB-INF/views/master/parcel/top.jsp");
-		mav.addObject("main", "/WEB-INF/views/master/parcel/index.jsp");
-		mav.addObject("list", list);
-		
+			mav.setViewName("master");
+			mav.addObject("top", "/WEB-INF/views/master/parcel/top.jsp");
+			mav.addObject("main", "/WEB-INF/views/master/parcel/index.jsp");
+			mav.addObject("list", list);
+			
 		return mav;
 	}
 	
@@ -54,14 +65,14 @@ public class ParcelController {
 	@RequestMapping("/new.do")
 	public ModelAndView newHandler(ModelMap map, WebRequest wr) {
 		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
-		map.put("userInfo", userInfo);
+			map.put("userInfo", userInfo);
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("master");
-		mav.addObject("top", "/WEB-INF/views/master/parcel/top.jsp");
-		mav.addObject("main", "/WEB-INF/views/master/parcel/new.jsp");	
-		
+			mav.setViewName("master");
+			mav.addObject("top", "/WEB-INF/views/master/parcel/top.jsp");
+			mav.addObject("main", "/WEB-INF/views/master/parcel/new.jsp");	
+			
 		return mav;
 	}
 	
@@ -81,9 +92,9 @@ public class ParcelController {
 		File dst = new File(dir, mainfileName);
 		File dst1 = new File(dir, file1Name);
 		File dst2= new File(dir, file2Name);
-		mainimage.transferTo(dst);
-		file1.transferTo(dst1);
-		file2.transferTo(dst2);
+			mainimage.transferTo(dst);
+			file1.transferTo(dst1);
+			file2.transferTo(dst2);
 		
 		String attachmain = "/" + time + "/" + mainfileName;
 		String attachfile1 = "/" + time + "/" + file1Name;
@@ -92,28 +103,29 @@ public class ParcelController {
 		String mode = (String)wr.getAttribute("mode", wr.SCOPE_SESSION);
 		Map data = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
 		String id = (String)data.get("ID");
-		param.put("writer", id);
-		
-		param.put("mainimage", attachmain);
-		param.put("file1", attachfile1);
-		param.put("file2", attachfile2);
+			param.put("writer", id);
+			param.put("mainimage", attachmain);
+			param.put("file1", attachfile1);
+			param.put("file2", attachfile2);
 		
 		ModelAndView mav = new ModelAndView();
+		
 		try {
 			int r = parcelRepository.addByParcel(param);
 			
-			
-			mav.setViewName("master");
-			mav.addObject("top", "/WEB-INF/views/master/parcel/top.jsp");
-			mav.addObject("main", "/WEB-INF/views/master/parcel/result.jsp");	
+				mav.setViewName("master");
+				mav.addObject("top", "/WEB-INF/views/master/parcel/top.jsp");
+				mav.addObject("main", "/WEB-INF/views/master/parcel/result.jsp");	
 			
 			return mav;
+			
 		}catch(Exception e) {
 			e.printStackTrace();
-			map.put("err", "on");
-			mav.setViewName("master");
-			mav.addObject("top", "/WEB-INF/views/master/parcel/top.jsp");
-			mav.addObject("main", "/WEB-INF/views/master/parcel/new.jsp");	
+				map.put("err", "on");
+				
+				mav.setViewName("master");
+				mav.addObject("top", "/WEB-INF/views/master/parcel/top.jsp");
+				mav.addObject("main", "/WEB-INF/views/master/parcel/new.jsp");	
 			
 			return mav;
 		}
@@ -125,16 +137,15 @@ public class ParcelController {
 		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
 		Map onedata = parcelRepository.getByOneParcel(no);
 		List comlist = parcelRepository.getAllByComments(no);
-		List cmtcnt = parcelRepository.getByCmtCount(no);
 			one.put("userInfo", userInfo);
 			one.put("one", onedata);
 			one.put("comlist", comlist);
-			one.put("cmtcnt", cmtcnt);
 			
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("master");
-		mav.addObject("top", "/WEB-INF/views/master/parcel/top.jsp");
-		mav.addObject("main", "/WEB-INF/views/master/parcel/detail.jsp");	
+		
+			mav.setViewName("master");
+			mav.addObject("top", "/WEB-INF/views/master/parcel/top.jsp");
+			mav.addObject("main", "/WEB-INF/views/master/parcel/detail.jsp");	
 		
 		return mav;
 	}
@@ -147,13 +158,13 @@ public class ParcelController {
 			one.put("one", onedata);
 			one.put("no", no);
 			
-			ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView();
 			
 			mav.setViewName("master");
 			mav.addObject("top", "/WEB-INF/views/master/parcel/top.jsp");
 			mav.addObject("main", "/WEB-INF/views/master/parcel/detailmodify.jsp");
 			
-			return mav;
+		return mav;
 	}
 	
 	// 게시글 수정 업데이트
@@ -162,7 +173,7 @@ public class ParcelController {
 	public ModelAndView updateDetail(@RequestParam Map param, ModelMap map, WebRequest wr) {
 		Map data = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
 		String id = (String)data.get("ID");
-		param.put("writer", id);
+			param.put("writer", id);
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -174,18 +185,17 @@ public class ParcelController {
 			mav.addObject("main", "/WEB-INF/views/master/parcel/result.jsp");	
 			
 			return mav;
+			
 		}catch(Exception e) {
 			e.printStackTrace();
-			map.put("err", "on");
-			mav.setViewName("master");
-			mav.addObject("top", "/WEB-INF/views/master/parcel/top.jsp");
-			mav.addObject("main", "/WEB-INF/views/master/parcel/new.jsp");	
+				map.put("err", "on");
+				mav.setViewName("master");
+				mav.addObject("top", "/WEB-INF/views/master/parcel/top.jsp");
+				mav.addObject("main", "/WEB-INF/views/master/parcel/new.jsp");	
 			
 			return mav;
 		}
 		
 	}
-	
-	
 	
 }

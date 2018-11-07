@@ -56,4 +56,9 @@ public class ParcelRepository {
 	public int updateDetail(Map param) {
 		return template.update("parcel.updateDetail", param);
 	}
+	
+	// 페이지수 개시물에 맞게 페이징처리한 갯수만큼 게시글 내용 뽑기
+	public List<Map> getSomeParcel(Map s) {
+		return template.selectList("parcel.getSomeParcel",s);
+	}
 }

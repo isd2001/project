@@ -58,7 +58,7 @@ public class CommentController {
 	}
 	
 	// 특정 댓글의 댓글 전체 출력
-	@RequestMapping("/getrecomment.do")
+	@RequestMapping(path="/getrecomment.do", produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String getAllByReComments(@RequestParam Map param, ModelMap map) {
 		String code = (String)param.get("code");

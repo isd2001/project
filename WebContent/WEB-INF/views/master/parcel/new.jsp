@@ -8,7 +8,7 @@
 <hr class="mb-4">
 <h4 class="mb-3" align="center">분양 글쓰기</h4>
 
-<form action="${pageContext.servletContext.contextPath }/add.do" method="post" enctype="multipart/form-data">
+<form action="${pageContext.servletContext.contextPath }/add.do" method="post" enctype="multipart/form-data" style="width: 900px; margin: auto;">
 	<input type="hidden" name="lat" value="" id="lat"/>
 	<input type="hidden" name="longi" value="" id="longi"/>
 	<div class="row">

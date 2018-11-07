@@ -13,7 +13,7 @@
 
 <!-- 특정 닉네임의 댓글 뽑는거 -->
 	<select id="getByTogetherComment" resultType="java.util.HashMap" parameterType="java.lang.String">
-		select * from togetherboard join (select * from togethercomment where nick = #{nick} order by leftdate DESC)tc on togetherboard.no = tc.cno
+		select * from togetherboard join (select nick as commneter, togethercomment.*  from togethercomment where nick = #{nick} order by leftdate DESC)tc on togetherboard.no = tc.cno
 	</select>
 	
 </mapper>

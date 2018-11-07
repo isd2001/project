@@ -7,14 +7,19 @@
 <form class="form-signin" action="${pageContext.servletContext.contextPath }/sort.do" method="post" >
 	<h1 class="h3 mb-3 font-weight-normal" style="margin-top: 40px;">비밀번호를 입력하세요.</h1>
 	
-<c:if test="${!empty err }">
-	<div class="alert alert-danger alert-dismissible fade show" role="alert">
-		<strong>비밀번호를 다시 한번 입력해 주시기 바랍니다.</strong>
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		</button>
-	</div>
-</c:if>
+	<c:choose>
+		<c:when test="${!empty err }">
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				<strong>비밀번호 오류!</strong> 입력하신 비밀번호가 다릅니다. 확인 하시고 다시 입력 하시기 바랍니다.
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+		</c:when>
+		<c:otherwise>
+		
+		</c:otherwise>
+	</c:choose>
       
 	<div class="bd-example">
 		<input type="password" id="param" name="param" class="form-control" style="margin-top: 50px;" placeholder="비밀번호" required autofocus>

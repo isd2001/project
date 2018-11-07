@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import app.models.MyPageRepository;
 
-@Controller("/mypage")
+@Controller
 public class MyPageController {
 	
 	@Autowired
@@ -55,8 +55,11 @@ public class MyPageController {
 		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
 		String talker = (String)userInfo.get("ID");
 		String nick = (String)userInfo.get("NICKNAME");
+		List pacmt = myPageRepository.getByParcelComments(talker);
 		List tocmt = myPageRepository.getByTogetherComment(nick);
+		System.out.println(tocmt);
 			map.put("tocmt", tocmt);
+			map.put("pacmt", pacmt);
 		
 		ModelAndView mav = new ModelAndView();
 		

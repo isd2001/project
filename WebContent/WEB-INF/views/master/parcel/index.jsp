@@ -3,10 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<div class="album py-5 bg-light">
+<div class="album py-5 bg-light" style="width: 900px; margin: auto;">
 	<div class="container">
 		<div class="row">
-			<c:forEach var="p" items="${list }">
+			<c:forEach var="p" items="${every }">
             <div class="col-md-4">
               <div class="card mb-4 shadow-sm">
                 <img class="card-img-top" src="${pageContext.servletContext.contextPath }${p.MAINIMAGE}" alt="Card image cap">
@@ -33,23 +33,15 @@
 		</div>
 	</div>
 	<a href="${pageContext.servletContext.contextPath }/new.do" class="btn btn-sm btn-outline-secondary" >글쓰기</a>
-	<nav aria-label="Page navigation example">
-		<ul class="pagination justify-content-center">
-			<li class="page-item">
-				<a class="page-link" href="#" aria-label="Previous">
-				<span aria-hidden="true">&laquo;</span>
-		        <span class="sr-only">Previous</span>
-		      </a>
-			</li>
-		    <li class="page-item"><a class="page-link" href="#">1</a></li>
-		    <li class="page-item">
-		      <a class="page-link" href="#" aria-label="Next">
-		        <span aria-hidden="true">&raquo;</span>
-		        <span class="sr-only">Next</span>
-		      </a>
-			</li>
-		</ul>
-	</nav>
+		<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
+				<c:forEach var="p" begin="1" end="4">
+					<li class="page-item"><a class="page-link" href="${pageContext.servletContext.contextPath }/parcel.do?p=${p}">${p }</a></li>
+				</c:forEach>
+				<li class="page-item"><a class="page-link" href="#">Next</a></li>
+			</ul>
+		</nav>
 </div>
 
 

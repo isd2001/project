@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<div style="float: left; margin-right: 20px;">
-	<img alt="이미지 안나오면 엑박" src="${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE }" style="width: 500px; height: 500px;">
+<div style="float: left; margin-right: 20px; margin-left: 100px;">
+	<img alt="이미지 안나오면 엑박" src="${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE }" style="width: 400px; height: 400px;">
 </div>
 
-<div style="float: left; width: 580px;">
+<div style="float: right; width: 480px; margin-right: 100px;">
 	<table class="table" >
 		<thead>
 			<tr>
