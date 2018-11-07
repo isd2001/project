@@ -24,9 +24,9 @@
 											class="text-muted" style="position: absolute; bottom: 10px">${l.DTID}
 										</small>
 									</div>
-									<a href="${pageContext.servletContext.contextPath}/dogTraining/detail.do?no=${l.NO }">
-									<button type="button" class="btn btn-sm btn-outline-secondary"
-										style="position: absolute; right: 15px; bottom: 15px"
+
+									<a href="${pageContext.servletContext.contextPath}/dogTraining/detail.do?NUM=${l.NUM }">
+									<button type="button" class="btn btn-sm btn-outline-secondary"	style="position: absolute; right: 15px; bottom: 15px"
 										id="detailBt" name="detailBt">자세히</button></a>
 								</div>
 							</div>
@@ -51,7 +51,7 @@
 				<button type="button" class="btn btn-outline-primary">글쓰기</button></a>
 				</div>
 				<div style="text-align:right">
-					<a href="${pageContext.servletContext.contextPath }/index.do">
+					<a href="${pageContext.servletContext.contextPath }/main/index.do">
 				<button type="button" class="btn btn-outline-secondary btn-sm">메인으로</button></a>
 				</div>
 			</div>

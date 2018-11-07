@@ -33,6 +33,11 @@
 		delete from member_board
 		where BOARD_NUM = #{BOARD_NUM}
 	</delete>
+	
+	<!-- 페이징 -->
+	<select id ="getfind"  resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	    select*from (select rownum r,o.* from (select*from member_board order by BOARD_NUM desc) o) where r between #{s} and #{e}
+	</select>
 
 </mapper>
 

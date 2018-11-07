@@ -28,8 +28,13 @@ public class NboardRepository {
 		return template.selectOne("member_board.nboardread" , BOARD_NUM);
 	}
 	
-	public List<Map> getAllnboard(){
-		return template.selectList("member_board.getAllnboard");
+	//글 삭제하기.
+	public int nboarddelete(int BOARD_NUM) {
+		return template.delete("member_board.nboarddelete" , BOARD_NUM);
+	}
+	//페이징처리후 게시글
+	public List<Map> getfind(Map s) {
+		return template.selectList("member_board.getfind" , s);
 	}
 
 	

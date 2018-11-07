@@ -28,10 +28,6 @@
      	    <td>${read.BOARD_DATE}</td>
      	    </tr>
      	    <tr>
-     	  <th scope="row" style="width: 12%"><small >추천</small></th>
-     	    <td>${read.BOARD_COUNT}</td>
-     	    </tr>
-     	    <tr>
      	  <th scope="row" style="width: 12%"><small>조회수</small></th>
      	    <td>${read.BOARD_LOOKUP}</td>
 	      </tr>
@@ -42,12 +38,12 @@
   
      	
 </table>
-     	<tr>
-     <a href="${pageContext.servletContext.contextPath }/Nboard/list.do">목록으로</a>
-        <a href="${pageContext.servletContext.contextPath }/Nboard/write.do">수정하기</a>
-         <a href="${pageContext.servletContext.contextPath }/Nboard/write.do">삭제하기</a>
-     
-     	</tr>
+     	<div style="text-align: right">
+     <a href="${pageContext.servletContext.contextPath }/Nboard/list.do" class="btn btn-primary">목록으로</a>
+        <a href="${pageContext.servletContext.contextPath }/Nboard/write.do" class="btn btn-primary">수정하기</a>
+         <a href="${pageContext.servletContext.contextPath }/Nboard/write.do" class="btn btn-primary">삭제하기</a>
+     </div>
+     	
     </html>
 
 
