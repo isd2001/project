@@ -34,6 +34,12 @@ public class dogtrainingRepository{
 		return template.update("dogtraining.updatelookup",no);
 	}
 
+	// 페이지수 개시물에 맞게 페이징처리한 갯수만큼 게시글 내용 뽑기
+	public List<Map> getSomeFind(Map s) {
+		return template.selectList("dogtraining.getSomeFind",s);
+	}
+
+
 
 
 

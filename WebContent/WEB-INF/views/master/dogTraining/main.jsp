@@ -35,8 +35,16 @@
 				</div>
 			</div>
 		</div>
-	<br/>	
-
+		<br/>	
+		<!-- ======================================== -->
+		<nav aria-label="Page navigation example" style="margin-left: 500px;">
+		  <ul class="pagination">
+		    <li class="page-item"><a class="page-link" href="${pageContext.servletContext.contextPath }/dogTraining/training.do?p=1">1</a></li>
+		    <li class="page-item"><a class="page-link" href="${pageContext.servletContext.contextPath }/dogTraining/training.do?p=2">2</a></li>
+		    <li class="page-item"><a class="page-link" href="${pageContext.servletContext.contextPath }/dogTraining/training.do?p=3">3</a></li>
+		    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+		  </ul>
+		</nav>
 			<div>
 				<div style="text-align:center">
 				<a href="${pageContext.servletContext.contextPath }/dogTraining/write.do">

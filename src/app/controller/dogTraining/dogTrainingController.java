@@ -14,6 +14,7 @@ import javax.servlet.ServletContext;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,8 +56,20 @@ public class dogTrainingController {
 				wreq.setAttribute("err", "off", wreq.SCOPE_REQUEST);
 			}			
 		}
+		//-------------------------------------------------
+		// 페이징 처리
+		System.out.println("param>"+param);
+		int rp = Integer.parseInt((String) param.get("p"));
+		Map mp = new HashMap<>();
+			mp.put("s", 1 + ( rp - 1 ) * 6 );
+			mp.put("e", rp * 6 );
 		
-		List<Map> getAlldt = dr.getAll();
+			
+		
+		//-------------------------------------------------
+		//List<Map> getAlldt = dr.getAll();
+		List<Map> getAlldt = dr.getSomeFind(mp);	
+			
 		wreq.setAttribute("list", getAlldt, WebRequest.SCOPE_REQUEST);
 
 		ModelAndView mav = new ModelAndView();
@@ -72,19 +85,16 @@ public class dogTrainingController {
 	@GetMapping("/detail.do")
 	public ModelAndView readdt(@RequestParam int no,WebRequest wreq) {		
 		SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		//------------------------------------------
 		//detail view 내용
 		Map read =dr.getlistByNo(no);
 		read.put("UPDAY", sdf.format(read.get("DAY")));
 		wreq.setAttribute("read",read, wreq.SCOPE_REQUEST);
-		//------------------------------------------
 		//detail comment
 		List<Map> comment = dc.getCommentByNo(no);
 		for (int i = 0; i < comment.size(); i++) {
 			comment.get(i).put("UPDAY", sdf.format(comment.get(i).get("CDATE")));
 		}
 		wreq.setAttribute("comment",comment, wreq.SCOPE_REQUEST);
-		//------------------------------------------
 		// 조회수 늘리기
 		dr.updatelookup(no);
 		
@@ -92,7 +102,7 @@ public class dogTrainingController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("master");
-		mav.addObject("top", "/WEB-INF/views/master/dogTraining/top.jsp");
+		mav.addObject("top", "/WEB-INF/views/master/dogTraining/emptytop.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/dogTraining/detail.jsp");
 
 
@@ -130,11 +140,10 @@ public class dogTrainingController {
 				wreq.setAttribute("err", "on", wreq.SCOPE_REQUEST);
 			}			
 		}
-			
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("master");
-		mav.addObject("top", "/WEB-INF/views/master/dogTraining/top.jsp");
+		mav.addObject("top", "/WEB-INF/views/master/dogTraining/emptytop.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/dogTraining/write.jsp");
 		return mav;
 	}//end dttwrite

@@ -58,7 +58,7 @@
 <script>
 //======================================================================
 //Weather
-var getWeather = function(gu) {
+/* var getWeather = function(gu) {
 		console.log("function Strar !!");
 		var apiURI = "http://api.openweathermap.org/data/2.5/weather";
 		var param = {
@@ -74,7 +74,7 @@ var getWeather = function(gu) {
 			document.getElementById("tempMin").innerHTML = rst.main.temp_min
 					+ "℃";
 		});
-	};
+	}; */
 </script>
 <div class="nav d-flex justify-content-around py-2 mb-2">
   <nav class="nav d-flex justify-content-between">
@@ -97,14 +97,14 @@ var getWeather = function(gu) {
     		 	<a href="${pageContext.servletContext.contextPath }/mycomment.do" style="color: silver;">회원정보 수정</a><br/>
     		 	<a href="${pageContext.servletContext.contextPath }/mycomment.do" style="color: silver;">비밀번호 변경</a>
     			 <hr align="center" style="border: solid 0.5px gray; width: 80%;"/>
-					<div class="justify-content-end">
+				<%-- 	<div class="justify-content-end">
 						오늘의 ${gu} 날씨 :
 						<script>
 								getWeather("${gu}");
 							</script>
 						<span id="currentTemp"></span><br>(최고 : <span id="tempMax"></span> / 최저:<span
 							id="tempMin"></span>)
-					</div>
+					</div> --%>
 				</c:when>
 				<c:otherwise>
 					<div class="justify-content-end">
@@ -125,7 +125,7 @@ var getWeather = function(gu) {
           <div class="dropdown p-2 text-muted">
           <a class="p-2 font-weight-bold"  style="color:black;" id="dropdownMenuButton" data-toggle="dropdown" href="#">똥개훈련</a>
 	           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			    <a class="dropdown-item font-weight-bold" href="${pageContext.servletContext.contextPath}/dogTraining/training.do">개동</a>
+			    <a class="dropdown-item font-weight-bold" href="${pageContext.servletContext.contextPath}/dogTraining/training.do?p=1">개동</a>
 			    <a class="dropdown-item font-weight-bold" href="${pageContext.servletContext.contextPath}/dogTraining/gaejalang.do">한번보시개</a>
 			    </div>
 		  </div>
@@ -146,16 +146,6 @@ function togglesidebar(){
 	document.getElementById("sidebar").classList.toggle('active');	
 }// sidebar 액션
 
-//======================================================================
-// noticeSocket
-
-/* var ws = new WebSocket("ws://"+location.host+"${pageContext.servletContext.contextPath}/notice.do");
-ws.onmessage = function(evt){
-	console.log(evt.data);
-	
-	
-}
- */
 
 
 
