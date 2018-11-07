@@ -78,14 +78,9 @@
           <a class="p-2 font-weight-bold"	style="color:black;"href="${pageContext.servletContext.contextPath }/find/list.do">찾아주시개</a>
           <a class="p-2  font-weight-bold"  style="color:black;" href="${pageContext.servletContext.contextPath }/parcel.do">데려가시개(분양)</a>
 
-          <a class="p-2  font-weight-bold"  style="color:black;" href="${pageContext.servletContext.contextPath }/together/mainboard.do?p=1">같이가시개</a>
-          <div class="dropdown p-2 text-muted">
-          <a class="p-2 font-weight-bold"  style="color:black;" id="dropdownMenuButton" data-toggle="dropdown" href="#">똥개훈련</a>
-	           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			    <a class="dropdown-item font-weight-bold" href="${pageContext.servletContext.contextPath}/dogTraining/training.do?p=1">개동</a>
-			    <a class="dropdown-item font-weight-bold" href="${pageContext.servletContext.contextPath}/dogTraining/gaejalang.do">한번보시개</a>
-			    </div>
-		  </div>
+          <a class="p-2  font-weight-bold"  style="color:black;" href="${pageContext.servletContext.contextPath }/together/mainboard.do?p=1">같이가시개</a>         
+		  <a class="p-2  font-weight-bold"  style="color:black;" href="${pageContext.servletContext.contextPath}/dogTraining/training.do?p=1">개동</a>
+		  
        	 <div class="dropdown p-2">
        	   <a class="p-2 font-weight-bold"  style="color:black;" id="dropdownMenuButton" data-toggle="dropdown" href="#">개아파</a>
 	           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -94,7 +89,7 @@
 
 			    </div>
 		  </div>		  
-		   <a class="p-2 font-weight-bold"  style="color:black;" href="${pageContext.servletContext.contextPath }/dogTalk/index.do">추천개시판</a>
+		 
         </nav>
         
 </div>
