@@ -2,17 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<section class="jumbotron text-center">
-	<div class="container">
-		<h3>
-			<b>우리 강아지를 찾아주세요</b>
-		</h3>
-		<p style="text-align: right">${date }</p>
-	</div>
-</section>
 
+<hr size="30px" width="100%">
 <div class="row mb-2 d-flex justify-content-center">
-	<div class="col-md-7 ">
+	<div class="col-md-6 ">
 		<div class="bd-example bd-example-images">
 			<img data-src="holder.js/400x400" class="img-thumbnail"
 				alt="이미지 안나오면 엑박"
@@ -20,14 +13,10 @@
 				data-holder-rendered="true" style="width: 400px; height: 400px;">
 		</div>
 	</div>
-	<div class="bd-example col-md-5">
-		<br />
-		<table class="table">
-			<thead class="d-flex justify-content-center">
-				<tr>
-					<th scope="col">${data.TITLE }</th>
-				</tr>
-			<thead>
+	<div class="bd-example col-md-6 my-3 p-3 bg-white rounded shadow-sm">
+		<br/>
+		<p style="text-align:center"><b>${data.TITLE }</b></p>
+		<table class="table">		
 			<tbody>
 				<tr>
 					<th scope="row">강아지 이름</th>

@@ -44,4 +44,12 @@ public class HelpRepository {
 
 		return template.selectOne("help.getOneByNo", no);
 	}
+	
+	public int updatelook(int no) {
+		
+		return template.update("help.updatelook",no);
+	}
+
+
 }
+

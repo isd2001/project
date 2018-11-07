@@ -14,7 +14,6 @@
 				<th scope="col" style="width:20%">작성자</th>
 				<th scope="col" style="width:15%">날짜</th>
 				<th scope="col" style="width:8%">조회수</th>
-				<th scope="col" style="width:8%">추천</th>
 			</tr>
 		</thead>
 		<tbody style="text-align:center">
@@ -27,7 +26,6 @@
 					<td>${l.NICK }</td>
 					<td><fmt:formatDate value="${l.REGDATE }" /></td>
 					<td>${l.LOOK }</td>
-					<td>${l.GOOD }</td>
 				</tr>
 			</c:forEach>
 		</tbody>

@@ -4,15 +4,8 @@
 <form method="post" enctype="multipart/form-data"
 	action="${pageContext.servletContext.contextPath }/find/start.do"
 	id="formAction">
-	<div style="text-align: center">
-		<br />
-		<h3>
-			<b>우리 강아지를 찾아주세요</b>
-		</h3>
-		<br/>
-		<hr class="mb-4">
-		<br />
-	</div>
+	<hr class="mb-4">
+	<br />
 	<div class="row">
 		<div class="col-md-6 mb-3">
 			<label for="lastName">제목</label> <input type="text"
@@ -76,7 +69,7 @@
 						onclick="writeOn();">작성 완료</button>
 					<div style="text-align: right">
 						<a href="${pageContext.servletContext.contextPath }/find/list.do">
-							<button type="button" class="btn btn-outline-secondary btn-sm">뒤로가기
+							<button type="button" class="btn btn-outline-secondary btn-sm">목록으로
 							</button>
 						</a> <a href="${pageContext.servletContext.contextPath }/index.do">
 							<button type="button" class="btn btn-outline-secondary btn-sm">메인으로
@@ -142,11 +135,6 @@
 		// 마커 위치를 클릭한 위치로 옮깁니다
 		marker.setPosition(latlng);
 
-		var message = '클릭한 위치의 위도 : ' + latlng.getLat() + "   /   ";
-		message += '클릭한 위치의 경도 : ' + latlng.getLng();
-
-		var resultDiv = document.getElementById('clickLatlng');
-		resultDiv.innerHTML = message;
 		
 		document.getElementById('mapx').value = latlng.getLat();
 		document.getElementById('mapy').value = latlng.getLng();
