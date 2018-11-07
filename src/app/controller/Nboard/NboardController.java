@@ -41,17 +41,27 @@ public class NboardController {
 
 	// 공지사항 이동
 	@GetMapping("/list.do")
-	public ModelAndView NboardHandler(WebRequest wreq,@RequestParam Map map,Model model) {
+	public ModelAndView NboardHandler(WebRequest wreq,ModelMap mmap ,@RequestParam(required=false)String p) {
+		
+		Date day= new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-		List<Map> Allboard =nr.getAllNboard();
-		System.out.println("allboard > "+ Allboard);
+		String date = sdf.format(day);
+        mmap.put("date", date);
+        
+    		
 		
-	for (int i =0; i<Allboard.size(); i++) {
-		Allboard.get(i).put("BOARD_DATE",sdf.format(Allboard.get(i).get("BOARD_DATE")));
-		System.out.println("Allboard" + Allboard);
-	}
+	
+	
+	Map map = new HashMap(); 
+	int pp = (p == null) ? 1: Integer.parseInt(p);
+	
+	map.put("s", 1+(pp-1)*6);
+	map.put("e", pp*6);
+	
+	List<Map> every =nr.getfind(map);
+	mmap.put("every", every);
 		
+	
 		
 
 		
@@ -59,7 +69,7 @@ public class NboardController {
 		// @requestparam -> 같고올때
 		// model -> 보낼때 , 일회성
 		
-		wreq.setAttribute("list", Allboard, WebRequest.SCOPE_REQUEST);
+		
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("master");
@@ -187,3 +197,18 @@ public class NboardController {
 }
 
 
+/*
+ * 
+		List<Map> Allboard =nr.getAllNboard();
+		System.out.println("allboard > "+ Allboard);
+
+
+	wreq.setAttribute("list", Allboard, WebRequest.SCOPE_REQUEST);
+
+
+
+		for (int i =0; i<getfind.size(); i++) {
+		getfind.get(i).put("BOARD_DATE",sdf.format(getfind.get(i).get("BOARD_DATE")));
+		System.out.println("Allboard" + getfind);
+ * 
+ */
