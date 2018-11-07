@@ -48,4 +48,8 @@ public class accountRepository {
 		return template.selectOne("gaenoljaaccount.getInfomodalByNick", nick);
 
 	}
+	
+	public String getDogProfileByNickname(String nickName) {
+		return template.selectOne("gaenoljaaccount.getDogProfileByNickname", nickName);
+	}
 }

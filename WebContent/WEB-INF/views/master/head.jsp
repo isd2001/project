@@ -9,6 +9,8 @@
 	href="${pageContext.servletContext.contextPath }/css/navcss.css">
 
 
+
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -159,9 +161,10 @@
 			switch(mode){			
 				case "loginUers" :
 				   var html = "";
-				   var loginList = obj.list;
+				   var loginList = obj.list;   				   
+				   	
 					for (var i = 0; i < loginList.length; i++) {				
-					 	if (obj[i]=="${userInfo.NICKNAME}") {
+					 	if (loginList[i].nickName=="${userInfo.NICKNAME}") {
 						html+="<li><a href=\"#\">"+loginList[i].nickName+"</a>";		
 						html+="</li>";
 						}else{	 		
@@ -189,15 +192,19 @@
 		};
 		var newMessageHandle = function(obj){		
 			console.log("newMessageHandle acticated");
-			var html = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">";
-			html += "<strong>【NewChatting】</strong><br/> 새로운 채팅이 있습니다.</br>";
-			html += obj.sender +"님이 채팅을 요청하였습니다. "
-			html += "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><br>";
-			html += "<button type=\"button\" onclick=\"openchat('"+obj.sender+"')\" >1:1대화</button>";				
+			var html = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">";			
+			html += "<strong>【NewChatting】</strong><br/> 새로운 채팅이 있습니다.</br>";			
+			html += obj.sender +"님이 채팅을 요청하였습니다. "			
+			html += "<button type=\"button\" class=\"btn btn-warning \"onclick=\"openchat('"+obj.sender+"')\" >1:1대화</button>";	
+			html += "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">";
 			html += "<span aria-hidden=\"true\">&times;</span>";
+			html += "</button>";
 			html += "</div>";
+			
 			document.getElementById("alert").innerHTML = html;
 		}
+		
+		
 		
 		//====================================================================
 		// chat
@@ -205,7 +212,7 @@
 			console.log("nickName : "+nickName);
 			window.open(
 					"${pageContext.servletContext.contextPath }/onetalk.do?talkNick="
-							+nickName+"&roomNumber="+roomNumber, "", "width=350,height=550");
+							+nickName+"&roomNumber="+roomNumber, nickName, "width=380,height=635");
 		};
 		
 		

@@ -1,8 +1,10 @@
 package app.controller.index;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,6 +19,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import com.google.gson.Gson;
 
 import app.models.OnechatRepository;
+import app.models.accountRepository;
 import app.service.SocketService;
 import app.service.chatService;
 
@@ -32,6 +35,9 @@ public class ChatSocketController extends TextWebSocketHandler{
 	
 	@Autowired
 	chatService chatService;
+	
+	@Autowired
+	accountRepository ar;
 	
 	
 	List<WebSocketSession> chatSockets;
@@ -66,7 +72,18 @@ public class ChatSocketController extends TextWebSocketHandler{
 	}
 	
 	@Override
-	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {		
+		
+		Set roomKeys = privateRoomMembers.keySet();
+		Iterator itr = roomKeys.iterator();
+		while(itr.hasNext()) {
+			String key = (String) itr.next();
+			if(privateRoomMembers.get(key).contains(session.getAttributes().get("nick"))){
+				privateRoomMembers.get(key).remove(session.getAttributes().get("nick"));
+				privateRoomSessions.get(key).remove(session);
+			}
+			System.out.println("session and list removed");
+		}
 		System.out.println("connection closed");
 		chatSockets.remove(session);
 	}
@@ -74,11 +91,29 @@ public class ChatSocketController extends TextWebSocketHandler{
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+		Date current = new Date(System.currentTimeMillis());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+		
 		String me = message.getPayload();
 		System.out.println("me >"+me);		
-		
-		
 		Map read = gson.fromJson(me, Map.class);
+			
+		
+		for (int i = 0; i < socketService.loggedInUsers.size(); i++) {
+			Map info = socketService.loggedInUsers.get(i).getAttributes();
+			Map userInfo = (Map) info.get("userInfo");			
+				if(info.get("nick").equals(read.get("recipient"))) {
+					read.put("recipientProfile", userInfo.get("DOGPROFILE"));
+				}
+				if(info.get("nick").equals((read.get("sender")))) {					
+					read.put("senderProfile", userInfo.get("DOGPROFILE"));	
+					}	
+			System.out.println("profile 불러오기 끝");
+		}
+	
+		
+		TextMessage whatToSend = new TextMessage(gson.toJson(read));
+		
 		//====================================
 		String mode = (String)read.get("mode");
 		switch(mode) {
@@ -91,9 +126,9 @@ public class ChatSocketController extends TextWebSocketHandler{
 						list.add(read.get("recipient"));
 					Map map = new HashMap();
 						map.put("roomNumber", list);
-					privateRoomMembers.put((String) read.get("roomNumber"), list);
-					
-										
+					privateRoomMembers.put((String) read.get("roomNumber"), list);				
+						
+			
 				}
 				privateRoomSessions.get((String)read.get("roomNumber")).add(session);
 				
@@ -116,8 +151,19 @@ public class ChatSocketController extends TextWebSocketHandler{
 		case "chat" :	
 			try {
 				List<WebSocketSession> li = privateRoomSessions.get((String)read.get("roomNumber"));
-				System.out.println(li.size());
-				for(int i=0; i<li.size(); i++) {
+					Map toMongo = new HashMap();
+					toMongo.put("sender", read.get("sender"));
+					toMongo.put("senderProfile", ar.getDogProfileByNickname((String)read.get("sender")));
+					toMongo.put("recipient", read.get("recipient"));
+					toMongo.put("text", read.get("text"));
+					toMongo.put("day", sdf.format(current));
+					List chatList = new ArrayList();
+						chatList.add(read.get("sender"));
+						chatList.add(read.get("recipient"));
+					toMongo.put("roomlist", chatList);
+				
+					onechat.addChat(toMongo);	
+				
 					if(li.size()<2) {
 						for (int k = 0; k < socketService.loggedInUsers.size(); k++) {						
 							if (socketService.loggedInUsers.get(k).getAttributes().get("nick").equals(read.get("recipient"))) {				
@@ -132,10 +178,10 @@ public class ChatSocketController extends TextWebSocketHandler{
 						}
 					}else {						
 						for(int j=0; j<li.size(); j++) {
-							li.get(j).sendMessage(message);
+							li.get(j).sendMessage(whatToSend);
 						}
 					}
-				}
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

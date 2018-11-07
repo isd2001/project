@@ -27,8 +27,7 @@ public class AccesslistController extends TextWebSocketHandler{
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		System.out.println("mainSocket established");
 		socketService.addSocket(session);
-		
-		
+				
 		
 		//=====================================================
 		List list = new ArrayList<>();

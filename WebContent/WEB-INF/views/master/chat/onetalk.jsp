@@ -20,22 +20,31 @@
 	rel="stylesheet">
 
 </head>
-<title>${roomNumber } </title>
-<body style="background-color: #AED6F1;">
-	<h4 style="text-align: center;">환영합니다. 개놀자 1:1 채팅방입니다.</h4>
+<title>	
+	개놀자 1:1 채팅방입니다.
+</title>
+<body style="background-color: #AED6F1;">	
+	<div class="alert alert-primary" role="alert">
+	   ${recipient} 님과의 개톡
+	</div>
+	
 
 	<div style="height: 520px; overflow-y: scroll;" id="chatView">		
 		<c:forEach var="c" items="${chatlist }">
 			<c:choose>
 				<c:when test="${c.sender== userInfo.NICKNAME}">
-					<small style="float: right;">${c.sender }</small>
+					<small style="float: right;">
+					<img src="${pageContext.servletContext.contextPath }${c.senderProfile}" style="width: 20px; height: 20px;" class="rounded-circle" id="image">
+					${c.sender }</small>
 					<br />
 					<span class="badge badge-warning" style="float: right;">
 						${c.text } </span>
 					<br/>
 				</c:when>
 				<c:otherwise>
-					<small>${c.sender }</small>
+					<small>
+					<img src="${pageContext.servletContext.contextPath }${c.senderProfile}" style="width: 20px; height: 20px;" class="rounded-circle" id="image">
+					${c.sender }</small>
 					<br />
 					<span class="badge badge-light">
 						${c.text } </span>
@@ -47,7 +56,7 @@
 	<div id="chatView">
 	
 
-		<div class="input-group input-group-lg">
+		<div class="input-group input-group-lg float-bottom">
 			<div class="input-group-prepend">
 				<span class="input-group-text" >글 입력</span>
 			</div>
@@ -71,8 +80,7 @@
 		document.getElementById("input").onchange = function() {
 			console.log(this.value);
 			console.log("${userInfo.NICKNAME}");
-			console.log("${recipient}");
-			
+			console.log("${recipient}");			
 			var msg = {
 				"mode" :"chat",
 				"roomNumber" : "${roomNumber}",
@@ -88,7 +96,7 @@
 			console.log("결과" + evt.data);
 			var obj = JSON.parse(evt.data);
 			console.log(obj);
-			
+			//picture
 			switch(obj.mode){
 				case "chat" : if (obj.sender == "${userInfo.NICKNAME}") {
 								warningHandle(obj);
@@ -101,19 +109,24 @@
 		};
 
 		var lightHandle = function(obj) {
-			var html = "<small>" + obj.sender + "</small><br/>";
+				
+			var html = "<small style=\"float: left;\">";
+			html += "<img src=\"${pageContext.servletContext.contextPath }"+obj.senderProfile+"\""+"style=\"width: 20px; height: 20px;\"class=\"rounded-circle\">";
+			html += obj.sender+ "</small><br/>";
 			html += "<span class=\"badge badge-light\" >";
 			html += obj.text;
 			html += "</span></br>";
 			document.getElementById("chatView").innerHTML += html;
 			document.getElementById("chatView").scrollTop = document
 					.getElementById("chatView").scrollHeight;
+			
 
 		};
 
-		var warningHandle = function(obj) {
-			var html = "<small style=\"float: right;\">" + obj.sender
-					+ "</small><br/>";
+		var warningHandle = function(obj) {			
+			var html = "<small style=\"float: right;\">";
+			html += "<img src=\"${pageContext.servletContext.contextPath }"+obj.senderProfile+"\""+"style=\"width: 20px; height: 20px;\"class=\"rounded-circle\">";
+			html += obj.sender+ "</small><br/>";
 			html += "<span class=\"badge badge-warning\"  style=\"float: right;\">";
 			html += obj.text;
 			html += "</span></br>";

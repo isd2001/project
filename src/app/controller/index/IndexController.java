@@ -57,6 +57,7 @@ public class IndexController {
 	
 	
 	
+	
 	@GetMapping("/index.do")
 	public ModelAndView indexHandle(WebRequest wr) {
 		ModelAndView mav = new ModelAndView();
@@ -200,22 +201,20 @@ public class IndexController {
 		String targetNick = (String)param.get("talkNick");		
 		System.out.println("target > "+ targetNick);		
 					
-		wr.setAttribute("recipient", targetNick, wr.SCOPE_REQUEST);
-		
+		wr.setAttribute("recipient", targetNick, wr.SCOPE_REQUEST);		
 		//========================================
 		Map user =(Map) wr.getAttribute("userInfo",wr.SCOPE_SESSION);
 		String senderNick = (String) user.get("NICKNAME");
-		System.out.println("sender > "+senderNick);
+		System.out.println("sender > "+senderNick);		
 		
-		Map result = new HashMap<>();
-			result.put("sender", senderNick);
-			result.put("recipient", targetNick);
 		Map nickNames = new HashMap<>();
 			nickNames.put("sender", senderNick);
 			nickNames.put("recipient", targetNick);
 			
 		List<Map> chatlist=onechat.getOneChat(nickNames);
-		map.addAttribute("chatlist",chatlist);
+			map.addAttribute("chatlist",chatlist);
+		
+		
 		
 		/*String uuid = UUID.randomUUID().toString().split("-")[0];
 		
