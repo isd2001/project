@@ -13,11 +13,12 @@
 	     <img src="${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE}" style="width: 80px; height: 80px;"class="rounded-circle">
 	  </div>
 	  <textarea class="form-control" aria-label="With textarea" placeholder="댕댕이가 하고싶은말을 써주세요!" id="content"></textarea>
-	  <button type="submit" class="btn btn-secondary btn-med " onclick="addComment();">왈왈!</button>
+	  <button type="submit" class="btn btn-secondary btn-med " onclick="addComment();">멍멍!</button>
 	</div>
 	
 	<hr/>
 	<div id="list" >
+	
 		<c:forEach var="list" items="${dogTalkList}">			
 				<div class="card" id="form">
 					<div class="card-header d-flex bd-highlight" style="background-color: #FFDEAD  "><div class="flex-grow-1">${list.TALKER}'s comment</div>
@@ -41,8 +42,12 @@
 					</div>
 				</div>		
 		</c:forEach>
+		
 	</div>
-
+	
+	<a class="button">+더보기</a>
+	
+	
 <script>
 	
 	var addComment = function(){
@@ -94,18 +99,8 @@
 			document.getElementById("content").value ="";
 		});			
 	};
-/* 	
- * // $() 탑색 ..document.getElement(s)By..
-	// "#txt" id, ".word" :class , "input" : tagName
- 
-	$("#p").html("<i>HTML</i>");	// .innerHTML = ??;
-	$("#p").append(" document traversal");	// .innerHTML +=
 	
- 	<li>val() : value 제어에 사용하는 함수</li>
-	<li>attr() : 속성 제어에 사용하는 함수</li>
-	<li>prop() : true,false 로 제어하는 요소에 사용하는 함수</li>
-	<li>css() : style 제어에 사용되는 함수</li>
-	<li>html(), append() : innerHTML 에 제에에 사용되는 함수</li> */
+	
 	
 	
 </script>

@@ -39,6 +39,10 @@ public class dogtrainingRepository{
 		return template.selectList("dogtraining.getSomeFind",s);
 	}
 
+	// 게시물에 따라 페이지 갯수 설정
+	public int totalCount() {
+		return template.selectOne("dogtraining.totalCount");
+	}
 
 
 

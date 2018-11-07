@@ -70,8 +70,6 @@ public class FindController {
 		return mav;
 	}
 
-	
-	
 	// 이 밑으로 손 안댔음
 
 	@GetMapping("/write.do")

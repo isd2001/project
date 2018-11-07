@@ -47,7 +47,10 @@ public class TogetherRepository {
 		return template.selectList("together.getSomeFind",s);
 	}
 
-
+	// 게시물에 따라 페이지 갯수 설정
+	public int totalCount() {
+		return template.selectOne("together.totalCount");
+	}
 
 
 

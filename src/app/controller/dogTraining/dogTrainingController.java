@@ -54,6 +54,11 @@ public class dogTrainingController {
 		if(param.get("type")!=null) {
 			if (param.get("type").equals("on")) {
 				wreq.setAttribute("err", "off", wreq.SCOPE_REQUEST);
+				ModelAndView mav = new ModelAndView();
+				mav.setViewName("master");
+				mav.addObject("top", "/WEB-INF/views/master/dogTraining/top.jsp");
+				mav.addObject("main", "/WEB-INF/views/master/dogTraining/main.jsp");
+				return mav;
 			}			
 		}
 		//-------------------------------------------------
@@ -64,6 +69,10 @@ public class dogTrainingController {
 			mp.put("s", 1 + ( rp - 1 ) * 6 );
 			mp.put("e", rp * 6 );
 		
+		int total = dr.totalCount();
+		
+		wreq.setAttribute("current", rp, wreq.SCOPE_REQUEST);
+		wreq.setAttribute("size", total/6 + (total%6>0 ? 1: 0), wreq.SCOPE_REQUEST);	
 			
 		
 		//-------------------------------------------------
@@ -76,9 +85,9 @@ public class dogTrainingController {
 		mav.setViewName("master");
 		mav.addObject("top", "/WEB-INF/views/master/dogTraining/top.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/dogTraining/main.jsp");
-
 		return mav;
-
+		
+		
 	} // end training.do
 
 	//글 목록 클릭해서 디테일

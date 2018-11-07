@@ -47,7 +47,11 @@ public class TogetherBoardController {
 		System.out.println("rp>"+rp);
 		Map mp = new HashMap<>();
 			mp.put("s", 1 + ( rp - 1 ) * 6 );
-			mp.put("e", rp * 10 );
+			mp.put("e", rp * 6 );
+		
+		int total=together.totalCount();
+		wreq.setAttribute("size",total/6 + (total%6>0 ? 1: 0),WebRequest.SCOPE_REQUEST);
+		wreq.setAttribute("current",rp,WebRequest.SCOPE_REQUEST);
 		
 		//------------------------------------------------
 		//List<Map> list=together.getAllTogether();
