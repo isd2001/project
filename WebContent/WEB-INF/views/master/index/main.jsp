@@ -21,10 +21,38 @@ af.f {
 </style>
 <body>
 <div class= "container">
-	<div class="row">	
-			
+	<div class = "row">
+		<div class="my-3 p-3 bg-white rounded shadow-sm border border-info" style="width:100%">
+			<h6 class="border-bottom border-gray pb-2 mb-0">개동</h6>			
+				<div class="container">
+					<div class="row">
+						<c:forEach var="l" items="${dogTraining}" begin="0" end="3">
+							<div class="col-md-3" id="post">
+								<div class="card mb-4 shadow-sm" style="width: 250px; max-height: 300px">
+									<video class="card-img-top" src="${l.UPLOAD }"	width="200" height="225" controls="controls"></video>
+									<div class="card-body">
+										<p class="card-text">
+										<div class="d-flex justify-content-between align-items-center">
+											<small class="text-muted"
+												style="position: absolute; bottom: 30px">${l.TITLE}</small> <small
+												class="text-muted" style="position: absolute; bottom: 10px">${l.DTID}
+											</small>
+										</div>
+	
+										<a href="${pageContext.servletContext.contextPath}/dogTraining/detail.do?NUM=${l.NUM }">
+										<button type="button" class="btn btn-sm btn-outline-secondary"	style="position: absolute; right: 15px; bottom: 15px"
+											id="detailBt" name="detailBt">자세히</button></a>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</div>		
+	</div>
+	<div class="row">				
 		<div class="col-md-6">		
-		<div class="my-3 p-3 bg-white rounded shadow-sm border border-warning">
+		<div class="my-3 p-3 bg-white rounded shadow-sm border border-warning" style="width:100%">
 			<h6 class="border-bottom border-gray pb-2 mb-0">Recent GaeTalk</h6>
 			<div id="recent"></div>
 			<div style="height: 300px; overflow-y: scroll;" id="recentUpdates">				
@@ -49,7 +77,7 @@ af.f {
 					</c:forEach>			
 					
 								
-				</div>	
+			</div>	
 				<small class="d-block text-right mt-3">
 			 <a href="${pageContext.servletContext.contextPath }/dogTalk/index.do">
 			<img src="${pageContext.servletContext.contextPath }/image/talkimg.png" style="width:25px; height: 25px;">개톡 더보기</a>

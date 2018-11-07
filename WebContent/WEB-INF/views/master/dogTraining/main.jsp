@@ -23,9 +23,8 @@
 											style="position: absolute; bottom: 30px">${l.TITLE}</small> <small
 											class="text-muted" style="position: absolute; bottom: 10px">${l.DTID}
 										</small>
-									</div>
-
-									<a href="${pageContext.servletContext.contextPath}/dogTraining/detail.do?NUM=${l.NUM }">
+									</div>									
+									<a href="${pageContext.servletContext.contextPath}/dogTraining/detail.do?NUM=${l.NO }">
 									<button type="button" class="btn btn-sm btn-outline-secondary"	style="position: absolute; right: 15px; bottom: 15px"
 										id="detailBt" name="detailBt">자세히</button></a>
 								</div>

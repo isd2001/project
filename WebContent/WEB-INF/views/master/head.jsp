@@ -78,14 +78,16 @@
 			<c:when test="${not empty userInfo}">
 
 			<!-- start weather -->
-				<small style="float: right;margin-top: 0%;"><strong><div class="justify-content-end">
+				<div class="justify-content-end">
+				<small style="float: right;margin-top: 0%;"><strong>
 						오늘의 ${gu} 날씨 :
 						<script>
 								getWeather("${gu}");
 							</script>
 						<span id="currentTemp"></span><br>(최고 : <span id="tempMax"></span> / 최저 : <span
 							id="tempMin"></span>)
-				</div></strong></small>
+				</strong></small>
+				</div>
 			<!-- end weather -->
 			<div>
 				<div style="margin-top: 8%;">
@@ -104,14 +106,16 @@
 				
 			</c:when>
 			<c:otherwise>
-				<small style="float: right;margin-top: 0%;"><strong><div class="justify-content-end">
+				<div class="justify-content-end">	
+				<small style="float: right;margin-top: 0%;"><strong>
+				
 						오늘의 강남구 날씨 :
 						<script>
 								getWeather("강남구");
 							</script>
 						<span id="currentTemp"></span><br>(최고 : <span id="tempMax"></span> / 최저 : <span
 							id="tempMin"></span>)
-				</div></strong></small>
+				</strong></small></div>
 				<div class="justify-content-end align-items-center" style="margin-left: 50%">
 					<a class="btn btn-sm btn-success"
 						href="${pageContext.servletContext.contextPath}/main/login.do">로그인</a>

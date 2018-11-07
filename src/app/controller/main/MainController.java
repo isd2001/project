@@ -25,6 +25,7 @@ import app.models.FindRepository;
 import app.models.ParcelRepository;
 import app.models.accountRepository;
 import app.models.dogTalkRepository;
+import app.models.dogtrainingRepository;
 import app.models.searchRepository;
 import app.service.WeatherService;
 
@@ -51,6 +52,9 @@ public class MainController {
 	
 	@Autowired
 	dogTalkRepository dtr;
+	
+	@Autowired
+	dogtrainingRepository dogTraining;
 	
 	@Autowired
 	searchRepository sr;
@@ -80,6 +84,7 @@ public class MainController {
 		mav.addObject("dtrList",dtr.getSomeFromDogTalk());
 		mav.addObject("findList", fr.getAllFind());
 		mav.addObject("parcelList", pr.getAllByParcel());		
+		mav.addObject("dogTraining",dogTraining.getAll());
 		wr.setAttribute("recommendKeywords", recommendKeywords, wr.SCOPE_SESSION);
 		return mav;
 	}
