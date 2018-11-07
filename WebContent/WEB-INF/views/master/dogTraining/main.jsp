@@ -24,7 +24,7 @@
 											class="text-muted" style="position: absolute; bottom: 10px">${l.DTID}
 										</small>
 									</div>									
-									<a href="${pageContext.servletContext.contextPath}/dogTraining/detail.do?NUM=${l.NO }">
+									<a href="${pageContext.servletContext.contextPath}/dogTraining/detail.do?no=${l.NO }">
 									<button type="button" class="btn btn-sm btn-outline-secondary"	style="position: absolute; right: 15px; bottom: 15px"
 										id="detailBt" name="detailBt">자세히</button></a>
 								</div>
@@ -36,14 +36,34 @@
 		</div>
 		<br/>	
 		<!-- ======================================== -->
-		<nav aria-label="Page navigation example" style="margin-left: 500px;">
+		<%-- <nav aria-label="Page navigation example" style="margin-left: 500px;">
 		  <ul class="pagination">
 		    <li class="page-item"><a class="page-link" href="${pageContext.servletContext.contextPath }/dogTraining/training.do?p=1">1</a></li>
 		    <li class="page-item"><a class="page-link" href="${pageContext.servletContext.contextPath }/dogTraining/training.do?p=2">2</a></li>
 		    <li class="page-item"><a class="page-link" href="${pageContext.servletContext.contextPath }/dogTraining/training.do?p=3">3</a></li>
 		    <li class="page-item"><a class="page-link" href="#">Next</a></li>
 		  </ul>
-		</nav>
+		</nav> --%>
+			<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
+				<c:forEach var="p" begin="1" end="${size }">
+						<c:choose>
+							<c:when test="${p==current}">
+								<li class="page-item active">
+     							 <a class="page-link" href="${pageContext.servletContext.contextPath }/dogTraining/training.do?p=${p}">${p }<span class="sr-only">(current)</span>
+     							 </a></li>	
+     						 </c:when>
+     						 <c:otherwise>
+     						 	<a class="page-link" href="${pageContext.servletContext.contextPath }/dogTraining/training.do?p=${p}">${p }</a>
+     						</c:otherwise>
+     					</c:choose>					
+					</c:forEach>
+				<li class="page-item"><a class="page-link" href="#">Next</a></li>
+			</ul>
+			</nav>
+		
+		
 			<div>
 				<div style="text-align:center">
 				<a href="${pageContext.servletContext.contextPath }/dogTraining/write.do">

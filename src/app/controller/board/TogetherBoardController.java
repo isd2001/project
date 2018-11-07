@@ -49,11 +49,16 @@ public class TogetherBoardController {
 		System.out.println("rp>"+rp);
 		Map mp = new HashMap<>();
 			mp.put("s", 1 + ( rp - 1 ) * 6 );
-			mp.put("e", rp * 10 );
+			mp.put("e", rp * 6 );
+		
+		int total=together.totalCount();
+		wreq.setAttribute("size",total/6 + (total%6>0 ? 1: 0),WebRequest.SCOPE_REQUEST);
+		wreq.setAttribute("current",rp,WebRequest.SCOPE_REQUEST);
 		
 		//------------------------------------------------
 
-		List<Map> list=together.getAllTogether();
+		List<Map> list = together.getSomeFind(mp);	
+
 			
 		List<Map> li = new ArrayList<>();
 		
@@ -101,9 +106,19 @@ public class TogetherBoardController {
 			String day=sdf.format(list.get(i).get("DAY"));
 			list.get(i).put("day",day);
 		}
+		//==================================================
+		/*int rp = Integer.parseInt((String) param.get("p"));
+		System.out.println("rp>"+rp);
+		Map mp = new HashMap<>();
+			mp.put("s", 1 + ( rp - 1 ) * 6 );
+			mp.put("e", rp * 6 );
+		
+		int total=together.totalCount();
+		wreq.setAttribute("size",total/6 + (total%6>0 ? 1: 0),WebRequest.SCOPE_REQUEST);
+		wreq.setAttribute("current",rp,WebRequest.SCOPE_REQUEST);*/
+		
 		
 
-		System.out.println("result > "+list);
 		wreq.setAttribute("list", list, WebRequest.SCOPE_REQUEST);		
 		
 		ModelAndView mav = new ModelAndView();	

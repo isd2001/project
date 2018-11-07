@@ -2,7 +2,9 @@ package app.controller.main;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -11,10 +13,12 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.SourceFilteringListener;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -64,8 +68,6 @@ public class MainController {
 		
 		dtr.getSomeFromDogTalk();
 		
-		System.out.println(sr.getSearch());
-		
 		List recommendKeywords = sr.getSearch();
 		recommendKeywords.sort(new Comparator<Map>() {
 			public int compare(Map m1, Map m2)	{
@@ -92,7 +94,8 @@ public class MainController {
 
 	@GetMapping("/login.do")
 	public ModelAndView mainLoginHandle(WebRequest wr) {
-		ModelAndView mav = new ModelAndView();		
+		ModelAndView mav = new ModelAndView();				
+		
 		mav.setViewName("master");
 		mav.addObject("top", "/WEB-INF/views/master/login/top.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/login/main.jsp");
@@ -106,14 +109,13 @@ public class MainController {
 		
 		if(ar.getPwById(param)) {						
 			Map userInfo =  ar.getUserInfo((String)param.get("id"));
-			String nick = (String)userInfo.get("NICKNAME");
-			System.out.println("닉에임 >>"+nick);
+			String nick = (String)userInfo.get("NICKNAME");		
 				
 			wr.setAttribute("nick", nick, wr.SCOPE_SESSION);
 			wr.setAttribute("userInfo", userInfo, wr.SCOPE_SESSION);
 			String gu = ws.getCoordinateByAddress((String)userInfo.get("ADDRESS"));
-			wr.setAttribute("gu", gu, wr.SCOPE_SESSION);			
-			System.out.println(gu);
+			wr.setAttribute("gu", gu, wr.SCOPE_SESSION);		
+			
 			
 			mav.setViewName("master");
 			mav.setViewName("redirect:/main/index.do");
@@ -131,7 +133,69 @@ public class MainController {
 		}
 	}
 	
-
+	@GetMapping(path="/getUserProfile.do", produces="application/json;charset=UTF-8")	
+	@ResponseBody
+	public String getUserProfileController(@RequestParam Map param) {		
+	
+		
+		System.out.println(ar.getDogProfileById(param));
+		
+		
+		
+		return gson.toJson(dtr.getDogTalk());
+	}
+	
+	@GetMapping("/findId.do")
+	public ModelAndView mainFindIdHandle(WebRequest wr) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("master");
+		
+		mav.addObject("top", "/WEB-INF/views/master/findAccount/top.jsp");
+		mav.addObject("main", "/WEB-INF/views/master/findAccount/findId.jsp");
+		System.out.println(wr.getAttribute("yourId", wr.SCOPE_REQUEST));
+		
+		if(wr.getAttribute("yourId", wr.SCOPE_REQUEST)!=null) {
+			wr.setAttribute("yourId", false, wr.SCOPE_REQUEST);
+			System.out.println("if 문 돌아감");
+		}	
+		
+		return mav;
+	}
+	@PostMapping("/findId.do")
+	public ModelAndView mainFindIdPostHandle(WebRequest wr,@RequestParam Map param) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println(param);
+		System.out.println(ar.findId(param));
+		if(ar.findId(param)==null) {		
+			System.out.println("inside null if 문");
+			wr.setAttribute("yourId", false, wr.SCOPE_REQUEST);
+			mav.setViewName("master");
+			
+			mav.addObject("top", "/WEB-INF/views/master/findAccount/top.jsp");
+			mav.addObject("main", "/WEB-INF/views/master/findAccount/findId.jsp");
+			
+		}else {			
+			mav.setViewName("master");
+			mav.addObject("yourId", ar.findId(param));
+			mav.addObject("top", "/WEB-INF/views/master/login/main.jsp");
+			mav.addObject("main", "/WEB-INF/views/master/login/main.jsp");
+		}
+				
+		return mav;
+	}
+	
+	@GetMapping("/findPassWord.do")
+	public ModelAndView mainFindPassWordHandle(WebRequest wr) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("master");
+		
+		mav.addObject("top", "/WEB-INF/views/master/findAccount/top.jsp");
+		mav.addObject("main", "/WEB-INF/views/master/findAccount/findPassWord.jsp");
+				
+	
+		
+		return mav;
+	}
 	
 	@GetMapping("/terms.do")
 	public ModelAndView mainTermsHandle(WebRequest wr) {

@@ -27,6 +27,11 @@
 		select ID from gaenoljaaccount where id=#{id}
 	</select>
 	
+	<select id="findId" resultType="java.lang.String" parameterType="java.util.HashMap">
+		select ID from gaenoljaaccount where name=#{name} and dogName=#{dogName}
+	</select>
+	
+	
 	<select id="checkNick" resultType="java.lang.String" parameterType="java.lang.String">
 		select NICKNAME from gaenoljaaccount where nickname=#{nickname}
 	</select>	
@@ -51,6 +56,9 @@
 	<select id="getDogProfileByNickname" resultType="java.lang.String" parameterType="java.lang.String">
 		select dogprofile from gaenoljaaccount where nickname=#{nick}	
 	</select>
-
+	
+	<select id="getDogProfileById" resultType="java.lang.String" parameterType="java.lang.String">
+		select dogprofile from gaenoljaaccount where id=#{id}	
+	</select>
 </mapper>
 

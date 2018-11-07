@@ -52,4 +52,12 @@ public class accountRepository {
 	public String getDogProfileByNickname(String nickName) {
 		return template.selectOne("gaenoljaaccount.getDogProfileByNickname", nickName);
 	}
+	
+	public String findId(Map map) {
+		return template.selectOne("gaenoljaaccount.findId",map);
+	}
+	
+	public String getDogProfileById(Map map) {
+		return template.selectOne("gaenoljaaccount.getDogProfileById", map);
+	}
 }

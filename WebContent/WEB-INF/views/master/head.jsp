@@ -76,10 +76,11 @@
 	<div class="col-4 text-center">
 		<c:choose>
 			<c:when test="${not empty userInfo}">
-
+			<div class="container">
+			<div class="row" style="float: right;">
 			<!-- start weather -->
 				<div class="justify-content-end">
-				<small style="float: right;margin-top: 0%;"><strong>
+				<small><strong>
 						오늘의 ${gu} 날씨 :
 						<script>
 								getWeather("${gu}");
@@ -89,21 +90,23 @@
 				</strong></small>
 				</div>
 			<!-- end weather -->
-			<div>
-				<div style="margin-top: 8%;">
-				<a class="btn btn-sm btn-danger" href="${pageContext.servletContext.contextPath }/logout.do">로그아웃</a>
-				</div>
-				<div style="margin-left: 50%;margin-top: -13%" >
+			
+			</div>
+			<div class="row" style="float: right; margin-top: 5px;">
 				<ul id="navmenu">
 					<li><a href="#">접속중유저</a>
 						<ul class="sub1" id="connectlist">
 						</ul>
 					</li>
 				</ul>
-				</div> 
+				
+				
+				<a class="btn btn-sm btn-danger" style="height:30px;" href="${pageContext.servletContext.contextPath }/logout.do">로그아웃</a>
+				
 			</div>
+		
 				
-				
+			</div>
 			</c:when>
 			<c:otherwise>
 				<div class="justify-content-end">	

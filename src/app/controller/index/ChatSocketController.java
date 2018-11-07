@@ -92,7 +92,7 @@ public class ChatSocketController extends TextWebSocketHandler{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 		
 		String me = message.getPayload();
-		System.out.println("me >"+me);		
+		
 		Map read = gson.fromJson(me, Map.class);
 			
 		
@@ -105,7 +105,7 @@ public class ChatSocketController extends TextWebSocketHandler{
 				if(info.get("nick").equals((read.get("sender")))) {					
 					read.put("senderProfile", userInfo.get("DOGPROFILE"));	
 					}	
-			System.out.println("profile 불러오기 끝");
+		
 		}
 	
 		
