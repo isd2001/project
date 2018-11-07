@@ -32,7 +32,7 @@ public class ModifyInfoController {
 	
 	// 수정처리 요청시 중간 인증 체크 핸들
 	// 정상 로그인 후 인증세션이 있으면 check.do 부분에 인증 유무에 따른 페이지 변환이 우선적으로 들어가야 함.
-	@RequestMapping("check.do")
+	@RequestMapping("/check.do")
 	public ModelAndView authCherckHandle(@RequestParam String mode ,WebRequest wr) {
 		switch(mode) {
 		case "memberInfo" : 

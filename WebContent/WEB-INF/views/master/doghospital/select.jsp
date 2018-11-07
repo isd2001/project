@@ -5,13 +5,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="accordion" id="accordionExample">
 	<div class="card">
-		<div class="card-header" id="headingOne">
+		<div class="card-header" >
 			<h5 class="mb-0">
 				<strong><label style="font-size: 18px;">지역구를 선택 하시면 해당 지역구의 동물병원이 나옵니다. 원하시는 지역구를 선택 하세요.</label></strong>
       		</h5>
 		</div>
 		<div>
 			<div class="card-body">
+				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px;" href="${pageContext.servletContext.contextPath }/doghospital.do" >ALL</a>
 				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=강남구" >강남구</a>
 				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=강북구" >강북구</a>
 				<a type="button" class="btn btn-primary btn-sm btn-light" style="font-size: 12px;" href="${pageContext.servletContext.contextPath }/getdh.do?gu=강서구" >강서구</a>
@@ -41,6 +42,8 @@
 	</div>
 </div>
 <hr />
+<div id="map" style="width:100%;height:400px;"></div>
+<hr />
 <table class="table table-hover">
 		<thead>
 			<tr>
@@ -55,9 +58,9 @@
 	<tbody>
 	<c:forEach var="dh" items="${dhlist }">
 		<tr>
-			<td style="font-size: 12px; text-align: center;">${dh.GU }</td>
+			<td style="font-size: 12px; text-align: center;" data="${dh.GU }">${dh.GU }</td>
 			<td style="font-size: 12px; text-align: center;">${dh.SORT }</td>
-			<td style="font-size: 12px; text-align: center;"><a href="#">${dh.HOSPITALNAME }</a></td>
+			<td style="font-size: 12px; text-align: center;" data-target="#exampleModalCenter" >${dh.HOSPITALNAME }</td>
 			<td style="font-size: 12px; text-align: center;">${dh.ADDRESS }</td>
 			<td style="font-size: 12px; text-align: center;">${dh.PHONE }</td>
 			<td style="font-size: 12px; text-align: center;">${dh.POSTALCODE }</td>
@@ -65,3 +68,99 @@
 	</c:forEach>
 	</tbody>
 </table>
+
+
+	<!-- Button trigger modal -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class= "container">
+				<div class="row">
+					<div class="col">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalCenterTitle"></h5>
+							<button type="button" class="close justify-content-end" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="modal-img"></div>
+							</div>
+							<div class="col">
+								<div class="modal-info">
+									<label class="form-control"></label>
+								</div>
+							</div>
+						</div>
+					</div>					
+				</div>
+				<div class="row">
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8732ddf8bab883cf85aa0180da9e413d&libraries=services,clusterer,drawing"></script>
+<script>	
+	
+	var gu = $("td").attr("data");
+	
+	var map = new daum.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
+        center : new daum.maps.LatLng(37.54863463182444, 126.99070931296113), // 지도의 중심좌표 
+        level : 9 // 지도의 확대 레벨 
+    });
+    
+    // 마커 클러스터러를 생성합니다 
+    var clusterer = new daum.maps.MarkerClusterer({
+        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+        minLevel: 5 // 클러스터 할 최소 지도 레벨 
+    });
+ 
+    // 데이터를 가져오기 위해 jQuery를 사용합니다
+    // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
+    $.ajax({ "url" : "${pageContext.servletContext.contextPath }/gucoordinates.do?gu="+gu," async" : true }).done(function(data) {
+    	console.log(data);
+
+		function setCenter() {            
+		    // 이동할 위도 경도 위치를 생성합니다 
+		    var moveLatLon = new daum.maps.LatLng(data.positions[0].LAT, data.positions[0].LNG);
+		    
+		    // 지도 중심을 이동 시킵니다
+		    map.setCenter(moveLatLon);
+		}
+
+		function panTo() {
+		    // 이동할 위도 경도 위치를 생성합니다 
+		    var moveLatLon = new daum.maps.LatLng(data.positions[0].LAT, data.positions[0].LNG);
+		    
+		    // 지도 중심을 부드럽게 이동시킵니다
+		    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+		    map.panTo(moveLatLon);            
+		}        
+		
+    	// 데이터에서 좌표 값을 가지고 마커를 표시합니다
+        // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
+    	var markers = $(data.positions).map(function(i, position) {
+    		return new daum.maps.Marker({
+    			"position" : new daum.maps.LatLng(position.LAT, position.LNG)
+    		});
+    	});
+    	// 클러스터러에 마커들을 추가합니다
+    	clusterer.addMarkers(markers);
+    });
+    
+</script>

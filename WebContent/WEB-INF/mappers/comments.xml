@@ -8,12 +8,12 @@
 
 <!-- 특정 게시글 댓글 전부 뽑는거(오름차순) -->
 	<select id="getAllByComments" resultType="java.util.HashMap" parameterType="java.lang.Integer">
-		select * from comments where ino=#{ino} order by regdate asc
+		select * from comments where ino=#{ino} order by regday asc
 	</select>
 
-<!-- 게시글 댓글별 리댓글 카운트 뽑는거 -->
-	<select id="getByCmtCount" resultType="java.util.HashMap" parameterType="java.lang.Integer">
-		select cnt, serial, code from (COMMENTS join (select code, count(*) as cnt from RECOMMENTS GROUP by CODE)r on COMMENTS.serial = r.code) where ino = #{no}
+<!-- 아이디별 댓글 뽑기 -->
+	<select id="getByParcelComments" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select * from parcel join (select * from comments where talker=#{talker} order by regday desc)c on parcel.no = c.ino
 	</select>
 	
 </mapper>

@@ -32,6 +32,12 @@ public class MyPageRepository {
 		return template.selectList("parcel.getByParcelList", writer);
 	}
 	
+	// 분양게시판 아이디별 댓글 가져오기
+	public List<Map> getByParcelComments(String talker) {
+		return template.selectList("comments.getByParcelComments", talker);
+	}
+	
+	
 	// 찾아주시개 게시판 아이디 별로 가져오기
 	public List<Map> getByFindList(String nick) {
 		return template.selectList("find.getByFindList", nick);
