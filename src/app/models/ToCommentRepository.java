@@ -17,6 +17,7 @@ public class ToCommentRepository {
 		return template.selectList("tocomment.getCommentByNo",cno);
 	}
 	
+	// 해당 게시물 댓글 저장
 	public int addComment(Map map) {
 		return template.insert("tocomment.addComment",map);
 	}

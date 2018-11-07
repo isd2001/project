@@ -8,14 +8,8 @@
 <link rel="stylesheet"
 	href="${pageContext.servletContext.contextPath }/css/navcss.css">
 
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-
-<link rel="stylesheet"	href="${pageContext.servletContext.contextPath }/css/navcss.css">
 
 <link href="https://fonts.googleapis.com/css?family=Cute+Font&amp;subset=korean" rel="stylesheet">
 
@@ -28,6 +22,7 @@
  }
 </style>
 <script>
+	// Weather
 	var getWeather = function(gu) {
 		console.log("function Strar !!");
 		var apiURI = "http://api.openweathermap.org/data/2.5/weather";
@@ -37,9 +32,6 @@
 			"APPID" : "221d0de36835fe0cf4b1d4b196c711bb"
 		};
 		$.get(apiURI, param, function(rst) {
-			console.log("ajax start !!");
-			console.log(rst);
-			console.log("ajax end ..!");
 			document.getElementById("currentTemp").innerHTML = rst.main.temp
 					+ "℃";
 			document.getElementById("tempMax").innerHTML = rst.main.temp_max
@@ -84,24 +76,43 @@
 	<div class="col-4 text-center">
 		<c:choose>
 			<c:when test="${not empty userInfo}">
-				<div class=" justify-content-end align-items-center form-inline">
 
-
-					<a class="btn btn-sm btn-success"
-						href="${pageContext.servletContext.contextPath }/mypage.do">마이페이지</a>
-					<a class="btn btn-sm btn-danger"
-						href="${pageContext.servletContext.contextPath }/logout.do">로그아웃</a>
-					<br/>
+			<!-- start weather -->
+				<small style="float: right;margin-top: 0%;"><strong><div class="justify-content-end">
+						오늘의 ${gu} 날씨 :
+						<script>
+								getWeather("${gu}");
+							</script>
+						<span id="currentTemp"></span><br>(최고 : <span id="tempMax"></span> / 최저 : <span
+							id="tempMin"></span>)
+				</div></strong></small>
+			<!-- end weather -->
+			<div>
+				<div style="margin-top: 8%;">
+				<a class="btn btn-sm btn-danger" href="${pageContext.servletContext.contextPath }/logout.do">로그아웃</a>
 				</div>
-					<ul id="navmenu" style="margin-left: 185px;">
-						<li><a href="#">접속중유저</a>
-							<ul class="sub1" id="connectlist">
-							</ul>
-						</li>
-					</ul> 
+				<div style="margin-left: 50%;margin-top: -13%" >
+				<ul id="navmenu">
+					<li><a href="#">접속중유저</a>
+						<ul class="sub1" id="connectlist">
+						</ul>
+					</li>
+				</ul>
+				</div> 
+			</div>
+				
+				
 			</c:when>
 			<c:otherwise>
-				<div class="justify-content-end align-items-center">
+				<small style="float: right;margin-top: 0%;"><strong><div class="justify-content-end">
+						오늘의 강남구 날씨 :
+						<script>
+								getWeather("강남구");
+							</script>
+						<span id="currentTemp"></span><br>(최고 : <span id="tempMax"></span> / 최저 : <span
+							id="tempMin"></span>)
+				</div></strong></small>
+				<div class="justify-content-end align-items-center" style="margin-left: 50%">
 					<a class="btn btn-sm btn-success"
 						href="${pageContext.servletContext.contextPath}/main/login.do">로그인</a>
 					<a class="btn btn-sm btn-info"

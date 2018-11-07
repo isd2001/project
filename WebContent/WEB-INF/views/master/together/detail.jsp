@@ -2,82 +2,69 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<c:if test="${re eq 'on' }">
-	<script>window.alert("댓글이 정상적으로 처리되셨습니다.")</script>
-</c:if>
-<div class="my-3 p-5 bg-white rounded shadow-sm">
-	<div class="media text-muted pt-3">
-		<div class="d-flex justify-content-between align-items-center w-100">
-			<strong class="text-gray-dark">${list.TITLE }</strong> <strong
-				class="text-gray-dark"><small>
-					[${list.AREA}]${list.DAY }</small></strong>
-		</div>
-	</div>
-	<hr />
-	<div class="media text-muted pt-3">
-		<div class="d-flex justify-content-between align-items-center w-100"
-			style="margin: auto;">
-			<strong class="text-gray-dark" style="text-align: center;">
-				${list.CONTENT }</strong>
-		</div>
-		
-	</div>
-	<hr />
 
-	<div class="pt-3">
-		<small>주소 > ${list.ADDRESS }</small>
-		<div class="d-flex justify-content-between align-items-center w-100">
-			<div id="map" style="width: 50%; height: 150px; float: right;"></div>
-		</div>
-	</div>
-	<div class="d-flex justify-content-between align-items-center w-100"
-		style="float: right;">
-		<div class="media text-muted pt-3" style="float: right;">
-			<span class="text-gray-dark"><small>조회 > ${list.LOOKUP }</small></span>
-		</div>
-		<a href="${pageContext.servletContext.contextPath }/together/mainboard.do">
-		<button type="button" class="btn btn-outline-dark">
-		메인으로</button></a>
-	</div>
-	
 
+<table class="table">
+	<thead class="thead-dark">
+		<tr>
+			<th scope="col" style="text-align: center;">POST</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row" style="text-align: center;"><small> 제목 :</small>
+				${list.TITLE }</th>
+		<tr>
+			<small style="float: right;">[${list.AREA}]${list.DAY }</small>
+		</tr>
+		</tr>
+		<tr>
+			<th scope="row" style="text-align: center;"><small> 내용 :</small>
+				${list.CONTENT }</th>
+		</tr>
+	</tbody>
+</table>
+
+<div id="map" style="width: 50%; height: 150px; margin-left: 25%;"></div>
+
+<small style="float: right;">주소 > ${list.ADDRESS }</small><br/>
+
+<div style="text-align: right;">
+	<span class="text-gray-dark"><small>조회 > ${list.LOOKUP }</small></span>	
+	<a href="${pageContext.servletContext.contextPath }/together/mainboard.do">
+		<button type="button" class="btn btn-outline-dark">메인으로</button>
+	</a>
 </div>
+
+
+
 <!-- 댓글 -->
-<div class="jumbotron" >
-
-	<ul class="list-group" >
-			<c:forEach var="c" items="${comment }">
-			<li class="list-group-item">▷ ${c.MENT } <small
-				style="float: right;">${c.day }</small> <br />
-			</li>
+<table class="table">
+	<thead class="thead-dark">
+		<tr>
+			<th scope="col" style="text-align: center;">COMMENT</th>
+		</tr>
+	</thead>
+	<tbody>
+		<c:forEach var="c" items="${comment }">
+			<tr>
+				<th scope="row">${c.NICK }<small>(${c.day }) </small><br /> <span
+					class="badge badge-pill badge-warning">${c.MENT }</span><br />
+				</th>
+			</tr>
 		</c:forEach>
-	</ul>
-	<hr />
-	<form
-		action="${pageContext.servletContext.contextPath }/together/detail.do?no=${list.NO}"
-		method="post">
-		<!--  <div class="row">
-			<div class="col-10">
-			<label for="text">(*)내 용</label><small id="size2">(0/500)</small>
-			<textarea class="form-control" id="comment" name="comment"
-				aria-label="With textarea" placeholder="댓글 작성 "
-				style="width: 100%; height: 100px; resize: none;" autocomplete="off"></textarea>
-			</div>
-			<div class="col-2" style="height: 30px;">
-				<button type="submit" class="btn btn-secondary btn-lg">댓글 올리기</button>
-			</div>
-		</div>-->
-		<div class="input-group mb-3">
-			<div class="input-group-prepend">
-				<span class="input-group-text" id="basic-addon1" >Comment</span>
-			</div>
-			<input type="text" class="form-control"
-				aria-describedby="basic-addon1" id="comment" name="comment" autocomplete="off" placeholder="댓글 입력 후 Enter를 눌러주세요.">
-		</div>
-	</form>
 
-</div>
-
+	</tbody>
+</table>
+<label for="newReplyText">댓글작성 </label>
+<form
+	action="${pageContext.servletContext.contextPath}/together/detail.do?no=${list.NO}"
+	method="post">
+	<input type="text" class="form-control" aria-describedby="basic-addon1"
+		id="comment" name="comment" autocomplete="off"
+		placeholder="댓글 입력 후 Enter를 눌러주세요.">
+</form>
 
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d54ea73b1e9ac77ebe1409aa939d77e5&libraries=services"></script>

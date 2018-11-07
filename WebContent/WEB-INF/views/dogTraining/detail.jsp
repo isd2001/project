@@ -43,8 +43,8 @@
      	
 </table>
      	<tr>
-     <a href="${pageContext.servletContext.contextPath }">목록으로</a>
-        <a href="${pageContext.servletContext.contextPath }">수정하기</a>
+     <a href="${pageContext.servletContext.contextPath }/dogTraining/training.do">목록으로</a>
+        <a href="${pageContext.servletContext.contextPath/dogTraining/write.do" }">수정하기</a>
          <a href="${pageContext.servletContext.contextPath }">삭제하기</a>
      
      	</tr>

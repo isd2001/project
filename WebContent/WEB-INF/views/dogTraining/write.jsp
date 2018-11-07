@@ -16,7 +16,7 @@
 				<div class="col-lg-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							ㅇㅇ
+							
 							<div class="panel-body">
 								<form action="${pageContext.servletContext.contextPath}/dogTraining/write.do" method="post">
 									<div class="row form-group">
@@ -26,10 +26,36 @@
 										</div>
 									</div>
 									</div>
-		<div class="col-md-6 mb-3">
-			<label for="lastName">메인이미지</label>
-			<input type="file" class="form-control" id="mainimage" name="mainimage">
-		</div>
+									<form id="fileForm" action="fileUpload" method="post"
+        enctype="multipart/form-data">
+        <input type="file" id="fileUp" name="fileUp"/><br/><br/>
+          
+        아이디 : <input type="text" name="id" />
+        비밀번호 : <input type="password" name="pw" /><br/><br/>
+        <input type="button" value="전송하기" onClick="fileSubmit();">
+    </form>
+ 
+<script>
+    function fileSubmit() {
+        var formData = new FormData($("#fileForm")[0]);
+        $.ajax({
+            type : 'post',
+            url : 'fileUpload',
+            data : formData,
+            processData : false,
+            contentType : false,
+            success : function(html) {
+                alert("파일 업로드하였습니다.");
+            },
+            error : function(error) {
+                alert("파일 업로드에 실패하였습니다.");
+                console.log(error);
+                console.log(error.status);
+            }
+        });
+    }
+</script>				
+											                            
 									<div class="row form-group">
 										<label class="col-lg-2">내용</label>
 										<div class="col-lg-12">
@@ -37,7 +63,8 @@
 										</div>
 									</div>
 
-									<button type="submit">완료</button>
+									<button type="submit">글쓰기</button>
+									</form>
 								</form>
 							</div>
 						</div>

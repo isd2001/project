@@ -1,54 +1,66 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>╠шЁ╩©К</title>
-</head>
-<body>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <table class="table table-hover">
+	<thead>
+	</thead>
+	<tbody>
+		<tr>
 
-  		<thead>
-  		</thead>
-  		<tbody>
-	     <tr>
-	     
-    	  <th scope="row" style="width: 7%"><small>NO</small></th>
-    	  <td>${read.NUM}</td>
-    	  </tr>
-    	  <tr>
-    	  <th scope="row" style="width: 50%"><small>а╕╦Я</small></th>
-    	  <td>${read.SUB}</td>
-    	   </tr>
-    	   <tr>
-     	  <th scope="row" style="width: 15%"><small>Ё╞б╔</small></th>
-     	  <td>${read.CDATE}</td>
-     	    </tr>
-     	    <tr>
-     	  <th scope="row" style="width: 12%"><small>а╤х╦╪Ж</small></th>
-     	  <td>${read.LOOKUP}</td>
-	      </tr>
-	      <tr>
-	      <th scope="row" style="width: 4%"><small>ID</small></th>
-	      <td>${read.DTBOARDID}</td>
-	      </tr>
-	      <th scope="row" style="width: 12%"><small>Ё╩©К</small></th>
-	      <td>${read.CON}</td>
-	      </tbody>
-  		
-  
-     	
+			<th scope="row" style="width: 7%"><small>NO</small></th>
+			<td>${read.NO}</td>
+		</tr>
+		<tr>
+			<th scope="row" style="width: 50%"><small>Л═°К╙╘</small></th>
+			<td>${read.TITLE}</td>
+		</tr>
+		<tr>
+			<th scope="row" style="width: 15%"><small>К┌═Л╖°</small></th>
+			<td>${read.UPDAY}</td>
+		</tr>
+		<tr>
+			<th scope="row" style="width: 12%"><small>Л║╟М ▄Л┬≤</small></th>
+			<td>${read.LOOKUP}</td>
+		</tr>
+		<tr>
+			<th scope="row" style="width: 4%"><small>ID</small></th>
+			<td>${read.DTID}</td>
+		</tr>
+		<tr>
+			<th scope="row" style="width: 12%"> <small>К┌╢Л ╘</small></th>
+			<td>${read.CONTENT}</td>
+		</tr>
+		<tr>
+			<th scope="row" style="width: 12%"> <small>К▐≥Л≤│Л┐│</small></th>
+			<td><video src="${read.UPLOAD}" controls="controls"></video></td>
+		</tr>
+	</tbody>
+
+
 </table>
-     	<tr>
-     <a href="${pageContext.servletContext.contextPath }">╦Я╥ою╦╥н</a>
-        <a href="${pageContext.servletContext.contextPath }">╪Жа╓го╠Б</a>
-         <a href="${pageContext.servletContext.contextPath }">╩Ха╕го╠Б</a>
-     
-     	</tr>
-    </html>
 
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col" style="text-align: center;">COMMENT</th>
+    </tr>
+  </thead>
+  <tbody>
+  	<c:forEach var="c" items="${comment }">
+    <tr>
+      <th scope="row">${c.ID }<small>(${c.UPDAY }) </small><br/>
+      <span class="badge badge-pill badge-warning">${c.CONTENT }</span><br/>
+      </th>
+    </tr>
+  	</c:forEach>
+    
+  </tbody>
+</table>
+<label for="newReplyText">К▄⌠Й╦─Л·▒Л└╠ </label>
+<form action="${pageContext.servletContext.contextPath}/dogTraining/detail.do?no=${read.NO}" method="post"> 
+<input type="text" class="form-control"
+				aria-describedby="basic-addon1" id="content" name="content" autocomplete="off" placeholder="К▄⌠Й╦─ Л·┘К═╔ М⌡└ EnterК╔╪ К┬▄К÷╛Лё╪Л└╦Л ■.">
+</form>
 
 
