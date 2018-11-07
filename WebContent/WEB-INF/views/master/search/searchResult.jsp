@@ -238,6 +238,99 @@
 </c:if>
 
 
+<c:if test="${not empty dogTraining}">
+	<div class="alert alert-info" role="alert">개동 글에서 (검색결과 : ${fn:length(dogTraining)}개)</div>
+		<div class="row">	
+			<c:forEach var="l" items="${dogTraining}">
+							<div class="col-md-4" id="post">
+								<div class="card mb-4 shadow-sm" style="width: 250px; max-height: 300px">
+									<video class="card-img-top" src="${l.UPLOAD }"	width="200" height="225" controls="controls"></video>
+									<div class="card-body">
+										<p class="card-text">
+										<div class="d-flex justify-content-between align-items-center">
+											<small class="text-muted"
+												style="position: absolute; bottom: 30px">${l.TITLE}</small> <small
+												class="text-muted" style="position: absolute; bottom: 10px">${l.DTID}
+											</small>
+										</div>
+	
+										<a href="${pageContext.servletContext.contextPath}/dogTraining/detail.do?NUM=${l.NUM }">
+										<button type="button" class="btn btn-sm btn-outline-secondary"	style="position: absolute; right: 15px; bottom: 15px"
+											id="detailBt" name="detailBt">자세히</button></a>
+									</div>
+								</div>
+							</div>
+			</c:forEach>
+		</div>
+</c:if>
+
+<c:if test="${not empty dogHospital}">
+	<div class="alert alert-info" role="alert">동물병원 글에서 (검색결과 : ${fn:length(dogHospital)}개)<a href="${pageContext.servletContext.contextPath}/doghospital.do" class="justify-content-end">게시판으로</a></div>
+		<div class="row">	
+						
+			<div style="width: 900px; margin: auto;">
+			<hr />
+			<table class="table table-hover">
+					<thead>
+						<tr>
+							<th style="text-align: center;"><small>지역</small></th>
+							<th style="text-align: center;"><small>구분</small></th>
+							<th style="text-align: center;"><small>병원이름</small></th>
+							<th style="text-align: center;"><small>주소</small></th>
+							<th style="text-align: center;"><small >전화번호</small></th>
+							<th style="text-align: center;"><small>우편번호</small></th>
+						</tr>
+					</thead>
+				<tbody>
+				<c:forEach var="dh" items="${dogHospital}" begin="0" end="9">
+					<tr>
+						<td style="text-align: center;"><small>${dh.GU }</small></td>
+						<td style="text-align: center;"><small>${dh.SORT }</small></td>
+						<td style="text-align: center;"><small>${dh.HOSPITALNAME }</small></td>
+						<td style="text-align: center;"><small>${dh.ADDRESS }</small></td>
+						<td style="text-align: center;"><small>${dh.PHONE }</small></td>
+						<td style="text-align: center;"><small>${dh.POSTALCODE }</small></td>
+					</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+			</div>
+			
+		</div>
+</c:if>
+
+
+<c:if test="${not empty help}">
+	<div class="alert alert-info" role="alert">도와주시개 글에서 (검색결과 : ${fn:length(help)}개)</div>
+		<div class="row">	
+			<table class="table">
+		<thead class="thead-light">
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">제목</th>
+				<th scope="col">작성자</th>
+				<th scope="col">날짜</th>
+				<th scope="col">조회수</th>
+				<th scope="col">추천</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="h" items="${help}">
+				<tr>
+					<th scope="row">${h.NO }</th>
+					<td><a
+						href="${pageContext.servletContext.contextPath  }/help/detail.do?no=${h.NO }">
+							${h.TITLE }</a></td>
+					<td>${h.WRITER }</td>
+					<td>${h.REGDATE }</td>
+					<td>${h.LOOK }</td>
+					<td>${h.GOOD }</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+		</div>
+</c:if>
 <script>	
 	
 	$('#exampleModalCenter').on('show.bs.modal', function (event) {

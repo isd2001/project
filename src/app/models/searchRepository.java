@@ -48,6 +48,17 @@ public class searchRepository {
 		return template.selectList("search.resultForSearchFromNboard", searchList);
 	}
 	
+	public List<Map> resultForSearchFromDogTraining(List searchList) {
+		return template.selectList("search.resultForSearchFromDogTraining", searchList);
+	}
+	
+	public List<Map> resultForSearchFromDogHospital(List searchList) {
+		return template.selectList("search.resultForSearchFromDogHospital", searchList);
+	}	
+	
+	public List<Map> resultForSearchFromHelp(List searchList) {
+		return template.selectList("search.resultForSearchFromHelp", searchList);
+	}
 	// MongoDB search 테이블
 	public Map addSearch(Map map) {
 		return mongoTemplate.insert(map,"search");

@@ -46,10 +46,14 @@ public class MainSearchController {
 		List resultFromDogTalk = sr.resultForSearchFromDogTalk(searchList);
 		List resultFromTogether = sr.resultForSearchFromTogether(searchList);
 		List resultFromNboard = sr.resultForSearchFromNboard(searchList);
-				
+		List resultFromDogTraining = sr.resultForSearchFromDogTraining(searchList);
+		List resultFromDogHospital = sr.resultForSearchFromDogHospital(searchList);
+		List resultFromHelp = sr.resultForSearchFromHelp(searchList);
+		
+		System.out.println("병원 검색글" + resultFromDogHospital);
+		
 		if(resultFromFind.size()!=0) {
-			mav.addObject("find",resultFromFind);
-			
+			mav.addObject("find",resultFromFind);			
 		}
 		if(resultFromParcel.size()!=0) {
 			mav.addObject("parcel",resultFromParcel);
@@ -66,14 +70,25 @@ public class MainSearchController {
 		if(resultFromNboard.size()!=0) {
 			mav.addObject("nbaord",resultFromNboard);		
 		}
+		if(resultFromDogTraining.size()!=0) {
+			mav.addObject("dogTraining",resultFromDogTraining);		
+		}
+		if(resultFromDogHospital.size()!=0) {
+			mav.addObject("dogHospital",resultFromDogHospital);		
+		}
+		if(resultFromHelp.size()!=0) {
+			mav.addObject("help",resultFromHelp);		
+		}
+		
 		
 		if(resultFromFind.size()==0 && resultFromParcel.size()==0 && resultFromDogList.size()==0 &&
-		   resultFromDogTalk.size()==0 && resultFromTogether.size()==0 && resultFromNboard.size() ==0){
+		   resultFromDogTalk.size()==0 && resultFromTogether.size()==0 && resultFromNboard.size() ==0 && resultFromDogTraining.size()==0 && resultFromDogHospital.size()==0 && resultFromHelp.size()==0){
 			mav.addObject("noResult", "noResult");
 		}
 		
 		if(resultFromFind.size()!=0 || resultFromParcel.size()!=0 || resultFromDogList.size()!=0 ||
-				   resultFromDogTalk.size()!=0 || resultFromTogether.size()!=0 || resultFromNboard.size() !=0){
+				   resultFromDogTalk.size()!=0 || resultFromTogether.size()!=0 || resultFromNboard.size() !=0  || resultFromDogTraining.size()!=0 ||
+				     resultFromDogHospital.size()!=0 || resultFromHelp.size()!=0){
 			System.out.println("검색 결과 있음");
 			for (int i = 0; i < searchKeyWords.length; i++) {
 				if(sr.getSearched(searchKeyWords[i]).size()==0){

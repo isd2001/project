@@ -55,5 +55,26 @@
 		or BOARD_CONTENT like <foreach collection="list" item="searchKey" separator=" and BOARD_CONTENT like">#{searchKey}</foreach>	
 	</select>
 	
+	<!-- 밑에 작업중  -->
+	
+	<select id="resultForSearchFromDogTraining" resultType="java.util.HashMap" parameterType="java.util.List">
+		select * from dogtraining where title like <foreach collection="list" item="searchKey" separator=" and title like">#{searchKey}</foreach>
+		or content like <foreach collection="list" item="searchKey" separator=" and content like">#{searchKey}</foreach>
+		or dtid like <foreach collection="list" item="searchKey" separator=" and dtid like">#{searchKey}</foreach>	
+		or day like <foreach collection="list" item="searchKey" separator=" and day like">#{searchKey}</foreach>	
+	</select>
+	
+	<select id="resultForSearchFromDogHospital" resultType="java.util.HashMap" parameterType="java.util.List">
+		select * from hospital where address like <foreach collection="list" item="searchKey" separator=" and address like">#{searchKey}</foreach>
+		or hospitalname like <foreach collection="list" item="searchKey" separator=" and hospitalname like">#{searchKey}</foreach>
+		or gu like <foreach collection="list" item="searchKey" separator=" and gu like">#{searchKey}</foreach>				
+	</select>
+	
+	<select id="resultForSearchFromHelp" resultType="java.util.HashMap" parameterType="java.util.List">
+		select * from help where title like <foreach collection="list" item="searchKey" separator=" and title like">#{searchKey}</foreach>
+		or nick like <foreach collection="list" item="searchKey" separator=" and nick like">#{searchKey}</foreach>
+		or regdate like <foreach collection="list" item="searchKey" separator=" and regdate like">#{searchKey}</foreach>		
+		or content like <foreach collection="list" item="searchKey" separator=" and content like">#{searchKey}</foreach>				
+	</select>
 	
 </mapper>
