@@ -48,39 +48,49 @@
 
 <div style="width: 900px; margin: auto;">
 <hr />
-<table class="table table-hover">
-		<thead>
+	<table class="table table-hover">
+			<thead>
+				<tr>
+					<th style="text-align: center;"><small>지역</small></th>
+					<th style="text-align: center;"><small>구분</small></th>
+					<th style="text-align: center;"><small>병원이름</small></th>
+					<th style="text-align: center;"><small>주소</small></th>
+					<th style="text-align: center;"><small >전화번호</small></th>
+					<th style="text-align: center;"><small>우편번호</small></th>
+				</tr>
+			</thead>
+		<tbody>
+		<c:forEach var="dh" items="${every }">
 			<tr>
-				<th style="text-align: center;"><small>지역</small></th>
-				<th style="text-align: center;"><small>구분</small></th>
-				<th style="text-align: center;"><small>병원이름</small></th>
-				<th style="text-align: center;"><small>주소</small></th>
-				<th style="text-align: center;"><small >전화번호</small></th>
-				<th style="text-align: center;"><small>우편번호</small></th>
+				<td style="text-align: center;"><small>${dh.GU }</small></td>
+				<td style="text-align: center;"><small>${dh.SORT }</small></td>
+				<td style="text-align: center;"><small>${dh.HOSPITALNAME }</small></td>
+				<td style="text-align: center;"><small>${dh.ADDRESS }</small></td>
+				<td style="text-align: center;"><small>${dh.PHONE }</small></td>
+				<td style="text-align: center;"><small>${dh.POSTALCODE }</small></td>
 			</tr>
-		</thead>
-	<tbody>
-	<c:forEach var="dh" items="${every }">
-		<tr>
-			<td style="text-align: center;"><small>${dh.GU }</small></td>
-			<td style="text-align: center;"><small>${dh.SORT }</small></td>
-			<td style="text-align: center;"><small>${dh.HOSPITALNAME }</small></td>
-			<td style="text-align: center;"><small>${dh.ADDRESS }</small></td>
-			<td style="text-align: center;"><small>${dh.PHONE }</small></td>
-			<td style="text-align: center;"><small>${dh.POSTALCODE }</small></td>
-		</tr>
-	</c:forEach>
-	</tbody>
-</table>
+		</c:forEach>
+		</tbody>
+	</table>
 </div>
+
 <div>
 	<nav aria-label="Page navigation example">
 		<ul class="pagination justify-content-center">
-			<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
-			<c:forEach var="p" begin="1" end="4">
-				<li class="page-item"><a class="page-link" href="${pageContext.servletContext.contextPath }/doghospital.do?p=${p}">${p }</a></li>
+			<li class="page-item"><a class="page-link" href="#" tabindex="-1">이전</a></li>
+			<c:forEach var="p" begin="1" end="${size }">
+				<c:choose>
+					<c:when test="${p==current}">
+						<li class="page-item active">
+    						<a class="page-link" href="${pageContext.servletContext.contextPath }/doghospital.do?p=${p}">${p }<span class="sr-only">(current)</span></a>
+    					</li>	
+    				</c:when>
+    				<c:otherwise>
+    					<a class="page-link" href="${pageContext.servletContext.contextPath }/find/list.do?p=${p}">${p }</a>
+    				</c:otherwise>
+				</c:choose>					
 			</c:forEach>
-			<li class="page-item"><a class="page-link" href="#">Next</a></li>
+			<li class="page-item"><a class="page-link" href="#">다음</a></li>
 		</ul>
 	</nav>
 </div>

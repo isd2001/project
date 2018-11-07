@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<div class="accordion" id="accordionExample">
+
+<div class="accordion" id="accordionExample" style="width: 900px; margin: auto;">
 	<div class="card">
 		<div class="card-header" >
 			<h5 class="mb-0">
@@ -40,76 +41,58 @@
 			</div>
 		</div>
 	</div>
-</div>
 <hr />
+</div>
+
 <div id="map" style="width:100%;height:400px;"></div>
+
+<div style="width: 900px; margin: auto;">
 <hr />
-<table class="table table-hover">
-		<thead>
+	<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col" style="text-align: center; width: 8% "><small>지역</small></th>
+					<th scope="col" style="text-align: center; width: 10%"><small>구분</small></th>
+					<th scope="col" style="text-align: center; width: 20%"><small>병원이름</small></th>
+					<th scope="col" style="text-align: center; width: 40%"><small>주소</small></th>
+					<th scope="col" style="text-align: center; width: 10%"><small >전화번호</small></th>
+					<th scope="col" style="text-align: center; width: 8%"><small>우편번호</small></th>
+				</tr>
+			</thead>
+		<tbody>
+		<c:forEach var="dh" items="${dhlist }">
 			<tr>
-				<th scope="col" style="text-align: center; width: 8% "><small>지역</small></th>
-				<th scope="col" style="text-align: center; width: 10%"><small>구분</small></th>
-				<th scope="col" style="text-align: center; width: 20%"><small>병원이름</small></th>
-				<th scope="col" style="text-align: center; width: 40%"><small>주소</small></th>
-				<th scope="col" style="text-align: center; width: 10%"><small >전화번호</small></th>
-				<th scope="col" style="text-align: center; width: 8%"><small>우편번호</small></th>
+				<td style="font-size: 12px; text-align: center;" data="${dh.GU }">${dh.GU }</td>
+				<td style="font-size: 12px; text-align: center;">${dh.SORT }</td>
+				<td style="font-size: 12px; text-align: center;" data-target="#exampleModalCenter" >${dh.HOSPITALNAME }</td>
+				<td style="font-size: 12px; text-align: center;">${dh.ADDRESS }</td>
+				<td style="font-size: 12px; text-align: center;">${dh.PHONE }</td>
+				<td style="font-size: 12px; text-align: center;">${dh.POSTALCODE }</td>
 			</tr>
-		</thead>
-	<tbody>
-	<c:forEach var="dh" items="${dhlist }">
-		<tr>
-			<td style="font-size: 12px; text-align: center;" data="${dh.GU }">${dh.GU }</td>
-			<td style="font-size: 12px; text-align: center;">${dh.SORT }</td>
-			<td style="font-size: 12px; text-align: center;" data-target="#exampleModalCenter" >${dh.HOSPITALNAME }</td>
-			<td style="font-size: 12px; text-align: center;">${dh.ADDRESS }</td>
-			<td style="font-size: 12px; text-align: center;">${dh.PHONE }</td>
-			<td style="font-size: 12px; text-align: center;">${dh.POSTALCODE }</td>
-		</tr>
-	</c:forEach>
-	</tbody>
-</table>
-
-
-	<!-- Button trigger modal -->
-
-	<!-- Modal -->
-	<div class="modal fade" id="exampleModalCenter" tabindex="-1"
-		role="dialog" aria-labelledby="exampleModalCenterTitle"
-		aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class= "container">
-				<div class="row">
-					<div class="col">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalCenterTitle"></h5>
-							<button type="button" class="close justify-content-end" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="row">
-							<div class="col">
-								<div class="modal-img"></div>
-							</div>
-							<div class="col">
-								<div class="modal-info">
-									<label class="form-control"></label>
-								</div>
-							</div>
-						</div>
-					</div>					
-				</div>
-				<div class="row">
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>
-				</div>
-				</div>
-			</div>
-		</div>
-	</div>
+		</c:forEach>
+		</tbody>
+	</table>
 </div>
+
+<div>
+	<nav aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+			<li class="page-item"><a class="page-link" href="#" tabindex="-1">이전</a></li>
+			<c:forEach var="p" begin="1" end="${size }">
+				<c:choose>
+					<c:when test="${p==current}">
+						<li class="page-item active">
+    						<a class="page-link" href="${pageContext.servletContext.contextPath }/doghospital.do?p=${p}">${p }<span class="sr-only">(current)</span></a>
+    					</li>	
+    				</c:when>
+    				<c:otherwise>
+    					<a class="page-link" href="${pageContext.servletContext.contextPath }/find/list.do?p=${p}">${p }</a>
+    				</c:otherwise>
+				</c:choose>					
+			</c:forEach>
+			<li class="page-item"><a class="page-link" href="#">다음</a></li>
+		</ul>
+	</nav>
 </div>
 
 

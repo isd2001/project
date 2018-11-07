@@ -35,4 +35,8 @@ public class DogHospitalRepository {
 		return template.selectList("hospital.getSomeHospital", s);
 	}
 	
+	public int getTotalCountByHospital() {
+		return template.selectOne("hospital.getTotalCountByHospital");
+	}
+	
 }

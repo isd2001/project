@@ -41,14 +41,17 @@ public class ParcelController {
 			map.put("list", list);
 		
 		//---------------------------------------------------------------
-		Map data = new HashMap();
 		int pp = (p == null) ? 1 : Integer.parseInt(p);
 		
+		Map data = new HashMap();
 			data.put("s", 1 + (pp-1) * 6);
 			data.put("e", pp*6);
 		
 		List<Map> every = parcelRepository.getSomeParcel(data);
 			map.put("every",every);
+			
+		int tot = parcelRepository.getTotalCountByParcel();
+		map.put("size", tot/6 + (tot%6>0 ? 1: 0));
 		//----------------------------------------------------------------
 		
 		ModelAndView mav = new ModelAndView();
@@ -133,13 +136,28 @@ public class ParcelController {
 	
 	// 특정 게시글의 내용 및 댓글 뽑기
 	@RequestMapping("/detail.do")
-	public ModelAndView getByOnePercel(@RequestParam int no, ModelMap one, WebRequest wr) {
+	public ModelAndView getByOnePercel(@RequestParam int no, ModelMap one, WebRequest wr, @RequestParam (required=false)String p) {
 		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
 		Map onedata = parcelRepository.getByOneParcel(no);
 		List comlist = parcelRepository.getAllByComments(no);
 			one.put("userInfo", userInfo);
 			one.put("one", onedata);
 			one.put("comlist", comlist);
+			
+		//---------------------------------------------------------------
+		int pp = (p == null) ? 1 : Integer.parseInt(p);
+			
+		Map data = new HashMap();
+			data.put("no", no);
+			data.put("s", 1 + (pp-1) * 6);
+			data.put("e", pp*6);
+		
+		List<Map> every = parcelRepository.getSomeComments(data);
+			one.put("every",every);
+			
+		int tot = parcelRepository.getTotalCountByComments();
+			one.put("size", tot/6 + (tot%6>0 ? 1: 0));
+		//----------------------------------------------------------------
 			
 		ModelAndView mav = new ModelAndView();
 		

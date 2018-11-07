@@ -16,5 +16,11 @@
 		select * from parcel join (select * from comments where talker=#{talker} order by regday desc)c on parcel.no = c.ino
 	</select>
 	
+<!-- 페이징에 들어갈 만큼 댓글 뽑기(분양게시판용) -->
+	<select id="getSomeComments" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		select * from (select rownum r, o.* from (select * from comments where ino=#{ino} order by regday asc) o ) where r between #{s} and #{e}
+	</select>
+
+	
 </mapper>
 

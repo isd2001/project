@@ -57,8 +57,23 @@ public class ParcelRepository {
 		return template.update("parcel.updateDetail", param);
 	}
 	
-	// 페이지수 개시물에 맞게 페이징처리한 갯수만큼 게시글 내용 뽑기
+	//페이징 갯수만큼 게시글 내용 뽑기
 	public List<Map> getSomeParcel(Map s) {
 		return template.selectList("parcel.getSomeParcel",s);
+	}
+	
+	// 게시글 수
+	public int getTotalCountByParcel() {
+		return template.selectOne("parcel.getTotalCountByParcel");
+	}
+	
+	// 페이징 갯수만큼 댓글 내용 뽑기
+	public List<Map> getSomeComments(Map s) {
+		return template.selectList("parcel.getSomeComments",s);
+	}
+	
+	// 댓글 수
+	public int getTotalCountByComments() {
+		return template.selectOne("parcel.getTotalCountByComments");
 	}
 }

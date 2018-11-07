@@ -76,7 +76,7 @@
 
 <!------------------------------------------------------- 게시판 댓글 내용 전체 출력 뷰 시작 -->
 
-<label style="margin: 20px;">#댓글을 클릭하시면 리플을 입력하실수 있습니다.</label>
+<label style="margin: 20px;"># 하단부터 입력된 댓글 내용을 확인 하실수 있습니다.</label>
 <ul class="list-unstyled"> 
 	<c:forEach var="c" items="${comlist }" varStatus="vs">
 		<li class="media border-top-0" id="view-listcomment_${vs.count }" data-toggle="collapse" data-target="#collapseExample_${vs.count }" aria-expanded="false" aria-controls="collapseExample" >
@@ -90,6 +90,25 @@
 	</c:forEach>
 	<div id="view_comment"></div>
 </ul>
+
+<nav aria-label="Page navigation example">
+	<ul class="pagination justify-content-center">
+		<li class="page-item"><a class="page-link" href="#" tabindex="-1">이전</a></li>
+		<c:forEach var="p" begin="1" end="${size }">
+				<c:choose>
+					<c:when test="${p==current}">
+						<li class="page-item active">
+   							 <a class="page-link" href="${pageContext.servletContext.contextPath }/detail.do?p=${p}">${p }<span class="sr-only">(current)</span>
+   							 </a></li>	
+   						 </c:when>
+   						 <c:otherwise>
+   						 	<a class="page-link" href="${pageContext.servletContext.contextPath }/parcel.do?p=${p}">${p }</a>
+   						</c:otherwise>
+   					</c:choose>					
+			</c:forEach>
+		<li class="page-item"><a class="page-link" href="#">다음</a></li>
+	</ul>
+</nav>
 
 <%-- 
 	<ul class="list-unstyled">

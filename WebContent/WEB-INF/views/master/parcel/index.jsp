@@ -34,13 +34,22 @@
 	</div>
 	<a href="${pageContext.servletContext.contextPath }/new.do" class="btn btn-sm btn-outline-secondary" >글쓰기</a>
 		<nav aria-label="Page navigation example">
-			<ul class="pagination justify-content-center">
-				<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
-				<c:forEach var="p" begin="1" end="4">
-					<li class="page-item"><a class="page-link" href="${pageContext.servletContext.contextPath }/parcel.do?p=${p}">${p }</a></li>
+		<ul class="pagination justify-content-center">
+			<li class="page-item"><a class="page-link" href="#" tabindex="-1">이전</a></li>
+			<c:forEach var="p" begin="1" end="${size }">
+					<c:choose>
+						<c:when test="${p==current}">
+							<li class="page-item active">
+    							 <a class="page-link" href="${pageContext.servletContext.contextPath }/parcel.do?p=${p}">${p }<span class="sr-only">(current)</span>
+    							 </a></li>	
+    						 </c:when>
+    						 <c:otherwise>
+    						 	<a class="page-link" href="${pageContext.servletContext.contextPath }/parcel.do?p=${p}">${p }</a>
+    						</c:otherwise>
+    					</c:choose>					
 				</c:forEach>
-				<li class="page-item"><a class="page-link" href="#">Next</a></li>
-			</ul>
+			<li class="page-item"><a class="page-link" href="#">다음</a></li>
+		</ul>
 		</nav>
 </div>
 
