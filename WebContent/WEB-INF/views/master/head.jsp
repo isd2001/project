@@ -48,9 +48,9 @@
 		<div class="col-4 pt-3">			
 			<a href="${pageContext.servletContext.contextPath }/main/index.do">
 				<img class="mb-4 rounded-circle"
-				src="${pageContext.servletContext.contextPath }/image/dal.jpg"
+				src="${pageContext.servletContext.contextPath }/image/mainBannerImage.jpg"
 				alt="" width="60" height="60">
-			</a>
+			</a> 
 			<a class="blog-header-logo text-dark pt-0"
 				href="${pageContext.servletContext.contextPath }/main/index.do"><span class="logo">개놀자</span></a>
 		</div>
