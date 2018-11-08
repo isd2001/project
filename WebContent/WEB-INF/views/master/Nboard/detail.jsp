@@ -10,7 +10,7 @@
     	  <th scope="row" style="width: 50%"><small>Á¦¸ñ</small></th>
     	   <td>${read.BOARD_SUBJECT}</td>
     	   </tr>
-    	   <tr>
+    	   <tr>    
     	  <th scope="row" style="width: 7%"><small>ID</small></th>
     	   <td>${read.BOARD_ID}</td>
     	   </tr>
