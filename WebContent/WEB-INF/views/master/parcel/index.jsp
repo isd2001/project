@@ -35,7 +35,6 @@
 	<a href="${pageContext.servletContext.contextPath }/new.do" class="btn btn-sm btn-outline-secondary" >글쓰기</a>
 		<nav aria-label="Page navigation example">
 		<ul class="pagination justify-content-center">
-			<li class="page-item"><a class="page-link" href="#" tabindex="-1">이전</a></li>
 			<c:forEach var="p" begin="1" end="${size }">
 					<c:choose>
 						<c:when test="${p==current}">
@@ -48,7 +47,6 @@
     						</c:otherwise>
     					</c:choose>					
 				</c:forEach>
-			<li class="page-item"><a class="page-link" href="#">다음</a></li>
 		</ul>
 		</nav>
 </div>

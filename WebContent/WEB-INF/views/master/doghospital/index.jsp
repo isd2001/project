@@ -51,12 +51,12 @@
 	<table class="table table-hover">
 			<thead>
 				<tr>
-					<th style="text-align: center;"><small>지역</small></th>
-					<th style="text-align: center;"><small>구분</small></th>
-					<th style="text-align: center;"><small>병원이름</small></th>
-					<th style="text-align: center;"><small>주소</small></th>
-					<th style="text-align: center;"><small >전화번호</small></th>
-					<th style="text-align: center;"><small>우편번호</small></th>
+					<th style="text-align: center; width: 8% "><small>지역</small></th>
+					<th style="text-align: center; width: 10%"><small>구분</small></th>
+					<th style="text-align: center; width: 20%"><small>병원이름</small></th>
+					<th style="text-align: center; width: 40%"><small>주소</small></th>
+					<th style="text-align: center; width: 10%"><small >전화번호</small></th>
+					<th style="text-align: center; width: 8%"><small>우편번호</small></th>
 				</tr>
 			</thead>
 		<tbody>
@@ -86,7 +86,7 @@
     					</li>	
     				</c:when>
     				<c:otherwise>
-    					<a class="page-link" href="${pageContext.servletContext.contextPath }/find/list.do?p=${p}">${p }</a>
+    					<a class="page-link" href="${pageContext.servletContext.contextPath }/doghospital.do?p=${p}">${p }</a>
     				</c:otherwise>
 				</c:choose>					
 			</c:forEach>

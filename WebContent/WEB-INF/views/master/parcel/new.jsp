@@ -38,7 +38,7 @@
 		</div>
 		<div class="col-md-6 mb-3">
 			<label for="lastName">분양자 핸드폰 번호</label>
-			<input type="text" class="form-control" id="phone" name="phone">
+			<input type="text" class="form-control" id="phone" name="phone" >
 		</div>
 		<div class="col-md-6 mb-3">
 
@@ -107,11 +107,6 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8732ddf8bab883cf85aa0180da9e413d&libraries=services,clusterer,drawing"></script>
 <script>
-/* 	var address = function() {
-		// 주소 작성 값 추출
-		var area = document.getElementById("area").value;
-		console.log(area);
-	} */
 
 	var mapContainer = document.getElementById("map"), // 지도를 표시할 div 
 	mapOption = {

@@ -135,7 +135,10 @@ public class ModifyInfoController {
 	public ModelAndView updateUserInfo(@RequestParam Map param, WebRequest wr, MultipartFile dogProfile, ModelMap map ) throws IOException{
 		Map data = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
 		String id = (String)data.get("ID");
+		String nick = (String)data.get("NICKNAME");
 			param.put("id", id);
+			param.put("nickname", nick);
+			
 		long time = System.currentTimeMillis();
 		String add = (String) param.get("address");
 		String add2= (String) param.get("address2");
@@ -144,9 +147,7 @@ public class ModifyInfoController {
 			param.remove("address2");
 		
 		String dogProfileName = String.valueOf(time) + "_" + dogProfile.getOriginalFilename();
-
 		String path = ctx.getRealPath(String.valueOf(time));
-		
 		File dir = new File(path);
 		if(!dir.exists()) {
 			dir.mkdirs();

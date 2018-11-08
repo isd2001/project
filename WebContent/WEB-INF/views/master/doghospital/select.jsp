@@ -44,36 +44,36 @@
 <hr />
 </div>
 
-<div id="map" style="width:100%;height:400px;"></div>
+<div id="map" style="width: 900px; height: 400px; margin: auto;"></div>
 
 <div style="width: 900px; margin: auto;">
 <hr />
 	<table class="table table-hover">
 			<thead>
 				<tr>
-					<th scope="col" style="text-align: center; width: 8% "><small>지역</small></th>
-					<th scope="col" style="text-align: center; width: 10%"><small>구분</small></th>
-					<th scope="col" style="text-align: center; width: 20%"><small>병원이름</small></th>
-					<th scope="col" style="text-align: center; width: 40%"><small>주소</small></th>
-					<th scope="col" style="text-align: center; width: 10%"><small >전화번호</small></th>
-					<th scope="col" style="text-align: center; width: 8%"><small>우편번호</small></th>
+					<th style="text-align: center; width: 8% "><small>지역</small></th>
+					<th style="text-align: center; width: 10%"><small>구분</small></th>
+					<th style="text-align: center; width: 20%"><small>병원이름</small></th>
+					<th style="text-align: center; width: 40%"><small>주소</small></th>
+					<th style="text-align: center; width: 10%"><small >전화번호</small></th>
+					<th style="text-align: center; width: 8%"><small>우편번호</small></th>
 				</tr>
 			</thead>
 		<tbody>
 		<c:forEach var="dh" items="${dhlist }">
 			<tr>
-				<td style="font-size: 12px; text-align: center;" data="${dh.GU }">${dh.GU }</td>
-				<td style="font-size: 12px; text-align: center;">${dh.SORT }</td>
-				<td style="font-size: 12px; text-align: center;" data-target="#exampleModalCenter" >${dh.HOSPITALNAME }</td>
-				<td style="font-size: 12px; text-align: center;">${dh.ADDRESS }</td>
-				<td style="font-size: 12px; text-align: center;">${dh.PHONE }</td>
-				<td style="font-size: 12px; text-align: center;">${dh.POSTALCODE }</td>
+				<td style="text-align: center;" data="${dh.GU }"><small>${dh.GU }</small></td>
+				<td style="text-align: center;"><small>${dh.SORT }</small></td>
+				<td style="text-align: center;"><small>${dh.HOSPITALNAME }</small></td>
+				<td style="text-align: center;"><small>${dh.ADDRESS }</small></td>
+				<td style="text-align: center;"><small>${dh.PHONE }</small></td>
+				<td style="text-align: center;"><small>${dh.POSTALCODE }</small></td>
 			</tr>
 		</c:forEach>
 		</tbody>
 	</table>
 </div>
-
+<%-- 
 <div>
 	<nav aria-label="Page navigation example">
 		<ul class="pagination justify-content-center">
@@ -82,11 +82,11 @@
 				<c:choose>
 					<c:when test="${p==current}">
 						<li class="page-item active">
-    						<a class="page-link" href="${pageContext.servletContext.contextPath }/doghospital.do?p=${p}">${p }<span class="sr-only">(current)</span></a>
+    						<a class="page-link" href="${pageContext.servletContext.contextPath }/getdh.do?p=${p}">${p }<span class="sr-only">(current)</span></a>
     					</li>	
     				</c:when>
     				<c:otherwise>
-    					<a class="page-link" href="${pageContext.servletContext.contextPath }/find/list.do?p=${p}">${p }</a>
+    					<a class="page-link" href="${pageContext.servletContext.contextPath }/getdh.do?p=${p}">${p }</a>
     				</c:otherwise>
 				</c:choose>					
 			</c:forEach>
@@ -94,7 +94,7 @@
 		</ul>
 	</nav>
 </div>
-
+  --%>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8732ddf8bab883cf85aa0180da9e413d&libraries=services,clusterer,drawing"></script>
 <script>	
