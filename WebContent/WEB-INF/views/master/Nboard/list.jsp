@@ -66,5 +66,3 @@
 			class="btn btn-primary">글쓰기</a>
 	</div>
 </c:if>
-</div>
-</footer>

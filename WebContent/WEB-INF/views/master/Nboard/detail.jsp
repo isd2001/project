@@ -2,33 +2,16 @@
     pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 
-<table class="table table-hover">
+  		<div class="jumbotron jumbotron-fluid">
+		  <div class="container">
+		    <h2 class="display-4">공지사항<small>(작성자 : ${read.BOARD_ID})</small></h2>
+		    <hr/>
+		    <h4>제목 : ${read.BOARD_SUBJECT} </h4>
+		    <p class="lead" style="margin-top: 2rem;">${read.BOARD_CONTENT}</p>
+		    <p class="d-flex justify-content-end"><small>작성일 :${read.BOARD_DATE} / 조회수 : ${read.BOARD_LOOKUP}</small></p>
+		  </div>
+		</div>
 
-  		<thead>
-  		</thead>
-  		<tbody>        
-    	  <th scope="row" style="width: 50%"><small>제목</small></th>
-    	   <td>${read.BOARD_SUBJECT}</td>
-    	   </tr>
-    	   <tr>    
-    	  <th scope="row" style="width: 7%"><small>ID</small></th>
-    	   <td>${read.BOARD_ID}</td>
-    	   </tr>
-    	   <tr>
-     	  <th scope="row" style="width: 15%"><small>날짜</small></th>
-     	    <td>${read.BOARD_DATE}</td>
-     	    </tr>
-     	    <tr>
-     	  <th scope="row" style="width: 12%"><small>조회수</small></th>
-     	    <td>${read.BOARD_LOOKUP}</td>
-	      </tr>
-	      <th scope="row" style="width: 12%"><small>내용</small></th>
-	      <td>${read.BOARD_CONTENT}</td>
-	      </tbody>
-  		
-  
-     	
-</table>
      	<div style="text-align: right">
      <a href="${pageContext.servletContext.contextPath }/Nboard/list.do" class="btn btn-primary">목록으로</a>
       
