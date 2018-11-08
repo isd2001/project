@@ -66,14 +66,5 @@ public class ParcelRepository {
 	public int getTotalCountByParcel() {
 		return template.selectOne("parcel.getTotalCountByParcel");
 	}
-	
-	// 페이징 갯수만큼 댓글 내용 뽑기
-	public List<Map> getSomeComments(Map s) {
-		return template.selectList("parcel.getSomeComments",s);
-	}
-	
-	// 댓글 수
-	public int getTotalCountByComments() {
-		return template.selectOne("parcel.getTotalCountByComments");
-	}
+
 }

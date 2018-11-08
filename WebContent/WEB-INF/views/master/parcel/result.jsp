@@ -7,5 +7,5 @@
   <hr class="my-4">
   <p>작성하신 게시글 저장이 완료 되었습니다.</p>
   <a class="btn btn-primary btn-lg" href="${pageContext.servletContext.contextPath }/parcel.do" role="button">목록으로</a>
-  <a class="btn btn-primary btn-lg" href="${pageContext.servletContext.contextPath }/index.do" role="button">메인으로</a>
+  <a class="btn btn-primary btn-lg" href="${pageContext.servletContext.contextPath }/main/index.do" role="button">메인으로</a>
 </div>
