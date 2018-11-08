@@ -35,6 +35,10 @@ public class accountRepository {
 		return template.selectOne("gaenoljaaccount.getUserInfo", id);
 	}
 	
+	public String getPassword(String id) {
+		return template.selectOne("gaenoljaaccount.getPwById", id);
+	}
+	
 
 	public String checkId(String id) {
 		return template.selectOne("gaenoljaaccount.checkId", id);
@@ -57,7 +61,7 @@ public class accountRepository {
 		return template.selectOne("gaenoljaaccount.findId",map);
 	}
 	
-	public String getDogProfileById(Map map) {
-		return template.selectOne("gaenoljaaccount.getDogProfileById", map);
+	public String getDogProfileById(String id) {
+		return template.selectOne("gaenoljaaccount.getDogProfileById", id);
 	}
 }

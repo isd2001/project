@@ -9,7 +9,6 @@
 </c:if>
 
 
-
 <c:if test="${not empty find}">
 	<div class="alert alert-info" role="alert">찾아주시개 글에서 (검색결과 :
 		${fn:length(find)}개)<a href="${pageContext.servletContext.contextPath}/board/main.do" class="justify-content-end">게시판으로</a></div>

@@ -3,8 +3,11 @@ package app.controller.main;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -133,16 +136,41 @@ public class MainController {
 		}
 	}
 	
+	@GetMapping(path="/getUserPassword.do", produces="application/json;charset=UTF-8")	
+	@ResponseBody
+	public String getUserPasswordController(@RequestParam Map param) {		
+	
+		String id = (String) param.get("id");		
+		return gson.toJson(ar.getPassword(id));	
+	}
+	
 	@GetMapping(path="/getUserProfile.do", produces="application/json;charset=UTF-8")	
 	@ResponseBody
 	public String getUserProfileController(@RequestParam Map param) {		
 	
+		String id = (String) param.get("id");
+		System.out.println("id : "+id);
+		System.out.println(ar.getDogProfileById(id));
 		
-		System.out.println(ar.getDogProfileById(param));
+		Map map = new HashMap();
+			map.put("profile", ar.getDogProfileById(id));
+			map.put("value", true);
+		String[] img = new String[] {"/image/ad1.jpg", "/image/searchimg.jpg", "/image/dog1.png","/image/dog2.jpg","/image/dog3.webp","/image/star.jpg","/image/lostdogbanner.jpg","/image/helpDog.jpg"};
+			
+		List<Map> profiles = new ArrayList<>();
+			
+			profiles.add(map);
+			
+			for (int i = 0; i < 8; i++) {
+				Map map1= new HashMap();
+					map1.put("profile", img[i]);
+					map1.put("value", false);
+				profiles.add(map1);
+			}			
 		
-		
-		
-		return gson.toJson(dtr.getDogTalk());
+		Collections.shuffle(profiles);
+			
+		return gson.toJson(profiles);
 	}
 	
 	@GetMapping("/findId.do")
@@ -177,7 +205,7 @@ public class MainController {
 		}else {			
 			mav.setViewName("master");
 			mav.addObject("yourId", ar.findId(param));
-			mav.addObject("top", "/WEB-INF/views/master/login/main.jsp");
+			mav.addObject("top", "/WEB-INF/views/master/login/top.jsp");
 			mav.addObject("main", "/WEB-INF/views/master/login/main.jsp");
 		}
 				
