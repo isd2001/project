@@ -11,7 +11,7 @@
 
 	<!-- 게시글 전부 뽑는거 -->
 	<select id="getAllTogether" resultType="java.util.HashMap">
-		select * from togetherboard order by no desc
+		select * from togetherboard where day > sysdate order by no desc
 	</select>
 
 	<!-- 특정 게시글 데이터 뽑는거 -->
@@ -21,8 +21,7 @@
 	</select>
 	<!-- 특정 지역 데이터 뽑는거 -->
 	<select id="getAllByArea" resultType="java.util.HashMap">
-		select * from togetherboard
-		where area=#{area}
+		select * from togetherboard where area=#{area}
 	</select>
 	<!-- look up -->
 	<update id="updatelookup" parameterType="java.lang.String">
@@ -50,7 +49,7 @@
 	<select id="getSomeFind" resultType="java.util.HashMap"
 		parameterType="java.util.HashMap">
 		select * from (select rownum r, o.* from (select * from
-		togetherboard order by no desc) o ) where r between #{s} and #{e}
+		togetherboard order by no desc) o ) where r between #{s} and #{e} and day>sysdate
 	</select>
 
 	<!-- 페이지 게시물 갯수에 따라 -->
@@ -61,6 +60,11 @@
 	<select id="selectCount" resultType="java.lang.Integer" parameterType="java.lang.String">
 		select count(*) from togetherboard where area=#{area}
 	</select>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="deletelist" parameterType="java.util.HashMap">
+		delete from togetherboard where no=#{no}	
+	</delete>
 
 </mapper>
 

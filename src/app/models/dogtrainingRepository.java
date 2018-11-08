@@ -43,6 +43,11 @@ public class dogtrainingRepository{
 	public int totalCount() {
 		return template.selectOne("dogtraining.totalCount");
 	}
+	// 게시물 삭제
+	public int deletelist(Map map) {
+		return template.delete("dogtraining.deletelist",map);
+	}
+
 
 
 

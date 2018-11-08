@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-
 
 <table class="table">
 	<thead class="thead-dark">
@@ -13,14 +11,18 @@
 	</thead>
 	<tbody>
 		<tr>
-			<th scope="row" style="text-align: center;"><small> 제목 :</small>
-				${list.TITLE }</th>
+			<th scope="row" style="text-align: left;"><small> 제목 :</small>
+				${list.TITLE }<span class="text-gray-dark"><small style="float: right;">조회 > ${list.LOOKUP }</small></span>	</th>
 		<tr>
 			<small style="float: right;">[${list.AREA}]${list.DAY }</small>
 		</tr>
 		</tr>
 		<tr>
-			<th scope="row" style="text-align: center;"><small> 내용 :</small>
+			<th scope="row" style="text-align:left;"><small> 닉네임 :</small>
+				${list.NICK }</th>
+		</tr>
+		<tr>
+			<th scope="row" style="text-align:left;"><small> 내용 :</small>
 				${list.CONTENT }</th>
 		</tr>
 	</tbody>
@@ -31,7 +33,19 @@
 <small style="float: right;">주소 > ${list.ADDRESS }</small><br/>
 
 <div style="text-align: right;">
-	<span class="text-gray-dark"><small>조회 > ${list.LOOKUP }</small></span>	
+	<c:if test="${list.NICK eq sessionScope.userInfo.NICKNAME || sessionScope.userInfo.NICKNAME eq '관리자'  }">
+	<button type="button" class="btn btn-outline-danger" id="endbtn" >
+	글 삭제</button><!-- </a> -->
+	<script>
+		$("#endbtn").on("click",function(){
+			var end=window.confirm("정말 삭제 하시겠습니까??");
+			if (end==true) {
+			window.location.href="${pageContext.servletContext.contextPath}/together/delete.do?no=${list.NO}";				
+			};
+		});
+	</script>
+	
+	</c:if> 
 	<a href="${pageContext.servletContext.contextPath }/together/mainboard.do">
 		<button type="button" class="btn btn-outline-dark">메인으로</button>
 	</a>

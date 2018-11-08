@@ -1,44 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-<table class="table table-hover">
-	<thead>
+ <small style="float: right;">${read.UPDAY}</small>
+<table class="table">
+	<thead class="thead-dark">
+	    <tr>
+	      <th scope="col" style="text-align: center;">POST</th>
+	    </tr>
 	</thead>
 	<tbody>
+		
 		<tr>
-
-			<th scope="row" style="width: 7%"><small>NO</small></th>
-			<td>${read.NO}</td>
+			<th scope="row" style="width: 50%"><small>제목 : </small>${read.TITLE} <small style="float: right;">조회수 : ${read.LOOKUP}</small></th>
 		</tr>
 		<tr>
-			<th scope="row" style="width: 50%"><small>제목</small></th>
-			<td>${read.TITLE}</td>
+			<th scope="row" style="width: 4%"><small>ID : </small>${read.DTID}</th>
 		</tr>
 		<tr>
-			<th scope="row" style="width: 15%"><small>날짜</small></th>
-			<td>${read.UPDAY}</td>
+			<th scope="row" style="width: 12%"><small>내용  :  </small>${read.CONTENT}</th>
 		</tr>
 		<tr>
-			<th scope="row" style="width: 12%"><small>조회수</small></th>
-			<td>${read.LOOKUP}</td>
-		</tr>
-		<tr>
-			<th scope="row" style="width: 4%"><small>ID</small></th>
-			<td>${read.DTID}</td>
-		</tr>
-		<tr>
-			<th scope="row" style="width: 12%"> <small>내용</small></th>
-			<td>${read.CONTENT}</td>
-		</tr>
-		<tr>
-			<th scope="row" style="width: 12%"> <small>동영상</small></th>
-			<td><video src="${read.UPLOAD}" controls="controls"></video></td>
+			<th scope="row" style="width: 12%;text-align: center;"> <video src="${read.UPLOAD}" controls="controls"></video></th>
+			
 		</tr>
 	</tbody>
-
-
 </table>
+<div style="text-align: right;">
+	<c:if test="${read.DTID eq sessionScope.userInfo.ID || sessionScope.userInfo.NICKNAME eq '관리자'  }">
+	<button type="button" class="btn btn-outline-danger" id="endbtn" >
+	글 삭제</button><!-- </a> -->
+	<script>
+		$("#endbtn").on("click",function(){
+			var end=window.confirm("정말 삭제 하시겠습니까??");
+			if (end==true) {
+			window.location.href="${pageContext.servletContext.contextPath}/dogTraining/delete.do?no=${read.NO}";				
+			};
+		});
+	</script>
+	</c:if> 
+	<a href="${pageContext.servletContext.contextPath }/dogTraining/training.do">
+		<button type="button" class="btn btn-outline-dark">메인으로</button>
+	</a>
+</div>
+
 
 <table class="table">
   <thead class="thead-dark">

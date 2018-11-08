@@ -57,6 +57,10 @@ public class TogetherRepository {
 		return template.selectOne("together.selectCount",area);
 	}
 
+	// 게시물 삭제
+	public int deletelist(Map map) {
+		return template.delete("together.deletelist",map);
+	}
 
 
 }//end class

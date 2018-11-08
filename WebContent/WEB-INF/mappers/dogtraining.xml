@@ -35,6 +35,11 @@
 	<!-- 페이지 게시물 갯수에 따라  -->
 	<select id="totalCount" resultType="java.lang.Integer">
 		select count(*) from dogtraining
-	</select>	
+	</select>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="deletelist" parameterType="java.util.HashMap">
+		delete from dogtraining where no=#{no}	
+	</delete>	
 
 </mapper>

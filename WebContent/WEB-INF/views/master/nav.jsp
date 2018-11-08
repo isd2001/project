@@ -94,8 +94,8 @@ button{background: transparent; border:none;}
     		 	<a href="${pageContext.servletContext.contextPath }/mypage.do" style="color: silver; ">마이 프로필</a><br/>
     		 	<a href="${pageContext.servletContext.contextPath }/myboard.do" style="color: silver;">내 게시글</a><br/>
     		 	<a href="${pageContext.servletContext.contextPath }/mycomment.do" style="color: silver;">내 댓글</a><br/>
-    		 	<a href="${pageContext.servletContext.contextPath }/mycomment.do" style="color: silver;">회원정보 수정</a><br/>
-    		 	<a href="${pageContext.servletContext.contextPath }/mycomment.do" style="color: silver;">비밀번호 변경</a>
+    		 	<a href="${pageContext.servletContext.contextPath }/check.do?mode=memberInfo" style="color: silver;">회원정보 수정</a><br/>
+    		 	<a href="${pageContext.servletContext.contextPath }/check.do?mode=password" style="color: silver;">비밀번호 변경</a>
     			 <hr align="center" style="border: solid 0.5px gray; width: 80%;"/>
 				</c:when>
 				<c:otherwise>

@@ -11,15 +11,16 @@ import org.springframework.stereotype.Repository;
 public class ToCommentRepository {
 	@Autowired
 	SqlSessionTemplate template;
-	
+
 	// 해당 게시물 댓글 불러오기
 	public List<Map> getCommentByNo(String cno) {
 		return template.selectList("tocomment.getCommentByNo",cno);
 	}
-	
+
 	// 해당 게시물 댓글 저장
 	public int addComment(Map map) {
 		return template.insert("tocomment.addComment",map);
 	}
- 	
+
+	
 }

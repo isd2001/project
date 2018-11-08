@@ -36,15 +36,13 @@ public class TogetherBoardController {
 	
 
 	@GetMapping("/mainboard.do")
-	public ModelAndView mainboard(WebRequest wreq,@RequestParam Map param) {
+	public ModelAndView mainboard(WebRequest wreq,@RequestParam(required=false) Map param) {
 		String re=(String)wreq.getAttribute("result",WebRequest.SCOPE_REQUEST);
 		if (re=="on") {
 			wreq.setAttribute("result","yes",WebRequest.SCOPE_REQUEST);
 		}
+		int rp =  (param.get("p") == null) ? 1 : Integer.parseInt((String)param.get("p"));
 		
-		
-		int rp = Integer.parseInt((String) param.get("p"));
-		System.out.println("rp>"+rp);
 		Map mp = new HashMap<>();
 			mp.put("s", 1 + ( rp - 1 ) * 6 );
 			mp.put("e", rp * 6 );
@@ -173,6 +171,7 @@ public class TogetherBoardController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			wreq.setAttribute("result","off", WebRequest.SCOPE_REQUEST);
 			mav.setViewName("master");
 			mav.addObject("top", "/WEB-INF/views/master/together/top.jsp");
 			mav.addObject("main", "/WEB-INF/views/master/together/mainboard.jsp");
@@ -187,12 +186,11 @@ public class TogetherBoardController {
 		Map info=(Map)wreq.getAttribute("userInfo", wreq.SCOPE_SESSION);
 		String no = (String)map.get("no");
 		String nick=(String)info.get("NICKNAME");
-		//===============================================
 		// lookup
 		int t = together.updatelookup(no);
-		
+		// detail view
 		Map target=together.getOneByNo(no);
-		
+		// detail comment
 		List<Map> comment = tocomment.getCommentByNo(no);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -228,11 +226,6 @@ public class TogetherBoardController {
 		String comment = (String)param.get("comment");
 		String cno=(String)param.get("no");
 		Date leftdate = new Date();
-		System.out.println("nick >"+nick);
-		System.out.println("comment >"+comment);
-		System.out.println("cno >"+cno);
-		System.out.println("leftdate > "+leftdate);
-		
 		
 		Map input = new HashMap<>();
 			input.put("cno", cno);
@@ -259,5 +252,17 @@ public class TogetherBoardController {
 		}
 		return "";
 	}//end ajax.do
+	
+	@GetMapping("/delete.do")
+	public String deleteGetHandle(@RequestParam Map param) {
+		
+		Map input = new HashMap<>();
+			input.put("no", param.get("no"));
+		
+		together.deletelist(input);
+				
+		return "redirect:/together/mainboard.do";
+	}//end deletehandle
+	
 	
 }

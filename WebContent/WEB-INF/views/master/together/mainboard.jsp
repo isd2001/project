@@ -125,6 +125,7 @@
 		</thead>
 		<tbody>
 			<c:forEach var="l" items="${list }">
+			
 				<tr>
 					<th scope="row">${l.NO }</th>
 					<td><small>${l.AREA }</small></td>
