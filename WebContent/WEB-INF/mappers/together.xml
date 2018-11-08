@@ -57,6 +57,10 @@
 	<select id="totalCount" resultType="java.lang.Integer">
 		select count(*) from togetherboard
 	</select>
+	
+	<select id="selectCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+		select count(*) from togetherboard where area=#{area}
+	</select>
 
 </mapper>
 

@@ -20,7 +20,7 @@
 	<div id="list" >
 	
 		<c:forEach var="list" items="${dogTalkList}">			
-				<div class="card" id="form">
+				<div class="card js-load" id="form">
 					<div class="card-header d-flex bd-highlight" style="background-color: #FFDEAD  "><div class="flex-grow-1">${list.TALKER}'s comment</div>
 					 <div class="bd-highlight"><small id="date" class="d-flex justify-content-end">${list.WRITEDATE}</small></div></div>
 					<div class="card-body" style="background-color: #AED6F1;">
@@ -45,7 +45,8 @@
 		
 	</div>
 	
-	<a class="button">+더보기</a>
+		<button type="button" class="btn btn-secondary btn-lg" id="addbtn" >더 보 기</button>
+
 	
 	
 <script>
@@ -102,5 +103,4 @@
 	
 	
 	
-	
-</script>
+	</script>

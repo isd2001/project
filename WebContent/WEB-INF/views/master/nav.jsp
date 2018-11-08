@@ -53,30 +53,30 @@
 	background: black;	
 	margin: 5px 0px ;
 }
+button{background: transparent; border:none;}
+
+    #menu{ width: 50px; right: 20px ;top: 20pxwdd;}
+
+    #menu>span{display: block; width: 100%; height: 8px; background: #000; margin: 4px 0 ; border-radius: 10px; transition: all 0.5s;}
+
+
+
+    #menu>.on:nth-child(1) {transform: translateY(15px) rotate(225deg); transition-delay: 0.2s; }
+
+    #menu>.on:nth-child(2) {opacity: 0; transform: translateX(50px);}
+
+    #menu>.on:nth-child(3) {transform: translateY(-11px) rotate(-225deg); transition-delay: 0.2s; }
 </style>
 
-<script>
-//======================================================================
-//Weather
-/* var getWeather = function(gu) {
-		console.log("function Strar !!");
-		var apiURI = "http://api.openweathermap.org/data/2.5/weather";
-		var param = {
-			"q" : gu,
-			"units" : "metric",
-			"APPID" : "221d0de36835fe0cf4b1d4b196c711bb"
-		};
-		$.get(apiURI, param, function(rst) {
-			document.getElementById("currentTemp").innerHTML = rst.main.temp
-					+ "℃";
-			document.getElementById("tempMax").innerHTML = rst.main.temp_max
-					+ "℃";
-			document.getElementById("tempMin").innerHTML = rst.main.temp_min
-					+ "℃";
-		});
-	}; */
-</script>
+
 <div class="nav d-flex justify-content-around py-2 mb-2">
+		  <a style="color:black; margin-left: 7%;" onclick="togglesidebar()">		
+			<button style="outline: none;" type="button" name="button" id="menu" class="toggle-btn p-2 font-weight-bold" >
+			  <span></span>
+				  <span></span>
+			  <span></span>
+			</button>
+		  </a>
   <nav class="nav d-flex justify-content-between">
     <div id="sidebar" style="background-color: black; opacity: 0.7; text-align: center; color: white;">
     		<c:choose>
@@ -97,14 +97,6 @@
     		 	<a href="${pageContext.servletContext.contextPath }/mycomment.do" style="color: silver;">회원정보 수정</a><br/>
     		 	<a href="${pageContext.servletContext.contextPath }/mycomment.do" style="color: silver;">비밀번호 변경</a>
     			 <hr align="center" style="border: solid 0.5px gray; width: 80%;"/>
-				<%-- 	<div class="justify-content-end">
-						오늘의 ${gu} 날씨 :
-						<script>
-								getWeather("${gu}");
-							</script>
-						<span id="currentTemp"></span><br>(최고 : <span id="tempMax"></span> / 최저:<span
-							id="tempMin"></span>)
-					</div> --%>
 				</c:when>
 				<c:otherwise>
 					<div class="justify-content-end">
@@ -115,7 +107,7 @@
     		 
 
 		</div>
-		  <a class="toggle-btn p-2 font-weight-bold" style="color:black;" onclick="togglesidebar()"> 더보개  </a>		
+
           <a class="p-2 font-weight-bold" style="color:black;" href="${pageContext.servletContext.contextPath }/Nboard/list.do">공지사항</a>
           <a class="p-2 font-weight-bold" style="color:black;" href="${pageContext.servletContext.contextPath }/dogTalk/index.do">개톡</a>
           <a class="p-2 font-weight-bold" style="color:black;"	href="${pageContext.servletContext.contextPath }/board/main.do">Gaekipedia</a>
@@ -145,7 +137,15 @@
 function togglesidebar(){
 	document.getElementById("sidebar").classList.toggle('active');	
 }// sidebar 액션
+$(function() {
 
+    $('#menu').click(function() {
+
+      $('#menu>span').toggleClass('on')
+
+    })
+
+  })
 
 
 

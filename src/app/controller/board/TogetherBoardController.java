@@ -91,8 +91,8 @@ public class TogetherBoardController {
 	}//end mainboard
 
 	@RequestMapping("/selectboard.do")
-	public ModelAndView selsctboard(@RequestParam Map target,WebRequest wreq) {
-		String area=(String)target.get("area");
+	public ModelAndView selsctboard(@RequestParam(required=false) Map param,WebRequest wreq) {
+		String area=(String)param.get("area");
 		List<Map> list=together.getAllByArea(area);
 		
 		List<Map> li = new ArrayList<>();
@@ -102,20 +102,20 @@ public class TogetherBoardController {
 			String day=sdf.format(list.get(i).get("DAY"));
 			list.get(i).put("day",day);
 		}
-		//==================================================
-		/*int rp = Integer.parseInt((String) param.get("p"));
-		System.out.println("rp>"+rp);
-		Map mp = new HashMap<>();
-			mp.put("s", 1 + ( rp - 1 ) * 6 );
-			mp.put("e", rp * 6 );
+		int pp = (param.get("p") == null) ? 1 : Integer.parseInt((String)param.get("p"));
 		
-		int total=together.totalCount();
+		Map mp = new HashMap<>();
+			mp.put("s", 1 + ( pp - 1 ) * 6 );
+			mp.put("e", pp * 6 );
+		
+		int total=together.selectCount((String)param.get("area"));
 		wreq.setAttribute("size",total/6 + (total%6>0 ? 1: 0),WebRequest.SCOPE_REQUEST);
-		wreq.setAttribute("current",rp,WebRequest.SCOPE_REQUEST);*/
+		wreq.setAttribute("current",pp,WebRequest.SCOPE_REQUEST);
 		
 		
 
 		wreq.setAttribute("list", list, WebRequest.SCOPE_REQUEST);		
+		wreq.setAttribute("area", param.get("area"), WebRequest.SCOPE_REQUEST);		
 		
 		ModelAndView mav = new ModelAndView();	
 		
@@ -158,7 +158,6 @@ public class TogetherBoardController {
 		ModelAndView mav = new ModelAndView();	
 		try {
 			int result=together.addTogetherBoard(m);
-			System.out.println("result >"+result);
 			if (result==1) {
 				wreq.setAttribute("result","on", WebRequest.SCOPE_REQUEST);
 				mav.setViewName("master");
@@ -250,14 +249,12 @@ public class TogetherBoardController {
 	@GetMapping("ajax.do")
 	@ResponseBody
 	public String ajaxHandle(@RequestParam Map param) {
-		System.out.println("param > "+param);
 		String no = (String)param.get("no");
 				
 		String mode = (String)param.get("mode");
 		if (mode.equals("good")) {
 			int result= together.updategood(no);
 			Map goodajax=together.getGoodByNo(no);
-			System.out.println("goodajax>>"+goodajax);
 			return gson.toJson(goodajax); 
 		}
 		return "";
