@@ -101,7 +101,7 @@
 				</ul>
 				
 				
-				<a class="btn btn-sm btn-danger" style="height:30px;" href="${pageContext.servletContext.contextPath }/logout.do">로그아웃</a>
+				<a class="btn btn-sm btn-danger" style="height:30px;" href="${pageContext.servletContext.contextPath }/main/logout.do">로그아웃</a>
 				
 			</div>
 		
@@ -229,7 +229,7 @@
 		var openchat = function(nickName, roomNumber) {			
 			console.log("nickName : "+nickName);
 			window.open(
-					"${pageContext.servletContext.contextPath }/onetalk.do?talkNick="
+					"${pageContext.servletContext.contextPath }/main/onetalk.do?talkNick="
 							+nickName+"&roomNumber="+roomNumber, nickName, "width=380,height=635");
 		};
 		
@@ -242,7 +242,7 @@
 			console.log(target);
 
 			$.ajax({
-					"url" : "${pageContext.servletContext.contextPath }/infomodal.do",
+					"url" : "${pageContext.servletContext.contextPath }/main/infomodal.do",
 					"data" : {
 						"nick" : target
 						},

@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
-
-
 <table class="table table-hover" width="80%">
 
         <colgroup>
@@ -39,11 +36,7 @@
      	</c:forEach> 
   </tbody>
 </table>
-     	<tr>
-     
-     	<footer class="text-muted">
-		<div class="container">
-			<nav aria-label="Page navigation example">
+  
 			<ul class="pagination justify-content-center">
 				<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">이전</a></li>
 				<c:forEach var="p" begin="1" end="4">
@@ -51,10 +44,11 @@
 				</c:forEach>
 				<li class="page-item"><a class="page-link" href="#">다음</a></li>
 			</ul>
-			</nav>
-     	</tr>
-     	<div style="text-align:right">
-    <a href="${pageContext.servletContext.contextPath }/Nboard/write.do" class="btn btn-primary" >글쓰기</a>
-     	</div>
-
-
+   	
+     	<c:if test="${not empty userInfo}">   
+     		<c:if test="${userInfo.ID eq 'admin'}">        		 
+		     	<div style="text-align:right">
+		   			<a href="${pageContext.servletContext.contextPath }/Nboard/write.do" class="btn btn-primary" >글쓰기</a>
+		     	</div>
+     		</c:if>
+     	</c:if> 

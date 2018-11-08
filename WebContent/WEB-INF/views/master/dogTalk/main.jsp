@@ -6,15 +6,26 @@
 <!DOCTYPE html>
 <h2>강아지 수다공간</h2>
 
-     
- 	
-     <div class="input-group">
-	  <div class="input-group-prepend">
-	     <img src="${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE}" style="width: 80px; height: 80px;"class="rounded-circle">
-	  </div>
-	  <textarea class="form-control" aria-label="With textarea" placeholder="댕댕이가 하고싶은말을 써주세요!" id="content"></textarea>
+<c:choose>
+	<c:when test="${not empty userInfo}">
+		<div class="input-group">
+	  		<div class="input-group-prepend">
+	    	 <img src="${pageContext.servletContext.contextPath }${userInfo.DOGPROFILE}" style="width: 80px; height: 80px;"class="rounded-circle">
+	  		</div>
+	 		 <textarea class="form-control" aria-label="With textarea" placeholder="댕댕이가 하고싶은말을 써주세요!" id="content"></textarea>
 	  <button type="submit" class="btn btn-secondary btn-med " onclick="addComment();">멍멍!</button>
 	</div>
+	</c:when>
+	<c:otherwise>
+			<div class="input-group">
+	 		 <div class="input-group-prepend">
+	    		 <img src="${pageContext.servletContext.contextPath }/image/mainBannerImage.jpg" style="width: 80px; height: 80px;"class="rounded-circle">
+	  		</div>
+	 			 <textarea class="form-control" aria-label="With textarea" placeholder="로그인이 필요한 서비스 입니다." id="content" readonly></textarea>
+	  			<button type="submit" class="btn btn-secondary btn-med " onclick="addComment();" disabled>멍멍!</button>
+	</div>
+	</c:otherwise>
+</c:choose>	
 	
 	<hr/>
 	<div id="list" >

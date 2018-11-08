@@ -1,4 +1,4 @@
-package app.controller.index;
+/*package app.controller.index;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -216,12 +216,6 @@ public class IndexController {
 			map.addAttribute("chatlist",chatlist);
 		
 		
-		
-		/*String uuid = UUID.randomUUID().toString().split("-")[0];
-		
-		Rooms room = new Rooms(uuid);
-			room.addUsers(senderNick, targetNick );
-			*/
 		System.out.println("roomNumber : "+param.get("roomNumber"));						
 			
 		
@@ -264,3 +258,4 @@ public class IndexController {
 	
 }
 
+*/

@@ -16,21 +16,21 @@
 			<div class="form-group row">
 				<label for="inputEmail3" class="col-sm-2 col-form-label">아이디</label>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" name="id"	placeholder="아이디" onchange="checkId(this)" id="id" ><span id="checkId" style="color:white;"></span>
+					<input type="text" class="form-control" name="id"	placeholder="아이디" onchange="checkId(this)" id="id" required><span id="checkId" style="color:white;"></span>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">비밀번호</label>
 				<div class="col-sm-6">
 					<input type="password" class="form-control" name="pw" id="pw"
-						placeholder="비밀번호">
+						placeholder="비밀번호" required>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">비밀번호확인</label>
 				<div class="col-sm-6">
 					<input type="password" class="form-control"
-						id="pwConfirm" placeholder="비밀번호 확인" onchange="confirmPw()">
+						id="pwConfirm" placeholder="비밀번호 확인" onchange="confirmPw()" required>
 						<span id="error"></span>
 				</div>
 			</div>
@@ -45,13 +45,13 @@
 				<label for="inputEmail3" class="col-sm-2 col-form-label">이름</label>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="name"
-						placeholder="이름">
+						placeholder="이름" required>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">닉네임</label>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" name="nickname"	placeholder="닉네임" onchange="checkNick(this)" id ="nick"><span id="checkNick" style="color:white;"></span>
+					<input type="text" class="form-control" name="nickname"	placeholder="닉네임" onchange="checkNick(this)" id ="nick"><span id="checkNick" style="color:white;" required></span>
 				</div>				
 			</div>
 			<div class="form-group row">
@@ -59,8 +59,8 @@
 				<div class="col-sm-6">
 					<button type="button" 
 						onclick="addressPopUp()" >주소 입력</button>
-					<input type="text" class="form-control" name="address" id = "address" placeholder="주소">
-					<input type="text" class="form-control" name="address2"  id = "address2" placeholder="상세주소">
+					<input type="text" class="form-control" name="address" id = "address" placeholder="주소" required>
+					<input type="text" class="form-control" name="address2"  id = "address2" placeholder="상세주소" required>
 				</div>
 			</div>			
 		</div>
@@ -74,7 +74,7 @@
 			   <div class="col-4 col-sm-4">
 		        <label class="">강아지 사진</label><br>
 				<img src="${pageContext.servletContext.contextPath }/image/noimage.png"  class="img-thumbnail" id="preview">
-				<input type="file" type = "file" class="btn-outline-info" name="dogProfile" id="dogProfile">
+				<input type="file" type = "file" class="btn-outline-info" name="dogProfile" id="dogProfile" required>
 				
 		      </div>
 		      <div class="col-8 col-sm-8">
@@ -82,14 +82,14 @@
 						<label  class="col-sm-3 col-form-label">강아지 이름</label>
 						<div class="col-sm-6">
 							<input type="text" class="form-control" name="dogName"
-								placeholder="강아지 이름">
+								placeholder="강아지 이름" required>
 						</div>
 					</div>
 					<div class="form-group row">
 						<label class="col-sm-3 col-form-label">강아지 견종</label>
 						<div class="col-sm-6">
 							<input type="text" class="form-control" name="dogType"
-								placeholder="강아지견종">
+								placeholder="강아지견종" required>
 						</div>			
 					</div>
 					<div class="form-group row">
@@ -116,7 +116,7 @@
 			
 			<div class="offset-md-2 justify-content-center">	
 				<br>			
-				<button type="submit" class="btn btn-primary">회원가입 신청</button>
+				<button type="submit" class="btn btn-primary" disabled="disabled" id="joinBotton">회원가입 신청</button>
 			</div>
 			
 			<br>
@@ -136,6 +136,17 @@
 
 
 <script>
+
+	var bottonArr = [false,false,false];
+	
+	var bottonActivate = function(){		
+		if(bottonArr[0]==true && bottonArr[1]==true && bottonArr[2]==true){
+			document.getElementById("joinBotton").disabled=false;
+		}else{
+			document.getElementById("joinBotton").disabled=true;
+		}
+	}
+	
 	var confirmPw = function(pw){
 		console.log("confrimPw function");
 		var pw = document.getElementById("pw").value;
@@ -144,9 +155,15 @@
 			document.getElementById("error").innerHTML = "비밀번호 값이 일치하지 않음";
 			$("#error").css("color","red");
 			$("#pwConfirm").val("");	
+			bottonArr[0]=false;
+			bottonActivate();
 			
+		}else{
+			bottonArr[0]=true;
+			bottonActivate();
 		}
 	}
+	
 	
 	var checkId = function (id) {
 		var input =id.value;
@@ -163,10 +180,14 @@
 			if(rst==true){
 				$("#checkId").html("사용가능한 아이디 입니다.");
 				$("#checkId").css("color","blue");
+				bottonArr[1]=true;
+				bottonActivate();
 			}else{
 				$("#checkId").html("이미 사용중인 아이디 입니다.");
 				$("#checkId").css("color","red");
 				$("#id").val("");
+				bottonArr[1]=false;
+				bottonActivate();
 			}
 		
 		});
@@ -186,10 +207,14 @@
 			if(rst==true){
 				$("#checkNick").html("사용가능한 닉네임 입니다.");
 				$("#checkNick").css("color","blue");
+				bottonArr[2]=true;
+				bottonActivate();
 			}else{
 				$("#checkNick").html("이미 사용중인 닉네임 입니다.");
 				$("#checkNick").css("color","red");
 				$("#nickname").val("");
+				bottonArr[2]=false;
+				bottonActivate();
 			}
 		
 		});

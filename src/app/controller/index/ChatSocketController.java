@@ -37,12 +37,12 @@ public class ChatSocketController extends TextWebSocketHandler{
 	chatService chatService;
 	
 	
-	List<WebSocketSession> chatSockets;
+	public List<WebSocketSession> chatSockets;
 	
-	List rooms;
+	public List rooms;
 	
-	Map<String,List<WebSocketSession>> privateRoomSessions;
-	Map<String,List<String>> privateRoomMembers;
+	public Map<String,List<WebSocketSession>> privateRoomSessions;
+	public Map<String,List<String>> privateRoomMembers;
 	
 	
 	

@@ -29,5 +29,14 @@
 	<listener>
 		<listener-class>app.listener.AppInitializer</listener-class>
 	</listener>
-
+	
+	<filter> 
+ 	<filter-name>authFilter</filter-name>
+	 	<filter-class>app.filters.AuthFilter</filter-class>	 	
+ 	</filter>
+ 	
+ 	<filter-mapping>
+ 	<filter-name>authFilter</filter-name>
+	 	<url-pattern>*.do</url-pattern>	 	
+ 	</filter-mapping>
 </web-app>

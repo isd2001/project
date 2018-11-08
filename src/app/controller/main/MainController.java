@@ -2,19 +2,19 @@ package app.controller.main;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.event.SourceFilteringListener;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,12 +28,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
+import app.controller.index.ChatSocketController;
 import app.models.FindRepository;
+import app.models.OnechatRepository;
 import app.models.ParcelRepository;
 import app.models.accountRepository;
 import app.models.dogTalkRepository;
 import app.models.dogtrainingRepository;
 import app.models.searchRepository;
+import app.service.SocketService;
 import app.service.WeatherService;
 
 @Controller
@@ -65,12 +68,23 @@ public class MainController {
 	
 	@Autowired
 	searchRepository sr;
+	
+	@Autowired
+	SocketService socketservice;	
+	
+	@Autowired
+	OnechatRepository onechat; 
+	
+	@Autowired
+	ChatSocketController chatSocket;
+	
 	@SuppressWarnings("unchecked")
 	@GetMapping("/index.do")
 	public ModelAndView mainIndexHandle(WebRequest wr) {
 		
 		dtr.getSomeFromDogTalk();
 		
+				
 		List recommendKeywords = sr.getSearch();
 		recommendKeywords.sort(new Comparator<Map>() {
 			public int compare(Map m1, Map m2)	{
@@ -123,7 +137,7 @@ public class MainController {
 			mav.setViewName("master");
 			mav.setViewName("redirect:/main/index.do");
 			
-			
+			System.out.println(userInfo);
 			return mav;
 		}else {
 			wr.setAttribute("loginFailed", 1, wr.SCOPE_REQUEST);
@@ -293,4 +307,75 @@ public class MainController {
 		}	
 			
 	}
+	
+	@GetMapping("/logout.do")
+	public ModelAndView logoutHandle(WebRequest wr) {
+		wr.removeAttribute("userInfo", wr.SCOPE_SESSION);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/main/index.do");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/onetalk.do")	
+	public String onetalkHandle(@RequestParam Map param,WebRequest wr,ModelMap map) {	
+		String targetNick = (String)param.get("talkNick");		
+		System.out.println("target > "+ targetNick);		
+					
+		wr.setAttribute("recipient", targetNick, wr.SCOPE_REQUEST);		
+		//========================================
+		Map user =(Map) wr.getAttribute("userInfo",wr.SCOPE_SESSION);
+		System.out.println(user);
+		String senderNick = (String) user.get("NICKNAME");
+		System.out.println("sender > "+senderNick);		
+		
+		Map nickNames = new HashMap<>();
+			nickNames.put("sender", senderNick);
+			nickNames.put("recipient", targetNick);
+			
+		List<Map> chatlist=onechat.getOneChat(nickNames);
+			map.addAttribute("chatlist",chatlist);
+		
+		
+		System.out.println("roomNumber : "+param.get("roomNumber"));						
+			
+		
+		if(param.get("roomNumber").equals("undefined")) {
+			System.out.println("roomNumber undefined");
+			String roomNumber = UUID.randomUUID().toString().split("-")[0];;
+			Map<String,List<String>> roomMembers = chatSocket.privateRoomMembers;
+			
+			Set keyset = roomMembers.keySet();
+			Iterator itr = keyset.iterator();
+			
+			while (itr.hasNext()) {
+				String key = (String) itr.next();
+				List list = roomMembers.get(key);
+				if(list.contains(senderNick)&&list.contains(targetNick)) {
+					roomNumber=key;
+				}
+			}
+			
+			System.out.println(roomMembers);
+		    wr.setAttribute("roomNumber", roomNumber, wr.SCOPE_REQUEST);
+		}else {
+			wr.setAttribute("roomNumber", param.get("roomNumber"), wr.SCOPE_REQUEST);
+		}
+		
+		return "master/chat/onetalk";
+	}//end onetalk.do
+	
+	
+	@GetMapping(path="/infomodal.do",produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String InfomodalHandle(@RequestParam Map param,WebRequest wreq) {
+		System.out.println("Infomodal>"+param);
+		String nick = (String)param.get("nick");
+		
+		Map result =ar.getInfomodalByNick(nick);
+		System.out.println("result >>>"+result);
+		return gson.toJson(result);
+	}//end Infomodal.do
 }
