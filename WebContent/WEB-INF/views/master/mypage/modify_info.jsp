@@ -33,7 +33,7 @@
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">닉네임</label>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" name="nickname"	placeholder="닉네임" onchange="checkNick(this)" id ="nick" value="${userInfo.NICKNAME }"><span id="checkNick" style="color:white;"></span>
+					<input type="text" class="form-control" name="nickname"	placeholder="닉네임" onchange="checkNick(this)" id ="nick" value="${userInfo.NICKNAME }" disabled><span id="checkNick" style="color:white;"></span>
 				</div>
 			</div>
 			<div class="form-group row">

@@ -41,16 +41,19 @@ public class ParcelController {
 			map.put("list", list);
 		
 		//---------------------------------------------------------------
-		Map data = new HashMap();
 		int pp = (p == null) ? 1 : Integer.parseInt(p);
 		
+		Map data = new HashMap();
 			data.put("s", 1 + (pp-1) * 6);
 			data.put("e", pp*6);
 		
 		List<Map> every = parcelRepository.getSomeParcel(data);
 			map.put("every",every);
+			
+		int tot = parcelRepository.getTotalCountByParcel();
+		map.put("size", tot/6 + (tot%6>0 ? 1: 0));
 		//----------------------------------------------------------------
-		
+		System.out.println(map);
 		ModelAndView mav = new ModelAndView();
 		
 			mav.setViewName("master");

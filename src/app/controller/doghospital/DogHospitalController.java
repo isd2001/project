@@ -29,14 +29,17 @@ public class DogHospitalController {
 			map.put("list", list);
 			
 		//---------------------------------------------------------------
-		Map data = new HashMap();
 		int pp = (p == null) ? 1 : Integer.parseInt(p);
 		
-			data.put("s", 1 + (pp-1) * 6);
-			data.put("e", pp*6);
+		Map data = new HashMap();
+			data.put("s", 1 + (pp-1) * 20);
+			data.put("e", pp*20);
 		
 		List<Map> every = dhr.getSomeHospital(data);
 			map.put("every",every);
+			
+		int tot = dhr.getTotalCountByHospital();
+			map.put("size", tot/20 + (tot%20>0 ? 1: 0));
 		//----------------------------------------------------------------
 		
 		ModelAndView mav = new ModelAndView();
@@ -50,9 +53,23 @@ public class DogHospitalController {
 	
 	@RequestMapping(path="/getdh.do", produces="application/json;charset=utf-8")
 	@ResponseBody
-	public ModelAndView getDogHospital(@RequestParam String gu, ModelMap map) {
+	public ModelAndView getDogHospital(@RequestParam String gu, @RequestParam (required=false)String p, ModelMap map) {
 		List dhlist = dhr.getDogHospitalByGu(gu);
 			map.put("dhlist", dhlist);
+			
+		//---------------------------------------------------------------
+		int pp = (p == null) ? 1 : Integer.parseInt(p);
+		
+		Map data = new HashMap();
+			data.put("s", 1 + (pp-1) * 20);
+			data.put("e", pp*20);
+		
+		List<Map> every = dhr.getSomeHospital(data);
+			map.put("every",every);
+			
+		int tot = dhr.getTotalCountByHospital();
+			map.put("size", tot/20 + (tot%20>0 ? 1: 0));
+		//----------------------------------------------------------------
 		
 		ModelAndView mav = new ModelAndView();
 		
