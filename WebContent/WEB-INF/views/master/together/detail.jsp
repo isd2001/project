@@ -35,7 +35,7 @@
 <div style="text-align: right;">
 	<c:if test="${list.NICK eq sessionScope.userInfo.NICKNAME || sessionScope.userInfo.NICKNAME eq '관리자'  }">
 	<button type="button" class="btn btn-outline-danger" id="endbtn" >
-	글 삭제</button><!-- </a> -->
+	글 삭제</button>
 	<script>
 		$("#endbtn").on("click",function(){
 			var end=window.confirm("정말 삭제 하시겠습니까??");
