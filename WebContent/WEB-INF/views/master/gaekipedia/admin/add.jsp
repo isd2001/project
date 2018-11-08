@@ -64,11 +64,12 @@
 			</div>
 			
 			<div class="row justify-content-center">
-			<button type="submit">강아지 등록!</button>
+			<button type="submit" class="btn btn-primary btn-lg btn-block">강아지 등록!</button>			
 			</div>
 		</div>
 		
 	</div>	
+	</div>
 	
 </form>
 

@@ -26,4 +26,8 @@ public class dogListRepository {
 	public List<Map> getDogListByType(Integer n) {
 		return template.selectList("dogList.getDogListByType", n);
 	}
+	
+	public int deleteDogList(Map map) {
+		return template.delete("dogList.deleteDogList",map);
+	}
 }

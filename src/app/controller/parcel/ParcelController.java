@@ -46,7 +46,13 @@ public class ParcelController {
 		Map data = new HashMap();
 			data.put("s", 1 + (pp-1) * 6);
 			data.put("e", pp*6);
+			
 		
+			
+		map.put("current",pp);
+		
+			
+			
 		List<Map> every = parcelRepository.getSomeParcel(data);
 			map.put("every",every);
 			

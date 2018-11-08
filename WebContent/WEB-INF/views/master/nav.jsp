@@ -108,13 +108,11 @@ button{background: transparent; border:none;}
 	</div>
 
           <a class="p-2 font-weight-bold" style="color:black;" href="${pageContext.servletContext.contextPath }/Nboard/list.do">공지사항</a>
-          <a class="p-2 font-weight-bold" style="color:black;" href="${pageContext.servletContext.contextPath }/dogTalk/index.do">개톡</a>
           <a class="p-2 font-weight-bold" style="color:black;"	href="${pageContext.servletContext.contextPath }/board/main.do">Gaekipedia</a>
-          <a class="p-2 font-weight-bold"	style="color:black;"href="${pageContext.servletContext.contextPath }/find/list.do">찾아주시개</a>
+          <a class="p-2  font-weight-bold"  style="color:black;" href="${pageContext.servletContext.contextPath}/dogTraining/training.do?p=1">개동</a>
+          <a class="p-2  font-weight-bold"  style="color:black;" href="${pageContext.servletContext.contextPath }/together/mainboard.do?p=1">같이가시개</a>  
           <a class="p-2  font-weight-bold"  style="color:black;" href="${pageContext.servletContext.contextPath }/parcel.do">데려가시개(분양)</a>
-
-          <a class="p-2  font-weight-bold"  style="color:black;" href="${pageContext.servletContext.contextPath }/together/mainboard.do?p=1">같이가시개</a>         
-		  <a class="p-2  font-weight-bold"  style="color:black;" href="${pageContext.servletContext.contextPath}/dogTraining/training.do?p=1">개동</a>
+          <a class="p-2 font-weight-bold"	style="color:black;"href="${pageContext.servletContext.contextPath }/find/list.do">찾아주시개</a>          
 		  
        	 <div class="dropdown p-2">
        	   <a class="p-2 font-weight-bold"  style="color:black;" id="dropdownMenuButton" data-toggle="dropdown" href="#">개아파</a>
@@ -123,7 +121,8 @@ button{background: transparent; border:none;}
 			    <a class="dropdown-item font-weight-bold" href="${pageContext.servletContext.contextPath}/doghospital.do">개병원ㅜ</a>
 
 			    </div>
-		  </div>		  
+		  </div>	
+		   <a class="p-2 font-weight-bold" style="color:black;" href="${pageContext.servletContext.contextPath }/dogTalk/index.do">개톡</a>	  
 		
 </nav>
 <script>

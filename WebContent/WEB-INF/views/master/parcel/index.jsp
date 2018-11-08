@@ -37,7 +37,7 @@
 		<ul class="pagination justify-content-center">
 			<c:forEach var="s" begin="1" end="${size }">
 					<c:choose>
-						<c:when test="${p==current}">
+						<c:when test="${s==current}">
 							<li class="page-item active">
     							 <a class="page-link" href="${pageContext.servletContext.contextPath }/parcel.do?p=${s}">${s }<span class="sr-only">(current)</span>
     							 </a></li>	

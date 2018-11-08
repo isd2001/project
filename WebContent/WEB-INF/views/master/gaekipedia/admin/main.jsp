@@ -7,8 +7,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 
-<a href = "${pageContext.servletContext.contextPath}/admin/dogBoard/add.do"><button>강아지 정보 추가하기</button></a>
-
+<a href = "${pageContext.servletContext.contextPath}/admin/dogBoard/add.do">
+<button type="button" class="btn btn-info btn-lg btn-block">강아지 정보 추가하기</button>
+</a>
 <div class="container marketing">
 <ul class="nav nav-tabs" id="myTab" role="tablist">
 	<li class="nav-item"><a class="nav-link active" id="all-tab"
@@ -40,6 +41,7 @@
 						data-info="${list.INFO }"><br/>
 						<span style="text-align: center" data-toggle="modal"data-target="#exampleModalCenter" data-name="${list.NAME}" data-engname="${list.ENGNAME}"
 						data-source="${pageContext.servletContext.contextPath}${list.IMG}">${list.NAME}</span></a>
+						<button type="button" class="btn btn-outline-danger" id="deletebtn" >글 삭제</button>
 				</div>
 			</c:forEach>
 		</div>		

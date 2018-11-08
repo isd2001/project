@@ -7,6 +7,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 
+
+<c:if test="${not empty userInfo}">   
+     		<c:if test="${userInfo.ID eq 'admin'}">        		 
+		     	<a href = "${pageContext.servletContext.contextPath}/board/add.do">
+					<button type="button" class="btn btn-info btn-lg btn-block">강아지 정보 추가하기</button>
+				</a>
+     		</c:if>
+</c:if> 
+
   <div class="container marketing">
 <ul class="nav nav-tabs" id="myTab" role="tablist">
 	<li class="nav-item"><a class="nav-link active" id="all-tab"
@@ -38,6 +47,12 @@
 						data-info="${list.INFO }"><br/>
 						<span style="text-align: center" data-toggle="modal"data-target="#exampleModalCenter" data-name="${list.NAME}" data-engname="${list.ENGNAME}"
 						data-source="${pageContext.servletContext.contextPath}${list.IMG}">${list.NAME}</span></a>
+					
+						     		<c:if test="${userInfo.ID eq 'admin'}">        		 
+								     	<button type="button" class="btn btn-outline-danger" onclick="deleteFunction(this);" value="${list.NAME}" >글 삭제</button>
+						     		</c:if>
+									
+						
 				</div>
 			</c:forEach>
 		</div>		
@@ -143,6 +158,16 @@
 
 <script>	
 	
+	var deleteFunction = function(a){
+		console.log("deletebtn activated");
+		console.log(a.value);
+		var end=window.confirm("정말 삭제 하시겠습니까??");
+			if (end==true) {
+			window.location.href="${pageContext.servletContext.contextPath}/board/delete.do?name="+a.value;				
+			};  
+	}
+	
+
 	$('#exampleModalCenter').on('show.bs.modal', function (event) {
 	  console.log("modalfunction");
 	  var button = $(event.relatedTarget) ;

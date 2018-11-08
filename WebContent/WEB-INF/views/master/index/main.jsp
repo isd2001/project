@@ -22,7 +22,7 @@ af.f {
 
 
 </style>
-<body   >
+<body >
 <div class= "container" >
 	<div class = "row">
 		<div class="my-3 p-3 bg-white rounded shadow-sm border border-info" style="width:100%">

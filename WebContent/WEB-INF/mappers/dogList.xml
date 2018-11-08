@@ -20,6 +20,8 @@
 		select * from dogList where name like #{search} or engname like #{search} or  info like #{search} or type like #{search} or img like #{search} 
 	</select>
 	
-	
+	<delete id="deleteDogList" parameterType="java.util.HashMap">
+		delete from dogList  where name=#{name}	
+	</delete>
 </mapper>
 

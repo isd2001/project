@@ -51,6 +51,8 @@ public class AuthFilter extends HttpFilter{
 					case "/Nboard/list.do":
 					case "/dogTalk/index.do":
 					case "/board/main.do":
+					case "/board/delete.do":
+					case "/board/add.do":
 					case "/find/list.do":
 					case "/parcel.do":
 					case "/together/mainboard.do":
