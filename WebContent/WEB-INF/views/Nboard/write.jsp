@@ -30,9 +30,10 @@
 										<div class="col-lg-12">
 											<textarea class="form-control" id="BOARD_CONTENT" name="BOARD_CONTENT"></textarea>
 										</div>
-									</div>
+     									<div style="text-align:right">
+									
 
-									<button type="submit">완료</button>
+									<button type="submit" class="btn btn-primary">완료</button>
 								</form>
 							</div>
 						</div>

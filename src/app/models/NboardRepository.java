@@ -29,13 +29,26 @@ public class NboardRepository {
 	}
 	
 	//글 삭제하기.
-	public int nboarddelete(int BOARD_NUM) {
-		return template.delete("member_board.nboarddelete" , BOARD_NUM);
+	public int nboarddelete(int r) {
+		return template.delete("member_board.nboarddelete" , r);
 	}
 	//페이징처리후 게시글
 	public List<Map> getfind(Map s) {
 		return template.selectList("member_board.getfind" , s);
 	}
+	
+	//페이지 개수 설정
+	public int totalCount() {
+		return template.selectOne("member_board.totalCount");
+	}
+	
+	//조회수 
+	public int updatelookup(int no) {
+		return template.update("member_board.updatelookup" , no);
+	}
+
+
+	
 
 	
 	
