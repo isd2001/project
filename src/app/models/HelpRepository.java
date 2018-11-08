@@ -50,6 +50,9 @@ public class HelpRepository {
 		return template.update("help.updatelook",no);
 	}
 
-
+	public int updateDetail(Map param) {
+		
+		return template.update("help.updateDetail", param);
+	}
 }
 

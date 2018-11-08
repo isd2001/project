@@ -101,7 +101,7 @@ public class MainController {
 		mav.addObject("top", "/WEB-INF/views/master/index/top.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/index/main.jsp");
 		mav.addObject("dtrList",dtr.getSomeFromDogTalk());
-		mav.addObject("findList", fr.getAllFind());
+		mav.addObject("findList", fr.getRecentFind());
 		mav.addObject("parcelList", pr.getAllByParcel());		
 		mav.addObject("dogTraining",dogTraining.getAll());
 		wr.setAttribute("recommendKeywords", recommendKeywords, wr.SCOPE_SESSION);

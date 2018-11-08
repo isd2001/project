@@ -58,7 +58,7 @@
 			<button type="button" class="btn btn-outline-primary">메인으로</button>
 		</a>
 		<div style="text-align: right">
-			<a href="${pageContext.servletContext.contextPath }/index.do">
+			<a href="${pageContext.servletContext.contextPath }/main/index.do">
 				<button type="button" class="btn btn-outline-secondary btn-sm">삭제</button>
 			</a>
 		</div>

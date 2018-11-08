@@ -26,7 +26,7 @@
 										</small>
 									</div>
 									<a href="${pageContext.servletContext.contextPath}/find/detail.do?no=${e.NO }">
-									<button type="button" class="btn btn-sm btn-outline-secondary"
+									<button type="button" class="btn btn-sm btn-outline-primary"
 										style="position: absolute; right: 15px; bottom: 15px"
 										id="detailBt" name="detailBt">자세히</button></a>
 								</div>
@@ -41,7 +41,7 @@
 		<div class="container">
 			<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
-				<li class="page-item"><a class="page-link" href="#" tabindex="-1">이전</a></li>
+				
 				<c:forEach var="p" begin="1" end="${size }">
 						<c:choose>
 							<c:when test="${p==current}">
@@ -54,7 +54,7 @@
      						</c:otherwise>
      					</c:choose>					
 					</c:forEach>
-				<li class="page-item"><a class="page-link" href="#">다음</a></li>
+			
 			</ul>
 			</nav>
 			

@@ -4,53 +4,52 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+
+<link href="${pageContext.servletContext.contextPath }/css/test/carousel.css"	rel="stylesheet">
 <hr size="30px" width="100%">
 <div class="container my-5 p-5 bg-white rounded shadow-sm">
 
-	<p style="text-align: left; color: gray">${data.GADAY }</p>
+	<p style="text-align: right; color: gray">${data.GADAY }</p>
 	<p>
 	<h2 style="text-align: center">
 		<b>${data.TITLE }</b>
 	</h2>
-	<div style="text-align: right">
-		<button type="submit" class="btn btn-outline-secondary btn-sm"
-			onclick="updateBoard();">수정</button>
-	</div>
 	<div class="row">
 		<div class="col-md-6 my-3 p-3 bg-white rounded shadow-sm">
 			<hr size="10px" width="100%">
 			<br />
 			<div class="row-6">
-				<div id="carouselExampleFade" class="carousel slide carousel-fade"
-					data-ride="carousel">
-					<div class="carousel-inner" style="max-width: 480px; max-height: 350px;">
-						<div class="carousel-item active">
-							<img class="d-block w-100" style="height:auto; width: 480px; height: 350px;"
-								src="${pageContext.servletContext.contextPath}${data.INPUTFILE1}"
-								alt="First slide">
-						</div>
-						<div class="carousel-item">
-							<img class="d-block w-100" style="height:auto; width: 480px; height: 350px;"
-								src="${pageContext.servletContext.contextPath}${data.INPUTFILE2}"
-								alt="No image">
-						</div>
-					</div>
-					<a class="carousel-control-prev" href="#carouselExampleFade"
-						role="button" data-slide="prev"> <span
-						class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-						class="sr-only">Previous</span>
-					</a> <a class="carousel-control-next" href="#carouselExampleFade"
-						role="button" data-slide="next"> <span
-						class="carousel-control-next-icon" aria-hidden="true"></span> <span
-						class="sr-only">Next</span>
-					</a>
-					<div class="card-body my-3 p-3 bg-white rounded shadow-sm"
+				<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			       <div class="carousel-inner">
+			          <div class="carousel-item active">         
+			               <img class="" style="height:auto; width: 480px; height: 100%;"	src="${pageContext.servletContext.contextPath}${data.INPUTFILE1}"	alt="First slide">
+			          </div>
+			          <div class="carousel-item">
+			            <img class="" style="height:auto; width: 480px; height: 100%;"
+											src="${pageContext.servletContext.contextPath}${data.INPUTFILE2}"
+											alt="No image">
+			          </div>     
+			        </div>
+			        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+			          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			          <span class="sr-only">Previous</span>
+			        </a>
+			        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+			          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+			          <span class="sr-only">Next</span>
+			        </a>
+			      
+			      </div>					
+				</div>		
+				<div class="card-body my-3 p-3 bg-white rounded shadow-sm"
 						style="height: 350px; width: 480px;">
 						<p class="card-text">${data.CONTENT}</p>
-					</div>
-				</div>
+					</div>		
 			</div>
-		</div>
+		
+
+
+
 
 		<div class="col-md-6 my-3 p-3 bg-white rounded shadow-sm">
 			<hr size="10px" width="100%">
@@ -59,10 +58,8 @@
 				<c:forEach var="c" items="${comment}">
 
 					<div class="card">
-						<div class="card-header">
-							※${c.NICK}님이 작성했어요 !&emsp; 
-							<small style="color:gray">【 ${c.GACOMDAY} 】</small></div>
-							<br/>
+					<div class="card-header d-flex bd-highlight" ><div class="flex-grow-1">※ <b>${c.NICK}</b>님이 작성했어요 !</div>
+					 <div class="bd-highlight"><small id="date" class="d-flex justify-content-end" style="color:gray"> 【 ${c.GACOMDAY} 】</small></div></div>
 						<div class="card-body">
 							<p class="card-text">▶&emsp;${c.REPLY}</p>
 						</div>
@@ -90,13 +87,25 @@
 			<div style="text-align: center" class="d-flex justify-content-center">
 				<a href="${pageContext.servletContext.contextPath }/help/list.do">
 					<button type="button" class="btn btn-outline-primary">목록으로</button>
-				</a> <a href="${pageContext.servletContext.contextPath }/index.do">
+				</a> <a href="${pageContext.servletContext.contextPath }/main/index.do">
 					<button type="button" class="btn btn-outline-primary">메인으로</button>
 				</a>
 			</div>
 			<br />
 		</div>
 	</div>
+</div>
+
+
+<div class="bd-example">
+	<c:choose>
+		<c:when test="${info.NICKNAME == data.NICK }">
+			<a href="${pageContext.servletContext.contextPath }/help/detailModify.do?no=${data.NO }"><button type="button" class="btn btn-primary btn-lg btn-block" >수정</button></a>
+		</c:when>
+		<c:otherwise>
+			""
+		</c:otherwise>
+	</c:choose>
 </div>
 
 <!-- 

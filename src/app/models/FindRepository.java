@@ -35,6 +35,14 @@ public class FindRepository {
 	public Map getByNo(int no) {
 		return template.selectOne("find.getOneByNo", no);
 	}
+	
+	public List<Map> getRecentFind(){
+		return template.selectList("find.getRecentFind");		
+	}
+	
+	public int updateDetail(Map rmap) {
+		return template.update("find.updateDetail", rmap);
+	}
 
 	// 게시물에 따라 페이지 갯수 설정
 	public int totalCount() {

@@ -35,15 +35,15 @@
 	<a href="${pageContext.servletContext.contextPath }/new.do" class="btn btn-sm btn-outline-secondary" >글쓰기</a>
 		<nav aria-label="Page navigation example">
 		<ul class="pagination justify-content-center">
-			<c:forEach var="p" begin="1" end="${size }">
+			<c:forEach var="s" begin="1" end="${size }">
 					<c:choose>
 						<c:when test="${p==current}">
 							<li class="page-item active">
-    							 <a class="page-link" href="${pageContext.servletContext.contextPath }/parcel.do?p=${p}">${p }<span class="sr-only">(current)</span>
+    							 <a class="page-link" href="${pageContext.servletContext.contextPath }/parcel.do?p=${s}">${s }<span class="sr-only">(current)</span>
     							 </a></li>	
     						 </c:when>
     						 <c:otherwise>
-    						 	<a class="page-link" href="${pageContext.servletContext.contextPath }/parcel.do?p=${p}">${p }</a>
+    						 	<a class="page-link" href="${pageContext.servletContext.contextPath }/parcel.do?p=${s}">${s }</a>
     						</c:otherwise>
     					</c:choose>					
 				</c:forEach>

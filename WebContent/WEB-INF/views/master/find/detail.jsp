@@ -13,7 +13,7 @@
 				data-holder-rendered="true" style="width: 400px; height: 400px;">
 		</div>
 	</div>
-	<div class="bd-example col-md-6 my-3 p-3 bg-white rounded shadow-sm">
+	<div class="bd-example col-md-5 my-3 p-3 bg-white rounded shadow-sm">
 		<br/>
 		<p style="text-align:center"><b>${data.TITLE }</b></p>
 		<table class="table">		
@@ -49,14 +49,21 @@
 	</a> <a href="${pageContext.servletContext.contextPath }/main/index.do">
 		<button type="button" class="btn btn-outline-primary">메인으로</button>
 	</a>
-	<div style="text-align: right">
-		<a href="${pageContext.servletContext.contextPath }/index.do">
-			<button type="button" class="btn btn-outline-secondary btn-sm">삭제</button>
-		</a>
-	</div>
+</div>
+<br/>
+<!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+<div class="bd-example">
+	<c:choose>
+		<c:when test="${info.ID == data.ID }">
+			<a href="${pageContext.servletContext.contextPath }/find/detailModify.do?no=${data.NO }"><button type="button" class="btn btn-primary btn-lg btn-block" >수정</button></a>
+		</c:when>
+		<c:otherwise>
+			""
+		</c:otherwise>
+	</c:choose>
 </div>
 
-
+<!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
 
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5194c970c18885a8e81f75b8cefdd048&libraries=services"></script>

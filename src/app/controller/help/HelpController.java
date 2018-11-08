@@ -152,20 +152,22 @@ public class HelpController {
 		//String now = sdf2.format(day);
 		//mmap.put("regdate", now);
 		//---------------------------
-		System.out.println("no>>>>"+no);
+		
 		help.updatelook(no);
 		
 		//------------------------------------------
-		System.out.println("no : "+no);
 		
+		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
+			mmap.put("info", userInfo);
 		
 		Map data = help.getOneByNo(no);
 			data.put("GADAY", today);
-		//mmap.put("data", data);
+			mmap.put("data", data);
+			
 		wr.setAttribute("data",data, wr.SCOPE_REQUEST);
 		List<Map> comment = helpComment.getCommentByHno(no);
 		
-		//mmap.put("comment",comment);
+	
 		for (int i = 0; i < comment.size(); i++) {
 			comment.get(i).put("GACOMDAY", sdf2.format(comment.get(i).get("REGDATE")) );
 			
@@ -186,15 +188,15 @@ public class HelpController {
 	@PostMapping("/detail.do")
 	public String detailPostHandler(WebRequest wr, @RequestParam Map rmap, ModelMap mmap) {
 		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
-		
+				
 		String nick = (String) userInfo.get("NICKNAME");
-		
 		System.out.println("userinfo.nick = " + nick);
 		
-		int no=Integer.parseInt((String) rmap.get("no"));
+		
+		int no = Integer.parseInt((String) rmap.get("no"));
 		
 		//-------------
-		Date d=new Date();
+		Date d = new Date();
 		
 		System.out.println("hno >"+no);
 		System.out.println("reply >"+rmap.get("comment"));
@@ -213,7 +215,62 @@ public class HelpController {
 		return "redirect:/help/detail.do?no="+no;
 		
 	}//end detailPost
+	
+	// 수정할 게시판 내용 추출
+	@RequestMapping("/detailModify.do")
+	public ModelAndView getDetailModify(@RequestParam int no, ModelMap mmap, WebRequest wr) {
+		System.out.println("no >" + no);
+		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);	
+		Map data = help.getOneByNo(no);
+			mmap.put("data", data);
+			mmap.put("no", no);
+			
+		System.out.println("one ? "+data);
+			
+		ModelAndView mav = new ModelAndView();
+			
+		mav.setViewName("master");
+		mav.addObject("top", "/WEB-INF/views/master/help/top.jsp");
+		mav.addObject("main", "/WEB-INF/views/master/help/detailModify.jsp");
+		
+		return mav;
+	}
+	
+	// 게시판 수정 후 업데이트
+	@RequestMapping("/updateDetail.do")
+	public ModelAndView updateDetail(@RequestParam Map rmap, ModelMap mmap, WebRequest wr) {
+		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
+			String id = (String)userInfo.get("ID");
+			rmap.put("nick", id);
+		
+		System.out.println("rmap은 뭐냐?"+ rmap);		
+		
+		ModelAndView mav = new ModelAndView();
+		
+		try {
+			int r = help.updateDetail(rmap);
+			System.out.println("r ? " + r);
+			mmap.put("map", rmap);
+			
+			System.out.println("수정 성공");
 
+			mav.setViewName("redirect:/help/list.do");	
+			
+			return mav;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+			System.out.println("수정 실패");
+			
+			mav.setViewName("master");
+			mav.addObject("top", "/WEB-INF/views/master/help/top.jsp");
+			mav.addObject("main", "/WEB-INF/views/master/help/write.jsp");	
+			return mav;
+		}
+		
+	}
+	
 	
 	
 }//end class
