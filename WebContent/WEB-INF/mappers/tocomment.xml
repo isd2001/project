@@ -16,5 +16,10 @@
 		select * from togetherboard join (select nick as commneter, togethercomment.*  from togethercomment where nick = #{nick} order by leftdate DESC)tc on togetherboard.no = tc.cno
 	</select>
 	
+	<!-- 게시물 삭제 -->
+	<delete id="deletelist" parameterType="java.util.HashMap">
+		delete from togethercomment where num=#{no}	
+	</delete>
+	
 </mapper>
 

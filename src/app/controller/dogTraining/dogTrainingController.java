@@ -50,7 +50,7 @@ public class dogTrainingController {
 
 	//리스트 불러오기
 	@GetMapping("training.do")
-	public ModelAndView dtboardHandler(WebRequest wreq,@RequestParam Map param) {
+	public ModelAndView dtboardHandler(WebRequest wreq,@RequestParam(required=false) Map param) {
 		if(param.get("type")!=null) {
 			if (param.get("type").equals("on")) {
 				wreq.setAttribute("err", "off", wreq.SCOPE_REQUEST);
@@ -63,8 +63,8 @@ public class dogTrainingController {
 		}
 		//-------------------------------------------------
 		// 페이징 처리
-		System.out.println("param>"+param);
-		int rp = Integer.parseInt((String) param.get("p"));
+
+		int rp = (param.get("p") == null) ? 1 : Integer.parseInt((String)param.get("p"));
 		Map mp = new HashMap<>();
 			mp.put("s", 1 + ( rp - 1 ) * 6 );
 			mp.put("e", rp * 6 );
@@ -78,7 +78,6 @@ public class dogTrainingController {
 		//-------------------------------------------------
 		//List<Map> getAlldt = dr.getAll();
 		List<Map> getAlldt = dr.getSomeFind(mp);	
-			
 		wreq.setAttribute("list", getAlldt, WebRequest.SCOPE_REQUEST);
 
 		ModelAndView mav = new ModelAndView();
@@ -212,10 +211,19 @@ public class dogTrainingController {
 			}
 			return "redirect:/dogTraining/write.do?type=off";
 		}
-		
-
 	} //end addwritePost
-
+	
+	@GetMapping("/delete.do")
+	public String deleteGetHandle(@RequestParam Map param) {
+		System.out.println("parama >>"+param);
+		Map input = new HashMap<>();
+			input.put("no", param.get("no"));
+		
+		dr.deletelist(input);
+				
+		return "redirect:/dogTraining/training.do";
+	}//end deletehandle
+	
 
 }//end class
 

@@ -123,8 +123,10 @@
 				<th scope="col" style="width: 9%"><small>Á¶È¸¼ö</small></th>
 			</tr>
 		</thead>
-		<tbody id="repage">
-			<c:forEach var="l" items="${list }" >
+
+		<tbody>
+			<c:forEach var="l" items="${list }">
+
 				<tr>
 					<th scope="row">${l.NO }</th>
 					<td><small>${l.AREA }</small></td>
@@ -138,16 +140,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	
-	<nav aria-label="Page navigation example" >
-	  <ul class="pagination">
-	    <li class="page-item" value=""><a class="page-link" >Previous</a></li>
-	    <li class="page-item" id="page" value="1" onclick="page(this)"><a class="page-link" href="#">1</a></li>
-	    <li class="page-item" value="2"><a class="page-link" href="#">2</a></li>
-	    <li class="page-item" value="3"><a class="page-link" href="#">3</a></li>
-	    <li class="page-item" ><a class="page-link" href="#">Next</a></li>
-	  </ul>
-	</nav>
+
 	<!-- ======================================== -->
 	<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
@@ -166,7 +159,7 @@
 					</c:forEach>
 				<li class="page-item"><a class="page-link" href="#">Next</a></li>
 			</ul>
-			</nav>
+	</nav>
 	
 	
 	<!-- ======================================== -->

@@ -86,11 +86,11 @@
 						<c:choose>
 							<c:when test="${p==current}">
 								<li class="page-item active">
-     							 <a class="page-link" href="${pageContext.servletContext.contextPath }/together/selectboard.do?p=${p}">${p }<span class="sr-only">(current)</span>
+     							 <a class="page-link" href="${pageContext.servletContext.contextPath }/together/selectboard.do?area=${area }&p=${p}">${p }<span class="sr-only">(current)</span>
      							 </a></li>	
      						 </c:when>
      						 <c:otherwise>
-     						 	<a class="page-link" href="${pageContext.servletContext.contextPath }/together/selectboard.do?p=${p}">${p }</a>
+     						 	<a class="page-link" href="${pageContext.servletContext.contextPath }/together/selectboard.do?area=${area }&p=${p}">${p }</a>
      						</c:otherwise>
      					</c:choose>					
 					</c:forEach>

@@ -64,7 +64,7 @@
 				<button type="button" class="btn btn-outline-primary">글쓰기</button></a>
 				</div>
 				<div style="text-align:right">
-					<a href="${pageContext.servletContext.contextPath }/index.do">
+					<a href="${pageContext.servletContext.contextPath }/main/index.do">
 				<button type="button" class="btn btn-outline-secondary btn-sm">메인으로</button></a>
 				</div>
 			</div>

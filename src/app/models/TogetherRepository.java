@@ -52,6 +52,15 @@ public class TogetherRepository {
 		return template.selectOne("together.totalCount");
 	}
 
+	// 게시물에 따라 페이지 갯수 설정
+	public int selectCount(String area) {
+		return template.selectOne("together.selectCount",area);
+	}
+
+	// 게시물 삭제
+	public int deletelist(Map map) {
+		return template.delete("together.deletelist",map);
+	}
 
 
 }//end class
