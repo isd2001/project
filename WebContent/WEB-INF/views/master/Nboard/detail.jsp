@@ -7,10 +7,6 @@
   		<thead>
   		</thead>
   		<tbody>   
-	     <tr>
-	     
-    	 
-    	  <tr>
     	  <th scope="row" style="width: 50%"><small>Á¦¸ñ</small></th>
     	   <td>${read.BOARD_SUBJECT}</td>
     	   </tr>
