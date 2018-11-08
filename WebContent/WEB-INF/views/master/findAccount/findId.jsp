@@ -11,7 +11,7 @@
 	</script>
 </c:if>
 
-  <div class="text-center" style="margin-right: 20rem;  margin-left: 20rem; margin-top: 10rem;">
+  <div class="text-center" style="margin-right: 20%;  margin-left: 20%; margin-top: 10%;">
     <form class="form-signin" action="${pageContext.servletContext.contextPath }/main/findId.do" method="post">
       <img class="mb-4" src="${pageContext.servletContext.contextPath }/image/findIdImage.jpg" alt="" width="200" height="200">
       <h1 class="h3 mb-3 font-weight-normal">아이디 찾기</h1>

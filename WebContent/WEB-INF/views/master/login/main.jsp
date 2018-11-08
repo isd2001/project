@@ -17,7 +17,7 @@
 		window.alert(회원님의 아이디 : ${yourId} );
 	</script>
 </c:if>
-  <div class="text-center" style="margin-right: 20rem;  margin-left: 20rem; margin-top: 10rem;">
+  <div class="text-center" style="margin-right: 20%;  margin-left: 20%; margin-top: 20%;">
     <form class="form-signin" action="${pageContext.servletContext.contextPath }/main/login.do" method="post">
       <img class="mb-4" src="${pageContext.servletContext.contextPath }/image/dal.jpg" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
