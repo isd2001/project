@@ -31,4 +31,9 @@
 		update help set look = look+1 where no=#{no}
 	</update>
 	
+	<update id="updateDetail" parameterType="java.util.HashMap">
+		update help set title = #{title}, content = #{content} where no = #{no}
+	</update>
+	
+	
 </mapper>

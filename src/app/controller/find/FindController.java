@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
@@ -36,7 +37,6 @@ public class FindController {
 	// 게시글 List 화면
 
 	@GetMapping("/list.do")
-
 	public ModelAndView listNeoHandler(ModelMap mmap, WebRequest wr, @RequestParam (required=false)String p) {
 
 		Date today = new Date();
@@ -76,7 +76,9 @@ public class FindController {
 
 	@GetMapping("/write.do")
 	public ModelAndView writeHandler() {
+		
 		ModelAndView mav = new ModelAndView();
+		
 		mav.setViewName("master");
 		mav.addObject("top", "/WEB-INF/views/master/find/top.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/find/write.jsp");
@@ -94,16 +96,15 @@ public class FindController {
 		String nick =  (String) userInfo.get("NICKNAME");
 		String id = (String) userInfo.get("ID");
 
-//		System.out.println("mapx: + " + mapx);
 		rmap.put("id", id);;
 		rmap.put("nick",nick);
+		
+		System.out.println("rmap은 ? " + rmap);
 		
 		// 파일 첨부
 		long time = System.currentTimeMillis();
 		String fileName = String.valueOf(time) + "_" + picture.getOriginalFilename();
-		System.out.println(fileName);
 		String path = ctx.getRealPath(String.valueOf(time));
-		
 		File dir = new File(path);
 
 		if (!dir.exists()) {
@@ -118,8 +119,10 @@ public class FindController {
 
 		try {
 			int r = findRepository.addAllFind(rmap);
-			System.out.println(r);
+			System.out.println(" r 은 1일까 0일까?" + r);
+			
 			mmap.put("map", rmap);
+			
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("master");
 			mav.addObject("top", "/WEB-INF/views/master/find/top.jsp");
@@ -139,10 +142,13 @@ public class FindController {
 	}
 
 	@RequestMapping("/detail.do")
-	public ModelAndView detailHandler(@RequestParam (required=false)int no, ModelMap mmap) {	
-		
+	public ModelAndView detailHandler(@RequestParam (required=false)int no, ModelMap mmap, WebRequest wr) {	
+		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
 		Map data = findRepository.getByNo(no);
+		mmap.put("info", userInfo);
 		mmap.put("data", data);
+		
+		System.out.println("data?" + data);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("master");
@@ -152,6 +158,62 @@ public class FindController {
 		return mav;
 	}
 	
+	@RequestMapping("/detailModify.do")
+	public ModelAndView getDetailModify(@RequestParam (required=false)int no, ModelMap mmap, WebRequest wr) {
+		Map info = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
+
+		Map one = findRepository.getByNo(no);
+			mmap.put("one", one);
+			mmap.put("no",no);
+		
+		System.out.println("one ? " + one);
+		System.out.println("info ? " + info);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("master");
+		mav.addObject("top", "/WEB-INF/views/master/find/top.jsp");
+		mav.addObject("main", "/WEB-INF/views/master/find/detailModify.jsp");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/updateDetail.do")
+	public ModelAndView updateDetail(@RequestParam Map rmap, ModelMap mmap, WebRequest wr) {
+		Map info = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
+		String id = (String)info.get("ID");
+			rmap.put("id", id);
+			
+			System.out.println("rmap?"+rmap);
+			
+		ModelAndView mav = new ModelAndView();
+		
+		try {
+			int r = findRepository.updateDetail(rmap);
+			System.out.println("r ? "+r);
+			/*mmap.put("map", rmap);*/
+			System.out.println("rmap ?" + rmap);
+			
+			wr.setAttribute("map", rmap, wr.SCOPE_REQUEST);
+			
+			System.out.println("수정 성공");
+					
+			mav.setViewName("redirect:/find/list.do");	
+			
+			return mav;
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("수정 실패");
+			
+			mav.setViewName("redirect:/find/detail.do");	
+			
+			return mav;
+		}
+	}
+	
+	
+	
+	
+	/*
 	@RequestMapping("/result.do")
 	public ModelAndView resultHandler(ModelMap mmap, @RequestParam (required=false)int no ) {
 		Date today = new Date();
@@ -168,18 +230,6 @@ public class FindController {
 		mav.addObject("main", "/WEB-INF/views/master/find/result.jsp");
 		
 		return mav;
-	}
-	/*
-	@RequestMapping("/remove.do")
-	public String removeHandler(int no) {
-		
-		int i = findRepository.removeByNo(no);
-		System.out.println(i);
-		if(i == 1) {
-			return "redirect:/find/list.do";
-		}else {
-			return "main.find.detail";
-		}
-	}
-	*/
+	}*/
+	
 }

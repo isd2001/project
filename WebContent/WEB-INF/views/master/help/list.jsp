@@ -36,8 +36,7 @@
 		<div class="container">
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
-					<li class="page-item "><a class="page-link" href=""
-						tabindex="-1">Previous</a></li>
+					
 					<c:forEach var="p" begin="1" end="${size }">
 						<c:choose>
 							<c:when test="${p==current}">
@@ -50,8 +49,7 @@
      						</c:otherwise>
      					</c:choose>					
 					</c:forEach>
-					<li class="page-item"><a class="page-link" href="" 
-					tabindex="+1" >Next</a></li>
+					
 				</ul>
 			</nav>
 			<br/>

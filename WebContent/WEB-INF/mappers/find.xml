@@ -4,8 +4,8 @@
 
 	<!-- 게시글 내용 모두 저장 -->
 	<insert id="addAllFind" parameterType="java.util.HashMap">
-		insert into find values (find_seq.nextval, #{title}, #{dogname}, #{phone}, sysdate, 
-		#{picture}, #{fcontent}, #{scontent}, #{mapx}, #{mapy}, #{nick}, #{id})
+		insert into find values (find_seq.nextval, #{title}, #{dogname}, sysdate, 
+		#{picture}, #{fcontent}, #{scontent}, #{mapx}, #{mapy}, #{nick}, #{id}, #{phone})
 	</insert>
 	
 	<!-- 모든 게시글 뽑기-->
@@ -21,17 +21,13 @@
 	<select id="getOneByNo" resultType="java.util.HashMap" parameterType="java.lang.Integer">
 		select * from find where no=#{no}
 	</select>
-	
-	<delete id="deleteFind" >
-		delete * from find where no=#{no}
-	</delete>	
 
 	<select id="resultForSearchFromFind" resultType="java.util.HashMap" parameterType="java.lang.String">
 		select * from find where title like #{search} or dogname like #{search} or picture like #{search} or fcontent like #{search} or scontent like #{search} or nick like #{search} or id like #{search}
 	</select>
 	
 	<select id="getRecentFind" resultType="java.util.HashMap">
-		select * from find order by regdate desc;
+		select * from find order by regdate desc
 	</select>
 
 	<!-- 특정 아이디의 게시글 전체 뽑는거 -->
@@ -43,5 +39,9 @@
 	<select id="totalCount" resultType="java.lang.Integer">
 		select count(*) from find
 	</select>	
+	
+	<update id="updateDetail" parameterType="java.util.HashMap">
+		update find set title = #{title}, dogname = #{dogname}, fcontent = #{fcontent}, scontent = #{scontent}, mapx = #{mapx}, mapy = #{mapy}, phone = #{phone} where no = #{no}
+	</update>
 	
 </mapper>

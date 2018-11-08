@@ -7,15 +7,11 @@
 <hr size="30px" width="100%">
 <div class="container my-5 p-5 bg-white rounded shadow-sm">
 
-	<p style="text-align: left; color: gray">${data.GADAY }</p>
+	<p style="text-align: right; color: gray">${data.GADAY }</p>
 	<p>
 	<h2 style="text-align: center">
 		<b>${data.TITLE }</b>
 	</h2>
-	<div style="text-align: right">
-		<button type="submit" class="btn btn-outline-secondary btn-sm"
-			onclick="updateBoard();">수정</button>
-	</div>
 	<div class="row">
 		<div class="col-md-6 my-3 p-3 bg-white rounded shadow-sm">
 			<hr size="10px" width="100%">
@@ -59,10 +55,8 @@
 				<c:forEach var="c" items="${comment}">
 
 					<div class="card">
-						<div class="card-header">
-							※${c.NICK}님이 작성했어요 !&emsp; 
-							<small style="color:gray">【 ${c.GACOMDAY} 】</small></div>
-							<br/>
+					<div class="card-header d-flex bd-highlight" ><div class="flex-grow-1">※ <b>${c.NICK}</b>님이 작성했어요 !</div>
+					 <div class="bd-highlight"><small id="date" class="d-flex justify-content-end" style="color:gray"> 【 ${c.GACOMDAY} 】</small></div></div>
 						<div class="card-body">
 							<p class="card-text">▶&emsp;${c.REPLY}</p>
 						</div>
@@ -90,13 +84,25 @@
 			<div style="text-align: center" class="d-flex justify-content-center">
 				<a href="${pageContext.servletContext.contextPath }/help/list.do">
 					<button type="button" class="btn btn-outline-primary">목록으로</button>
-				</a> <a href="${pageContext.servletContext.contextPath }/index.do">
+				</a> <a href="${pageContext.servletContext.contextPath }/main/index.do">
 					<button type="button" class="btn btn-outline-primary">메인으로</button>
 				</a>
 			</div>
 			<br />
 		</div>
 	</div>
+</div>
+
+
+<div class="bd-example">
+	<c:choose>
+		<c:when test="${info.NICKNAME == data.NICK }">
+			<a href="${pageContext.servletContext.contextPath }/help/detailModify.do?no=${data.NO }"><button type="button" class="btn btn-primary btn-lg btn-block" >수정</button></a>
+		</c:when>
+		<c:otherwise>
+			""
+		</c:otherwise>
+	</c:choose>
 </div>
 
 <!-- 

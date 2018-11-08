@@ -151,7 +151,7 @@ public class ParcelController {
 	}
 	
 	// 수정할 게시판 내용 추출
-	@RequestMapping("detailmodify.do")
+	@RequestMapping("/detailmodify.do")
 	public ModelAndView getDetailModify(@RequestParam int no, ModelMap one, WebRequest wr) {
 		Map onedata = parcelRepository.getByOneParcel(no);
 		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
