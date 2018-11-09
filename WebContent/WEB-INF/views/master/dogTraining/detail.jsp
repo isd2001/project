@@ -62,8 +62,14 @@
 </table>
 <label for="newReplyText">댓글작성 </label>
 <form action="${pageContext.servletContext.contextPath}/dogTraining/detail.do?no=${read.NO}" method="post"> 
-<input type="text" class="form-control"
-				aria-describedby="basic-addon1" id="content" name="content" autocomplete="off" placeholder="댓글 입력 후 Enter를 눌러주세요.">
+<div class="form-row">
+  	  <div class="form-group col-md-11">
+	<input type="text" class="form-control" aria-describedby="basic-addon1"
+		id="comment" name="comment" autocomplete="off" placeholder="댓글 입력 후 Enter를 눌러주세요."></div>
+	<div class="form-group col-md-1">
+	<button style="float: right;" type="button" class="btn btn-warning">댓글 작성</button>
+	</div>
+	</div>
 </form>
 
 
