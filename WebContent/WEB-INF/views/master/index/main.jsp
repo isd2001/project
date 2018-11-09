@@ -129,7 +129,7 @@ af.f {
 		<c:forEach var="p" items="${parcelList }" begin="0" end="1">
 			 <div class="col-md-6">
 	          <div class="card flex-md-row mb-4 shadow-sm h-md-250">
-	         	 <img class="card-img-left flex-auto d-none d-lg-block" data-src="${pageContext.servletContext.contextPath }${p.MAINIMAGE}" alt="Card image cap">
+	         	 <img class="card-img-left flex-auto d-none d-lg-block" src="${pageContext.servletContext.contextPath }${p.MAINIMAGE}" style="width:250px; height:250px;" alt="Card image cap">
 	            <div class="card-body d-flex flex-column align-items-start">
 	              <strong class="d-inline-block mb-2 text-primary">
 	              	<c:choose>
@@ -150,7 +150,7 @@ af.f {
 	            </div>  
 	          </div>
 	        </div>
-        </c:forEach>
+        </c:forEach>   
       
       </div>        
 	</div>
