@@ -13,6 +13,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 
 import com.google.gson.Gson;
 
@@ -78,6 +81,12 @@ public class MainController {
 	@Autowired
 	ChatSocketController chatSocket;
 	
+	Map<String, HttpSession> sessions;
+	
+	public MainController() {
+		sessions = new HashMap<>();
+	}
+	
 	@SuppressWarnings("unchecked")
 	@GetMapping("/index.do")
 	public ModelAndView mainIndexHandle(WebRequest wr) {
@@ -121,18 +130,26 @@ public class MainController {
 	}
 	
 	@PostMapping("/login.do")
-	public ModelAndView loginHandle(@RequestParam Map param, WebRequest wr) {
+	public ModelAndView loginHandle(@RequestParam Map param, WebRequest wr, HttpSession session) throws IOException {
 		ModelAndView mav = new ModelAndView();	
 		
 		if(ar.getPwById(param)) {						
 			Map userInfo =  ar.getUserInfo((String)param.get("id"));
 			String nick = (String)userInfo.get("NICKNAME");		
-				
+			
+			
+			if(sessions.containsKey(nick)) {				
+				Map data = new HashMap();
+				data.put("mode", "invalidated");					
+				socketservice.sendOne(data, nick);			
+				sessions.get(nick).invalidate();
+			}
 			wr.setAttribute("nick", nick, wr.SCOPE_SESSION);
 			wr.setAttribute("userInfo", userInfo, wr.SCOPE_SESSION);
 			String gu = ws.getCoordinateByAddress((String)userInfo.get("ADDRESS"));
-			wr.setAttribute("gu", gu, wr.SCOPE_SESSION);		
+			wr.setAttribute("gu", gu, wr.SCOPE_SESSION);	
 			
+			sessions.put(nick, session);  //메인 세션 에 추가
 			
 			mav.setViewName("master");
 			mav.setViewName("redirect:/main/index.do");
@@ -309,9 +326,12 @@ public class MainController {
 	}
 	
 	@GetMapping("/logout.do")
-	public ModelAndView logoutHandle(WebRequest wr) {
+	public ModelAndView logoutHandle(WebRequest wr, HttpSession session) {
 		wr.removeAttribute("userInfo", wr.SCOPE_SESSION);
 		
+		String nick = (String) session.getAttribute("nick");		
+		sessions.remove(nick);
+		session.invalidate();			
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/main/index.do");

@@ -60,9 +60,9 @@ public class SocketService {
 	         try {
 	            WebSocketSession ws = loggedInUsers.get(i);
 	            System.out.println("service.getAttris"+ws.getAttributes());
-	            if(ws.getAttributes().get("userId").equals(target)) {	            	
+	            if(ws.getAttributes().get("nick").equals(target)) {	            	
 	            	ws.sendMessage(msg);
-	            }	            
+	            }	           
 	         } catch (IOException e) {
 	            e.printStackTrace();
 	         }

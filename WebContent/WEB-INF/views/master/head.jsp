@@ -203,11 +203,27 @@
 					console.log(obj.sender);
 					console.log(obj.roomNumber);
 					newMessageHandle(obj);
-					break;					
+					break;
+				case "invalidated" : 
+					invalidatedHandle();
+					break;	
 			
 		}
 		
 		};
+		
+		var invalidatedHandle = function(){
+			var html = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">";			
+			html += "<strong>【NewChatting】</strong><br/> 중복 로그인</br>";			
+			html += "중복 로그인이 감지되었습니다. 다시 로그인 해주세요."			
+			html += "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">";
+			html += "<a href=\"${pageContext.servletContext.contextPath }/main/login.do\"><button type=\"button\" class=\"btn btn-warning \">로그인창으로</button>";	
+			html += "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">";
+			html += "<span aria-hidden=\"true\">&times;</span>";
+			html += "</button>";
+			html += "</div>";			
+			document.getElementById("alert").innerHTML = html;
+		}
 		var newMessageHandle = function(obj){		
 			console.log("newMessageHandle acticated");
 			var html = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">";			

@@ -70,7 +70,6 @@ public class AuthFilter extends HttpFilter{
 					case "/main/validate.do":		
 					case "/access.do":
 					case "/":
-						///onechat.do
 					case "/joinform.do":
 						chain.doFilter(request, response);
 						break;
