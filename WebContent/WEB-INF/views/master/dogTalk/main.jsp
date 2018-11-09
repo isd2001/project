@@ -28,7 +28,7 @@
 </c:choose>	
 	
 	<hr/>
-	<div id="list" >
+	<div id="list" style="margin-bottom: 10%;" >
 	
 		<c:forEach var="list" items="${dogTalkList}">	
 				<div class="card" id="form">
@@ -91,14 +91,14 @@
 				var date = rst[i].WRITEDATE;
 								
 					html +=  "<div class=\"card\" id=\"form\">";
-					html += "<div class=\"card-header d-flex bd-highlight\"><div class=\"flex-grow-1\">"+talker+"'s comment</div>";
+					html += "<div class=\"card-header d-flex bd-highlight\"  style=\"background-color: #FFDEAD; margin-top: 5px;\" ><div class=\"flex-grow-1\">"+talker+"'s comment</div>";
 					html += "<div class=\"bd-highlight\"><small id=\"date\" class=\"d-flex justify-content-end\">";
 					html += date+"</small></div></div>";	
-					html += " <div class=\"card-body\">";
+					html += " <div class=\"card-body\" style=\"background-color: #AED6F1;\">";
 					html += "<blockquote class=\"blockquote mb-0\">";
 					html += "<div class=\"row align-items-center\">";
 					html += "<img src=\""+picture+"\" style=\"width: 80px; height: 80px;\"class=\"rounded-circle\" id =\"image\">";
-					html += " <p>"+content+"</p></div>";
+					html += " <p >&nbsp;&nbsp;<span style=\"background-color: white;\">"+content+"</span></p></div>";
 					html += "<footer class=\"blockquote-footer d-flex justify-content-end \"><span id=\"address\">";
 					html += "<cite title=\"Source Title\">"+address+"..</span></cite></footer>";
 					html += "</blockquote>";

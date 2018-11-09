@@ -13,7 +13,7 @@
 	</script>
 </c:if>
 
-<div class="container">
+<div class="container" style="margin-bottom: 10%;">
 <form
 	action="${pageContext.servletContext.contextPath }/together/selectboard.do"
 	method="post">

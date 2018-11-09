@@ -7,7 +7,7 @@
 
 <form action="${pageContext.servletContext.contextPath}/main/joinform.do" method="post" enctype="multipart/form-data">
 
-<div class="container">
+<div class="container" style="margin-bottom: 10%;">
 	<div class="row  justify-content-center">	
 		<div class="col-md-8 offset-md-2">
 			<div class="alert alert-warning row" role="alert">

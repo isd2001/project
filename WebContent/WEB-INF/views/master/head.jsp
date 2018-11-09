@@ -10,11 +10,17 @@
 
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-
 <link href="https://fonts.googleapis.com/css?family=Cute+Font&amp;subset=korean" rel="stylesheet">
 
+<link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 
 <style>
+ div.recommendKeyWord{
+   font-family: 'Jua', cursive;
+   font-size: 18px;
+   font-weight: 450;
+ }
+
  span.logo{
    font-family: 'Cute Font', cursive;
    font-size: 60px;
@@ -65,9 +71,9 @@
 					</form>
 				</nav>
 			</div>
-			<div class="row">
+			<div class="row recommendKeyWord">
 				추천 검색어 : &nbsp;
-			<c:forEach var="keyword" items="${recommendKeywords}" begin="0" end="2">
+			<c:forEach var="keyword" items="${recommendKeywords}" begin="0" end="2">			
 				<a href = "${pageContext.servletContext.contextPath }/search/result.do?search=${keyword.keyWord}">#${keyword.keyWord}&nbsp;</a>
 			</c:forEach>
 			</div>

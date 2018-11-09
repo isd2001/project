@@ -3,8 +3,14 @@
 	
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
+<c:if test="${joinFailed==1}">
+	<script>
+		window.alert("회원가입에 실패하였습니다. 다시 작성해주세요.");
+	</script>
+</c:if>
 <form action="${pageContext.servletContext.contextPath}/joinFormHandle.do" method="post" enctype="multipart/form-data">
 
 <div class="container">

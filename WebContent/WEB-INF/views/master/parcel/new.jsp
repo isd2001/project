@@ -44,7 +44,7 @@
 
 			<label for="lastName">분양장소(상세주소입력)</label>			
 			<!-- ======================================================= -->
-			<button type="button" onclick="addressPopUp()" >간편 주소 입력</button>
+			<button type="button" class="btn btn-primary btn-sm" onclick="addressPopUp()" >간편 주소 입력</button>
 					<input type="text" class="form-control" id="area" placeholder="간편 주소" readonly="readonly" onchange="address(this);" name="area" >					
 			<!-- ======================================================= -->
 

@@ -16,14 +16,11 @@ h6 {
 }
 af.f {
   font-weight: 200;
-
 }
-
-
-
 </style>
 <body >
-<div class= "container" >
+
+<div class= "container" style="margin-bottom: 10%;" >
 	<div class = "row">
 		<div class="my-3 p-3 bg-white rounded shadow-sm border border-info" style="width:100%">
 			<h6 class="border-bottom border-gray pb-2 mb-0">개동  <a href="${pageContext.servletContext.contextPath }/dogTraining/training.do?p=1" >
@@ -157,35 +154,7 @@ af.f {
 
 </div>
 	<script>
-   
-   /*
-   
-   var ws = new WebSocket("ws://"+location.host+
-         "${pageContext.servletContext.contextPath}/conn.do");
-   
-   ws.onmessage = function(got){   
-      //매개 변수 설정하면 받은 내용에 관련된 객체를 넘겨주면서 콜이 일어나고 ,      
-      var obj = JSON.parse(got.data);     
-      switch (obj.mode) {
-	      case "needId":	    	  
-	    	  var info = {"mode":"login","userId":"${userId}"};
-	    	  ws.send(JSON.stringify(info));
-	         break;
-	      case "login":	    	  
-	    	  var name = obj.user.NAME;
-	    	  var dep = obj.user.DNAME;
-	    	  var posi = obj.user.PNAME;
-	    	  var time = obj.user.loginTime;
-	    	  var html = 
-	    		 "<div class=\"media text-muted pt-3\"><p class=\"media-body pb-3 mb-0 small lh-125 border-bottom border-gray\">";
-	          html += "<strong class=\"d-block text-gray-dark\">"+name+" 님 ("+dep+"-"+posi+")</strong>";
-	          html += "로그인 하셨습니다. ("+time+") </p> </div>";
-	          document.getElementById("recent").innerHTML+=html;
-	          break;
-      }
-   };
-   
-   */
+   	
    </script>
 
 </body>

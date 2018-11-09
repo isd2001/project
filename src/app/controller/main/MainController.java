@@ -122,6 +122,10 @@ public class MainController {
 	public ModelAndView mainLoginHandle(WebRequest wr) {
 		ModelAndView mav = new ModelAndView();				
 		
+		if(wr.getAttribute("joinSuccess", wr.SCOPE_REQUEST)!=null) {
+			wr.setAttribute("joinSuccess", 1, wr.SCOPE_REQUEST);
+		}
+		
 		mav.setViewName("master");
 		mav.addObject("top", "/WEB-INF/views/master/login/top.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/login/main.jsp");
@@ -151,7 +155,7 @@ public class MainController {
 			
 			sessions.put(nick, session);  //메인 세션 에 추가
 			
-			mav.setViewName("master");
+			
 			mav.setViewName("redirect:/main/index.do");
 			
 			System.out.println(userInfo);
@@ -294,6 +298,12 @@ public class MainController {
 	@GetMapping("/joinform.do")
 	public ModelAndView mainjoinformHandle(WebRequest wr) {
 		ModelAndView mav = new ModelAndView();
+		
+		if(wr.getAttribute("joinFailed",wr.SCOPE_REQUEST)!=null) {
+			wr.setAttribute("joinFailed", 1, wr.SCOPE_REQUEST);
+		}
+		
+
 		mav.setViewName("master");
 		mav.addObject("top", "/WEB-INF/views/master/join/top.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/join/joinform.jsp");
@@ -332,19 +342,15 @@ public class MainController {
 		
 		try {
 			int r = ar.addAccount(param);
-			wr.setAttribute("joinSucess", 1, wr.SCOPE_REQUEST);
-			mav.setViewName("master");
-			mav.addObject("top", "/WEB-INF/views/master/index/top.jsp");
-			mav.addObject("main", "/WEB-INF/views/master/index/main.jsp");
+			wr.setAttribute("joinSuccess", 1, wr.SCOPE_REQUEST);
 			
+			mav.setViewName("redirect:/main/login.do");
 			return mav;
 		}catch(Exception e) {
 			e.printStackTrace();
 			wr.setAttribute("joinFailed", 1, wr.SCOPE_REQUEST);
 			
-			mav.setViewName("master");
-			mav.addObject("top", "/WEB-INF/views/master/index/top.jsp");
-			mav.addObject("main", "/WEB-INF/views/master/index/main.jsp");			
+			mav.setViewName("redirect:/main/joinform.do");		
 			return mav;
 		}	
 			

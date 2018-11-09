@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>  
-<c:if test="${joinSucess==1}">
+<c:if test="${joinSuccess==1}">
 	<script>
 		window.alert("회원가입에 성공하셨습니다. 로그인 해주세요.");
 	</script>
