@@ -20,7 +20,7 @@
 			<th scope="row" style="width: 12%"><small>내용  :  </small>${read.CONTENT}</th>
 		</tr>
 		<tr>
-			<th scope="row" style="width: 12%;text-align: center;"> <video src="${read.UPLOAD}" controls="controls"></video></th>
+			<th scope="row" style="width: 12%;text-align: center;"> <video src="${read.UPLOAD}" controls="controls" style="width: 550px; height:400px;"></video></th>
 			
 		</tr>
 	</tbody>
