@@ -11,6 +11,7 @@ ul#navmenu li {
 	position: relative;
 	float: left;
 	margin-right: 4px;
+	z-index: 1;
 }
 
 ul#navmenu a {
@@ -22,6 +23,7 @@ ul#navmenu a {
 	background-color: #FFF;
 	border: 1px solid #CCC;
 	border-radius: 5px;
+	z-index: 1;
 }
 
 ul#navmenu .sub1 li {
@@ -30,18 +32,22 @@ ul#navmenu .sub1 li {
 
 ul#navmenu .sub1 a {
 	margin-top: 0px;
+	z-index: 1;
 }
 
 ul#navmenu .sub2 a {
 	margin-left: 10px;
+	z-index: 1;
 }
 
 ul#navmenu li:hover>a {
 	background-color: #CFC;
+	z-index: 1;
 }
 
 ul#navmenu li:hover>a:hover {
 	background-color: #FF0;
+	z-index: 1;
 }
 
 ul#navmenu ul.sub1 {
@@ -49,6 +55,7 @@ ul#navmenu ul.sub1 {
 	position: absolute;
 	top: 26px;
 	left: -40px;
+	z-index: 1;
 }
 
 ul#navmenu ul.sub2 {
@@ -56,23 +63,28 @@ ul#navmenu ul.sub2 {
 	position: absolute;
 	top: 0px;
 	left: 80px;
+	z-index: 1;
 }
 
 ul#navmenu li:hover .sub1 {
 	display: block;
+	z-index: 1;
 }
 
 ul#navmenu .sub1 li:hover .sub2 {
 	display: block;
+	z-index: 1;
 }
 
 nav.nav {
    font-family: 'Cute Font', cursive;
    font-size: 30px;
    font-weight: 700;
+   z-index: 1;
  }
  a.dropdown-item{
  	font-family: 'Cute Font', cursive;
    font-size: 25px;
    font-weight: 700;
+   z-index: 1;
  }

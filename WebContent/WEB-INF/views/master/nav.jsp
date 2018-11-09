@@ -70,7 +70,7 @@ button{background: transparent; border:none;}
 
 
 
-<nav class="nav d-flex justify-content-between py-2 mb-2">
+<nav class="nav d-flex justify-content-between py-2 mb-2" style="z-index: 2;">
 		  <a style="color:black;" onclick="togglesidebar()">		
 			<button style="outline: none;" type="button" name="button" id="menu" class="toggle-btn p-2 font-weight-bold" >
 			  <span></span>

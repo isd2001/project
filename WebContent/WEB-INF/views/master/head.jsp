@@ -289,17 +289,5 @@
 		};//end openmodal 
 		
 		
-		//<![CDATA[
-	    // 사용할 앱의 JavaScript 키를 설정해 주세요.
-	    Kakao.init('88dcf767f7e04ec218e4e74ecf349baa');
-	    // 카카오 로그인 버튼을 생성합니다.
-	    Kakao.Auth.createLoginButton({
-	      container: '#kakao-login-btn',
-	      success: function(authObj) {
-	        alert(JSON.stringify(authObj));
-	      },
-	      fail: function(err) {
-	         alert(JSON.stringify(err));
-	      }
-	    });
+	
 	</script>
