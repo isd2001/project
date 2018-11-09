@@ -10,11 +10,17 @@
 
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-
 <link href="https://fonts.googleapis.com/css?family=Cute+Font&amp;subset=korean" rel="stylesheet">
 
+<link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 
 <style>
+ div.recommendKeyWord{
+   font-family: 'Jua', cursive;
+   font-size: 18px;
+   font-weight: 450;
+ }
+
  span.logo{
    font-family: 'Cute Font', cursive;
    font-size: 60px;
@@ -65,9 +71,9 @@
 					</form>
 				</nav>
 			</div>
-			<div class="row">
+			<div class="row recommendKeyWord">
 				추천 검색어 : &nbsp;
-			<c:forEach var="keyword" items="${recommendKeywords}" begin="0" end="2">
+			<c:forEach var="keyword" items="${recommendKeywords}" begin="0" end="2">			
 				<a href = "${pageContext.servletContext.contextPath }/search/result.do?search=${keyword.keyWord}">#${keyword.keyWord}&nbsp;</a>
 			</c:forEach>
 			</div>
@@ -125,6 +131,7 @@
 					<a class="btn btn-sm btn-info"
 						href="${pageContext.servletContext.contextPath }/main/terms.do">회원가입</a>
 				</div>
+				
 			</c:otherwise>
 		</c:choose>
 		</div>
@@ -203,11 +210,27 @@
 					console.log(obj.sender);
 					console.log(obj.roomNumber);
 					newMessageHandle(obj);
-					break;					
+					break;
+				case "invalidated" : 
+					invalidatedHandle();
+					break;	
 			
 		}
 		
 		};
+		
+		var invalidatedHandle = function(){
+			var html = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">";			
+			html += "<strong>【NewChatting】</strong><br/> 중복 로그인</br>";			
+			html += "중복 로그인이 감지되었습니다. 다시 로그인 해주세요."			
+			html += "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">";
+			html += "<a href=\"${pageContext.servletContext.contextPath }/main/login.do\"><button type=\"button\" class=\"btn btn-warning \">로그인창으로</button>";	
+			html += "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">";
+			html += "<span aria-hidden=\"true\">&times;</span>";
+			html += "</button>";
+			html += "</div>";			
+			document.getElementById("alert").innerHTML = html;
+		}
 		var newMessageHandle = function(obj){		
 			console.log("newMessageHandle acticated");
 			var html = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">";			
@@ -264,4 +287,19 @@
 				});
 
 		};//end openmodal 
+		
+		
+		//<![CDATA[
+	    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+	    Kakao.init('88dcf767f7e04ec218e4e74ecf349baa');
+	    // 카카오 로그인 버튼을 생성합니다.
+	    Kakao.Auth.createLoginButton({
+	      container: '#kakao-login-btn',
+	      success: function(authObj) {
+	        alert(JSON.stringify(authObj));
+	      },
+	      fail: function(err) {
+	         alert(JSON.stringify(err));
+	      }
+	    });
 	</script>

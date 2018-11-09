@@ -2,18 +2,13 @@
 	pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:if test="${result eq 'on' }">
+<c:if test="${err eq 'on' }">
 	<script>
 		window.alert("글이 정상적으로 처리되셨습니다.")
 	</script>
 </c:if>
-<c:if test="${result eq 'off' }">
-	<script>
-		window.alert("정상 등록이 되지 않았습니다. 필수항목을 다시 체크해주세요.")
-	</script>
-</c:if>
 
-<div class="container">
+<div class="container" style="margin-bottom: 10%;">
 <form
 	action="${pageContext.servletContext.contextPath }/together/selectboard.do"
 	method="post">
@@ -157,7 +152,7 @@
      						</c:otherwise>
      					</c:choose>					
 					</c:forEach>
-				<li class="page-item"><a class="page-link" href="#">Next</a></li>
+				
 			</ul>
 	</nav>
 	

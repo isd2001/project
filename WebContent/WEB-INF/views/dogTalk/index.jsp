@@ -17,7 +17,7 @@
 	</div>
 	
 	<hr/>
-	<div id="list">
+	<div id="list" style="margin-bottom: 10%;">
 		<c:forEach var="list" items="${dogTalkList}">			
 				<div class="card" id="form">
 					<div class="card-header d-flex bd-highlight"><div class="flex-grow-1">${list.TALKER}'s comment</div>

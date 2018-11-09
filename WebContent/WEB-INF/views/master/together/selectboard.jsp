@@ -2,6 +2,8 @@
 	pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+
+<div class="container" style="margin-bottom: 10%;">
 <form
 	action="${pageContext.servletContext.contextPath }/together/selectboard.do"
 	method="post">
@@ -97,9 +99,11 @@
 				<li class="page-item"><a class="page-link" href="#">Next</a></li>
 			</ul>
 		</nav>	
-	<a href="${pageContext.servletContext.contextPath }/together/new.do">
-	<button type="button" class="btn btn-outline-success" style="position: absolute;right: 0;">
-	글 쓰기</button></a>
+		
+	
+	<a href="${pageContext.servletContext.contextPath }/together/new.do" class="d-flex justify-content-end">
+		<button type="button" class="btn btn-outline-success">글 쓰기</button>
+	</a>
 
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d54ea73b1e9ac77ebe1409aa939d77e5&libraries=services"></script>
@@ -161,4 +165,5 @@
 		}
 	</script>
 </form>
+</div>
 

@@ -3,15 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<div style="margin-bottom:  10%;">
 <c:if test="${not empty noResult}">
 	<img src="${pageContext.servletContext.contextPath}/image/noResult.jpg" width="1000px" class="justify-content-center">
 </c:if>
 
-
 <c:if test="${not empty find}">
 	<div class="alert alert-info" role="alert">찾아주시개 글에서 (검색결과 :
-		${fn:length(find)}개)<a href="${pageContext.servletContext.contextPath}/board/main.do" class="justify-content-end">게시판으로</a></div>
+		${fn:length(find)}개)<a href="${pageContext.servletContext.contextPath}/board/main.do" class="justify-content-end"><span class="badge badge-pill badge-primary">게시판으로</span></a></div>
 	<div class="container">
 		<div class="row">
 			<c:forEach var="e" items="${find}">
@@ -44,8 +43,8 @@
 </c:if>
 
 <c:if test="${not empty parcel}">
-	<div class="alert alert-info" role="alert">키워주시개 글에서 (검색결과 :
-		${fn:length(parcel)}개)</div>
+	<div class="alert alert-info" role="alert">데려가시개 글에서 (검색결과 :
+		${fn:length(parcel)}개)</div><a href="${pageContext.servletContext.contextPath}/parcel.do" class="justify-content-end"><span class="badge badge-pill badge-primary">게시판으로</span></a></div>
 	<div class="container">
 		<div class="row">
 			<c:forEach var="p" items="${parcel}">
@@ -82,7 +81,8 @@
 </c:if>
 
 <c:if test="${not empty dogList}">
-	<div class="alert alert-info" role="alert">Gaekipedia 글에서 (검색결과 : ${fn:length(dogList)}개)</div>
+	<div class="alert alert-info" role="alert">Gaekipedia 글에서 (검색결과 : ${fn:length(dogList)}개)
+	<a href="${pageContext.servletContext.contextPath}/board/main.do" class="justify-content-end"><span class="badge badge-pill badge-primary">게시판으로</span></a></div>
 	<div class="container">
 		<div class="row">
 			<c:forEach var="list" items="${dogList}">
@@ -142,7 +142,8 @@
 </div>
 <!--========================= 같이가시개 겁색결과 ==================================================-->
 <c:if test="${not empty together}">
-	<div class="alert alert-info" role="alert">같이가시개 글에서 (검색결과 : ${fn:length(together)}개)</div>
+	<div class="alert alert-info" role="alert">같이가시개 글에서 (검색결과 : ${fn:length(together)}개)
+	<a href="${pageContext.servletContext.contextPath}/together/mainboard.do?p=1" class="justify-content-end"><span class="badge badge-pill badge-primary">게시판으로</span></a></div>
 	<div class="row">	
 		<table class="table table-hover">
 				<thead>
@@ -176,7 +177,8 @@
 </c:if>
 <!--========================= 개톡 겁색결과 ==================================================-->
 <c:if test="${not empty dogTalk}">
-	<div class="alert alert-info" role="alert">개톡 글에서 (검색결과 : ${fn:length(dogTalk)}개)</div>
+	<div class="alert alert-info" role="alert">개톡 글에서 (검색결과 : ${fn:length(dogTalk)}개)
+	<a href="${pageContext.servletContext.contextPath}/dogTalk/index.do" class="justify-content-end"><span class="badge badge-pill badge-primary">게시판으로</span></a></div>
 	<div class="row">	
 		<c:forEach var="list" items="${dogTalk}">		
 			<div class="col-md-4">	
@@ -207,7 +209,8 @@
 </c:if>
 <!--========================= 공지사항 겁색결과 ==================================================-->
 <c:if test="${not empty nboard}">
-	<div class="alert alert-info" role="alert">공지사항 글에서 (검색결과 : ${fn:length(nboard)}개)</div>
+	<div class="alert alert-info" role="alert">공지사항 글에서 (검색결과 : ${fn:length(nboard)}개)
+	<a href="${pageContext.servletContext.contextPath}/Nboard/list.do" class="justify-content-end"><span class="badge badge-pill badge-primary">게시판으로</span></a></div>
 	<table class="table table-hover">
 
   		<thead>
@@ -238,7 +241,8 @@
 
 
 <c:if test="${not empty dogTraining}">
-	<div class="alert alert-info" role="alert">개동 글에서 (검색결과 : ${fn:length(dogTraining)}개)</div>
+	<div class="alert alert-info" role="alert">개동 글에서 (검색결과 : ${fn:length(dogTraining)}개)
+	<a href="${pageContext.servletContext.contextPath}/dogTraining/training.do?p=1" class="justify-content-end"><span class="badge badge-pill badge-primary">게시판으로</span></a></div>
 		<div class="row">	
 			<c:forEach var="l" items="${dogTraining}">
 							<div class="col-md-4" id="post">
@@ -264,7 +268,8 @@
 </c:if>
 
 <c:if test="${not empty dogHospital}">
-	<div class="alert alert-info" role="alert">동물병원 글에서 (검색결과 : ${fn:length(dogHospital)}개)<a href="${pageContext.servletContext.contextPath}/doghospital.do" class="justify-content-end">게시판으로</a></div>
+	<div class="alert alert-info" role="alert">동물병원 글에서 (검색결과 : ${fn:length(dogHospital)}개)
+	<a href="${pageContext.servletContext.contextPath}/doghospital.do" class="justify-content-end">게시판으로</a></div>
 		<div class="row">	
 						
 			<div style="width: 900px; margin: auto;">
@@ -300,7 +305,8 @@
 
 
 <c:if test="${not empty help}">
-	<div class="alert alert-info" role="alert">도와주시개 글에서 (검색결과 : ${fn:length(help)}개)</div>
+	<div class="alert alert-info" role="alert">도와주시개 글에서 (검색결과 : ${fn:length(help)}개)
+	<a href="${pageContext.servletContext.contextPath}/help/list.do" class="justify-content-end">게시판으로</a></div>
 		<div class="row">	
 			<table class="table">
 		<thead class="thead-light">
@@ -330,6 +336,7 @@
 	</table>
 		</div>
 </c:if>
+</div>
 <script>	
 	
 	$('#exampleModalCenter').on('show.bs.modal', function (event) {

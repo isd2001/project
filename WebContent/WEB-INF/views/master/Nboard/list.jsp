@@ -1,23 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-<table class="table table-hover">
-	<colgroup>
-		<col width="5%" />
-		<col width="40%" />
-		<col width="15%" />
-		<col width="25%" />
-		<col width="15%" />
-	</colgroup>
-
-	<thead style="text-align: center">
-		<tr>
-			<th scope="col"><small>NO</small></th>
-			<th scope="col"><small>제목</small></th>
-			<th scope="col"><small>작성자</small></th>
-			<th scope="col"><small>날짜</small></th>
-			<th scope="col"><small>조회수</small></th>
+<table class="table table-hover" style="width: 900px; margin: auto;">
+	
+	<thead>
+		<tr class="table-success">
+			<th scope="col" style="width:50px; text-align: center;"><small>NO</small></th>
+			<th scope="col" style="width:150px; text-align: center;"><small>제목</small></th>
+			<th scope="col" style="width:80px; text-align: center;"><small>작성자</small></th>
+			<th scope="col" style="width:80px; text-align: center;"><small>날짜</small></th>
+			<th scope="col" style="width:50px; text-align: center;"><small>조회수</small></th>
 		</tr>
 	</thead>
 	<tbody style="text-align: center">

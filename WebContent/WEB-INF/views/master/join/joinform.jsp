@@ -7,7 +7,7 @@
 
 <form action="${pageContext.servletContext.contextPath}/main/joinform.do" method="post" enctype="multipart/form-data">
 
-<div class="container">
+<div class="container" style="margin-bottom: 10%;">
 	<div class="row  justify-content-center">	
 		<div class="col-md-8 offset-md-2">
 			<div class="alert alert-warning row" role="alert">
@@ -30,7 +30,7 @@
 				<label class="col-sm-2 col-form-label">비밀번호확인</label>
 				<div class="col-sm-6">
 					<input type="password" class="form-control"
-						id="pwConfirm" placeholder="비밀번호 확인" onchange="confirmPw()" required>
+						id="pwConfirm" placeholder="비밀번호 확인" onkeyup="confirmPw(this)" required>
 						<span id="error"></span>
 				</div>
 			</div>
@@ -147,18 +147,20 @@
 		}
 	}
 	
-	var confirmPw = function(pw){
+	var confirmPw = function(input){
 		console.log("confrimPw function");
+		console.log(input.value);
 		var pw = document.getElementById("pw").value;
-		var confirm = document.getElementById("pwConfirm").value;		
+		var confirm = input.value;		
 		if(pw != confirm){
 			document.getElementById("error").innerHTML = "비밀번호 값이 일치하지 않음";
-			$("#error").css("color","red");
-			$("#pwConfirm").val("");	
+			$("#error").css("color","red");			
 			bottonArr[0]=false;
 			bottonActivate();
 			
 		}else{
+			document.getElementById("error").innerHTML = "비밀번호 값 일치";
+			$("#error").css("color","blue");
 			bottonArr[0]=true;
 			bottonActivate();
 		}
@@ -169,7 +171,7 @@
 		var input =id.value;
 				
 		console.log("id function");
-		var url = "/gaenolja/validate.do";		
+		var url = "/gaenolja/main/validate.do";		
 		
 		var param = {
 				"mode"  : "id",
@@ -196,7 +198,7 @@
 	var checkNick = function (nick) {
 		var input =nick.value;
 		
-		var url = "/gaenolja/validate.do";		
+		var url = "/gaenolja/main/validate.do";		
 		
 		var param = {
 				"mode"  : "nick",

@@ -13,6 +13,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 
 import com.google.gson.Gson;
 
@@ -78,6 +81,12 @@ public class MainController {
 	@Autowired
 	ChatSocketController chatSocket;
 	
+	Map<String, HttpSession> sessions;
+	
+	public MainController() {
+		sessions = new HashMap<>();
+	}
+	
 	@SuppressWarnings("unchecked")
 	@GetMapping("/index.do")
 	public ModelAndView mainIndexHandle(WebRequest wr) {
@@ -113,6 +122,10 @@ public class MainController {
 	public ModelAndView mainLoginHandle(WebRequest wr) {
 		ModelAndView mav = new ModelAndView();				
 		
+		if(wr.getAttribute("joinSuccess", wr.SCOPE_REQUEST)!=null) {
+			wr.setAttribute("joinSuccess", 1, wr.SCOPE_REQUEST);
+		}
+		
 		mav.setViewName("master");
 		mav.addObject("top", "/WEB-INF/views/master/login/top.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/login/main.jsp");
@@ -121,20 +134,28 @@ public class MainController {
 	}
 	
 	@PostMapping("/login.do")
-	public ModelAndView loginHandle(@RequestParam Map param, WebRequest wr) {
+	public ModelAndView loginHandle(@RequestParam Map param, WebRequest wr, HttpSession session) throws IOException {
 		ModelAndView mav = new ModelAndView();	
 		
 		if(ar.getPwById(param)) {						
 			Map userInfo =  ar.getUserInfo((String)param.get("id"));
 			String nick = (String)userInfo.get("NICKNAME");		
-				
+			
+			
+			if(sessions.containsKey(nick)) {				
+				Map data = new HashMap();
+				data.put("mode", "invalidated");					
+				socketservice.sendOne(data, nick);			
+				sessions.get(nick).invalidate();
+			}
 			wr.setAttribute("nick", nick, wr.SCOPE_SESSION);
 			wr.setAttribute("userInfo", userInfo, wr.SCOPE_SESSION);
 			String gu = ws.getCoordinateByAddress((String)userInfo.get("ADDRESS"));
-			wr.setAttribute("gu", gu, wr.SCOPE_SESSION);		
+			wr.setAttribute("gu", gu, wr.SCOPE_SESSION);	
+			
+			sessions.put(nick, session);  //메인 세션 에 추가
 			
 			
-			mav.setViewName("master");
 			mav.setViewName("redirect:/main/index.do");
 			
 			System.out.println(userInfo);
@@ -148,6 +169,31 @@ public class MainController {
 			return mav;
 			
 		}
+	}
+	
+	@GetMapping(path="/validate.do", produces="application/json;charset=UTF-8")	
+	@ResponseBody
+	public String validate(@RequestParam Map param) {
+		String mode = (String) param.get("mode");
+		
+		switch(mode) {
+		case "id" :
+				if(ar.checkId((String)param.get("input"))==null){
+					return gson.toJson(true);
+				}else {
+					return gson.toJson(false);
+				}	
+				
+		case "nick" :
+			System.out.println(ar.checkNick((String)param.get("input"))==null);
+			System.out.println((String)param.get("input"));
+				if(ar.checkNick((String)param.get("input"))==null){
+					return gson.toJson(true);
+				}else {
+					return gson.toJson(false);
+				}				
+		}
+		return "";
 	}
 	
 	@GetMapping(path="/getUserPassword.do", produces="application/json;charset=UTF-8")	
@@ -252,6 +298,12 @@ public class MainController {
 	@GetMapping("/joinform.do")
 	public ModelAndView mainjoinformHandle(WebRequest wr) {
 		ModelAndView mav = new ModelAndView();
+		
+		if(wr.getAttribute("joinFailed",wr.SCOPE_REQUEST)!=null) {
+			wr.setAttribute("joinFailed", 1, wr.SCOPE_REQUEST);
+		}
+		
+
 		mav.setViewName("master");
 		mav.addObject("top", "/WEB-INF/views/master/join/top.jsp");
 		mav.addObject("main", "/WEB-INF/views/master/join/joinform.jsp");
@@ -290,28 +342,27 @@ public class MainController {
 		
 		try {
 			int r = ar.addAccount(param);
-			wr.setAttribute("joinSucess", 1, wr.SCOPE_REQUEST);
-			mav.setViewName("master");
-			mav.addObject("top", "/WEB-INF/views/master/index/top.jsp");
-			mav.addObject("main", "/WEB-INF/views/master/index/main.jsp");
+			wr.setAttribute("joinSuccess", 1, wr.SCOPE_REQUEST);
 			
+			mav.setViewName("redirect:/main/login.do");
 			return mav;
 		}catch(Exception e) {
 			e.printStackTrace();
 			wr.setAttribute("joinFailed", 1, wr.SCOPE_REQUEST);
 			
-			mav.setViewName("master");
-			mav.addObject("top", "/WEB-INF/views/master/index/top.jsp");
-			mav.addObject("main", "/WEB-INF/views/master/index/main.jsp");			
+			mav.setViewName("redirect:/main/joinform.do");		
 			return mav;
 		}	
 			
 	}
 	
 	@GetMapping("/logout.do")
-	public ModelAndView logoutHandle(WebRequest wr) {
+	public ModelAndView logoutHandle(WebRequest wr, HttpSession session) {
 		wr.removeAttribute("userInfo", wr.SCOPE_SESSION);
 		
+		String nick = (String) session.getAttribute("nick");		
+		sessions.remove(nick);
+		session.invalidate();			
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/main/index.do");
