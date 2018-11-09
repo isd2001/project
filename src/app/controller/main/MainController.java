@@ -90,10 +90,7 @@ public class MainController {
 	@SuppressWarnings("unchecked")
 	@GetMapping("/index.do")
 	public ModelAndView mainIndexHandle(WebRequest wr) {
-		
-		dtr.getSomeFromDogTalk();
-		
-				
+						
 		List recommendKeywords = sr.getSearch();
 		recommendKeywords.sort(new Comparator<Map>() {
 			public int compare(Map m1, Map m2)	{
@@ -143,10 +140,17 @@ public class MainController {
 			
 			
 			if(sessions.containsKey(nick)) {				
-				Map data = new HashMap();
+				Map data = new HashMap();				
 				data.put("mode", "invalidated");					
 				socketservice.sendOne(data, nick);			
-				sessions.get(nick).invalidate();
+				
+				for (int i = 0; i < socketservice.loggedInUsers.size(); i++) {
+					if(nick.equals(socketservice.loggedInUsers.get(i).getAttributes().get("nick"))){
+						socketservice.loggedInUsers.remove(i);
+					}					
+				}
+				sessions.get(nick).invalidate();	
+				
 			}
 			wr.setAttribute("nick", nick, wr.SCOPE_SESSION);
 			wr.setAttribute("userInfo", userInfo, wr.SCOPE_SESSION);

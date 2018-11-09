@@ -197,7 +197,7 @@
 						html+="<ul class=\"sub2\">";
 						html+="<li><a onclick=\"openchat('"+ loginList[i].nickName+"')\" value=\""+loginList[i].sessionId+ "\" >1:1대화</a></li>";
 						html+="<li><a data-toggle=\"modal\" data-target=\"#exampleModalCenter2\" id=\"Infomodal\" onclick=\"openmodal('"
-							+ loginList.nickName + "')\" \">정보 보기</a></li>";
+							+ loginList[i].nickName + "')\" \">정보 보기</a></li>";
 						html+="</ul>";
 						html+="</li>";
 						}//end if..else
