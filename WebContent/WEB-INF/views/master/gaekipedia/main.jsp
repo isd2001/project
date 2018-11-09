@@ -48,9 +48,9 @@
 						<span style="text-align: center" data-toggle="modal"data-target="#exampleModalCenter" data-name="${list.NAME}" data-engname="${list.ENGNAME}"
 						data-source="${pageContext.servletContext.contextPath}${list.IMG}">${list.NAME}</span></a>
 					
-						     		<c:if test="${userInfo.ID eq 'admin'}">        		 
-								     	<button type="button" class="btn btn-outline-danger" onclick="deleteFunction(this);" value="${list.NAME}" >글 삭제</button>
-						     		</c:if>
+			     		<c:if test="${userInfo.ID eq 'admin'}">        		 
+					     	<button type="button" class="btn btn-outline-danger" onclick="deleteFunction(this);" value="${list.NAME}" >글 삭제</button>
+			     		</c:if>
 									
 						
 				</div>

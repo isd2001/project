@@ -73,28 +73,6 @@
 		</tbody>
 	</table>
 </div>
-<%-- 
-<div>
-	<nav aria-label="Page navigation example">
-		<ul class="pagination justify-content-center">
-			<li class="page-item"><a class="page-link" href="#" tabindex="-1">이전</a></li>
-			<c:forEach var="p" begin="1" end="${size }">
-				<c:choose>
-					<c:when test="${p==current}">
-						<li class="page-item active">
-    						<a class="page-link" href="${pageContext.servletContext.contextPath }/getdh.do?p=${p}">${p }<span class="sr-only">(current)</span></a>
-    					</li>	
-    				</c:when>
-    				<c:otherwise>
-    					<a class="page-link" href="${pageContext.servletContext.contextPath }/getdh.do?p=${p}">${p }</a>
-    				</c:otherwise>
-				</c:choose>					
-			</c:forEach>
-			<li class="page-item"><a class="page-link" href="#">다음</a></li>
-		</ul>
-	</nav>
-</div>
-  --%>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8732ddf8bab883cf85aa0180da9e413d&libraries=services,clusterer,drawing"></script>
 <script>	

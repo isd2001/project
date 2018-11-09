@@ -7,7 +7,7 @@
 
 <link href="${pageContext.servletContext.contextPath }/css/test/carousel.css"	rel="stylesheet">
 <hr size="30px" width="100%">
-<div class="container my-5 p-5 bg-white rounded shadow-sm">
+<div class="container bg-white rounded shadow-sm">
 	<p style="text-align: right; color: gray">${data.GADAY }</p>
 	<p>
 	<h2 style="text-align: center">

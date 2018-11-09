@@ -31,8 +31,7 @@
 
 
 <nav aria-label="Page navigation example">
-	<ul class="pagination justify-content-center">
-		<li class="page-item"><a class="page-link" href="#" tabindex="-1">이전</a></li>
+	<ul class="pagination justify-content-center">		
 		<c:forEach var="p" begin="1" end="${size }">
 			<c:choose>
 				<c:when test="${p==current}">
@@ -46,8 +45,7 @@
 						href="${pageContext.servletContext.contextPath }/Nboard/list.do?p=${p}">${p }</a>
 				</c:otherwise>
 			</c:choose>
-		</c:forEach>
-		<li class="page-item"><a class="page-link" href="#">다음</a></li>
+		</c:forEach>		
 	</ul>
 </nav>
 

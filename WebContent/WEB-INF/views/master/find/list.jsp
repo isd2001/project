@@ -7,9 +7,9 @@
 	href="${pageContext.servletContext.contextPath }/css/blog.css">
 
 <hr size="30px" width="100%">
-<body>	
-	<div class="album py-5">
-			<div class="container my-5 p-5 bg-white rounded shadow-sm">
+<div class="container" style="margin-left: 3%;">	
+	<div class="album ">
+			<div class="container bg-white rounded">
 				<div class="row">
 					<c:forEach var="e" items="${every}">
 						<div class="col-md-4" id="post">
@@ -74,5 +74,5 @@
 			<br/>
 		</div>		
 	</footer>
-</body>
+</div>
 

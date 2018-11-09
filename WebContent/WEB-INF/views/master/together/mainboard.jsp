@@ -138,8 +138,7 @@
 
 	<!-- ======================================== -->
 	<nav aria-label="Page navigation example">
-			<ul class="pagination justify-content-center">
-				<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
+			<ul class="pagination justify-content-center">			
 				<c:forEach var="p" begin="1" end="${size }">
 						<c:choose>
 							<c:when test="${p==current}">

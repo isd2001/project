@@ -19,7 +19,7 @@
 
 		<div class="col-md-6 mb-3">
 			<label for="lastName">핸드폰 번호</label> <input type="text"
-				class="form-control" id="phone" name="phone" onchange="checkRegex(this);">
+				class="form-control" id="phone" name="phone" onchange="checkRegex(this);" placeholder="010-1234-5678">
 		</div>
 		<div class="col-md-6 mb-3">
 			

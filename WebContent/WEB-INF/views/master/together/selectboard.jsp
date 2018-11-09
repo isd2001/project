@@ -57,8 +57,7 @@
      	  <th scope="col" style="width: 10%"><small>지역</small></th>
     	  <th scope="col" style="width: 35%"><small>제목</small></th>
       	  <th scope="col" style="width: 20%"><small>작성자</small></th>
-     	  <th scope="col" style="width: 10%"><small>날짜</small></th>
-     	  <th scope="col" style="width: 9%"><small >추천</small></th>
+     	  <th scope="col" style="width: 10%"><small>날짜</small></th>     	  
      	  <th scope="col" style="width: 9%"><small>조회수</small></th>
 	     </tr>
   		</thead>
@@ -71,9 +70,8 @@
 				<a href="${pageContext.servletContext.contextPath  }/together/detail.do?no=${l.NO }">     			
      			${l.TITLE }</a>
      			</td>
-     			<td>-</td>
-     			<td>${l.day }</td>
-     			<td>${l.GOOD }</td>
+     			<td>${l.NICK }</td>
+     			<td>${l.day }</td>     			
      			<td>${l.LOOKUP }</td>
      			</tr>
      	</c:forEach>
@@ -82,8 +80,7 @@
 </table>
 <!-- ======================================== -->
 	<nav aria-label="Page navigation example">
-			<ul class="pagination justify-content-center">
-				<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
+			<ul class="pagination justify-content-center">				
 				<c:forEach var="p" begin="1" end="${size }">
 						<c:choose>
 							<c:when test="${p==current}">
@@ -95,8 +92,7 @@
      						 	<a class="page-link" href="${pageContext.servletContext.contextPath }/together/selectboard.do?area=${area }&p=${p}">${p }</a>
      						</c:otherwise>
      					</c:choose>					
-					</c:forEach>
-				<li class="page-item"><a class="page-link" href="#">Next</a></li>
+					</c:forEach>			
 			</ul>
 		</nav>	
 		

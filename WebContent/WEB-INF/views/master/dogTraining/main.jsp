@@ -20,8 +20,11 @@
 									<p class="card-text">
 									<div class="d-flex justify-content-between align-items-center">
 										<small class="text-muted"
-											style="position: absolute; bottom: 30px">${l.TITLE}</small> <small
-											class="text-muted" style="position: absolute; bottom: 10px">${l.DTID}
+											style="position: absolute; bottom: 32px">글제목 : <b> ${l.TITLE}</b></small> <small
+											class="text-muted" style="position: absolute; bottom: 16px">글쓴이 : ${l.DTID}
+										</small>
+										<small
+											class="text-muted" style="position: absolute; bottom: 1px; ">조회수 : <span> ${l.LOOKUP}</span>
 										</small>
 									</div>									
 									<a href="${pageContext.servletContext.contextPath}/dogTraining/detail.do?no=${l.NO }">
@@ -36,17 +39,10 @@
 		</div>
 		<br/>	
 		<!-- ======================================== -->
-		<%-- <nav aria-label="Page navigation example" style="margin-left: 500px;">
-		  <ul class="pagination">
-		    <li class="page-item"><a class="page-link" href="${pageContext.servletContext.contextPath }/dogTraining/training.do?p=1">1</a></li>
-		    <li class="page-item"><a class="page-link" href="${pageContext.servletContext.contextPath }/dogTraining/training.do?p=2">2</a></li>
-		    <li class="page-item"><a class="page-link" href="${pageContext.servletContext.contextPath }/dogTraining/training.do?p=3">3</a></li>
-		    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-		  </ul>
-		</nav> --%>
+	
 			<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
-				<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
+				
 				<c:forEach var="p" begin="1" end="${size }">
 						<c:choose>
 							<c:when test="${p==current}">
@@ -59,7 +55,7 @@
      						</c:otherwise>
      					</c:choose>					
 					</c:forEach>
-				<li class="page-item"><a class="page-link" href="#">Next</a></li>
+				
 			</ul>
 			</nav>
 		

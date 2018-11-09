@@ -118,9 +118,9 @@
 				<div class="justify-content-end">	
 				<small style="float: right;margin-top: 0%;"><strong>
 				
-						오늘의 강남구 날씨 :
+						오늘의 서울 날씨 :
 						<script>
-								getWeather("강남구");
+								getWeather("seoul");
 							</script>
 						<span id="currentTemp"></span><br>(최고 : <span id="tempMax"></span> / 최저 : <span
 							id="tempMin"></span>)

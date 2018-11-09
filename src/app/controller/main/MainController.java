@@ -138,7 +138,6 @@ public class MainController {
 			Map userInfo =  ar.getUserInfo((String)param.get("id"));
 			String nick = (String)userInfo.get("NICKNAME");		
 			
-			
 			if(sessions.containsKey(nick)) {				
 				Map data = new HashMap();				
 				data.put("mode", "invalidated");					
@@ -146,9 +145,11 @@ public class MainController {
 				
 				for (int i = 0; i < socketservice.loggedInUsers.size(); i++) {
 					if(nick.equals(socketservice.loggedInUsers.get(i).getAttributes().get("nick"))){
-						socketservice.loggedInUsers.remove(i);
+						socketservice.removeSocket(socketservice.loggedInUsers.get(i));
 					}					
 				}
+			
+				
 				sessions.get(nick).invalidate();	
 				
 			}

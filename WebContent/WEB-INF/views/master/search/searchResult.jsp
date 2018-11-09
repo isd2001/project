@@ -43,8 +43,8 @@
 </c:if>
 
 <c:if test="${not empty parcel}">
-	<div class="alert alert-info" role="alert">데려가시개 글에서 (검색결과 :
-		${fn:length(parcel)}개)</div><a href="${pageContext.servletContext.contextPath}/parcel.do" class="justify-content-end"><span class="badge badge-pill badge-primary">게시판으로</span></a></div>
+	<div class="alert alert-info" role="alert">데려가시개 글에서 (검색결과 :	${fn:length(parcel)}개)
+	<a href="${pageContext.servletContext.contextPath}/parcel.do" class="justify-content-end"><span class="badge badge-pill badge-primary">게시판으로</span></a></div>
 	<div class="container">
 		<div class="row">
 			<c:forEach var="p" items="${parcel}">
@@ -241,7 +241,7 @@
 
 
 <c:if test="${not empty dogTraining}">
-	<div class="alert alert-info" role="alert">개동 글에서 (검색결과 : ${fn:length(dogTraining)}개)
+	<div class="alert alert-info" role="alert" style="margin-top: 3%;">개동 글에서 (검색결과 : ${fn:length(dogTraining)}개)
 	<a href="${pageContext.servletContext.contextPath}/dogTraining/training.do?p=1" class="justify-content-end"><span class="badge badge-pill badge-primary">게시판으로</span></a></div>
 		<div class="row">	
 			<c:forEach var="l" items="${dogTraining}">
@@ -269,7 +269,7 @@
 
 <c:if test="${not empty dogHospital}">
 	<div class="alert alert-info" role="alert">동물병원 글에서 (검색결과 : ${fn:length(dogHospital)}개)
-	<a href="${pageContext.servletContext.contextPath}/doghospital.do" class="justify-content-end">게시판으로</a></div>
+	<a href="${pageContext.servletContext.contextPath}/doghospital.do" class="justify-content-end"><span class="badge badge-pill badge-primary">게시판으로</span></a></div>
 		<div class="row">	
 						
 			<div style="width: 900px; margin: auto;">
@@ -306,7 +306,7 @@
 
 <c:if test="${not empty help}">
 	<div class="alert alert-info" role="alert">도와주시개 글에서 (검색결과 : ${fn:length(help)}개)
-	<a href="${pageContext.servletContext.contextPath}/help/list.do" class="justify-content-end">게시판으로</a></div>
+	<a href="${pageContext.servletContext.contextPath}/help/list.do" class="justify-content-end"><span class="badge badge-pill badge-primary">게시판으로</span></a></div>
 		<div class="row">	
 			<table class="table">
 		<thead class="thead-light">
