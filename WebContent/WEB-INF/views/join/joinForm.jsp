@@ -143,8 +143,7 @@
 		if(pw != confirm){
 			document.getElementById("error").innerHTML = "비밀번호 값이 일치하지 않음";
 			$("#error").css("color","red");
-			$("#pwConfirm").val("");	
-			
+			$("#pwConfirm").val("");				
 		}
 	}
 	
@@ -152,7 +151,7 @@
 		var input =id.value;
 				
 		console.log("id function");
-		var url = "/gaenolja/validate.do";		
+		var url = "/gaenolja/main/validate.do";		
 		
 		var param = {
 				"mode"  : "id",
@@ -175,7 +174,7 @@
 	var checkNick = function (nick) {
 		var input =nick.value;
 		
-		var url = "/gaenolja/validate.do";		
+		var url = "/gaenolja/main/validate.do";		
 		
 		var param = {
 				"mode"  : "nick",

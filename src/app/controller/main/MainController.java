@@ -167,6 +167,31 @@ public class MainController {
 		}
 	}
 	
+	@GetMapping(path="/validate.do", produces="application/json;charset=UTF-8")	
+	@ResponseBody
+	public String validate(@RequestParam Map param) {
+		String mode = (String) param.get("mode");
+		
+		switch(mode) {
+		case "id" :
+				if(ar.checkId((String)param.get("input"))==null){
+					return gson.toJson(true);
+				}else {
+					return gson.toJson(false);
+				}	
+				
+		case "nick" :
+			System.out.println(ar.checkNick((String)param.get("input"))==null);
+			System.out.println((String)param.get("input"));
+				if(ar.checkNick((String)param.get("input"))==null){
+					return gson.toJson(true);
+				}else {
+					return gson.toJson(false);
+				}				
+		}
+		return "";
+	}
+	
 	@GetMapping(path="/getUserPassword.do", produces="application/json;charset=UTF-8")	
 	@ResponseBody
 	public String getUserPasswordController(@RequestParam Map param) {		

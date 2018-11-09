@@ -69,8 +69,10 @@ public class AuthFilter extends HttpFilter{
 					case "/main/logout.do":
 					case "/main/validate.do":		
 					case "/access.do":
+					case "/dogTalk/add.do":
 					case "/":
 					case "/joinform.do":
+					case "/validate.do":
 						chain.doFilter(request, response);
 						break;
 					}
