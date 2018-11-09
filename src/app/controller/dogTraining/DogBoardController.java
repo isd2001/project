@@ -72,6 +72,14 @@ public class DogBoardController {
 		return "redirect:/board/main.do";
 	}//end deletehandle
 	
+	@GetMapping("/add.do")
+	public ModelAndView addGetHandle() {		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("dogBoard.main");
+		mav.addObject("center", "/WEB-INF/views/dogTraining/gajalang.jsp");
+		return mav;
+	}//end deletehandle
+	
 	@PostMapping("/add.do")
 	public ModelAndView adminDogBoardAddPostController(@RequestParam Map param,  @RequestParam MultipartFile img) throws IllegalStateException, IOException {
 		System.out.println(param);

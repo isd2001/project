@@ -35,4 +35,39 @@
 
 </form>
 
+<script>
+
+$("#title").on("keyup", function() {
+	var len = $("#title").val().length;
+	console.log(len);
+
+	var html = "(" + len + "/15)";
+	document.getElementById("size1").innerHTML = html;
+
+	if (len >= 15) {
+		$("#b").prop("disabled", true);
+	} else {
+		$("#b").prop("disabled", false);
+	}
+
+});
+
+$("#content").on("keyup", function() {
+	var len = $("#content").val().length;
+	console.log(len);
+
+	var html = "(" + len + "/500)";
+	document.getElementById("size2").innerHTML = html;
+
+	if (len >= 500) {
+		$("#b").prop("disabled", true);
+	} else {
+		$("#b").prop("disabled", false);
+	}
+
+});
+
+
+</script>
+
 
