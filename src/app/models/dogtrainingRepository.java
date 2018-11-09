@@ -48,7 +48,7 @@ public class dogtrainingRepository{
 		return template.delete("dogtraining.deletelist",map);
 	}
 
-
+	
 
 
 
