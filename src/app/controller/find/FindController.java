@@ -44,7 +44,6 @@ public class FindController {
 		String date = sdf.format(today);
 		mmap.put("date", date);
 		
-	
 		//-------------------------------------
 		
 		int pp = (p == null) ? 1 : Integer.parseInt(p);
@@ -55,11 +54,19 @@ public class FindController {
 		
 		mmap.put("current",pp);
 
-		List<Map> every = findRepository.getSomeFind(map);
-		mmap.put("every",every);
 		
 		int tot = findRepository.totalCount();
 		mmap.put("size", tot/6 + (tot%6>0 ? 1: 0));
+
+		List<Map> every = findRepository.getSomeFind(map);
+		mmap.put("every",every);
+		
+		for(int i=0; i<every.size(); i++) {
+			String title = (String)every.get(i).get("TITLE");
+			if(title.length() > 10) {
+				every.get(i).put("TITLE", title.substring(0,10)+"...");
+			}
+		}
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -97,8 +104,6 @@ public class FindController {
 		rmap.put("id", id);;
 		rmap.put("nick",nick);
 		
-		System.out.println("rmap은 ? " + rmap);
-		
 		// 파일 첨부
 		long time = System.currentTimeMillis();
 		String fileName = String.valueOf(time) + "_" + picture.getOriginalFilename();
@@ -117,8 +122,7 @@ public class FindController {
 
 		try {
 			int r = findRepository.addAllFind(rmap);
-			System.out.println(" r 은 1일까 0일까?" + r);
-			
+	
 			mmap.put("map", rmap);
 			
 			ModelAndView mav = new ModelAndView();

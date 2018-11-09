@@ -120,11 +120,9 @@ public class HelpController {
 
 		rmap.put("nick", nick);
 
-		System.out.println("rmap ? = " + rmap);
 		ModelAndView mav = new ModelAndView();		
 		try {
 			int i = help.addAllHelp(rmap);
-			System.out.println("i = " + i);
 			mmap.put("map", rmap);
 			
 			mav.setViewName("redirect:/help/list.do");
@@ -190,8 +188,6 @@ public class HelpController {
 		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
 				
 		String nick = (String) userInfo.get("NICKNAME");
-		System.out.println("userinfo.nick = " + nick);
-		
 		
 		int no = Integer.parseInt((String) rmap.get("no"));
 		
@@ -219,14 +215,11 @@ public class HelpController {
 	// 수정할 게시판 내용 추출
 	@RequestMapping("/detailModify.do")
 	public ModelAndView getDetailModify(@RequestParam int no, ModelMap mmap, WebRequest wr) {
-		System.out.println("no >" + no);
 		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);	
 		Map data = help.getOneByNo(no);
 			mmap.put("data", data);
 			mmap.put("no", no);
-			
-		System.out.println("one ? "+data);
-			
+
 		ModelAndView mav = new ModelAndView();
 			
 		mav.setViewName("master");
@@ -241,27 +234,20 @@ public class HelpController {
 	public ModelAndView updateDetail(@RequestParam Map rmap, ModelMap mmap, WebRequest wr) {
 		Map userInfo = (Map)wr.getAttribute("userInfo", wr.SCOPE_SESSION);
 			String id = (String)userInfo.get("ID");
-			rmap.put("nick", id);
-		
-		System.out.println("rmap은 뭐냐?"+ rmap);		
+			rmap.put("nick", id);		
 		
 		ModelAndView mav = new ModelAndView();
 		
 		try {
 			int r = help.updateDetail(rmap);
-			System.out.println("r ? " + r);
 			mmap.put("map", rmap);
-			
-			System.out.println("수정 성공");
-
+	
 			mav.setViewName("redirect:/help/list.do");	
 			
 			return mav;
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-			
-			System.out.println("수정 실패");
 			
 			mav.setViewName("master");
 			mav.addObject("top", "/WEB-INF/views/master/help/top.jsp");

@@ -20,10 +20,12 @@
 								<div class="card-body">
 									<p class="card-text">
 									<div class="d-flex justify-content-between align-items-center">
+								
 										<small class="text-muted"
 											style="position: absolute; bottom: 30px">${e.TITLE}</small> <small
 											class="text-muted" style="position: absolute; bottom: 10px">${e.NICK}
 										</small>
+								
 									</div>
 									<a href="${pageContext.servletContext.contextPath}/find/detail.do?no=${e.NO }">
 									<button type="button" class="btn btn-sm btn-outline-primary"
@@ -41,12 +43,13 @@
 		<div class="container">
 			<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
-				
-				<c:forEach var="p" begin="1" end="${size }">
+					
+					<c:forEach var="p" begin="1" end="${size }">
 						<c:choose>
 							<c:when test="${p==current}">
 								<li class="page-item active">
-     							 <a class="page-link" href="${pageContext.servletContext.contextPath }/find/list.do?p=${p}">${p }<span class="sr-only">(current)</span>
+     							 <a class="page-link" href="${pageContext.servletContext.contextPath }/find/list.do?p=${p}">${p }
+     							 <span class="sr-only">(current)</span>
      							 </a></li>	
      						 </c:when>
      						 <c:otherwise>
@@ -54,7 +57,7 @@
      						</c:otherwise>
      					</c:choose>					
 					</c:forEach>
-			
+				
 			</ul>
 			</nav>
 			

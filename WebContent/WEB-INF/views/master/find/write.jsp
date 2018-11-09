@@ -18,8 +18,8 @@
 		</div>
 
 		<div class="col-md-6 mb-3">
-			<label for="lastName">연락처</label> <input type="text"
-				class="form-control" id="phone" name="phone">
+			<label for="lastName">핸드폰 번호</label> <input type="text"
+				class="form-control" id="phone" name="phone" onchange="checkRegex(this);">
 		</div>
 		<div class="col-md-6 mb-3">
 			
@@ -66,7 +66,7 @@
 
 				<div>
 					<button type="button" class="btn btn-outline-primary"
-						onclick="writeOn();">작성 완료</button>
+						onclick="writeOn();" disabled id="complete">작성 완료</button>
 					
 					<div style="text-align: center">
 					<br/>
@@ -91,7 +91,23 @@
 		}
 		f.readAsDataURL(this.files[0]);
 	});
-
+	
+	var checkRegex = function(phone){
+		var number = phone.value;
+		var reg = /^[0-9]{3}-[0-9]{4}-[0-9]{4}$/;
+		console.log(number);
+		console.log(reg.test(number));
+		
+		if(!reg.test(number)){
+			window.alert("○○○-○○○○-○○○○ 형태로 입력해주세요");
+			document.getElementById("complete").disabled=true;
+			return;
+		}else{
+			document.getElementById("complete").disabled=false;
+			return;
+		}
+	}
+	
 	var writeOn = function() {
 		if (document.getElementById("title").value != ""
 				&& document.getElementById("picture").files[0] != ""

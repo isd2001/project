@@ -11,7 +11,6 @@
 		<div class="d-flex justify-content-center">
 	<div class="my-5 p-5 bg-white rounded shadow-sm ">
 			<hr size="30%" width="100%">
-
 			<div class="row ">
 				<div class="col-md-6">
 					<label for="lastName">제 목</label> <input type="text"
