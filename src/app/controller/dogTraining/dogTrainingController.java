@@ -54,11 +54,6 @@ public class dogTrainingController {
 		if(param.get("type")!=null) {
 			if (param.get("type").equals("on")) {
 				wreq.setAttribute("err", "off", wreq.SCOPE_REQUEST);
-				ModelAndView mav = new ModelAndView();
-				mav.setViewName("master");
-				mav.addObject("top", "/WEB-INF/views/master/dogTraining/top.jsp");
-				mav.addObject("main", "/WEB-INF/views/master/dogTraining/main.jsp");
-				return mav;
 			}			
 		}
 		//-------------------------------------------------
@@ -171,13 +166,14 @@ public class dogTrainingController {
 			String ext = "."+FilenameUtils.getExtension(filename);
 			
 			String path=ctx.getRealPath("gaevideo");
+			System.out.println("path >>"+path);
 			
 			long gg = new Date(System.currentTimeMillis()).getTime();
 			
 			File f = new File(path,gg+ext);
-	
+			
 			if (!f.exists()) {
-				f.mkdir();
+				f.mkdirs();
 			}
 			
 			attach.transferTo(f);

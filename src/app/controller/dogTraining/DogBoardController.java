@@ -82,6 +82,7 @@ public class DogBoardController {
 		
 		return mav;
 	}
+
 	
 	@PostMapping("/add.do")
 	public ModelAndView adminDogBoardAddPostController(@RequestParam Map param,  @RequestParam MultipartFile img) throws IllegalStateException, IOException {

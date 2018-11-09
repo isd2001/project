@@ -50,12 +50,12 @@
 	<select id="getSomeFind" resultType="java.util.HashMap"
 		parameterType="java.util.HashMap">
 		select * from (select rownum r, o.* from (select * from
-		togetherboard order by no desc) o ) where r between #{s} and #{e} and day>sysdate
+		togetherboard where day>sysdate order by no desc) o ) where r between #{s} and #{e} 
 	</select>
 
 	<!-- 페이지 게시물 갯수에 따라 -->
 	<select id="totalCount" resultType="java.lang.Integer">
-		select count(*) from togetherboard
+		select count(*) from togetherboard where day>sysdate
 	</select>
 	
 	<select id="selectCount" resultType="java.lang.Integer" parameterType="java.lang.String">

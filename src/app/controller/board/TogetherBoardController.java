@@ -37,35 +37,26 @@ public class TogetherBoardController {
 
 	@GetMapping("/mainboard.do")
 	public ModelAndView mainboard(WebRequest wreq,@RequestParam(required=false) Map param) {
-		String re=(String)wreq.getAttribute("result",WebRequest.SCOPE_REQUEST);
-		
-		System.out.println("param >>"+param);
-		if (re=="on") {
-			wreq.setAttribute("result","yes",WebRequest.SCOPE_REQUEST);
+		if(param.get("result")!=null) {
+			if (param.get("result").equals("on")) {
+				wreq.setAttribute("err", "on", wreq.SCOPE_REQUEST);
+			}			
 		}
+		//-------------------------------------------------
 		int rp =  (param.get("p") == null) ? 1 : Integer.parseInt((String)param.get("p"));
-		
+		System.out.println("rp>"+rp);
 		Map mp = new HashMap<>();
-			mp.put("s", 1 + ( rp - 1 ) * 6 );
-			mp.put("e", rp * 6 );
+			mp.put("s", 1 + ( rp - 1 ) * 10 );
+			mp.put("e", rp * 10 );
 		
 		int total=together.totalCount();
-		wreq.setAttribute("size",total/6 + (total%6>0 ? 1: 0),WebRequest.SCOPE_REQUEST);
+		wreq.setAttribute("size",total/10 + (total%10>0 ? 1: 0),WebRequest.SCOPE_REQUEST);
 		wreq.setAttribute("current",rp,WebRequest.SCOPE_REQUEST);
-		
 		//------------------------------------------------
-
-		List<Map> list = together.getSomeFind(mp);	
-
-			
+		List<Map> list = together.getSomeFind(mp);				
 		List<Map> li = new ArrayList<>();
-		
-		
-		
 		//================================================
 		SimpleDateFormat sdf= new SimpleDateFormat("MM-dd");
-		
-		
 		for (int i = 0; i < list.size(); i++) {
 			Map map = new HashMap<>();
 			map.put("NO", list.get(i).get("NO"));
@@ -129,7 +120,18 @@ public class TogetherBoardController {
 	}//end selectboard
 
 	@GetMapping("/new.do")
-	public ModelAndView newGetboard() {
+	public ModelAndView newGetboard(@RequestParam Map param,WebRequest wreq) {
+		if(param.get("result")!=null) {
+			if (param.get("result").equals("off")) {
+				wreq.setAttribute("err", "off", wreq.SCOPE_REQUEST);
+				ModelAndView mav = new ModelAndView();
+				mav.setViewName("master");
+				mav.addObject("top", "/WEB-INF/views/master/together/top.jsp");
+				mav.addObject("main", "/WEB-INF/views/master/together/new.jsp");		
+				return mav;
+			}			
+		}
+		//=====================================================
 		ModelAndView mav = new ModelAndView();	
 		mav.setViewName("master");
 		mav.addObject("top", "/WEB-INF/views/master/together/top.jsp");
@@ -139,7 +141,7 @@ public class TogetherBoardController {
 
 
 	@PostMapping("/new.do")
-	public ModelAndView newPostboard(@RequestParam Map map,WebRequest wreq) {
+	public String newPostboard(@RequestParam Map map,WebRequest wreq) {
 		Map info=(Map)wreq.getAttribute("userInfo", wreq.SCOPE_SESSION);
 		String nick=(String)info.get("NICKNAME");
 		String d=(String)map.get("day");
@@ -157,29 +159,17 @@ public class TogetherBoardController {
 		m.put("address", map.get("address"));
 		m.put("nick", nick);
 	                                                                                                                                                                                                                                                       
-		ModelAndView mav = new ModelAndView();	
+			
 		try {
 			int result=together.addTogetherBoard(m);
-			if (result==1) {
-				wreq.setAttribute("result","on", WebRequest.SCOPE_REQUEST);
-				mav.setViewName("master");
-				mav.addObject("top", "/WEB-INF/views/master/together/top.jsp");
-				mav.addObject("main", "/WEB-INF/views/master/together/mainboard.jsp");
-				return mav;	
-			}else {
-				wreq.setAttribute("result","off", WebRequest.SCOPE_REQUEST);
-				mav.setViewName("master");
-				mav.addObject("top", "/WEB-INF/views/master/together/top.jsp");
-				mav.addObject("main", "/WEB-INF/views/master/together/mainboard.jsp");
-				return mav;	
+			if (result==1) {			
+				return "redirect:/together/mainboard.do?result=on";
+			}else {			
+				return "redirect:/together/new.do?result=off"; 	
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			wreq.setAttribute("result","off", WebRequest.SCOPE_REQUEST);
-			mav.setViewName("master");
-			mav.addObject("top", "/WEB-INF/views/master/together/top.jsp");
-			mav.addObject("main", "/WEB-INF/views/master/together/mainboard.jsp");
-			return mav;	
+			return "redirect:/together/new.do?result=off";
 		}
 
 

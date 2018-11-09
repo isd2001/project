@@ -135,9 +135,9 @@
 								<div class="modal-img"></div>
 							</div>
 							<div class="col">
-								<div class="modal-info">
+								<small><div class="modal-info">
 									<label class="form-control"></label>
-								</div>
+								</div></small>
 							</div>
 						</div>
 					</div>					

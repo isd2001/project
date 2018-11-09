@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:if test="${result eq 'no' }">
+<c:if test="${err eq 'off' }">
 	<script>window.alert("글이 정상처리 되지 않았습니다.\n필수사항을 다시한번 확인해주세요.")</script>
 </c:if>
 
