@@ -149,8 +149,12 @@ public class MainController {
 					}					
 				}
 			
-				
-				sessions.get(nick).invalidate();	
+				try {
+					sessions.get(nick).invalidate();
+				} catch (Exception e) {
+					
+				}
+					
 				
 			}
 			wr.setAttribute("nick", nick, wr.SCOPE_SESSION);

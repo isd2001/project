@@ -57,9 +57,9 @@
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">주소</label>
 				<div class="col-sm-6">
-					<button type="button" 
-						onclick="addressPopUp()" >주소 입력</button>
-					<input type="text" class="form-control" name="address" id = "address" placeholder="주소" required>
+					<button type="button" class="btn btn-info btn-sm" 
+						onclick="addressPopUp()" >주소 검색</button>
+					<input type="text" class="form-control" name="address" id = "address" placeholder="주소" required readonly="readonly">
 					<input type="text" class="form-control" name="address2"  id = "address2" placeholder="상세주소" required>
 				</div>
 			</div>			
