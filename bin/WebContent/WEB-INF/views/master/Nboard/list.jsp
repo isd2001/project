@@ -31,11 +31,7 @@
 
 
 <nav aria-label="Page navigation example">
-<<<<<<< HEAD
-	<ul class="pagination justify-content-center">
-=======
 	<ul class="pagination justify-content-center">		
->>>>>>> refs/remotes/origin/minwoo
 		<c:forEach var="p" begin="1" end="${size }">
 			<c:choose>
 				<c:when test="${p==current}">
@@ -49,11 +45,7 @@
 						href="${pageContext.servletContext.contextPath }/Nboard/list.do?p=${p}">${p }</a>
 				</c:otherwise>
 			</c:choose>
-<<<<<<< HEAD
-		</c:forEach>
-=======
 		</c:forEach>		
->>>>>>> refs/remotes/origin/minwoo
 	</ul>
 </nav>
 

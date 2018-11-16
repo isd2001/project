@@ -17,7 +17,7 @@
           <c:forEach var="f" items="${findList }">
            <tr>
             <td style="text-align: center;"><small>${f.NO }</small></td>
-              <td style="text-align: center;"><small>${f.DOGNAME }</small></td>
+              <td style="text-align: center;"><small>${f.DOGNAME }</td>
               <td style="text-align: center;"><a href="${pageContext.servletContext.contextPath }/find/detail.do?no=${f.NO }"><small>${f.TITLE }</small></a></td>
             <td style="text-align: center;"><small>${f.NICK }</small></td>
            </tr>
@@ -66,8 +66,8 @@
         <tbody>
            <c:forEach var="t" items="${togetherList }">
            <tr>
-            <td style="text-align: center;"><small>${t.NO }</small></td>
-            <td style="text-align: center;"><small>${t.AREA }</small></td>
+            <td style="text-align: center;"><small>${t.NO }</td>
+            <td style="text-align: center;"><small>${t.AREA }</td>
               <td style="text-align: center;"><a href="${pageContext.servletContext.contextPath }/together/detail.do?no=${t.NO }"><small>${t.TITLE }</small></a></td>
               <td style="text-align: center;"><small>${t.NICK }</small></td>
             <td style="text-align: center;"><small><fmt:formatDate value="${t.DAY }" /></small></td>
